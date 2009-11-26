@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/jose.antonio.camallonga/!svn/ver/45/player/src/Player/SOAPpy/wstools/test
+END
+test_wstools.py
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/jose.antonio.camallonga/!svn/ver/45/player/src/Player/SOAPpy/wstools/test/test_wstools.py
+END
+test_wsdl.py
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/jose.antonio.camallonga/!svn/ver/45/player/src/Player/SOAPpy/wstools/test/test_wsdl.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/jose.antonio.camallonga/!svn/ver/45/player/src/Player/SOAPpy/wstools/test/__init__.py
+END
+test_wstools_net.py
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/jose.antonio.camallonga/!svn/ver/45/player/src/Player/SOAPpy/wstools/test/test_wstools_net.py
+END
+test_t1.py
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/jose.antonio.camallonga/!svn/ver/45/player/src/Player/SOAPpy/wstools/test/test_t1.py
+END
