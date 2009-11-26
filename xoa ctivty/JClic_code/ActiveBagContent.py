@@ -22,7 +22,7 @@ from Rectangular import *
 from pygame import *
 
 class ActiveBagContent(object):
-    
+    print 'demo' 
     ncw = 0
     nch = 0
     w = 0.0
