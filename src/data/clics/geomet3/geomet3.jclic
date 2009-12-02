@@ -1,0 +1,910 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JClicProject name="geomet3" version="0.1.3">
+ <settings>
+  <title>La geometria</title>
+  <revision description="Creació del paquet d'activitats en Clic 3.0" date="10/17/08" />
+  <revision description="Conversió de Clic3 a JClic" date="10/17/08">
+   <author name="Equip Clic" mail="clic@xtec.net" organization="Àrea TIC - Departament d'Educació" />
+  </revision>
+  <author name="Estel Busquets" />
+  <author name="Núria Matabosch" />
+  <organization name="CEIP Marta Mata" mail="b7006721@xtec.net" url="http://www.xtec.es/centres/b7006721/" city="Girona" state="Catalunya" />
+  <language>català (ca)</language>
+  <description>
+   <p>Projecte d'activitats pels més petits sobre geometria. Fent les activitats ens nens i nenes coneixen objectes geomètrics. El projecte està dividit en dues parts:</p>
+   <p>Dues dimensions (cossos plans)</p>
+   <p>Tres dimensions (cossos amb volum)</p>
+  </description>
+  <descriptors area="Matemàtiques" level="Infantil (3-6)">geometria</descriptors>
+ </settings>
+ <sequence>
+  <item id="inici" name="pantalla informació portada" navButtons="fwd" />
+  <item id="tria" name="tria" navButtons="none" />
+  <item id="opció 1" name="Associació simple  2d" navButtons="fwd" />
+  <item name="Associació complexa 2d">
+   <jump tag="escull opció 2" id="forward" />
+  </item>
+  <item id="opcio 2" name="Sopa de lletres" navButtons="fwd" />
+  <item name="associació simple 3d" />
+  <item name="associacio complexa 3 d" />
+  <item name="joc memoria 3d" />
+  <item id="escull opció 2" name="p.infor. continuar o fi">
+   <jump tag="tria" id="back" />
+  </item>
+  <item id="opció 3" name="p. infor. final" navButtons="back">
+   <jump action="STOP" id="forward" />
+  </item>
+ </sequence>
+ <activities>
+  <activity class="@associations.ComplexAssociation" name="Associació complexa 2d" code="">
+   <description />
+   <messages>
+    <cell border="true" type="initial">
+     <style borderStroke="3.7" markerStroke="2.7">
+      <font family="Arial" size="24" bold="true" />
+      <color foreground="0xFF0000" background="0x000000" border="0xFF0000" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="relacionalesfiguresamblesimatges-3.mp3" />
+     <p>RELACIONA LES FIGURES AMB LES IMATGES</p>
+    </cell>
+    <cell border="true" type="final">
+     <style borderStroke="3.5" markerStroke="2.7">
+      <font family="Arial" size="28" bold="true" />
+      <color background="0xFF0000" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="moltbe_3.mp3" />
+     <p>MOLT BÉ!</p>
+    </cell>
+   </messages>
+   <settings margin="8" report="true" reportActions="false">
+    <container bgColor="0x000000">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0x000000" border="true" />
+   </settings>
+   <cells rows="4" cols="3" cellWidth="169.0" cellHeight="159.0" border="true" id="primary">
+    <style borderStroke="0.7" markerStroke="5.0">
+     <color background="0x000000" />
+    </style>
+    <shaper class="@Rectangular" cols="3" rows="4" />
+    <cell id="0" image="bicileta_p.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0xFFFFFF" inactive="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell id="0" image="aros_p.jpg">
+     <style borderStroke="5.1" markerStroke="5.0">
+      <color background="0xFFFFFF" inactive="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell id="0" image="anell_p.jpg">
+     <style borderStroke="5.1" markerStroke="5.0">
+      <color background="0xFFFFFF" inactive="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell id="0" image="plat_p.jpg">
+     <style borderStroke="5.1" markerStroke="5.0">
+      <color background="0xFFFFFF" inactive="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell id="0" image="collaret_p.jpg">
+     <style borderStroke="5.0" markerStroke="5.0">
+      <color background="0x000000" inactive="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell id="3" image="arrecada_p.jpg">
+     <style borderStroke="5.0" markerStroke="5.0">
+      <color background="0xFFFFFF" inactive="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell id="2" image="piscina_p.jpg">
+     <style borderStroke="5.0" markerStroke="5.0">
+      <color background="0x996600" inactive="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell id="2" image="pantalla_tv_p.jpg">
+     <style borderStroke="5.0" markerStroke="5.0">
+      <color background="0xFFFFFF" inactive="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell id="2" image="quadre_p.jpg">
+     <style borderStroke="5.1" markerStroke="5.0">
+      <color background="0xFFFFFF" inactive="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell id="1" image="triangle_instrument_p.jpg">
+     <style borderStroke="5.1" markerStroke="5.0">
+      <color background="0xFFFFFF" inactive="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell id="1" image="senyal_transit_p.jpg">
+     <style borderStroke="5.0" markerStroke="5.0">
+      <color background="0xFFCC33" inactive="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell id="3" image="renault_p.jpg">
+     <style borderStroke="5.0" markerStroke="5.0">
+      <color background="0xFFCC33" inactive="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+   </cells>
+   <cells rows="4" cols="1" cellWidth="200.0" cellHeight="148.0" border="true" id="secondary">
+    <style />
+    <shaper class="@Rectangular" cols="1" rows="4" />
+    <cell image="cerclepaint.JPG">
+     <style borderStroke="5.0" markerStroke="5.0">
+      <font family="Arial" size="17" bold="true" />
+      <color background="0x000000" inactive="0x000000" border="0x66FF33" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="cercle.mp3" />
+    </cell>
+    <cell border="true" image="trianglepaint.JPG">
+     <style borderStroke="5.1" markerStroke="5.0">
+      <color background="0x000000" inactive="0x000000" border="0x66FF33" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="triangle.mp3" />
+    </cell>
+    <cell image="rectanglepaint.JPG">
+     <style borderStroke="5.0" markerStroke="5.0">
+      <color background="0x000000" inactive="0x000000" border="0x66FF33" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="rectangle.mp3" />
+    </cell>
+    <cell image="rombepaint.JPG">
+     <style borderStroke="5.0" markerStroke="5.0">
+      <color background="0x000000" inactive="0x000000" border="0x66FF33" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="rombe.mp3" />
+    </cell>
+   </cells>
+   <scramble times="31" primary="true" secondary="false" />
+   <layout position="BA" />
+  </activity>
+  <activity class="@associations.SimpleAssociation" name="Associació simple  2d" code="">
+   <description />
+   <messages>
+    <cell border="true" type="initial">
+     <style borderStroke="3.7" markerStroke="5.0">
+      <font family="Arial" size="20" bold="true" />
+      <color foreground="0xFF0000" background="0x000000" border="0xFF0000" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="relacionalesparaulesamblesfigures_3.mp3" />
+     <p>RELACIONA LES PARAULES AMB LES FIGURES</p>
+    </cell>
+    <cell border="true" type="final">
+     <style borderStroke="3.1" markerStroke="2.7">
+      <font family="Arial" size="24" bold="true" />
+      <color background="0xFF0000" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="moltbecontinuaendavant_2.mp3" />
+     <p>MOLT BÉ! CONTINUA ENDAVANT!</p>
+    </cell>
+   </messages>
+   <settings margin="8" report="true" reportActions="false">
+    <container bgColor="0x000000">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0x000000" border="true" />
+   </settings>
+   <cells rows="5" cols="1" cellWidth="220.0" cellHeight="265.0" border="true" id="primary">
+    <style borderStroke="3.4" markerStroke="2.7">
+     <font family="Arial" size="17" bold="true" />
+     <color background="0x000000" inactive="0x000000" border="0x990000" />
+    </style>
+    <shaper class="@Rectangular" cols="1" rows="5" />
+    <cell image="cerclepaint.JPG" />
+    <cell image="quadratpaint.JPG" />
+    <cell image="rectanglepaint.JPG" />
+    <cell image="rombepaint.JPG" />
+    <cell image="trianglepaint.JPG" />
+   </cells>
+   <cells rows="5" cols="1" cellWidth="380.0" cellHeight="254.0" border="true" id="secondary">
+    <style borderStroke="3.8" markerStroke="5.0">
+     <font family="Arial" size="12" bold="true" />
+     <color background="0xFF0000" border="0x990000" />
+    </style>
+    <shaper class="@Rectangular" cols="1" rows="5" />
+    <cell border="true">
+     <style borderStroke="4.5" markerStroke="5.0">
+      <font family="Arial" size="12" bold="true" />
+      <color background="0xFF0000" inactive="0x000000" border="0x990000" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="cercle.mp3" />
+     <p>CERCLE</p>
+    </cell>
+    <cell>
+     <style borderStroke="4.5" markerStroke="5.0">
+      <font family="Arial" size="12" bold="true" />
+      <color background="0xFF0000" inactive="0x000000" border="0x990000" />
+     </style>
+     <p>QUADRAT</p>
+    </cell>
+    <cell>
+     <style borderStroke="4.5" markerStroke="5.0">
+      <font family="Arial" size="12" bold="true" />
+      <color background="0xFF0000" inactive="0x000000" border="0x990000" />
+     </style>
+     <p>RECTANGLE</p>
+    </cell>
+    <cell>
+     <style borderStroke="4.5" markerStroke="5.0">
+      <font family="Arial" size="12" bold="true" />
+      <color background="0xFF0000" inactive="0x000000" border="0x990000" />
+     </style>
+     <p>ROMBE</p>
+    </cell>
+    <cell>
+     <style borderStroke="4.5" markerStroke="5.0">
+      <font family="Arial" size="12" bold="true" />
+      <color background="0xFF0000" inactive="0x000000" border="0x990000" />
+     </style>
+     <p>TRIANGLE</p>
+    </cell>
+   </cells>
+   <scramble times="31" primary="true" secondary="true" />
+   <layout position="AB" />
+  </activity>
+  <activity class="@textGrid.WordSearch" name="Sopa de lletres" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style borderStroke="2.9" markerStroke="2.7">
+      <font family="Arial" size="28" bold="true" />
+      <color foreground="0xFF0000" background="0x000000" border="0xFF0000" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="trobaelsnomsdelesfigures_2.mp3" />
+     <p>TROBA ELS NOMS DE LES FIGURES</p>
+    </cell>
+    <cell type="final">
+     <style borderStroke="3.0" markerStroke="2.7">
+      <font family="Arial" size="28" bold="true" />
+      <color background="0xFF0000" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="continuaaixi_ambsilencillarg.mp3" />
+     <p>CONTINUA AIXÍ!</p>
+    </cell>
+   </messages>
+   <settings margin="8" report="true" reportActions="false">
+    <container bgColor="0x040404">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0x050505" border="true" />
+   </settings>
+   <textGrid rows="8" columns="8" cellWidth="65.0" cellHeight="65.0" border="true">
+    <style borderStroke="1.8" markerStroke="2.7">
+     <font family="Arial" size="22" bold="true" />
+     <color background="0xFFCC99" border="0xCC0000" />
+    </style>
+    <text>
+     <row>CON*****</row>
+     <row>********</row>
+     <row>********</row>
+     <row>ESFERA**</row>
+     <row>CILINDRE</row>
+     <row>********</row>
+     <row>PIRAMIDE</row>
+     <row>****CUB*</row>
+    </text>
+   </textGrid>
+   <clues>
+    <clue id="0">ESFERA</clue>
+    <clue id="1">CON</clue>
+    <clue id="2">CILINDRE</clue>
+    <clue id="3">PIRAMIDE</clue>
+    <clue id="4">CUB</clue>
+   </clues>
+   <cells rows="5" cols="1" cellWidth="239.0" cellHeight="75.0" border="true" id="secondary">
+    <style />
+    <shaper class="@Rectangular" cols="1" rows="5" />
+    <cell>
+     <style borderStroke="5.0" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color background="0xFB0808" inactive="0x000000" border="0x040404" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="esfera.mp3" />
+     <p>ESFERA</p>
+    </cell>
+    <cell>
+     <style borderStroke="5.0" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color background="0xFB0808" inactive="0x000000" border="0x040404" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="con_.mp3" />
+     <p>CON</p>
+    </cell>
+    <cell>
+     <style borderStroke="5.0" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color background="0xFB0808" inactive="0x000000" border="0x040404" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="cilindre.mp3" />
+     <p>CILINDRE</p>
+    </cell>
+    <cell>
+     <style borderStroke="5.0" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color background="0xFB0808" inactive="0x000000" border="0x040404" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="piramide.mp3" />
+     <p>PIRAMIDE</p>
+    </cell>
+    <cell>
+     <style borderStroke="5.0" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color background="0xFB0808" inactive="0x000000" border="0x040404" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="cub.mp3" />
+     <p>CUB</p>
+    </cell>
+   </cells>
+   <layout position="AB" />
+   <scramble times="31" secondary="true" />
+  </activity>
+  <activity class="@associations.ComplexAssociation" name="associacio complexa 3 d" code="">
+   <description />
+   <messages>
+    <cell border="true" type="initial">
+     <style borderStroke="4.1" markerStroke="2.7">
+      <font family="Arial" size="28" bold="true" />
+      <color foreground="0xFF0000" background="0x000000" border="0xFF0000" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="relacionalesfiguresamblesimatges-3.mp3" />
+     <p>RELACIONA LES FIGURES AMB LES IMATGES</p>
+    </cell>
+    <cell border="true" type="final">
+     <style borderStroke="4.2" markerStroke="2.7">
+      <font family="Arial" size="28" bold="true" />
+      <color background="0xFF0000" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="perfecte.mp3" />
+     <p>PERFECTE!</p>
+    </cell>
+   </messages>
+   <settings margin="8" report="true" reportActions="false">
+    <container bgColor="0x000000">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0x000000" border="true" />
+   </settings>
+   <cells rows="4" cols="4" cellWidth="146.0" cellHeight="162.0" border="true" id="primary">
+    <style />
+    <shaper class="@Rectangular" cols="4" rows="4" />
+    <cell id="0" border="true" image="farola_p.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0x000000" inactive="0x000000" alternative="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell id="0" border="true" image="mon_p.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0x000000" inactive="0x000000" alternative="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell id="0" border="true" image="pilota_p.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0x000000" inactive="0x000000" alternative="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell id="0" border="true" image="sol_p.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0x000000" inactive="0x000000" alternative="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell id="2" border="true" image="caixa_sabates_p.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0xCCCCCC" inactive="0x000000" alternative="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell id="2" border="true" image="dau_p.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0xFFFFFF" inactive="0x000000" alternative="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell id="2" border="true" image="edifici_p.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0xCCCCFF" inactive="0x000000" alternative="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell id="4" border="true" image="egipte_p.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0x66FFFF" inactive="0x000000" alternative="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell id="4" border="true" image="teulada_p.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0xCCFFFF" inactive="0x000000" alternative="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell id="3" border="true" image="con_circulacio_p.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0x999999" inactive="0x000000" alternative="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell id="3" border="true" image="gelat_p.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0xFFFFFF" inactive="0x000000" alternative="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell id="3" border="true" image="lampada_p.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0x999999" inactive="0x000000" alternative="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell id="1" border="true" image="ceres_colors_p.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0xFF9900" inactive="0x000000" alternative="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell id="1" border="true" image="paperera_p.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0x999999" inactive="0x000000" alternative="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell id="1" border="true" image="formatge_p.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0xCCCCCC" inactive="0x000000" alternative="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell id="1" border="true" image="espelmes_p.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0x333333" inactive="0x000000" alternative="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+   </cells>
+   <cells rows="5" cols="1" cellWidth="224.0" cellHeight="121.0" border="true" id="secondary">
+    <style />
+    <shaper class="@Rectangular" cols="1" rows="5" />
+    <cell border="true" image="esfera_m.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0x000000" inactive="0x000000" alternative="0x000000" border="0x33FF00" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="esfera.mp3" />
+    </cell>
+    <cell border="true" image="cilindre_m.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0x000000" inactive="0x000000" alternative="0x000000" border="0x33FF00" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="cilindre.mp3" />
+    </cell>
+    <cell border="true" image="cub_m.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0x000000" inactive="0x000000" alternative="0x000000" border="0x33FF00" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="cub.mp3" />
+    </cell>
+    <cell border="true" image="con_m.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0x000000" inactive="0x000000" alternative="0x000000" border="0x33FF00" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="con_.mp3" />
+    </cell>
+    <cell border="true" image="piramide_m.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0x000000" inactive="0x000000" alternative="0x000000" border="0x33FF00" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="piramide.mp3" />
+    </cell>
+   </cells>
+   <scramble times="31" primary="true" secondary="true" />
+   <layout position="BA" />
+  </activity>
+  <activity class="@associations.SimpleAssociation" name="associació simple 3d" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style borderStroke="3.5" markerStroke="2.7">
+      <font family="Arial" size="24" bold="true" />
+      <color foreground="0xFF0000" background="0x000000" border="0xFF0000" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="relacionalesparaulesamblesfigures_3.mp3" />
+     <p>RELACIONA LES PARAULES AMB LES FIGURES</p>
+    </cell>
+    <cell type="final">
+     <style borderStroke="3.3" markerStroke="2.7">
+      <font family="Arial" size="28" bold="true" />
+      <color background="0xFF0000" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="moltbe_3.mp3" />
+     <p>MOLT BÉ!</p>
+    </cell>
+   </messages>
+   <settings margin="8" report="true" reportActions="false">
+    <container bgColor="0x000000">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0x000000" border="true" />
+   </settings>
+   <cells rows="5" cols="1" cellWidth="304.0" cellHeight="230.0" border="true" id="primary">
+    <style borderStroke="3.1" markerStroke="2.7">
+     <color border="0xFF0000" />
+    </style>
+    <shaper class="@Rectangular" cols="1" rows="5" />
+    <cell image="con_m.jpg">
+     <style borderStroke="5.0" markerStroke="2.7">
+      <font family="Arial" size="36" />
+      <color background="0x000000" inactive="0x000000" border="0xFF0000" />
+     </style>
+    </cell>
+    <cell image="cilindre_m.jpg">
+     <style borderStroke="5.0" markerStroke="2.7">
+      <font family="Arial" size="36" />
+      <color background="0x000000" inactive="0x000000" border="0xFF0000" />
+     </style>
+    </cell>
+    <cell image="cub_m.jpg">
+     <style borderStroke="5.0" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color background="0x000000" inactive="0x000000" border="0xFF0000" />
+     </style>
+    </cell>
+    <cell image="esfera_m.jpg">
+     <style borderStroke="5.0" markerStroke="2.7">
+      <font family="Arial" size="36" />
+      <color background="0x000000" inactive="0x000000" border="0xFF0000" />
+     </style>
+    </cell>
+    <cell image="piramide_m.jpg">
+     <style borderStroke="5.0" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color background="0x000000" inactive="0x000000" border="0xFF0000" />
+     </style>
+    </cell>
+   </cells>
+   <cells rows="5" cols="1" cellWidth="344.0" cellHeight="200.0" border="true" id="secondary">
+    <style borderStroke="5.1" markerStroke="2.7">
+     <font family="Arial" size="12" bold="true" />
+     <color background="0xFF0000" />
+    </style>
+    <shaper class="@Rectangular" cols="1" rows="5" />
+    <cell border="true">
+     <style borderStroke="5.0" markerStroke="2.7">
+      <font family="Arial" size="12" bold="true" />
+      <color background="0xFF0000" inactive="0x000000" />
+     </style>
+     <p>CON</p>
+    </cell>
+    <cell>
+     <style borderStroke="5.0" markerStroke="2.7">
+      <font family="Arial" size="12" bold="true" />
+      <color foreground="0x090808" background="0xFB0808" inactive="0x000000" border="0x040404" />
+     </style>
+     <p>CILINDRE</p>
+    </cell>
+    <cell>
+     <style borderStroke="5.0" markerStroke="2.7">
+      <font family="Arial" size="12" bold="true" />
+      <color foreground="0x090808" background="0xFB0808" inactive="0x000000" border="0x040404" />
+     </style>
+     <p>CUB</p>
+    </cell>
+    <cell>
+     <style borderStroke="5.0" markerStroke="2.7">
+      <font family="Arial" size="12" bold="true" />
+      <color foreground="0x090808" background="0xFB0808" inactive="0x000000" border="0x040404" />
+     </style>
+     <p>ESFERA</p>
+    </cell>
+    <cell>
+     <style borderStroke="5.0" markerStroke="2.7">
+      <font family="Arial" size="12" bold="true" />
+      <color foreground="0x090808" background="0xFB0808" inactive="0x000000" border="0x040404" />
+     </style>
+     <p>PIRAMIDE</p>
+    </cell>
+   </cells>
+   <scramble times="31" primary="true" secondary="true" />
+   <layout position="BA" />
+  </activity>
+  <activity class="@memory.MemoryGame" name="joc memoria 3d" code="">
+   <description />
+   <messages>
+    <cell border="true" type="initial">
+     <style borderStroke="3.8" markerStroke="2.7">
+      <font family="Arial" size="28" bold="true" />
+      <color foreground="0xFF0000" background="0x000000" border="0xFF0000" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="trobalesparelles.mp3" />
+     <p>TROBA LES PARELLES!</p>
+    </cell>
+    <cell type="final">
+     <style borderStroke="4.1" markerStroke="2.7">
+      <font family="Arial" size="28" bold="true" />
+      <color background="0xFF0000" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="moltbe_3.mp3" />
+     <p>MOLT BÉ!</p>
+    </cell>
+   </messages>
+   <settings margin="8" report="true" reportActions="false">
+    <container bgColor="0x000000">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0x000000" border="true" />
+   </settings>
+   <cells rows="1" cols="5" cellWidth="200.0" cellHeight="220.0" border="true" id="primary">
+    <style />
+    <shaper class="@Rectangular" cols="5" rows="1" />
+    <cell id="0" border="true" image="con_m.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0x000000" inactive="0x000000" alternative="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell id="1" border="true" image="cub_m.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0x000000" inactive="0x000000" alternative="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell id="2" border="true" image="esfera_m.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0x000000" inactive="0x000000" alternative="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell image="piramide_m.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0x000000" inactive="0x000000" alternative="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell image="cilindre_m.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0x000000" inactive="0x000000" alternative="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+   </cells>
+   <cells rows="1" cols="5" cellWidth="50.0" cellHeight="30.0" border="true" id="secondary">
+    <style />
+    <shaper class="@Rectangular" cols="5" rows="1" />
+    <cell image="con_circulacio_p.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0x666666" inactive="0x000000" alternative="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell image="dau_p.jpg">
+     <style borderStroke="5.1" markerStroke="5.0">
+      <color background="0xFFFFFF" inactive="0x000000" alternative="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell image="pilota_p.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0x663300" inactive="0x000000" alternative="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell image="egipte_p.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0x00CCFF" inactive="0x000000" alternative="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+    <cell image="espelmes_p.jpg">
+     <style borderStroke="5.1" markerStroke="2.7">
+      <color background="0x333333" inactive="0x000000" alternative="0x000000" border="0xFF3333" />
+     </style>
+    </cell>
+   </cells>
+   <scramble times="31" />
+   <layout position="AUB" />
+  </activity>
+  <activity class="@panels.InformationScreen" name="p. infor. final" code="">
+   <description />
+   <messages>
+    <cell border="true" type="initial">
+     <style borderStroke="4.5" markerStroke="2.7">
+      <font family="Arial" size="28" bold="true" />
+      <color background="0x0066FF" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="Pachelbel.mp3" />
+     <p>FINS AVIAT!</p>
+    </cell>
+   </messages>
+   <settings margin="8" report="false">
+    <container bgColor="0x000000">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0x000000" border="true" />
+   </settings>
+   <cells rows="1" cols="1" border="false" image="geometryyy.jpg">
+    <style transparent="true" borderStroke="0.0" markerStroke="2.7">
+     <font family="Arial" size="17" bold="true" />
+     <color background="0x00000000" inactive="0x000000" alternative="0x000000" />
+    </style>
+    <shaper class="@Rectangular" cols="1" rows="1" />
+    <cell>
+     <style transparent="true" borderStroke="2.3" markerStroke="2.7">
+      <font family="Arial" size="22" />
+      <color foreground="0xFFFFFF" background="0x00000000" inactive="0x000000" alternative="0x000000" />
+     </style>
+     <media type="EXIT" level="1" />
+     <p>FINS AVIAT!</p>
+    </cell>
+   </cells>
+  </activity>
+  <activity class="@panels.InformationScreen" name="p.infor. continuar o fi" code="">
+   <description />
+   <messages>
+    <cell border="true" type="initial">
+     <style borderStroke="3.6" markerStroke="2.7">
+      <font family="Arial" size="24" bold="true" />
+      <color foreground="0xFFFFFF" background="0x000000" border="0xFFFFFF" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="volscontinuarovolssortir_2.mp3" />
+     <p>VOLS CONTINUAR O VOLS SORTIR?</p>
+    </cell>
+   </messages>
+   <settings margin="8" report="false">
+    <container bgColor="0x000000">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0x000000" border="true" />
+   </settings>
+   <cells rows="2" cols="2" cellWidth="329.0" cellHeight="180.0" border="true">
+    <style />
+    <shaper class="@Rectangular" cols="2" rows="2" />
+    <cell imgAlign="middle,bottom" border="true">
+     <style borderStroke="10.0" markerStroke="2.7">
+      <font family="Arial" size="20" bold="true" />
+      <color background="0x00FF00" inactive="0x000000" alternative="0x000000" />
+     </style>
+     <media type="RUN_CLIC_PACKAGE" level="1" file="tria" />
+     <p>VOLS CONTINUAR?</p>
+    </cell>
+    <cell imgAlign="middle,bottom" border="true">
+     <style borderStroke="10.0" markerStroke="2.7">
+      <font family="Arial" size="20" bold="true" />
+      <color background="0xFF0000" inactive="0x000000" alternative="0x000000" />
+     </style>
+     <media type="RUN_CLIC_PACKAGE" level="1" file="opció 3" />
+     <p>VOLS SORTIR?</p>
+    </cell>
+    <cell image="geo_composicio paint.JPG">
+     <media type="RUN_CLIC_PACKAGE" level="1" file="escull opció" />
+    </cell>
+    <cell image="surt.JPG">
+     <media type="RUN_CLIC_PACKAGE" level="1" file="opció 3" />
+    </cell>
+   </cells>
+  </activity>
+  <activity class="@panels.InformationScreen" name="pantalla informació portada" code="">
+   <description />
+   <messages>
+    <cell border="true" type="initial">
+     <style borderStroke="3.1" markerStroke="2.7">
+      <font family="Arial" size="24" bold="true" />
+      <color background="0x0066FF" inactive="0x0000FF" alternative="0x3333FF" />
+     </style>
+     <media type="PLAY_AUDIO" level="1" file="Pachelbel.mp3" />
+     <p>TREBALLEM LA GEOMETRIA</p>
+    </cell>
+   </messages>
+   <settings margin="8" report="false">
+    <container bgColor="0x000000">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0x000000" transparent="true" border="false">
+     <gradient source="0x000000" dest="0xFFFFFF" angle="79" />
+    </window>
+   </settings>
+   <cells rows="2" cols="1" border="true" image="geometryyy.jpg">
+    <style transparent="true" borderStroke="9.7" markerStroke="2.7">
+     <font family="Arial" size="26" />
+     <color background="0x000000" inactive="0x00FFFFFF" alternative="0x00808080" />
+    </style>
+    <shaper class="@Rectangular" cols="1" rows="2" />
+    <cell txtAlign="middle,bottom" border="true">
+     <style borderStroke="0.0" markerStroke="5.0">
+      <font family="Arial" size="24" />
+      <color foreground="0xFFFFFF" />
+     </style>
+     <p>LA GEOMETRIA</p>
+    </cell>
+    <cell border="true">
+     <style borderStroke="0.0" markerStroke="2.7">
+      <font family="Arial" size="20" bold="true" />
+      <color foreground="0xFFFFFF" />
+     </style>
+     <p>Estel Busquets i Núria Matabosch</p>
+     <p>              CEIP Marta Mata </p>
+     <p>    Nivell: P4       </p>
+     <p>       </p>
+     <p>ADRIEI    Curs 2007/08        UdG</p>
+    </cell>
+   </cells>
+  </activity>
+  <activity class="@panels.InformationScreen" name="tria" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style />
+     <p>Escull una opció</p>
+    </cell>
+   </messages>
+   <settings margin="8" report="false">
+    <container bgColor="0xC0C0C0">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0x000000" border="true" />
+   </settings>
+   <cells rows="1" cols="2" cellWidth="150.0" cellHeight="150.0" border="true">
+    <style borderStroke="5.7" markerStroke="2.7">
+     <font family="Arial" size="17" bold="true" />
+     <color border="0x990000" />
+    </style>
+    <shaper class="@Rectangular" cols="2" rows="1" />
+    <cell image="geometria2d_m.jpg">
+     <media type="RUN_CLIC_PACKAGE" level="1" file="opció 1" />
+     <p>Geometría 2D</p>
+    </cell>
+    <cell image="geometria3d_m.jpg">
+     <media type="RUN_CLIC_PACKAGE" level="1" file="opcio 2" />
+     <p>Geometría 3D</p>
+    </cell>
+   </cells>
+  </activity>
+ </activities>
+ <mediaBag>
+  <media name="anell_p.jpg" file="anell_p.jpg" />
+  <media name="aros_p.jpg" file="aros_p.jpg" />
+  <media name="arrecada_p.jpg" file="arrecada_p.jpg" />
+  <media name="bicileta_p.jpg" file="bicileta_p.jpg" />
+  <media name="caixa_sabates_p.jpg" file="caixa_sabates_p.jpg" />
+  <media name="cerclepaint.JPG" file="cerclepaint.JPG" />
+  <media name="ceres_colors_p.jpg" file="ceres_colors_p.jpg" />
+  <media name="cilindre_m.jpg" file="cilindre_m.jpg" />
+  <media name="collaret_p.jpg" file="collaret_p.jpg" />
+  <media name="con_circulacio_p.jpg" file="con_circulacio_p.jpg" />
+  <media name="con_m.jpg" file="con_m.jpg" />
+  <media name="cub_m.jpg" file="cub_m.jpg" />
+  <media name="dau_p.jpg" file="dau_p.jpg" />
+  <media name="edifici_p.jpg" file="edifici_p.jpg" />
+  <media name="egipte_p.jpg" file="egipte_p.jpg" />
+  <media name="esfera_m.jpg" file="esfera_m.jpg" />
+  <media name="espelmes_p.jpg" file="espelmes_p.jpg" />
+  <media name="farola_p.jpg" file="farola_p.jpg" />
+  <media name="formatge_p.jpg" file="formatge_p.jpg" />
+  <media name="gelat_p.jpg" file="gelat_p.jpg" />
+  <media name="geo_composicio paint.JPG" file="geo_composicio paint.JPG" />
+  <media name="geometria2d_m.jpg" file="geometria2d_m.jpg" />
+  <media name="geometria3d_m.jpg" file="geometria3d_m.jpg" />
+  <media name="geometryyy.jpg" file="geometryyy.jpg" />
+  <media name="lampada_p.jpg" file="lampada_p.jpg" />
+  <media name="mon_p.jpg" file="mon_p.jpg" />
+  <media name="pantalla_tv_p.jpg" file="pantalla_tv_p.jpg" />
+  <media name="paperera_p.jpg" file="paperera_p.jpg" />
+  <media name="pilota_p.jpg" file="pilota_p.jpg" />
+  <media name="piramide_m.jpg" file="piramide_m.jpg" />
+  <media name="piscina_p.jpg" file="piscina_p.jpg" />
+  <media name="plat_p.jpg" file="plat_p.jpg" />
+  <media name="quadratpaint.JPG" file="quadratpaint.JPG" />
+  <media name="quadre_p.jpg" file="quadre_p.jpg" />
+  <media name="rectanglepaint.JPG" file="rectanglepaint.JPG" />
+  <media name="renault_p.jpg" file="renault_p.jpg" />
+  <media name="rombepaint.JPG" file="rombepaint.JPG" />
+  <media name="senyal_transit_p.jpg" file="senyal_transit_p.jpg" />
+  <media name="sol_p.jpg" file="sol_p.jpg" />
+  <media name="surt.JPG" file="surt.JPG" />
+  <media name="teulada_p.jpg" file="teulada_p.jpg" />
+  <media name="triangle_instrument_p.jpg" file="triangle_instrument_p.jpg" />
+  <media name="trianglepaint.JPG" file="trianglepaint.JPG" />
+  <media name="cercle.mp3" file="cercle.mp3" />
+  <media name="cilindre.mp3" file="cilindre.mp3" />
+  <media name="con_.mp3" file="con_.mp3" />
+  <media name="continuaaixi_ambsilencillarg.mp3" file="continuaaixi_ambsilencillarg.mp3" />
+  <media name="continuaendavant_3.mp3" file="continuaendavant_3.mp3" />
+  <media name="cub.mp3" file="cub.mp3" />
+  <media name="escullduesotresdimensions_3.mp3" file="escullduesotresdimensions_3.mp3" />
+  <media name="esfera.mp3" file="esfera.mp3" />
+  <media name="feselpuzzle.mp3" file="feselpuzzle.mp3" />
+  <media name="moltbe_3.mp3" file="moltbe_3.mp3" />
+  <media name="moltbecontinuaendavant_2.mp3" file="moltbecontinuaendavant_2.mp3" />
+  <media name="Pachelbel.mp3" file="Pachelbel.mp3" />
+  <media name="perfecte.mp3" file="perfecte.mp3" />
+  <media name="piramide.mp3" file="piramide.mp3" />
+  <media name="quadrat.mp3" file="quadrat.mp3" />
+  <media name="rectangle.mp3" file="rectangle.mp3" />
+  <media name="relacionalesfiguresamblesimatges-3.mp3" file="relacionalesfiguresamblesimatges-3.mp3" />
+  <media name="relacionalesparaulesamblesfigures_3.mp3" file="relacionalesparaulesamblesfigures_3.mp3" />
+  <media name="rombe.mp3" file="rombe.mp3" />
+  <media name="triaiescoltaquees.mp3" file="triaiescoltaquees.mp3" />
+  <media name="triangle.mp3" file="triangle.mp3" />
+  <media name="trobaelsnomsdelesfigures_2.mp3" file="trobaelsnomsdelesfigures_2.mp3" />
+  <media name="trobalesparelles.mp3" file="trobalesparelles.mp3" />
+  <media name="volscontinuarovolssortir_2.mp3" file="volscontinuarovolssortir_2.mp3" />
+ </mediaBag>
+</JClicProject>
+

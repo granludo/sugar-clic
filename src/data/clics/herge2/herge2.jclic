@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JClicProject name="herge2" version="0.1.3">
+ <settings>
+  <title>Hergé - Tintín</title>
+  <revision description="Creació del paquet d'activitats en Clic 3.0" date="11/26/07" />
+  <revision description="Conversió de Clic3 a JClic" date="11/28/07">
+   <author name="Equip Clic" mail="clic@xtec.net" organization="Àrea TIC - Departament d'Educació" />
+  </revision>
+  <author name="Anna Boix i Moradell" mail="aboix25@xtec.cat" />
+  <organization name="CEIP Doctor Carulla" mail="b7000160@centres.xtec.es" url="http://www.xtec.es/centres/b7000160" city="Arbúcies" state="Catalunya" />
+  <language>català (ca)</language>
+  <description>
+   <p>Projecte sobre la vida i l'obra d'Hergé en motiu del centenari del seu naixement. Al llarg de les activitats es repassa tant la seva biografia, com el seu personatge més conegut: en Tintín i la resta de protagonistes de les històries d'aquest jove aventurer, Castafiore, Dupont i Duppond, el capità Haddock, en Tornassol, Milú...</p>
+  </description>
+  <descriptors area="Llengües" level="Primària (6-12)">literatura juvenil, biografia, Hergé</descriptors>
+  <skin file="@orange.xml" />
+ </settings>
+ <sequence>
+  <item id="start" name="Presentacio" navButtons="fwd">
+   <class nom="puzzle.py"/>
+   <files nom="4"/>
+   <columnes nom="6"/>
+   <foto nom="ejemplo1.jpg"/>
+   <jump action="RETURN" id="back" />
+  </item>
+  <item name="obres" />
+  <item name="DE PETIT A GRAN" />
+  <item name="Altres comics dHerge" />
+  <item name="tintin en catala" />
+  <item name="Memory" />
+  <item name="D i D i Tornassol" />
+  <item name="sOPA DE LEETRES" navButtons="back">
+   <jump action="RETURN" id="forward" />
+  </item>
+ </sequence>
+ <activities>
+  <activity class="@associations.SimpleAssociation" name="Altres comics dHerge" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style>
+      <font family="Arial Black" size="20" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+     <p>Relaciona el llibre amb el seu títol</p>
+    </cell>
+    <cell type="final">
+     <style>
+      <font family="Arial Black" size="20" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+     <p>TAMBÉ SÓN MOLT DIVERTITS</p>
+    </cell>
+   </messages>
+   <settings margin="8" report="true" reportActions="false">
+    <container bgColor="0xC0C0C0">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0x000000" border="true" />
+   </settings>
+   <cells rows="2" cols="1" cellWidth="300.0" cellHeight="300.0" border="true" id="primary">
+    <style />
+    <shaper class="@Rectangular" cols="1" rows="2" />
+    <cell image="Jo_Zette_Jocko_manitoba_wallpaper_fond_d_ecran.jpg">
+     <style>
+      <font family="Arial Black" size="20" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+    </cell>
+    <cell image="9782203324084v1.jpg">
+     <style>
+      <font family="Arial Black" size="20" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+    </cell>
+   </cells>
+   <cells rows="2" cols="1" cellWidth="300.0" cellHeight="300.0" border="true" id="secondary">
+    <style />
+    <shaper class="@Rectangular" cols="1" rows="2" />
+    <cell>
+     <style>
+      <font family="Arial Black" size="20" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+     <p>JO, ZETTE ET JOCKO</p>
+    </cell>
+    <cell>
+     <style>
+      <font family="Arial Black" size="20" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+     <p>QUICK ET FLUPKE</p>
+    </cell>
+   </cells>
+   <scramble times="31" primary="true" secondary="true" />
+   <layout position="AB" />
+  </activity>
+  <activity class="@associations.ComplexAssociation" name="D i D i Tornassol" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style>
+      <font family="Arial Black" size="20" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+     <p>RELACIONA</p>
+    </cell>
+    <cell type="final">
+     <style>
+      <font family="Arial Black" size="20" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+     <p>MOLT BÉ!</p>
+    </cell>
+   </messages>
+   <settings margin="8" report="true" reportActions="false">
+    <container bgColor="0x009900">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0x000000" border="true" />
+   </settings>
+   <cells rows="3" cols="3" cellWidth="200.0" cellHeight="150.0" border="true" id="primary">
+    <style borderStroke="2.3" markerStroke="2.7">
+     <font family="Arial" size="14" bold="true" />
+     <color border="0xCCCC00" />
+    </style>
+    <shaper class="@Rectangular" cols="3" rows="3" />
+    <cell id="0" border="true">
+     <style borderStroke="2.7" markerStroke="2.7">
+      <font family="Arial Black" size="14" />
+      <color foreground="0x006600" background="0xCCFFCC" border="0xCCCC00" />
+     </style>
+     <p>SÓN POLICIES</p>
+    </cell>
+    <cell id="1" border="true">
+     <style borderStroke="3.1" markerStroke="2.7">
+      <font family="Arial Black" size="14" />
+      <color foreground="0x006600" background="0xCCFFCC" border="0xCCCC00" />
+     </style>
+     <p>SAVI I GRAN INVENTOR</p>
+    </cell>
+    <cell id="0" border="true">
+     <style borderStroke="2.7" markerStroke="2.7">
+      <font family="Arial Black" size="14" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" border="0xCCCC00" />
+     </style>
+     <p>S'INTENTEN CAMUFLAR</p>
+    </cell>
+    <cell id="0" border="true">
+     <style borderStroke="3.0" markerStroke="2.7">
+      <font family="Arial Black" size="14" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" border="0xCCCC00" />
+     </style>
+     <p>VESTEIXEN IGUAL</p>
+    </cell>
+    <cell id="1" border="true">
+     <style borderStroke="3.2" markerStroke="2.7">
+      <font family="Arial Black" size="10" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" border="0xCCCC00" />
+     </style>
+     <p>SEMPRE VA AMB UN PÈNDOL</p>
+    </cell>
+    <cell id="1" border="true">
+     <style borderStroke="3.0" markerStroke="2.7">
+      <font family="Arial Black" size="14" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" border="0xCCCC00" />
+     </style>
+     <p>MOLT DESPISTAT</p>
+    </cell>
+    <cell id="0" border="true">
+     <style borderStroke="3.0" markerStroke="2.7">
+      <font family="Arial Black" size="10" />
+      <color foreground="0x006600" background="0xCCFFCC" border="0xCCCC00" />
+     </style>
+     <p>ES DIFERENCIEN PEL BIGOTI</p>
+    </cell>
+    <cell id="1" border="true">
+     <style borderStroke="2.8" markerStroke="5.0">
+      <font family="Arial" size="12" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" border="0xCCCC00" />
+     </style>
+     <p>DEFENSOR DELS DRETS HUMNAS</p>
+    </cell>
+    <cell id="1" border="true">
+     <style borderStroke="3.0" markerStroke="2.7">
+      <font family="Arial Black" size="14" />
+      <color foreground="0x006600" background="0xCCFFCC" border="0xCCCC00" />
+     </style>
+     <p>ÉS UN HOME DE CIÈNCIA</p>
+    </cell>
+   </cells>
+   <cells rows="1" cols="2" cellWidth="200.0" cellHeight="200.0" border="false" id="secondary">
+    <style />
+    <shaper class="@Rectangular" cols="2" rows="1" />
+    <cell border="true" image="DUPOND I DUPONT1.jpg">
+     <style borderStroke="2.7" markerStroke="2.7">
+      <font family="Arial Black" size="20" />
+      <color foreground="0x006600" background="0xCCCC00" border="0xCCCC00" />
+     </style>
+    </cell>
+    <cell border="true" image="TORNASSOL2.jpg">
+     <style borderStroke="2.7" markerStroke="2.7">
+      <font family="Arial" size="17" bold="true" />
+      <color background="0xCCCC00" border="0xCCCC00" />
+     </style>
+    </cell>
+   </cells>
+   <scramble times="31" primary="true" secondary="true" />
+   <layout position="BUA" />
+  </activity>
+  <activity class="@associations.SimpleAssociation" name="DE PETIT A GRAN" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style>
+      <font family="Arial Black" size="20" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+     <p>Emprella les fotos amb l'edat</p>
+    </cell>
+    <cell type="final">
+     <style>
+      <font family="Arial Black" size="20" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+     <p>MOLT BÉ!</p>
+    </cell>
+   </messages>
+   <settings margin="8" report="true" reportActions="false">
+    <container bgColor="0x009900">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0x000000" border="true" />
+   </settings>
+   <cells rows="2" cols="3" cellWidth="150.0" cellHeight="150.0" border="true" id="primary">
+    <style />
+    <shaper class="@Rectangular" cols="3" rows="2" />
+    <cell image="2 anys.jpg">
+     <style>
+      <font family="Arial Black" size="20" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+    </cell>
+    <cell image="2407664_6895_5.jpg">
+     <style>
+      <font family="Arial Black" size="20" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+    </cell>
+    <cell image="hergf10 amb els boy scouts.jpg">
+     <style>
+      <font family="Arial Black" size="20" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+    </cell>
+    <cell image="hergf8.jpg">
+     <style>
+      <font family="Arial Black" size="20" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+    </cell>
+    <cell image="hergf9 1933.jpg">
+     <style>
+      <font family="Arial Black" size="20" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+    </cell>
+    <cell image="hergf2 1949.jpg">
+     <style>
+      <font family="Arial Black" size="20" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+    </cell>
+   </cells>
+   <cells rows="2" cols="3" cellWidth="150.0" cellHeight="85.0" border="true" id="secondary">
+    <style borderStroke="0.7" markerStroke="2.7">
+     <font family="Arial" size="12" />
+    </style>
+    <shaper class="@Rectangular" cols="3" rows="2" />
+    <cell>
+     <style>
+      <font family="Arial Black" size="14" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+     <p>1909</p>
+     <p>2 ANYS</p>
+    </cell>
+    <cell>
+     <style>
+      <font family="Arial Black" size="14" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+     <p>1980</p>
+     <p>73 ANYS</p>
+    </cell>
+    <cell>
+     <style>
+      <font family="Arial Black" size="14" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+     <p>AMB ELS </p>
+     <p>BOY SCOUTS</p>
+    </cell>
+    <cell>
+     <style>
+      <font family="Arial Black" size="14" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+     <p>1915</p>
+     <p>8 ANYS</p>
+    </cell>
+    <cell>
+     <style>
+      <font family="Arial Black" size="14" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+     <p>1933</p>
+     <p>25 ANYS</p>
+    </cell>
+    <cell>
+     <style>
+      <font family="Arial Black" size="14" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+     <p>1949</p>
+     <p>42 ANYS</p>
+    </cell>
+   </cells>
+   <scramble times="31" primary="true" secondary="false" />
+   <layout position="AUB" />
+  </activity>
+  <activity class="@memory.MemoryGame" name="Memory" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style>
+      <font family="Arial Black" size="20" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+     <p>TROBA LA SEVA PARELLA</p>
+    </cell>
+    <cell type="final">
+     <style>
+      <font family="Arial Black" size="20" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+     <p>FANTÀSTIC!</p>
+    </cell>
+   </messages>
+   <settings margin="8" report="true" reportActions="false">
+    <container bgColor="0x009900">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0x000000" border="true" />
+   </settings>
+   <cells rows="2" cols="4" cellWidth="150.0" cellHeight="210.0" border="true" id="primary">
+    <style borderStroke="2.6" markerStroke="2.7">
+     <color border="0xFFCC00" />
+    </style>
+    <shaper class="@Rectangular" cols="4" rows="2" />
+    <cell border="true" image="84-261-0275-1.jpg">
+     <style borderStroke="3.0" markerStroke="2.7">
+      <font family="Arial Black" size="20" />
+      <color foreground="0x006600" background="0xCCFFCC" border="0xFFCC00" />
+     </style>
+    </cell>
+    <cell border="true" image="84-261-0278-6.jpg">
+     <style borderStroke="3.0" markerStroke="2.7">
+      <font family="Arial Black" size="20" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" border="0xFFCC00" />
+     </style>
+    </cell>
+    <cell border="true" image="84-261-0381-2.jpg">
+     <style borderStroke="3.0" markerStroke="2.7">
+      <font family="Arial Black" size="20" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" border="0xFFCC00" />
+     </style>
+    </cell>
+    <cell border="true" image="84-261-0382-0.jpg">
+     <style borderStroke="2.8" markerStroke="2.7">
+      <font family="Arial Black" size="20" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" border="0xFFCC00" />
+     </style>
+    </cell>
+    <cell border="true" image="84-261-0816-4.jpg">
+     <style borderStroke="2.8" markerStroke="2.7">
+      <font family="Arial Black" size="20" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" border="0xFFCC00" />
+     </style>
+    </cell>
+    <cell border="true" image="84-261-0837-7.jpg">
+     <style borderStroke="2.8" markerStroke="2.7">
+      <font family="Arial Black" size="20" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" border="0xFFCC00" />
+     </style>
+    </cell>
+    <cell border="true" image="84-261-1046-0.jpg">
+     <style borderStroke="2.8" markerStroke="2.7">
+      <font family="Arial Black" size="20" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" border="0xFFCC00" />
+     </style>
+    </cell>
+    <cell border="true" image="84-261-1036-3.jpg">
+     <style borderStroke="3.4" markerStroke="2.7">
+      <font family="Arial Black" size="20" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" border="0xFFCC00" />
+     </style>
+    </cell>
+   </cells>
+   <scramble times="31" />
+   <layout position="BUA" />
+  </activity>
+  <activity class="puzzleU" name="Presentacio" code="">
+   <nou files="2" columnes="2" imatge="ejemplo1.jpg" red="255" green="0" blue="0"/>
+   <description />
+   <messages>
+    <cell type="initial">
+     <style>
+      <font family="Arial" size="17" bold="true" />
+      <color background="0xCCFFCC" />
+     </style>
+     <p>Clica la fletxa per començar</p>
+    </cell>
+   </messages>
+   <settings margin="8" report="false">
+    <container bgColor="0x009900">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0x000000" border="true" />
+   </settings>
+   <cells rows="2" cols="2" cellWidth="600.0" cellHeight="600.0" border="false">
+    <style />
+    <shaper class="@Rectangular" cols="2" rows="2" />
+    <cell txtAlign="right,top" imgAlign="middle,bottom">
+     <style borderStroke="5.0" markerStroke="2.7">
+      <font family="Arial" size="48" bold="true" />
+      <color foreground="0x006633" background="0xCCFFCC" border="0x009900" />
+     </style>
+     <p>HERGÉ</p>
+    </cell>
+    <cell txtAlign="middle,bottom" imgAlign="middle,bottom" image="hergf2 1949.jpg">
+     <style borderStroke="5.0" markerStroke="2.7">
+      <font family="Arial" size="48" bold="true" />
+      <color foreground="0x006633" background="0xCCFFCC" border="0x009900" />
+     </style>
+    </cell>
+    <cell txtAlign="left,top" imgAlign="left,top">
+     <style borderStroke="5.0" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0x006633" background="0xCCFFCC" border="0x009900" />
+     </style>
+     <p>Centenari del seu naixement</p>
+     <p>1907-2007</p>
+    </cell>
+    <cell txtAlign="middle,bottom" imgAlign="right,bottom">
+     <style borderStroke="5.0" markerStroke="2.7">
+      <font family="Arial" size="16" bold="true" />
+      <color background="0xCCFFCC" shadow="0x000000" border="0x009900" />
+     </style>
+     <p>Anna Boix</p>
+     <p>CEIP Doctor Carulla</p>
+    </cell>
+   </cells>
+  </activity>
+  <activity class="puzzleU" name="obres" code="">
+   <nou files="3" columnes="6" imatge="ejemplo21.jpg" red="255" green="255" blue="255"/>
+   <description />
+   <messages>
+    <cell type="initial">
+     <style />
+     <p>Llegeix. Quan acabis clica la fletxa</p>
+    </cell>
+   </messages>
+   <settings margin="8" report="false">
+    <container bgColor="0x009900">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0x000000" border="true" />
+   </settings>
+   <cells rows="12" cols="1" cellWidth="500.0" cellHeight="80.0" border="false">
+    <style borderStroke="0.7" markerStroke="5.0">
+     <font family="Arial" size="9" bold="true" />
+     <color background="0xCCFFCC" />
+    </style>
+    <shaper class="@Rectangular" cols="1" rows="12" />
+    <cell>
+     <style borderStroke="0.7" markerStroke="5.0">
+      <font family="Arial Black" size="11" />
+      <color background="0xCCFFCC" />
+     </style>
+     <p>Llibres</p>
+    </cell>
+    <cell>
+     <p>Tintín. El centro de Ottokar</p>
+    </cell>
+    <cell>
+     <p>Tintín en el país del oro negro</p>
+    </cell>
+    <cell>
+     <p>Tintín. El asunto Tornasol</p>
+    </cell>
+    <cell>
+     <p>Tintín en el Tibet</p>
+    </cell>
+    <cell>
+     <p>Tintín en América</p>
+    </cell>
+    <cell>
+     <p>Tintín. El templo del sol</p>
+    </cell>
+    <cell>
+     <p>El cangrejo de las pinzas de oro</p>
+    </cell>
+    <cell>
+     <p>Tintín. El tesoro de Rarkham el Rojo</p>
+    </cell>
+    <cell>
+     <p>Tintín. Aterrizaje en la Luna</p>
+    </cell>
+    <cell>
+     <p>Le "Manitoba" ne Répond plus</p>
+    </cell>
+    <cell>
+     <p>Vive le progrés</p>
+    </cell>
+   </cells>
+  </activity>
+  <activity class="@textGrid.WordSearch" name="sOPA DE LEETRES" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style>
+      <font family="Arial Black" size="20" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+     <p>TROBA EL NOM DELS PERSONATGES QUE HEM CONEGUT I EL DEL SEU AUTOR</p>
+    </cell>
+    <cell type="final">
+     <style>
+      <font family="Arial Black" size="20" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+     <p>EN SAPS MOLTÍSSIM!!!!!</p>
+    </cell>
+   </messages>
+   <settings margin="8" report="true" reportActions="false">
+    <container bgColor="0x009900">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0x000000" border="true" />
+   </settings>
+   <textGrid rows="14" columns="14" cellWidth="30.0" cellHeight="29.0" border="true">
+    <style borderStroke="1.6" markerStroke="2.7">
+     <font family="Arial" size="17" bold="true" />
+     <color foreground="0x666600" background="0xCCFFCC" border="0x999900" />
+    </style>
+    <text>
+     <row>*******TINTIN*</row>
+     <row>**************</row>
+     <row>*H*****T******</row>
+     <row>CASTAFIORE****</row>
+     <row>*D*****R*****H</row>
+     <row>*D*****N*****E</row>
+     <row>*O*****A*****R</row>
+     <row>*C*****S*****G</row>
+     <row>*K*****S*****E</row>
+     <row>*******O******</row>
+     <row>*****MILU*****</row>
+     <row>**************</row>
+     <row>**************</row>
+     <row>DUPONTIDUPOND*</row>
+    </text>
+   </textGrid>
+   <clues>
+    <clue id="0">DUPONTIDUPOND</clue>
+    <clue id="1">TINTIN</clue>
+    <clue id="2">CASTAFIORE</clue>
+    <clue id="3">HADDOCK</clue>
+    <clue id="4">TORNASSOL</clue>
+    <clue id="5">MILU</clue>
+    <clue id="6">HERGE</clue>
+   </clues>
+   <cells rows="4" cols="2" cellWidth="100.0" cellHeight="100.0" border="true" id="secondary">
+    <style borderStroke="10.0" markerStroke="5.0">
+     <color background="0xCCFFCC" border="0xCCFFCC" />
+    </style>
+    <shaper class="@Rectangular" cols="2" rows="4" />
+    <cell image="Dupont i Dupond.jpg" />
+    <cell image="Tintín.jpg" />
+    <cell image="Castafiore.jpg" />
+    <cell image="haddock.jpg" />
+    <cell image="Tornassol.jpg" />
+    <cell image="Milú.jpg" />
+    <cell image="hergf2 1949.jpg" />
+    <cell />
+   </cells>
+   <layout position="AB" />
+  </activity>
+  <activity class="@associations.SimpleAssociation" name="tintin en catala" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style>
+      <font family="Arial Black" size="20" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+     <p>RELACIONA AMB EL QUE LI CORRESPON</p>
+    </cell>
+    <cell type="final">
+     <style>
+      <font family="Arial Black" size="20" bold="true" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+     <p>ENDAVANT!!!</p>
+    </cell>
+   </messages>
+   <settings margin="8" report="true" reportActions="false">
+    <container bgColor="0x009900">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0x000000" border="true" />
+   </settings>
+   <cells rows="3" cols="1" cellWidth="150.0" cellHeight="100.0" border="true" id="primary">
+    <style />
+    <shaper class="@Rectangular" cols="1" rows="3" />
+    <cell>
+     <style>
+      <font family="Arial Black" size="20" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+     <p>1960</p>
+    </cell>
+    <cell>
+     <style>
+      <font family="Arial Black" size="20" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+     <p>1964-1965</p>
+    </cell>
+    <cell>
+     <style>
+      <font family="Arial Black" size="20" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+     <p>Traducció</p>
+    </cell>
+   </cells>
+   <cells rows="3" cols="1" cellWidth="300.0" cellHeight="100.0" border="true" id="secondary">
+    <style />
+    <shaper class="@Rectangular" cols="1" rows="3" />
+    <cell>
+     <style>
+      <font family="Arial Black" size="14" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+     <p>Primeres pel.lícules de Tintín al cinema</p>
+    </cell>
+    <cell>
+     <style>
+      <font family="Arial Black" size="14" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+     <p>Primers còmics de Tintín en català</p>
+    </cell>
+    <cell>
+     <style>
+      <font family="Arial Black" size="14" />
+      <color foreground="0x006600" background="0xCCFFCC" />
+     </style>
+     <p>Tíntín ha estat traduït a 60 llengües diferents</p>
+    </cell>
+   </cells>
+   <scramble times="31" primary="true" secondary="true" />
+   <layout position="AB" />
+  </activity>
+ </activities>
+ <mediaBag>
+  <media name="1179736226_1 1980.jpg" file="1179736226_1 1980.jpg" />
+  <media name="2 anys.jpg" file="2 anys.jpg" />
+  <media name="2407664_6895_5.jpg" file="2407664_6895_5.jpg" />
+  <media name="84-261-0275-1.jpg" file="84-261-0275-1.jpg" />
+  <media name="84-261-0278-6.jpg" file="84-261-0278-6.jpg" />
+  <media name="84-261-0381-2.jpg" file="84-261-0381-2.jpg" />
+  <media name="84-261-0382-0.jpg" file="84-261-0382-0.jpg" />
+  <media name="84-261-0816-4.jpg" file="84-261-0816-4.jpg" />
+  <media name="84-261-0837-7.jpg" file="84-261-0837-7.jpg" />
+  <media name="84-261-0964-0.jpg" file="84-261-0964-0.jpg" />
+  <media name="84-261-1036-3.jpg" file="84-261-1036-3.jpg" />
+  <media name="84-261-1046-0.jpg" file="84-261-1046-0.jpg" />
+  <media name="9782203324084v1.jpg" file="9782203324084v1.jpg" />
+  <media name="BIANCA CASTAFIORE1.jpg" file="BIANCA CASTAFIORE1.jpg" />
+  <media name="Castafiore.jpg" file="Castafiore.jpg" />
+  <media name="DUPOND I DUPONT1.jpg" file="DUPOND I DUPONT1.jpg" />
+  <media name="Dupont i Dupond.jpg" file="Dupont i Dupond.jpg" />
+  <media name="europa.JPG" file="europa.JPG" />
+  <media name="haddock.jpg" file="haddock.jpg" />
+  <media name="HADDOCK1.jpg" file="HADDOCK1.jpg" />
+  <media name="hergf10 amb els boy scouts.jpg" file="hergf10 amb els boy scouts.jpg" />
+  <media name="hergf2 1949.jpg" file="hergf2 1949.jpg" />
+  <media name="hergf8.jpg" file="hergf8.jpg" />
+  <media name="hergf9 1933.jpg" file="hergf9 1933.jpg" />
+  <media name="Jo_Zette_Jocko_manitoba_wallpaper_fond_d_ecran.jpg" file="Jo_Zette_Jocko_manitoba_wallpaper_fond_d_ecran.jpg" />
+  <media name="Milú.jpg" file="Milú.jpg" save="false" />
+  <media name="milú1.jpg" file="milú1.jpg" save="false" />
+  <media name="TINTIN1.jpg" file="TINTIN1.jpg" />
+  <media name="Tintín.jpg" file="Tintín.jpg" save="false" />
+  <media name="Tornassol.jpg" file="Tornassol.jpg" />
+  <media name="TORNASSOL2.jpg" file="TORNASSOL2.jpg" />
+ </mediaBag>
+</JClicProject>
+

@@ -1,0 +1,10 @@
+setup.py
+activity/activity.info
+activity/jclicdownloader-icon.svg
+jclicdownloader.glade
+activity.py
+clic_player.py
+controller.py
+db_clics.py
+ws_handler.py
+MANIFEST

@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/jose.antonio.camallonga/!svn/ver/45/player/src/Player/SOAPpy/wstools
+END
+WSDLTools.py
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/jose.antonio.camallonga/!svn/ver/45/player/src/Player/SOAPpy/wstools/WSDLTools.py
+END
+TimeoutSocket.py
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/jose.antonio.camallonga/!svn/ver/45/player/src/Player/SOAPpy/wstools/TimeoutSocket.py
+END
+XMLname.py
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/jose.antonio.camallonga/!svn/ver/45/player/src/Player/SOAPpy/wstools/XMLname.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/jose.antonio.camallonga/!svn/ver/45/player/src/Player/SOAPpy/wstools/__init__.py
+END
+logging.py
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/jose.antonio.camallonga/!svn/ver/45/player/src/Player/SOAPpy/wstools/logging.py
+END
+UserTuple.py
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/jose.antonio.camallonga/!svn/ver/45/player/src/Player/SOAPpy/wstools/UserTuple.py
+END
+Utility.py
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/jose.antonio.camallonga/!svn/ver/45/player/src/Player/SOAPpy/wstools/Utility.py
+END
+Namespaces.py
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/jose.antonio.camallonga/!svn/ver/45/player/src/Player/SOAPpy/wstools/Namespaces.py
+END
+XMLSchema.py
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/jose.antonio.camallonga/!svn/ver/45/player/src/Player/SOAPpy/wstools/XMLSchema.py
+END
+c14n.py
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/jose.antonio.camallonga/!svn/ver/45/player/src/Player/SOAPpy/wstools/c14n.py
+END
