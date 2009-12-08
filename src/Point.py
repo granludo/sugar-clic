@@ -1,7 +1,7 @@
 ''' 
     This file is part of Sugar-Clic
     
-    Sugar-Clic is copyrigth 2009 by Maria José Casany Guerrero and Marc Alier Forment
+    Sugar-Clic is copyrigth 2009 by Maria Jose Casany Guerrero and Marc Alier Forment
     of the Universitat Politecnica de Catalunya http://www.upc.edu
     Contact info: Marc Alier Forment granludo @ gmail.com or marc.alier
     @ upc.edu
@@ -22,7 +22,7 @@
 
 
     @package sugarclic
-    @copyrigth 2009 Marc Alier, Maria José Casany marc.alier@upc.edu
+    @copyrigth 2009 Marc Alier, Maria Jose Casany marc.alier@upc.edu
     @copyrigth 2009 Universitat Politecnica de Catalunya http://www.upc.edu
     
     @autor Marc Alier
