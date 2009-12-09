@@ -51,6 +51,7 @@ class clic_player:
         self.selected = False #is a clic chosen to play?
         self.start = False #is a clic_activity running?
         self.newclic = False #check when a newclic is installed
+        self.isBrowseActivated = False #check if the Browse is activated
         
         #loading application views
         self.xml = gtk.glade.XML('views.glade') 
@@ -149,7 +150,8 @@ class clic_player:
         self.vboxDownload.hide()
         self.vboxAvailable.hide()
         self.vboxPlay.hide()
-        self.vboxBrowser.remove(self.browser)
+        if self.isBrowseActivated:
+            self.vboxBrowser.remove(self.browser)
         self.vboxBrowser.hide()
         self.vboxMain.show()
  
@@ -158,8 +160,8 @@ class clic_player:
         self.vboxMain.hide()           
         self.vboxAvailable.hide()
         self.vboxPlay.hide()
-        self.vboxBrowser.remove(self.browser)
-        self.browser.hide()
+        if self.isBrowseActivated:
+            self.vboxBrowser.remove(self.browser)
         self.vboxBrowser.hide()
         self.vboxDownload.show()
        
@@ -174,7 +176,8 @@ class clic_player:
                 lstore = clic_player_data.add_clics_data(clics)
                 self.treeAvailable.set_model(lstore)
                 self.newclic = False
-        self.vboxBrowser.remove(self.browser)
+        if self.isBrowseActivated:
+            self.vboxBrowser.remove(self.browser)
         self.vboxBrowser.hide()
         self.vboxMain.hide()           
         self.vboxDownload.hide()
@@ -185,8 +188,9 @@ class clic_player:
     def __play_clics_view(self, *args):
         if self.selected:
             clic = clic_player_data.get_clic_data(self.treeAvailable)
-            self.controller.load_clic(clic['File'].split('.',1)[0]) 
-            self.vboxBrowser.remove(self.browser)
+            self.controller.load_clic(clic['File'].split('.',1)[0])
+            if self.isBrowseActivated: 
+                self.vboxBrowser.remove(self.browser)
             self.vboxBrowser.hide()
             self.vboxMain.hide()           
             self.vboxAvailable.hide()
@@ -205,6 +209,7 @@ class clic_player:
         self.vboxBrowser.add(self.browser)
         self.vboxBrowser.show()
         self.browser.load_uri('http://wiki.laptop.org/go/Activities')
+        self.isBrowseActivated = True
 
     #a clic is chosen to download    
     def __is_clicked(self, *args):

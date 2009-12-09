@@ -74,15 +74,25 @@ class Sequencer:
     
                 #Next activity
                 if(resultat == -2 and self.index < self.size-1):
-                    self.index = self.index + 1
-                    clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the first activity(tag) of the sequence
-                    self.act_handler.start_activity(clic_activity)#initiate activity view
+                    #searching for a new and valid clic activity
+                    print 'next'
+                    while (self.index < self.size-1):
+                        self.index = self.index + 1
+                        clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the first activity(tag) of the sequence
+                        if self.act_handler.canExecuteActivity(clic_activity):
+                            self.act_handler.start_activity(clic_activity)#initiate activity view
+                            break
         
                 #Previous activity
                 if(resultat == -3 and self.index > 0):
-                    self.index = self.index - 1
-                    clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the first activity(tag) of the sequence
-                    self.act_handler.start_activity(clic_activity)#initiate activity view
+                    #searching for a new and valid clic activity
+                    print 'previous'
+                    while (self.index > 0):
+                        self.index = self.index - 1
+                        clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the first activity(tag) of the sequence
+                        if self.act_handler.canExecuteActivity(clic_activity):
+                            self.act_handler.start_activity(clic_activity)#initiate activity view
+                            break
             
             
                 #Return -1 to see available clics, controled in clic_player.py
@@ -101,6 +111,8 @@ class Sequencer:
     def __start_pygame_view(self):
         #Pygame initiation
         self.exit= False
+        
+    
 
 
 

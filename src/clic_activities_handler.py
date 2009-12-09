@@ -101,24 +101,20 @@ class ClicActivities:
             pointMouse = Point(pygame.mouse.get_pos())
             
             
-        	#Retornem -2 tractant la seguent activitat
-            if self.dialog.isOverNextButton(pointMouse):
-                
+            #Retornem -2 tractant la seguent activitat
+            if self.dialog.isOverNextButton(pointMouse):                
                 return -2
 
 	        #Retornem -3 tractant l'activitat anterior
-        	if self.dialog.isOverPreviousButton(pointMouse):
-		           return -3
+            if self.dialog.isOverPreviousButton(pointMouse):
+                return -3
 
-            	#Retornem -1 perque es tracti al clic_player per tornar a comensar
+            #Retornem -1 perque es tracti al clic_player per tornar a comensar
             if self.dialog.isOverChangeClicButton(pointMouse):
-                    return -1
+                return -1
             
             if self.dialog.isOverActivity(pointMouse):
-                     self.activityInUse.OnEvent((pointMouse.getX()-32,pointMouse.getY()-32))
-
-            
-        
+                self.activityInUse.OnEvent((pointMouse.getX()-32,pointMouse.getY()-32))
         
         self.activityInUse.OnRender( self.activity_surf)
             
@@ -127,7 +123,7 @@ class ClicActivities:
         # TODO
         # activity_class.update()
 	# return resultats, temps, ...
-
+    
     def canExecuteActivity(self,node):
         ''' at the end this function is not necessary'''
         print 'classtype=',node.getAttribute('class')
@@ -145,6 +141,8 @@ class ClicActivities:
                         return True
         elif  node.getAttribute('class') =='@panels.Explore':
                         return True
+        else:
+             return False
     def executeActivity(self,node):
         if node.getAttribute('class') =='@puzzles.ExchangePuzzle':
                         return ExchangePuzzle(node)

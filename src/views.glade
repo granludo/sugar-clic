@@ -25,7 +25,7 @@
                     <child>
                       <widget class="GtkImage" id="image4">
                         <property name="visible">True</property>
-                        <property name="pixbuf">download.jpg</property>
+                        <property name="pixbuf">img/download.jpg</property>
                       </widget>
                     </child>
                   </widget>
@@ -61,7 +61,7 @@
                     <child>
                       <widget class="GtkImage" id="image3">
                         <property name="visible">True</property>
-                        <property name="pixbuf">caja.jpg</property>
+                        <property name="pixbuf">img/caja.jpg</property>
                       </widget>
                     </child>
                   </widget>
@@ -100,7 +100,7 @@
                     <child>
                       <widget class="GtkImage" id="image2">
                         <property name="visible">True</property>
-                        <property name="pixbuf">lupa.JPG</property>
+                        <property name="pixbuf">img/lupa.JPG</property>
                         <property name="icon_size">3</property>
                       </widget>
                     </child>
