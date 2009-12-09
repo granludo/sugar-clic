@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Wed Dec  9 00:38:57 2009 -->
+<!--Generated with glade3 3.4.5 on Wed Dec  9 18:44:06 2009 -->
 <glade-interface>
   <widget class="GtkWindow" id="window">
     <property name="title" translatable="yes">~Clic~</property>
@@ -23,9 +23,9 @@
                     <property name="receives_default">True</property>
                     <property name="response_id">0</property>
                     <child>
-                      <widget class="GtkImage" id="image4">
+                      <widget class="GtkImage" id="imageDownload">
                         <property name="visible">True</property>
-                        <property name="pixbuf">img/download.jpg</property>
+                        <property name="pixbuf">download.jpg</property>
                       </widget>
                     </child>
                   </widget>
@@ -59,9 +59,9 @@
                     <property name="receives_default">True</property>
                     <property name="response_id">0</property>
                     <child>
-                      <widget class="GtkImage" id="image3">
+                      <widget class="GtkImage" id="imageAvailable">
                         <property name="visible">True</property>
-                        <property name="pixbuf">img/caja.jpg</property>
+                        <property name="pixbuf">caja.jpg</property>
                       </widget>
                     </child>
                   </widget>
@@ -98,9 +98,9 @@
                     <property name="receives_default">True</property>
                     <property name="response_id">0</property>
                     <child>
-                      <widget class="GtkImage" id="image2">
+                      <widget class="GtkImage" id="imageSearch">
                         <property name="visible">True</property>
-                        <property name="pixbuf">img/lupa.JPG</property>
+                        <property name="pixbuf">lupa.JPG</property>
                         <property name="icon_size">3</property>
                       </widget>
                     </child>

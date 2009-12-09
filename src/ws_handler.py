@@ -50,7 +50,8 @@ class WSHandler:
 
 #Downloads a Jclic to the computer
     def download_clic(self, clic_file):
-        t = os.system('mkdir ' + self.clics_path)
+        if not os.path.exists(self.clics_path):
+            t = os.system('mkdir ' + self.clics_path)
         t = os.system('wget -q '+ self.namespace +'/'+ clic_file +' --directory-prefix='+ self.clics_path)
         return t
 

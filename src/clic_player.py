@@ -65,6 +65,12 @@ class clic_player:
         #loading main widget
         self.bD = self.xml.get_widget('buttonDownload')
         self.bD = self.bD.connect('clicked', self.__download_clics_view)   
+        self.ImageD = self.xml.get_widget('imageDownload')
+        self.ImageD.set_from_file('img/download.jpg')
+        self.ImageS = self.xml.get_widget('imageSearch')
+        self.ImageS.set_from_file('img/lupa.JPG')
+        self.ImageAva = self.xml.get_widget('imageAvailable')
+        self.ImageAva.set_from_file('img/caja.jpg')
         self.bAva = self.xml.get_widget('buttonAvailable')                
         self.bAva = self.bAva.connect('clicked', self.__available_clics_view)
         self.bSearch = self.xml.get_widget('buttonSearch')                
@@ -116,11 +122,11 @@ class clic_player:
         self.controller = Controller()
         
         #loading data of the treeview (download_clic)
-        clics_list = self.controller.get_clics_list()
-        lstore = clic_player_data.add_clics_data(clics_list)
-        self.tree.set_model(lstore)
-        #adding columns to treeviews
-        clic_player_data.put_columns(self.tree)
+#        clics_list = self.controller.get_clics_list()
+#        lstore = clic_player_data.add_clics_data(clics_list)
+#        self.tree.set_model(lstore)
+#        #adding columns to treeviews
+#        clic_player_data.put_columns(self.tree)
         clics = self.controller.get_installed_clics()
         lstore = clic_player_data.add_clics_data(clics)
         self.treeAvailable.set_model(lstore)

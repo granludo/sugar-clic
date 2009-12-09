@@ -90,14 +90,11 @@ class HelperAppLauncherDialog:
             else:
                 extension = ''
                 
-        cmd = paths.application_data_path
-        fin,fout = os.popen4(cmd)
-        result = fout.read()
-        result = result.replace ( '\n', '' )
+        temp_path = paths.application_data_path
 #        temp_path = os.path.join('/home/niobst/Desktop', 'instance')
 #        temp_path = os.path.join(activity.get_activity_root(), 'instance')
-        if not os.path.exists(temp_path):
-            os.makedirs(temp_path)
+#        if not os.path.exists(temp_path):
+#            os.makedirs(temp_path)
 #        fd, file_path = tempfile.mkstemp(dir=temp_path, prefix=base_name, suffix=extension)
 #        os.close(fd)
 #        os.chmod(file_path, 0644)

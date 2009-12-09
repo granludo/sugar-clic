@@ -75,7 +75,6 @@ class Sequencer:
                 #Next activity
                 if(resultat == -2 and self.index < self.size-1):
                     #searching for a new and valid clic activity
-                    print 'next'
                     while (self.index < self.size-1):
                         self.index = self.index + 1
                         clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the first activity(tag) of the sequence
@@ -86,7 +85,6 @@ class Sequencer:
                 #Previous activity
                 if(resultat == -3 and self.index > 0):
                     #searching for a new and valid clic activity
-                    print 'previous'
                     while (self.index > 0):
                         self.index = self.index - 1
                         clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the first activity(tag) of the sequence
