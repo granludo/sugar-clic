@@ -45,6 +45,7 @@ class DbClics:
         result = fout.read()
         result = result.replace ( '\n', '' )
         result = result + '/downloaded.xml'
+
         return result
 
     #Creation of the DB
@@ -119,6 +120,7 @@ class DbClics:
         # Create the <wml> base element
         wml = doc.createElement('files')
         doc.appendChild(wml)
+        doc.toxml
         file = doc.toxml()
         global path_db
         f = open(self.path_db, 'w')

@@ -30,6 +30,11 @@
     
     @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 '''
+import os
+import hulahop
+##from sugar import env
+##hulahop.startup(os.path.join(env.get_profile_path(), 'gecko'))
+hulahop.startup('data/test')
 import gtk
 import gtk.glade
 import gobject
@@ -37,7 +42,8 @@ from controller import Controller
 import clic_player_data
 from olpcgames import gtkEvent
 import pygame
-import os
+from browser import Browser
+
 
 class clic_player:
     def __init__(self, runaslib = True):                
@@ -50,7 +56,8 @@ class clic_player:
         self.xml = gtk.glade.XML('views.glade') 
         #loading window
         self.window = self.xml.get_widget('window')
-        self.window.connect('delete_event', gtk.main_quit)   
+        self.window.connect('delete_event', gtk.main_quit) 
+        self.window.set_size_request(500,300)  
         # Get Windows child (Vertical Box with the views)
         self.w_child = self.window.get_child()  
         
@@ -59,6 +66,8 @@ class clic_player:
         self.bD = self.bD.connect('clicked', self.__download_clics_view)   
         self.bAva = self.xml.get_widget('buttonAvailable')                
         self.bAva = self.bAva.connect('clicked', self.__available_clics_view)
+        self.bSearch = self.xml.get_widget('buttonSearch')                
+        self.bSearch = self.bSearch.connect('clicked', self.__search_clics_view)
         self.vboxMain = self.xml.get_widget('vboxMain')
 
         #loading download_clics widget   
@@ -80,6 +89,13 @@ class clic_player:
         self.bGV = self.xml.get_widget('playClic')
         self.bGV.connect('clicked', self.__play_clics_view)
         self.vboxAvailable = self.xml.get_widget('vboxAvailable')
+        
+        #loading search_clics widget
+        self.vboxBrowser = self.xml.get_widget('vboxBrowser')
+        self.browser = Browser()
+        self.bBM = self.xml.get_widget('button1')
+        self.bBM.connect('clicked', self.__main_view)
+        
         
         #loading play_clics widget
         self.vboxPlay = self.xml.get_widget('vboxPlay')
@@ -133,6 +149,8 @@ class clic_player:
         self.vboxDownload.hide()
         self.vboxAvailable.hide()
         self.vboxPlay.hide()
+        self.vboxBrowser.remove(self.browser)
+        self.vboxBrowser.hide()
         self.vboxMain.show()
  
     #view to download clics
@@ -140,6 +158,9 @@ class clic_player:
         self.vboxMain.hide()           
         self.vboxAvailable.hide()
         self.vboxPlay.hide()
+        self.vboxBrowser.remove(self.browser)
+        self.browser.hide()
+        self.vboxBrowser.hide()
         self.vboxDownload.show()
        
     #View to see the available clics in the computer and select one to play
@@ -153,6 +174,8 @@ class clic_player:
                 lstore = clic_player_data.add_clics_data(clics)
                 self.treeAvailable.set_model(lstore)
                 self.newclic = False
+        self.vboxBrowser.remove(self.browser)
+        self.vboxBrowser.hide()
         self.vboxMain.hide()           
         self.vboxDownload.hide()
         self.vboxPlay.hide()
@@ -163,12 +186,26 @@ class clic_player:
         if self.selected:
             clic = clic_player_data.get_clic_data(self.treeAvailable)
             self.controller.load_clic(clic['File'].split('.',1)[0]) 
+            self.vboxBrowser.remove(self.browser)
+            self.vboxBrowser.hide()
             self.vboxMain.hide()           
             self.vboxAvailable.hide()
             self.vboxDownload.hide()
             self.vboxPlay.show()
             self.selected = False
-           
+            
+    #Browser -> find new clics
+    def __search_clics_view(self, *args):
+        self.vboxMain.hide()           
+        self.vboxDownload.hide()
+        self.vboxPlay.hide()
+        self.vboxAvailable.hide()
+        self.browser = Browser()
+        self.browser.show()
+        self.vboxBrowser.add(self.browser)
+        self.vboxBrowser.show()
+        self.browser.load_uri('http://wiki.laptop.org/go/Activities')
+
     #a clic is chosen to download    
     def __is_clicked(self, *args):
         self.clicked = True
@@ -180,7 +217,6 @@ class clic_player:
     #calls the controller to download and install a clic
     def __clic_selected(self, *args):
         if self.clicked:
-            print 'entrooooooooooo'
             clic = clic_player_data.get_clic_data(self.tree)
             t = self.controller.add_new_clic(clic)
             if t == 0 :
