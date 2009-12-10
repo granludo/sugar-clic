@@ -42,9 +42,9 @@ __UNIX_bundle = '.'
 ####################USE ONLY IN OLPC LAPTOP###############################
 ##Comment it when you are not in OLPC!!!!
 ###activity folder to store data ($SUGAR_ACTIVITY_ROOT)
-__XO_data =  os.path.join(activity.get_activity_root(), 'data') 
+#__XO_data =  os.path.join(activity.get_activity_root(), 'data') 
 ###activity path (in /home/olpc/Activities folder) ($SUGAR_ACTIVITY_BUNDLE)
-__XO_bundle = activity.get_bundle_path()
+#__XO_bundle = activity.get_bundle_path()
 ##########################################################################
 
 web_service = 'http://potato.lsi.upc.edu/jclicrepository/index.php?wsdl'
