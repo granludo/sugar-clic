@@ -35,7 +35,7 @@
 import Constants
 
 
-from Activity import  Activity
+from Activity_CLIC import  Activity
 from Grid import Grid
 
 

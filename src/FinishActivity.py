@@ -32,7 +32,7 @@
 '''
 
 
-from Activity import  Activity
+from Activity_CLIC import  Activity
 
 
 class FinishActivity(Activity):

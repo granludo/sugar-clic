@@ -30,13 +30,30 @@
     
     @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 '''
+from sugar.activity import activity
 import os
 #paths used in the application
-__Fedora = './data'
-__XO = '$SUGAR_ACTIVITY_ROOT/data' #an activity can only store in a specific folder
+
+###########################USE ONLY IN YOUR UNIX SESSION##################
+__UNIX_data = './data'
+__UNIX_bundle = '.'
+##########################################################################
+
+####################USE ONLY IN OLPC LAPTOP###############################
+##Comment it when you are not in OLPC!!!!
+###activity folder to store data ($SUGAR_ACTIVITY_ROOT)
+__XO_data =  os.path.join(activity.get_activity_root(), 'data') 
+###activity path (in /home/olpc/Activities folder) ($SUGAR_ACTIVITY_BUNDLE)
+__XO_bundle = activity.get_bundle_path()
+##########################################################################
+
 web_service = 'http://potato.lsi.upc.edu/jclicrepository/index.php?wsdl'
 
-application_data_path = __Fedora
+#root folder of the application
+application_bundle_path = __UNIX_bundle
+
+#folder to store clics files
+application_data_path = __UNIX_data
 
 clics_path = application_data_path + '/clics' #path to the folder that contains the clics
 

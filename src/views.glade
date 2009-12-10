@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Wed Dec  9 18:44:06 2009 -->
+<!--Generated with glade3 3.4.5 on Thu Dec 10 00:30:15 2009 -->
 <glade-interface>
   <widget class="GtkWindow" id="window">
     <property name="title" translatable="yes">~Clic~</property>
@@ -25,7 +25,6 @@
                     <child>
                       <widget class="GtkImage" id="imageDownload">
                         <property name="visible">True</property>
-                        <property name="pixbuf">download.jpg</property>
                       </widget>
                     </child>
                   </widget>
@@ -51,7 +50,7 @@
             <child>
               <widget class="GtkHBox" id="hbox2">
                 <property name="visible">True</property>
-                <property name="spacing">264</property>
+                <property name="spacing">262</property>
                 <child>
                   <widget class="GtkButton" id="buttonAvailable">
                     <property name="visible">True</property>
@@ -61,7 +60,6 @@
                     <child>
                       <widget class="GtkImage" id="imageAvailable">
                         <property name="visible">True</property>
-                        <property name="pixbuf">caja.jpg</property>
                       </widget>
                     </child>
                   </widget>
@@ -90,7 +88,7 @@
             <child>
               <widget class="GtkHBox" id="hbox3">
                 <property name="visible">True</property>
-                <property name="spacing">262</property>
+                <property name="spacing">238</property>
                 <child>
                   <widget class="GtkButton" id="buttonSearch">
                     <property name="visible">True</property>
@@ -100,7 +98,6 @@
                     <child>
                       <widget class="GtkImage" id="imageSearch">
                         <property name="visible">True</property>
-                        <property name="pixbuf">lupa.JPG</property>
                         <property name="icon_size">3</property>
                       </widget>
                     </child>
@@ -272,15 +269,14 @@
               <widget class="GtkHButtonBox" id="hbuttonbox1">
                 <property name="visible">True</property>
                 <child>
-                  <widget class="GtkButton" id="button1">
+                  <widget class="GtkButton" id="buttonHome">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="response_id">0</property>
                     <child>
-                      <widget class="GtkImage" id="image1">
+                      <widget class="GtkImage" id="imageHome">
                         <property name="visible">True</property>
-                        <property name="pixbuf">next_small.png</property>
                       </widget>
                     </child>
                   </widget>

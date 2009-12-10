@@ -36,7 +36,7 @@ import pygame
 import pygame.font
 import pygame.locals
 
-from Activity import  Activity
+from Activity_CLIC import  Activity
 from Grid import Grid
 
 class IdentifyPanels(Activity):
