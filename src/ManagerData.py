@@ -63,7 +63,7 @@ def add_clics_data(data):
 def put_columns(tree):
         
     #column for title
-    column = gtk.TreeViewColumn('Title', gtk.CellRendererText(), 
+    column = gtk.TreeViewColumn('Clic Title', gtk.CellRendererText(), 
                                     text=COLUMN_TITLE)
     column.set_sort_column_id(COLUMN_TITLE)
     tree.append_column(column)

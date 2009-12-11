@@ -144,8 +144,13 @@ class Manager:
         self.bPM.connect('clicked', self.__main_view)
         self.bGV = self.xml.get_widget('playClic')
         self.bGV.connect('clicked', self.__play_clics_view)
+        self.ImagePlay = self.xml.get_widget('imagePlay')
+        self.ImagePlay.set_from_file(icons_path + '/play.png')
+        self.labelMy = self.xml.get_widget('labelMyClics')
         self.vboxAvailable = self.xml.get_widget('vboxAvailable')
         gtk.Container.remove(self.windowAva, self.vboxAvailable)
+        self.ImageHome = self.xml.get_widget('imageHome')
+        self.ImageHome.set_from_file(icons_path + '/home.png')
 
 
      
@@ -243,6 +248,7 @@ class Manager:
        
     #View to see the available clics in the computer and select one to play
     def __available_clics_view(self, *args):
+        self.labelMy.set_text('Please, select a Clic')
         if self.start:
             self.start = False
         else:
@@ -306,6 +312,7 @@ class Manager:
     #a clic is chosen to play       
     def __is_selected(self, *args):
         self.selected = True
+        self.labelMy.set_text('Play now!')
         
     #calls the controller to download and install a clic
     def __clic_selected(self, *args):
@@ -314,7 +321,7 @@ class Manager:
             clic = ManagerData.get_clic_data(self.tree)
             t = self.controller.add_new_clic(clic)
             if t == 0 :
-                print 'File downloaded (Manger)'
+                print 'File downloaded (Manager)'
                 self.labelInfo.set_text(clic['Title'] + ' downloaded')
                 self.newclic = True
             else:

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Fri Dec 11 22:20:04 2009 -->
+<!--Generated with glade3 3.4.5 on Sat Dec 12 00:44:35 2009 -->
 <glade-interface>
   <widget class="GtkWindow" id="window">
     <child>
@@ -23,25 +23,48 @@
         <child>
           <widget class="GtkHButtonBox" id="hbuttonbox5">
             <property name="visible">True</property>
+            <property name="spacing">18</property>
             <child>
               <widget class="GtkButton" id="playClic">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="label" translatable="yes">Play Clic</property>
+                <property name="relief">GTK_RELIEF_NONE</property>
                 <property name="response_id">0</property>
+                <child>
+                  <widget class="GtkImage" id="imagePlay">
+                    <property name="visible">True</property>
+                    <property name="stock">gtk-missing-image</property>
+                  </widget>
+                </child>
               </widget>
+            </child>
+            <child>
+              <widget class="GtkLabel" id="labelMyClics">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Please, select a Clic</property>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="position">1</property>
+              </packing>
             </child>
             <child>
               <widget class="GtkButton" id="buttonAvaMain">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="label" translatable="yes">Main Menu</property>
+                <property name="relief">GTK_RELIEF_NONE</property>
                 <property name="response_id">0</property>
+                <child>
+                  <widget class="GtkImage" id="imageHome">
+                    <property name="visible">True</property>
+                    <property name="stock">gtk-missing-image</property>
+                  </widget>
+                </child>
               </widget>
               <packing>
-                <property name="position">1</property>
+                <property name="position">2</property>
               </packing>
             </child>
           </widget>
