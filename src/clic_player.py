@@ -33,7 +33,7 @@
 import os
 import hulahop
 import paths
-hulahop.startup(paths.application_bundle_path+ '/test')
+hulahop.startup(paths.application_data_path + '/test')
 import gtk
 import gtk.glade
 import gobject
