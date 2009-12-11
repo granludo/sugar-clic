@@ -32,9 +32,9 @@
 '''
 import pygame
 import random
-from clic_activities_handler import ClicActivities
+
 import controller
-from sugar.graphics.toolbutton import ToolButton
+from clicHandler import ClicActivities
 
 
 class Sequencer:
@@ -46,9 +46,9 @@ class Sequencer:
     #load the clic sequence information
     def begin_sequence(self, sequence, mediaBag, settings, clic_path,clic_name):
         #get all the names of the activities (inside the sequence)
+        self.activities = []
         for item in sequence.getElementsByTagName('item'):
-            self.activities.append(item.getAttribute('name'))
-            
+            self.activities.append(item.getAttribute('name'))            
         self.size = self.activities.__len__()
         self.act_handler = ClicActivities(clic_path, mediaBag, settings,clic_name)
     

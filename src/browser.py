@@ -7,7 +7,7 @@ from xpcom import components
 from xpcom.components import interfaces
 from xpcom.server.factory import Factory
 
-from progresslistener import ProgressListener
+#from progresslistener import ProgressListener
 from downloadmanager import Download
 from downloadmanager import HelperAppLauncherDialog
 
@@ -29,7 +29,7 @@ class ContentInvoker:
 class Browser(WebView):
     def __init__(self):
         WebView.__init__(self)
-        self.progress = ProgressListener()
+#        self.progress = ProgressListener()
 
         io_service_class = components.classes[ \
         "@mozilla.org/network/io-service;1"]
@@ -40,8 +40,8 @@ class Browser(WebView):
         io_service2 = io_service_class.getService(interfaces.nsIIOService2)
         io_service2.manageOfflineStatus = False
 
-        self.progress.connect('loading-stop', self._loaded)
-        self.progress.connect('loading-progress', self._loading)
+#        self.progress.connect('loading-stop', self._loaded)
+#        self.progress.connect('loading-progress', self._loading)
 
     def do_setup(self):
         print "do_setup"

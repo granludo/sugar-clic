@@ -31,21 +31,20 @@
     @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 '''
 import pygame
-from   GeneralDialog import GeneralDialog
-from Point import Point
-
 import xml.dom.minidom
-from  ExchangePuzzle  import ExchangePuzzle
-from  MemoryGame  import MemoryGame
-from  DoublePuzzle import DoublePuzzle 
-from  InformationScreen import InformationScreen 
-from  HolePuzzle import HolePuzzle
-from  IdentifyPanels import IdentifyPanels
-from  FinishActivity import FinishActivity
-from  PanelsExplore import PanelsExplore
-import Constants
-import pygame
 from pygame.locals import *
+from ClicActivity.Point import Point
+from ClicActivity.ExchangePuzzle  import ExchangePuzzle
+from ClicActivity.MemoryGame  import MemoryGame
+from ClicActivity.DoublePuzzle import DoublePuzzle 
+from ClicActivity.InformationScreen import InformationScreen 
+from ClicActivity.HolePuzzle import HolePuzzle
+from ClicActivity.IdentifyPanels import IdentifyPanels
+from ClicActivity.FinishActivity import FinishActivity
+from ClicActivity.PanelsExplore import PanelsExplore
+from ClicActivity.GeneralDialog import GeneralDialog
+from ClicActivity import Constants
+
 
 class ClicActivities:
     display = None

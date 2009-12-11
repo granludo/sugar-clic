@@ -99,6 +99,7 @@ class HelperAppLauncherDialog:
 #        os.close(fd)
 #        os.chmod(file_path, 0644)
         file_path = (temp_path + '/' + default_file)
+        print file_path
         dest_file.initWithPath(file_path)
 
         requestor = window_context.queryInterface(interfaces.nsIInterfaceRequestor)

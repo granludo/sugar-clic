@@ -36,7 +36,7 @@ import Constants
 import pygame
 from pygame import *
 
-from Activity_CLIC import  Activity
+from Activity import  Activity
 from Grid import Grid
 
 class MemoryGame(Activity):

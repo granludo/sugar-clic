@@ -38,14 +38,14 @@ import gtk
 import gtk.glade
 import gobject
 from controller import Controller
-import clic_player_data
+import ManagerData
 from olpcgames import gtkEvent
 import pygame
 from browser import Browser
 
 
 
-class clic_player:
+class Manager:
     def __init__(self, runaslib = True):                
         self.clicked = False #is a clic chosen to download?
         self.selected = False #is a clic chosen to play?
@@ -125,15 +125,15 @@ class clic_player:
         self.controller = Controller()
         
         #loading data of the treeview (download_clic)
-        clics_list = self.controller.get_clics_list()
-        lstore = clic_player_data.add_clics_data(clics_list)
-        self.tree.set_model(lstore)
-        #adding columns to treeviews
-        clic_player_data.put_columns(self.tree)
+#        clics_list = self.controller.get_clics_list()
+#        lstore = ManagerData.add_clics_data(clics_list)
+#        self.tree.set_model(lstore)
+#        #adding columns to treeviews
+#        ManagerData.put_columns(self.tree)
         clics = self.controller.get_installed_clics()
-        lstore = clic_player_data.add_clics_data(clics)
+        lstore = ManagerData.add_clics_data(clics)
         self.treeAvailable.set_model(lstore)
-        clic_player_data.put_columns(self.treeAvailable)
+        ManagerData.put_columns(self.treeAvailable)
         
         #runs the first view (main view)
         self.__main_view()
@@ -182,7 +182,8 @@ class clic_player:
         else:
             if self.newclic:
                 clics = self.controller.get_installed_clics()
-                lstore = clic_player_data.add_clics_data(clics)
+                print clics
+                lstore = ManagerData.add_clics_data(clics)
                 self.treeAvailable.set_model(lstore)
                 self.newclic = False
         if self.isBrowseActivated:
@@ -196,7 +197,7 @@ class clic_player:
     #View that shows the clics (and its activities)
     def __play_clics_view(self, *args):
         if self.selected:
-            clic = clic_player_data.get_clic_data(self.treeAvailable)
+            clic = ManagerData.get_clic_data(self.treeAvailable)
             self.controller.load_clic(clic['File'].split('.',1)[0])
             if self.isBrowseActivated: 
                 self.vboxBrowser.remove(self.browser)
@@ -232,10 +233,10 @@ class clic_player:
     def __clic_selected(self, *args):
         if self.clicked:
             self.labelInfo.set_text('Clics')
-            clic = clic_player_data.get_clic_data(self.tree)
+            clic = ManagerData.get_clic_data(self.tree)
             t = self.controller.add_new_clic(clic)
             if t == 0 :
-                print 'File downloaded (clic_player)'
+                print 'File downloaded (Manger)'
                 self.labelInfo.set_text(clic['Title'] + ' downloaded')
                 self.newclic = True
             else:
@@ -259,5 +260,5 @@ class clic_player:
 
 #To execute outside the Xo laptop
 if __name__=="__main__":
-    clic_player(False)
+    Manager(False)
         

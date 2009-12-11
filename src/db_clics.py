@@ -71,7 +71,7 @@ class DbClics:
                     'Language': file.childNodes[3].childNodes[0].data,
                     'File': file.childNodes[4].childNodes[0].data              
                     }
-        l.append(clic)
+            l.append(clic)
         return l
 
     #insert clic to the DB    

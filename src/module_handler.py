@@ -52,9 +52,10 @@ class ClicParser:
     #Returns the xml code related with the activity_name
     def get_clic_activity(self, activity_name):
         for clic_activity in self.clic_activities.getElementsByTagName('activity'):
+            print clic_activity.getAttribute('name')
             if clic_activity.getAttribute('name') == activity_name:
                 return clic_activity        
-        raise SyntaxError, "No activities with this name"  
+        raise SyntaxError, "No activities with this name: " + activity_name  
 
     
     
