@@ -125,11 +125,11 @@ class Manager:
         self.controller = Controller()
         
         #loading data of the treeview (download_clic)
-#        clics_list = self.controller.get_clics_list()
-#        lstore = ManagerData.add_clics_data(clics_list)
-#        self.tree.set_model(lstore)
-#        #adding columns to treeviews
-#        ManagerData.put_columns(self.tree)
+        clics_list = self.controller.get_clics_list()
+        lstore = ManagerData.add_clics_data(clics_list)
+        self.tree.set_model(lstore)
+        #adding columns to treeviews
+        ManagerData.put_columns(self.tree)
         clics = self.controller.get_installed_clics()
         lstore = ManagerData.add_clics_data(clics)
         self.treeAvailable.set_model(lstore)
