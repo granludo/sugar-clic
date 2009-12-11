@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Thu Dec 10 00:30:15 2009 -->
+<!--Generated with glade3 3.4.5 on Fri Dec 11 22:24:06 2009 -->
 <glade-interface>
   <widget class="GtkWindow" id="window">
     <property name="title" translatable="yes">~Clic~</property>
@@ -25,6 +25,7 @@
                     <child>
                       <widget class="GtkImage" id="imageDownload">
                         <property name="visible">True</property>
+                        <property name="stock">gtk-missing-image</property>
                       </widget>
                     </child>
                   </widget>
@@ -60,6 +61,7 @@
                     <child>
                       <widget class="GtkImage" id="imageAvailable">
                         <property name="visible">True</property>
+                        <property name="stock">gtk-missing-image</property>
                       </widget>
                     </child>
                   </widget>
@@ -98,6 +100,7 @@
                     <child>
                       <widget class="GtkImage" id="imageSearch">
                         <property name="visible">True</property>
+                        <property name="stock">gtk-missing-image</property>
                         <property name="icon_size">3</property>
                       </widget>
                     </child>
@@ -277,6 +280,7 @@
                     <child>
                       <widget class="GtkImage" id="imageHome">
                         <property name="visible">True</property>
+                        <property name="stock">gtk-missing-image</property>
                       </widget>
                     </child>
                   </widget>

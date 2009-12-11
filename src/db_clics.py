@@ -40,7 +40,10 @@ class DbClics:
         self.__load_db()
 
     def __get_path_db(self):
-        cmd = 'echo ' + paths.application_data_path
+##############ONLY FOR ALPHA TEST###############################       
+        cmd = 'echo ' + paths.application_bundle_path + '/data'
+################################################################        
+#        cmd = 'echo ' + paths.application_data_path
         fin,fout = os.popen4(cmd)
         result = fout.read()
         result = result.replace ( '\n', '' )
