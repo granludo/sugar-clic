@@ -140,10 +140,13 @@ class Manager:
         
         if not runaslib: 
             self.window.show() 
-            while True:
+            gtk.main()
+            b = False
+            while b == False:
+                b = gtk.main_iteration(block=False)
                 self.updating()
                 self.area.grab_focus()
-                gtk.main_iteration(block=False)
+
 
     #calls the clic infinite times (until the clic ends) 
     def updating(self):        
