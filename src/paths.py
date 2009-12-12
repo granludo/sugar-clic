@@ -55,7 +55,11 @@ application_bundle_path = __UNIX_bundle
 #folder to store clics files
 application_data_path = __UNIX_data
 
-clics_path = application_data_path + '/clics' #path to the folder that contains the clics
+##############ONLY FOR ALPHA TEST###############################       
+clics_path = application_bundle_path + '/data/clics' 
+################################################################ 
+ 
+#clics_path = application_data_path + '/clics' #path to the folder that contains the clics
 
 
 #Returns the absolute path of the clic folder
