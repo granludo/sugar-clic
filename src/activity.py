@@ -38,6 +38,7 @@ import gobject
 from Manager import Manager
 # Load sugar libraries
 from sugar.activity import activity  
+from gettext import gettext as _
 
 class JClicDownloaderActivity(activity.Activity):
     def __init__(self, handle):
@@ -45,7 +46,7 @@ class JClicDownloaderActivity(activity.Activity):
         self._name = handle
 
         # Set title for our Activity
-        self.set_title('Clic Player')
+        self.set_title(_('Clic Player'))
 
         # Attach sugar toolbox (Share, ...)
         toolbox = activity.ActivityToolbox(self)

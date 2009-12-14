@@ -37,6 +37,7 @@ hulahop.startup(paths.application_data_path + '/test')
 import gtk
 import gtk.glade
 import gobject
+from gettext import gettext as _
 from controller import Controller
 import ManagerData
 from olpcgames import gtkEvent
@@ -55,6 +56,8 @@ class Manager:
         self.iterate = True #execute the app?
         self.firstWs = True #first call to the web service?
         
+        #if runaslib = True -> we are in a Xo laptop
+        paths.set_environment(runaslib)
         
         img_app_path = os.path.join(paths.application_bundle_path, 'img/app') 
         views_path = os.path.join(img_app_path, 'appViews')
@@ -248,7 +251,7 @@ class Manager:
        
     #View to see the available clics in the computer and select one to play
     def __available_clics_view(self, *args):
-        self.labelMy.set_text('Please, select a Clic')
+        self.labelMy.set_text(_('Select a Clic'))
         if self.start:
             self.start = False
         else:
@@ -312,12 +315,12 @@ class Manager:
     #a clic is chosen to play       
     def __is_selected(self, *args):
         self.selected = True
-        self.labelMy.set_text('Play now!')
+        self.labelMy.set_text(_('Play now!'))
         
     #calls the controller to download and install a clic
     def __clic_selected(self, *args):
         if self.clicked:
-            self.labelInfo.set_text('Clics')
+            self.labelInfo.set_text(_('Clics'))
             clic = ManagerData.get_clic_data(self.tree)
             t = self.controller.add_new_clic(clic)
             if t == 0 :

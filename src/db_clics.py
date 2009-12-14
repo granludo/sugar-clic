@@ -36,20 +36,8 @@ import paths
 
 class DbClics:
     def __init__(self):
-        self.path_db = self.__get_path_db() #Absolute path of the downloaded.xml (File with information about clics downloaded)          
+        self.path_db = paths.get_db_path() #Absolute path of the downloaded.xml (File with information about clics downloaded)          
         self.__load_db()
-
-    def __get_path_db(self):
-##############ONLY FOR ALPHA TEST###############################       
-        cmd = 'echo ' + paths.application_bundle_path + '/data'
-################################################################        
-#        cmd = 'echo ' + paths.application_data_path
-        fin,fout = os.popen4(cmd)
-        result = fout.read()
-        result = result.replace ( '\n', '' )
-        result = result + '/downloaded.xml'
-
-        return result
 
     #Creation of the DB
     def __load_db(self):

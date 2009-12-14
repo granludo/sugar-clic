@@ -32,41 +32,54 @@
 '''
 from sugar.activity import activity
 import os
-#paths used in the application
+# paths used in the application
 
-###########################USE ONLY IN YOUR UNIX SESSION##################
-__UNIX_data = './data'
-__UNIX_bundle = '.'
-##########################################################################
-
-####################USE ONLY IN OLPC LAPTOP###############################
-##Comment it when you are not in OLPC!!!!
-###activity folder to store data ($SUGAR_ACTIVITY_ROOT)
-#__XO_data =  os.path.join(activity.get_activity_root(), 'data') 
-###activity path (in /home/olpc/Activities folder) ($SUGAR_ACTIVITY_BUNDLE)
-#__XO_bundle = activity.get_bundle_path()
-##########################################################################
-
+# old web_service
 web_service = 'http://potato.lsi.upc.edu/jclicrepository/index.php?wsdl'
 
-#root folder of the application
-application_bundle_path = __UNIX_bundle
+#paths to use outside the Xo laptop
+bundle = '.'
+data = './data'
+clics = './data/clics'
 
-#folder to store clics files
-application_data_path = __UNIX_data
+# root path of the activity (in a Xo laptop is /home/olpc/Activities/activity/)
+application_bundle_path = bundle
 
+# Where the activity stores its data (clics, hulahop settings, ...)
+application_data_path = data
+
+# folder where the clics are stored
+clics_path = clics
+
+
+def get_db_path():
+    global application_bundle_path
 ##############ONLY FOR ALPHA TEST###############################       
-clics_path = application_bundle_path + '/data/clics' 
-################################################################ 
- 
-#clics_path = application_data_path + '/clics' #path to the folder that contains the clics
-
+    cmd = 'echo ' + application_bundle_path + '/data'
+################################################################        
+#    cmd = 'echo ' + application_data_path
+    fin,fout = os.popen4(cmd)
+    result = fout.read()
+    result = result.replace ( '\n', '' )
+    result = os.path.join(result , 'downloaded.xml')
+    return result
 
 #Returns the absolute path of the clic folder
 def get_clic_path(clic_name):
-        fin,fout = os.popen4('echo ' + clics_path)
-        result = fout.read()
-        result = result.replace ( '\n', '' )
-        return result + '/' + clic_name
+    fin,fout = os.popen4('echo ' + clics_path)
+    result = fout.read()
+    result = result.replace ( '\n', '' )
+    return os.path.join(result , clic_name)
+    
+def set_environment(is_Xo):
+    global application_bundle_path, application_data_path, clics_path
+    if is_Xo :
+        application_data_path = os.path.join(activity.get_activity_root(), 'data') 
+        application_bundle_path = activity.get_bundle_path()
+        ##############ONLY FOR ALPHA TEST###########################################
+        clics_path = os.path.join(application_bundle_path , 'data/clics')          
+        ############################################################################ 
+        #clics_path = os.path.join(application_data_path , 'clics') #path to the folder that contains the clics
+    
     
     
