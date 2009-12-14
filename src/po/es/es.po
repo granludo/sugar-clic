@@ -1,0 +1,17 @@
+#activity.py
+msgid "Clics Player"
+msgstr "Reproductor de Clics"
+
+#manager.py
+msgid "Select a Clic"
+msgstr "Elige un Clic"
+
+#manager.py
+msgid "Play now!"
+msgstr "Juega ahora!"
+
+#manager.py
+msgid "Clics"
+msgstr "Clics"
+
+

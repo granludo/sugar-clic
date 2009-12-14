@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Sat Dec 12 00:37:37 2009 -->
+<!--Generated with glade3 3.4.5 on Mon Dec 14 18:48:15 2009 -->
 <glade-interface>
   <widget class="GtkWindow" id="window">
     <child>
@@ -40,7 +40,7 @@
                 <child>
                   <widget class="GtkLabel" id="label2">
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">ABOUT</property>
+                    <property name="label" translatable="yes">About</property>
                   </widget>
                 </child>
               </widget>
@@ -84,7 +84,7 @@
                 <child>
                   <widget class="GtkLabel" id="label1">
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">MY CLICS</property>
+                    <property name="label" translatable="yes">My Clics</property>
                   </widget>
                 </child>
               </widget>
