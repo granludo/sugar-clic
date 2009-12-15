@@ -43,6 +43,8 @@ from ClicActivity.IdentifyPanels import IdentifyPanels
 from ClicActivity.FinishActivity import FinishActivity
 from ClicActivity.PanelsExplore import PanelsExplore
 from ClicActivity.GeneralDialog import GeneralDialog
+from ClicActivity.SimpleAssociation import SimpleAssociation
+from ClicActivity.ComplexAssociation import ComplexAssociation
 from ClicActivity import Constants
 
 
@@ -144,6 +146,10 @@ class ClicActivities:
                         return True
         elif  node.getAttribute('class') =='@panels.Explore':
                         return True
+        elif  node.getAttribute('class') =='@associations.SimpleAssociation':
+                        return True
+        elif  node.getAttribute('class') =='@associations.ComplexAssociation':
+                        return True
         else:
              return False
     def executeActivity(self,node):
@@ -161,4 +167,8 @@ class ClicActivities:
                         return IdentifyPanels(node)
         elif  node.getAttribute('class') =='@panels.Explore':
                         return PanelsExplore(node)
+        elif  node.getAttribute('class') =='@associations.SimpleAssociation':
+                        return SimpleAssociation(node)
+        elif  node.getAttribute('class') =='@associations.ComplexAssociation':
+                        return ComplexAssociation(node)
                 
