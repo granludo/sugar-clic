@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JClicProject name="binario" version="0.1.3">
+ <settings>
+  <title>Sistema binario</title>
+  <revision description="Creación del paquete de actividades en Clic 3.0" date="1/27/06" />
+  <revision description="Conversión de Clic3 a JClic" date="1/27/06">
+   <author name="Equip Clic" mail="clic@xtec.net" organization="Àrea TIC - Departament d'Educació" />
+  </revision>
+  <author name="Félix Manuel Redondo Templado" mail="templado@teleline.es" />
+  <organization name="IES Complutense" mail="ies.complutense@terra.es" url="http://centros5.pntic.mec.es/ies.complutense/" city="Alcalá de Henares" state="Madrid" />
+  <language>español</language>
+  <description>
+   <p>Actividades relacionadas con la conversión entre sistemas de numeración: de binario a decimal, de decimal a binario, de hexadecimal a binario, etc...</p>
+  </description>
+  <descriptors area="Tecnología" level="Secundaria (12-16), Bachillerato (16-18)" />
+ </settings>
+ <sequence>
+  <item id="binario.pac" name="sisbin.ass">
+   <jump action="RETURN" id="back" />
+  </item>
+  <item name="tablabin.ass" />
+  <item name="multiplo.ass" />
+  <item name="bytes.sop" />
+  <item name="inf_d2b.ass" />
+  <item name="inf_b2d.ass" />
+  <item name="hexa.ass" />
+  <item name="bdh.ass" />
+  <item name="infh2d.ass" />
+  <item name="inf_hex.ass" />
+  <item name="bin2hex.ass" />
+ </sequence>
+ <activities>
+  <activity class="@panels.InformationScreen" name="bdh.ass" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style />
+     <p>A continuación se muestra cómo podemos pasar del sistema hexadecimal al decimal y viceversa.</p>
+    </cell>
+    <cell type="final">
+     <style />
+    </cell>
+   </messages>
+   <settings margin="8" report="false">
+    <container bgColor="0xC0C0C0">
+     <counters time="false" actions="false" score="false" />
+    </container>
+    <window bgColor="0xFFFFFF" border="true" />
+   </settings>
+   <cells rows="1" cols="1" border="false" image="bdh.gif">
+    <style>
+     <color background="0xFFFFFF" />
+    </style>
+    <shaper class="@Rectangular" cols="1" rows="1" />
+   </cells>
+  </activity>
+  <activity class="@panels.InformationScreen" name="bin2hex.ass" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style />
+    </cell>
+    <cell type="final">
+     <style />
+    </cell>
+   </messages>
+   <settings margin="8" report="false">
+    <container bgColor="0xC0C0C0">
+     <counters time="false" actions="false" score="false" />
+    </container>
+    <window bgColor="0xFFFFFF" border="true" />
+   </settings>
+   <cells rows="1" cols="1" border="true" image="bin2hex.gif">
+    <style>
+     <color background="0xFFFFFF" />
+    </style>
+    <shaper class="@Rectangular" cols="1" rows="1" />
+   </cells>
+  </activity>
+  <activity class="@textGrid.WordSearch" name="bytes.sop" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style />
+     <p>Encuentra 4 prefijos que son múltiplos de byte.</p>
+    </cell>
+    <cell type="final">
+     <style />
+     <p>Perfecto!</p>
+    </cell>
+   </messages>
+   <settings margin="8" report="true" reportActions="false">
+    <container bgColor="0xC0C0C0">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0xFFFFFF" border="true" />
+   </settings>
+   <textGrid rows="9" columns="12" cellWidth="20.0" cellHeight="20.0" border="true">
+    <style>
+     <color background="0xFFFFFF" />
+    </style>
+    <text>
+     <row>LAKZGJN**</row>
+     <row>LFNACUI**</row>
+     <row>URYGMZV**</row>
+     <row>RUHIMMA**</row>
+     <row>NQFGPMO**</row>
+     <row>DZLAGEM**</row>
+     <row>MEPZMDK**</row>
+     <row>*********</row>
+     <row>*T*******</row>
+     <row>*E*KILO**</row>
+     <row>*R*******</row>
+     <row>*A*******</row>
+    </text>
+   </textGrid>
+   <clues>
+    <clue id="0">GIGA</clue>
+    <clue id="1">MEGA</clue>
+    <clue id="2">KILO</clue>
+    <clue id="3">TERA</clue>
+   </clues>
+   <cells rows="4" cols="1" cellWidth="140.0" cellHeight="100.0" border="false" id="secondary">
+    <style>
+     <color background="0xFFFFFF" />
+    </style>
+    <shaper class="@Rectangular" cols="1" rows="4" />
+    <cell>
+     <p>1 gigabyte = 1024 megabyte</p>
+    </cell>
+    <cell>
+     <p>1 megabyte = 1024 kilobyte</p>
+    </cell>
+    <cell>
+     <p>1 kilobyte = 1024 byte</p>
+    </cell>
+    <cell>
+     <p>1 terabyte = 1024 gigabyte</p>
+    </cell>
+   </cells>
+   <layout position="AB" />
+  </activity>
+  <activity class="@panels.InformationScreen" name="hexa.ass" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style />
+    </cell>
+    <cell type="final">
+     <style />
+    </cell>
+   </messages>
+   <settings margin="8" report="false">
+    <container bgColor="0xFFFFFF">
+     <counters time="false" actions="false" score="false" />
+    </container>
+    <window bgColor="0xFFFFFF" border="false" />
+   </settings>
+   <cells rows="1" cols="1" border="false" image="hexa.gif">
+    <style>
+     <color background="0xFFFFFF" />
+    </style>
+    <shaper class="@Rectangular" cols="1" rows="1" />
+   </cells>
+  </activity>
+  <activity class="@panels.InformationScreen" name="inf_b2d.ass" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style />
+     <p>Fíjate cómo se obtiene el equivalente decimal de un número binario.</p>
+    </cell>
+    <cell type="final">
+     <style />
+    </cell>
+   </messages>
+   <settings margin="8" report="false">
+    <container bgColor="0xC0C0C0">
+     <counters time="false" actions="false" score="false" />
+    </container>
+    <window bgColor="0xFFFFFF" border="true" />
+   </settings>
+   <cells rows="1" cols="1" border="true" image="bin2dec.gif">
+    <style>
+     <color background="0xFFFFFF" />
+    </style>
+    <shaper class="@Rectangular" cols="1" rows="1" />
+   </cells>
+  </activity>
+  <activity class="@panels.InformationScreen" name="inf_d2b.ass" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style />
+     <p>Fíjate como se pasa un número de decimal a binario.</p>
+    </cell>
+    <cell type="final">
+     <style />
+    </cell>
+   </messages>
+   <settings margin="8" report="false">
+    <container bgColor="0xC0C0C0">
+     <counters time="false" actions="false" score="false" />
+    </container>
+    <window bgColor="0xFFFFFF" border="true" />
+   </settings>
+   <cells rows="1" cols="1" border="true" image="dec2bin.gif">
+    <style>
+     <color background="0xFFFFFF" />
+    </style>
+    <shaper class="@Rectangular" cols="1" rows="1" />
+   </cells>
+  </activity>
+  <activity class="@panels.InformationScreen" name="inf_hex.ass" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style />
+    </cell>
+    <cell type="final">
+     <style />
+    </cell>
+   </messages>
+   <settings margin="8" report="false">
+    <container bgColor="0xC0C0C0">
+     <counters time="false" actions="false" score="false" />
+    </container>
+    <window bgColor="0xFFFFFF" border="true" />
+   </settings>
+   <cells rows="1" cols="1" border="true" image="dec2hex.gif">
+    <style>
+     <color background="0xFFFFFF" />
+    </style>
+    <shaper class="@Rectangular" cols="1" rows="1" />
+   </cells>
+  </activity>
+  <activity class="@panels.InformationScreen" name="infh2d.ass" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style />
+    </cell>
+    <cell type="final">
+     <style />
+    </cell>
+   </messages>
+   <settings margin="8" report="false">
+    <container bgColor="0xC0C0C0">
+     <counters time="false" actions="false" score="false" />
+    </container>
+    <window bgColor="0xFFFFFF" border="true" />
+   </settings>
+   <cells rows="1" cols="1" border="true" image="hex2dec.gif">
+    <style>
+     <color background="0xFFFFFF" />
+    </style>
+    <shaper class="@Rectangular" cols="1" rows="1" />
+   </cells>
+  </activity>
+  <activity class="@panels.InformationScreen" name="multiplo.ass" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style />
+    </cell>
+    <cell type="final">
+     <style />
+    </cell>
+   </messages>
+   <settings margin="8" report="false">
+    <container bgColor="0xC0C0C0">
+     <counters time="false" actions="false" score="false" />
+    </container>
+    <window bgColor="0xFFFFFF" border="true" />
+   </settings>
+   <cells rows="1" cols="1" border="true" image="multiplo.gif">
+    <style>
+     <color background="0xFFFFFF" />
+    </style>
+    <shaper class="@Rectangular" cols="1" rows="1" />
+   </cells>
+  </activity>
+  <activity class="@panels.InformationScreen" name="sisbin.ass" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style />
+    </cell>
+    <cell type="final">
+     <style />
+    </cell>
+   </messages>
+   <settings margin="8" report="false">
+    <container bgColor="0xC0C0C0">
+     <counters time="false" actions="false" score="false" />
+    </container>
+    <window bgColor="0xFFFFFF" border="true" />
+   </settings>
+   <cells rows="1" cols="1" border="true" image="sisbin.gif">
+    <style>
+     <color background="0xFFFFFF" />
+    </style>
+    <shaper class="@Rectangular" cols="1" rows="1" />
+   </cells>
+  </activity>
+  <activity class="@panels.InformationScreen" name="tablabin.ass" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style />
+    </cell>
+    <cell type="final">
+     <style />
+    </cell>
+   </messages>
+   <settings margin="8" report="false">
+    <container bgColor="0xC0C0C0">
+     <counters time="false" actions="false" score="false" />
+    </container>
+    <window bgColor="0xFFFFFF" border="true" />
+   </settings>
+   <cells rows="1" cols="2" border="true" image="tabla8.gif">
+    <style>
+     <color background="0xFFFFFF" />
+    </style>
+    <shaper class="@Rectangular" cols="2" rows="1" />
+   </cells>
+  </activity>
+ </activities>
+ <mediaBag>
+  <media name="2n.gif" file="2n.gif" />
+  <media name="bdh.gif" file="bdh.gif" />
+  <media name="bin2dec.gif" file="bin2dec.gif" />
+  <media name="bin2hex.gif" file="bin2hex.gif" />
+  <media name="dec2bin.gif" file="dec2bin.gif" />
+  <media name="dec2hex.gif" file="dec2hex.gif" />
+  <media name="hex2dec.gif" file="hex2dec.gif" />
+  <media name="hexa.gif" file="hexa.gif" />
+  <media name="multiplo.gif" file="multiplo.gif" />
+  <media name="sisbin.gif" file="sisbin.gif" />
+  <media name="tabla8.gif" file="tabla8.gif" />
+  <media name="tecno.gif" file="tecno.gif" />
+ </mediaBag>
+</JClicProject>
+
