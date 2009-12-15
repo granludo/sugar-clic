@@ -45,13 +45,19 @@ class IdentifyPanels(Activity):
 
 
     def Load(self, display_surf ):
-        self.setBgColor()
+        self.setBgColor(display_surf)
 
         '''Loading xml values'''
         xmlGrid1 = self.xmlActivity.getElementsByTagName('cells')[0]
-        xmlGrid2 = self.xmlActivity.getElementsByTagName('cells')[1]
         self.Grid1 = Grid(xmlGrid1)
-        self.Grid2 = Grid(xmlGrid2)
+        try:
+            xmlGrid2 = self.xmlActivity.getElementsByTagName('cells')[1]
+            self.Grid2 = Grid(xmlGrid2)
+        except:
+            self.Grid2 = Grid()
+            '''only 1 Grid'''
+        
+       
        
         ''' Calculate Real size'''
         
@@ -86,11 +92,12 @@ class IdentifyPanels(Activity):
             id  = int(cell.getAttribute('id') )
             self.Grid1.Cells[i].contentCell.id = id 
             i = i+1
-        
-        self.Grid2.Load(self.Grid1.numRows,self.Grid1.numCols,width,height,xActual ,yActual, display_surf)
-        
         try:
             '''if cells 2 not exists, only create an empty Grid'''
+            self.Grid2.Load(self.Grid1.numRows,self.Grid1.numCols,width,height,xActual ,yActual, display_surf)
+        
+
+   
            
             cells = xmlGrid2.getElementsByTagName('cell')    
             i = 0
@@ -117,7 +124,7 @@ class IdentifyPanels(Activity):
                
 
     def OnRender(self,display_surf):
-        display_surf.fill(self.containerBg)
+        display_surf.blit(self.containerBg,(0,0))
         '''repintamos el grid...'''
         self.Grid1.OnRender(display_surf)
            

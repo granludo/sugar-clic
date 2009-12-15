@@ -46,7 +46,7 @@ class HolePuzzle(Activity):
 
      
     def Load(self, display_surf ):
-        self.setBgColor()
+        self.setBgColor(display_surf)
 
         '''Loading xml values'''
         xmlGrid = self.xmlActivity.getElementsByTagName('cells')[0]
@@ -151,7 +151,7 @@ class HolePuzzle(Activity):
                     
 
     def OnRender(self,display_surf):
-        display_surf.fill(self.containerBg)
+        display_surf.blit(self.containerBg,(0,0))
         '''repintamos el grid...'''
         self.Grid1.OnRender(display_surf)
         self.Grid2.OnRender(display_surf)

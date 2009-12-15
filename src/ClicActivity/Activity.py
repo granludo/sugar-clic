@@ -41,6 +41,7 @@ class Activity(object):
     containerBg = None
     pathToMedia = None
     
+    
     def __init__(self,xmlActivity):
         
         self.xmlActivity = xmlActivity
@@ -51,22 +52,35 @@ class Activity(object):
         print 'MOTHER CLASS'
     def OnRender(self,display_surf):
         print 'MOTHER CLASS'
-    def setBgColor(self):
+    def setBgColor(self,display_surf):
+        self.containerBg = display_surf.copy()
         '''Background Activity'''
         ''' this function runs so wrong, the bgcolor is in Container-> bgColor not in  gradient'''
+        
         try: 
             bgColor = self.xmlActivity.getElementsByTagName('gradient')[0].getAttribute('source')
             intcolor =  int(bgColor, 16)
-            self.containerBg = pygame.Color(hex(intcolor))
+            self.containerBg.fill(pygame.Color(hex(intcolor)))
         except:
             try:
                 bgColor = self.xmlActivity.getElementsByTagName('container')[0].getAttribute('bgColor')
                 intcolor =  int(bgColor, 16)
-                self.containerBg = pygame.Color(hex(intcolor))
+                self.containerBg.fill(pygame.Color(hex(intcolor)))
             except:
                 '''No bgColor'''
-                self.containerBg = Constants.colorBackground
-        ''' Background Grid'''
+        ''' If the activity have image background'''
+        
+        try:   
+            imagePath = self.xmlActivity.getElementsByTagName('image')[0].getAttribute('name')
+            image = pygame.image.load(self.pathToMedia+'/'+imagePath).convert_alpha()
+            img2 = pygame.transform.scale(image, (pygame.Surface.get_width(self.containerBg), pygame.Surface.get_height(self.containerBg)))
+            self.containerBg.blit(img2,(0,0))
+
+        except:
+            '''don't have image bg'''
+          
+  
+        
 
     def Load(self,display_surf):
         print 'MOTHER CLASS'

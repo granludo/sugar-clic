@@ -68,24 +68,28 @@ class ClicActivities:
         height = Constants.MAX_HEIGHT-(Constants.MARGIN_TOP+Constants.MARGIN_BOTTOM)
         rectborder= Rect(30,30,weidth,height)
         self.activity_surf = self.screen.subsurface(rectborder)
-        
+       
         '''por si acaso no hay actividad'''
         
        
        
         if self.canExecuteActivity(activityTag):
            
-      
+            mesages  = activityTag.getElementsByTagName('messages')[0].getElementsByTagName('cell')
+            for mesage in mesages:
+                if mesage.getAttribute('type') == 'initial':
+                    self.dialog.printMessage(self.screen,mesage.getElementsByTagName('p')[0].firstChild.nodeValue)
             self.activityInUse = self.executeActivity(activityTag)
             self.activityInUse.pathToMedia = self.path_to_clic
-            self.activityInUse.Load(self.screen)
+            self.activityInUse.Load(self.activity_surf)
         
         else: 
             self.activityInUse = FinishActivity(activityTag)
             
             self.dialog.printMessage(self.screen,'activitat no disponible' )
         
-        
+        '''Initial rendering'''
+        self.activityInUse.OnRender( self.activity_surf)
 	#Prova: mostrem per pantalla el nom de l'activitat actual de la sequencia	
        
 
@@ -115,7 +119,7 @@ class ClicActivities:
             if self.dialog.isOverActivity(pointMouse):
                 self.activityInUse.OnEvent((pointMouse.getX()-32,pointMouse.getY()-32))
         
-        self.activityInUse.OnRender( self.activity_surf)
+            self.activityInUse.OnRender( self.activity_surf)
             
         return 0
         #self.activityInUse.onRender(self.screen)

@@ -118,7 +118,7 @@ class Grid(object):
         
         img = pygame.image.load(pathToMedia+'/'+self.imagePath).convert_alpha()
 
-        img2 = pygame.transform.scale(img, (width, height))
+        img2 = pygame.transform.scale(img, (int(width), int(height)))
         
         surfaceEmpty = surface.Surface((int(width), int(height)))
 

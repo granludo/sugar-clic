@@ -52,7 +52,7 @@ class GeneralDialog(object):
 
         self.ImgNext     =  pygame.image.load(Constants.Images.NEXT).convert_alpha()
         self.ImgPrevious =  pygame.image.load(Constants.Images.PREV).convert_alpha()
-        self.ImgChangeClic =  pygame.image.load(Constants.Images.PREV).convert_alpha()
+        self.ImgChangeClic =  pygame.image.load(Constants.Images.HOME).convert_alpha()
     
         self.pointPrevious = Point((10, Constants.MAX_HEIGHT-50))
         self.pointNext =  Point((60, Constants.MAX_HEIGHT-50))
@@ -74,8 +74,8 @@ class GeneralDialog(object):
         display_surf.fill(Constants.colorBackground,rectborder)
         
         ''' TEXT Dialog'''
-        rectTextExt= Rect(150,Constants.MAX_HEIGHT-(50),700,40)
-        rectTextInt= Rect(152,Constants.MAX_HEIGHT-(48),696,36)
+        rectTextExt= Rect(130,Constants.MAX_HEIGHT-(50),590,40)
+        rectTextInt= Rect(132,Constants.MAX_HEIGHT-(48),586,36)
         display_surf.fill(Constants.colorBorderDark,rectTextExt)
         display_surf.fill(Constants.colorBackground,rectTextInt)
         
@@ -94,9 +94,9 @@ class GeneralDialog(object):
             return False
     def printMessage(self,display_surf,message):
         
-        rectTextExt= Rect(150,Constants.MAX_HEIGHT-(50),700,40)
-        rectTextInt= Rect(152,Constants.MAX_HEIGHT-(48),696,36)
-        rectText= Rect(157,Constants.MAX_HEIGHT-(40),696,36)
+        rectTextExt= Rect(130,Constants.MAX_HEIGHT-(50),590,40)
+        rectTextInt= Rect(132,Constants.MAX_HEIGHT-(48),586,36)
+        rectText= Rect(137,Constants.MAX_HEIGHT-(40),586,36)
         font = pygame.font.Font(None,int(25) )
         text  = font.render(message, True, (0,0,0),Constants.colorMessage)    
         

@@ -33,8 +33,8 @@
 
 
 
-MAX_WIDTH = 1024
-MAX_HEIGHT = 768
+MAX_WIDTH = 800
+MAX_HEIGHT = 600
 MARGIN_TOP = 30
 MARGIN_BOTTOM = 75
 MARGIN_LEFT = 30
@@ -55,4 +55,5 @@ DEFAULT_BORDER_SIZE = 3
 class Images:
     NEXT = "img/next.png"
     PREV = "img/prev.png"
+    HOME = "img/home2.png"
     

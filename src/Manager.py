@@ -31,9 +31,9 @@
     @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 '''
 import os
-import hulahop
+#import hulahop
 import paths
-hulahop.startup(paths.application_data_path + '/test')
+#hulahop.startup(paths.application_data_path + '/test')
 import gtk
 import gtk.glade
 import gobject
@@ -42,7 +42,7 @@ from controller import Controller
 import ManagerData
 from olpcgames import gtkEvent
 import pygame
-from browser import Browser
+#from browser import Browser
 
 
 
@@ -174,7 +174,7 @@ class Manager:
         self.vboxPlay = self.xml.get_widget('vboxPlay')
         #initialize play_clics area
         self.area = self.xml.get_widget('playArea')
-        self.area.set_size_request(1024,768)
+        self.area.set_size_request(800,600)
         #translates GTK events into Pygame events 
         t = gtkEvent.Translator(self.area)
         self.area.connect('map-event', self.__callback)

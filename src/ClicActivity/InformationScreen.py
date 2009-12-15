@@ -46,7 +46,7 @@ class InformationScreen(Activity):
     
  
     def Load(self, display_surf ):
-        self.setBgColor()
+        self.setBgColor(display_surf)
 
         '''Loading constants for the activity'''
 
@@ -75,10 +75,13 @@ class InformationScreen(Activity):
             self.Grid1.Load(self.Grid1.numRows, self.Grid1.numCols, width, height, xActual, yActual, display_surf)
             i = 0
             cells = xmlGrid1.getElementsByTagName('cell')
-            for cell in cells: 
-                self.printxmlCellinCell(self.Grid1.Cells[i], cell)
-                
-                i = i+1 
+            if cells.length !=0:
+                for cell in cells: 
+                    self.printxmlCellinCell(self.Grid1.Cells[i], cell)
+                    
+                    i = i+1 
+            else:
+                self.Grid1 = None
       
 
     def OnEvent(self,PointOfMouse):
@@ -87,9 +90,10 @@ class InformationScreen(Activity):
         '''
 
     def OnRender(self,display_surf):
-        display_surf.fill(self.containerBg)
+        display_surf.blit(self.containerBg,(0,0))
         '''repintamos el grid...'''
-        self.Grid1.OnRender(display_surf)
+        if self.Grid1 != None:
+            self.Grid1.OnRender(display_surf)
         
 
     def isGameFinished(self):

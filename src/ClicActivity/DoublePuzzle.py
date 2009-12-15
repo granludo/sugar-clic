@@ -43,8 +43,7 @@ class DoublePuzzle(Activity):
     PressedCell = None
     FinishGame = False
     xmlActivity = None
-    numRows = None
-    nomCols = None
+
     
     
     def __init__(self,xmlActivity):
@@ -54,7 +53,7 @@ class DoublePuzzle(Activity):
  
      
     def Load(self, display_surf ):
-        self.setBgColor()
+        self.setBgColor(display_surf)
 
         '''Loading xml values'''
         xmlGrid1 = self.xmlActivity.getElementsByTagName('cells')[0]
@@ -89,7 +88,7 @@ class DoublePuzzle(Activity):
        
         ''' 1 Imagen de fondo '''
 
-        self.Grid1.LoadWithImage(self.numRows,self.numCols,width,height,xActual ,yActual, display_surf,self.pathToMedia)
+        self.Grid1.LoadWithImage(self.Grid1.numRows,self.Grid1.numCols,width,height,xActual ,yActual, display_surf,self.pathToMedia)
         
         if layout == 'AB':
             xActual = xActual + width + 10
@@ -97,7 +96,7 @@ class DoublePuzzle(Activity):
             yActual = yActual + height + 10
         
         
-        self.Grid2.LoadWithImage(self.numRows,self.numCols,width,height,xActual ,yActual, display_surf)
+        self.Grid2.LoadWithImage(self.Grid1.numRows,self.Grid1.numCols,width,height,xActual ,yActual, display_surf,self.pathToMedia)
         
         for cell in self.Grid1.Cells:
             cell.contentCell.img.fill(Constants.colorBackground)
@@ -158,7 +157,7 @@ class DoublePuzzle(Activity):
 
         
     def OnRender(self,display_surf):
-        display_surf.fill(self.containerBg)
+        display_surf.blit(self.containerBg,(0,0))
         '''repintamos el grid...'''
         self.Grid1.OnRender(display_surf)
         self.Grid2.OnRender(display_surf)

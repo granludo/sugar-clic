@@ -47,7 +47,7 @@ class ExchangePuzzle(Activity):
     
     
     def Load(self, display_surf ):
-        self.setBgColor()
+        self.setBgColor(display_surf)
 
         '''Loading xml values'''
         xmlGrid1 = self.xmlActivity.getElementsByTagName('cells')[0]
@@ -84,7 +84,7 @@ class ExchangePuzzle(Activity):
             
             
             ''' 1 Imagen por cada celda ''' 
-            self.Grid1.Load(self.numRows,self.numCols,width,height,xActual ,yActual, display_surf)
+            self.Grid1.Load(self.Grid1.numRows,self.Grid1.numCols,width,height,xActual ,yActual, display_surf)
             cells = xmlGrid1.getElementsByTagName('cell')
             
             i = 0
@@ -123,7 +123,7 @@ class ExchangePuzzle(Activity):
            
 
     def OnRender(self,display_surf):
-        display_surf.fill(self.containerBg)
+        display_surf.blit(self.containerBg,(0,0))
         '''repintamos el grid...'''
         self.Grid1.OnRender(display_surf)
         

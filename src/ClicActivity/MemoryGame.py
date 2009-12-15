@@ -48,7 +48,7 @@ class MemoryGame(Activity):
  
      
     def Load(self, display_surf ):
-        self.setBgColor()
+        self.setBgColor(display_surf)
         ''' ----Dos posibilidades en XML----
             
             -1 Grid: Hay que doblar el tamano del Grid para duplicar las posibilidades
@@ -187,7 +187,7 @@ class MemoryGame(Activity):
 
         
     def OnRender(self,display_surf):
-        display_surf.fill(self.containerBg)
+        display_surf.blit(self.containerBg,(0,0))
         #repintamos el grid...
         self.Grid1.OnRender(display_surf)
         #si la celda se ha apretado, la pintamos ( por los bordes)
