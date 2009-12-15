@@ -20,7 +20,7 @@ class SimpleAssociation(Activity):
  
      
     def Load(self, display_surf ):
-        self.setBgColor()
+        self.setBgColor(display_surf)
         ''' ----Dos posibilidades en XML----
             
          orientation   -1 Grid: Hay que doblar el tamano del Grid para duplicar las posibilidades
@@ -41,20 +41,28 @@ class SimpleAssociation(Activity):
         width = self.Grid1.cellWidth * self.Grid1.numCols
         height = self.Grid1.cellHeight * self.Grid1.numRows
 
-        
-        '''Maximize size'''
-        coef = self.calculateCoef(width, height)
-	coefx = self.calculateCoefPart(height)
-        height = self.Grid1.cellHeight * self.Grid1.numRows * coef
-        width = self.Grid1.cellWidth * self.Grid1.numCols * coef
-
         width2 = self.Grid2.cellWidth * self.Grid2.numCols
         height2 = self.Grid2.cellHeight * self.Grid2.numRows
 
-        coef = self.calculateCoef(width2, height2)
-	coefx = self.calculateCoefPart(height2)
+        if orientation == 'AUB' or orientation == 'BUA':
+            '''Sumamos el height al tamano'''
+            coef = self.calculateCoef(width, height+height2)
+        else:
+            '''Sumamos el width al tamano total'''
+            coef = self.calculateCoef(width+width2, height)
+        
+        '''Maximize size'''
+        #coef = self.calculateCoef(width, height)
+	#coefx = self.calculateCoefPart(height)
+        height = self.Grid1.cellHeight * self.Grid1.numRows * coef
+        width = self.Grid1.cellWidth * self.Grid1.numCols * coef
+
+
+
+        '''coef = self.calculateCoef(width2, height2)
+	#coefx = self.calculateCoefPart(height2)
         height2 = self.Grid2.cellHeight * self.Grid2.numRows * coef
-        width2 = self.Grid2.cellWidth * self.Grid2.numCols * coef
+        width2 = self.Grid2.cellWidth * self.Grid2.numCols * coef'''
 
 	print "paramentres"
 	print height
@@ -92,13 +100,15 @@ class SimpleAssociation(Activity):
 
         self.Grid1.Load(self.Grid1.numRows,self.Grid1.numCols,width,height,xActual ,yActual, display_surf)
 
+
         if orientation == 'AUB' or orientation == 'BUA':
             '''Sumamos el height al tamano'''
-            self.Grid2.Load(self.Grid2.numRows,self.Grid2.numCols,width2,height2,xActual ,yActual + height +10, display_surf)
+	    newHeight = self.Grid2.cellHeight * coef
+            self.Grid2.Load(self.Grid2.numRows,self.Grid2.numCols,width,newHeight,xActual ,yActual + height +10, display_surf)
         else:
             '''Sumamos el width al tamano total'''
-            self.Grid2.Load(self.Grid2.numRows,self.Grid2.numCols,width2,height2,xActual + width +10,yActual, display_surf)
-
+	    newWidth = self.Grid2.cellWidth *coef
+            self.Grid2.Load(self.Grid2.numRows,self.Grid2.numCols,newWidth,height,xActual + width +10 ,yActual, display_surf)
 
 
         if self.xmlActivity.getElementsByTagName('cells').length == 2:
@@ -249,7 +259,7 @@ class SimpleAssociation(Activity):
 
         
     def OnRender(self,display_surf):
-        display_surf.fill(self.containerBg)
+        display_surf.blit(self.containerBg,(0,0))
         #repintamos el grid...
         self.Grid1.OnRender(display_surf)
 	self.Grid2.OnRender(display_surf)

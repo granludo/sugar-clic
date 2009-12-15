@@ -20,7 +20,7 @@ class ComplexAssociation(Activity):
  
      
     def Load(self, display_surf ):
-        self.setBgColor()
+        self.setBgColor(display_surf)
         ''' ----Dos posibilidades en XML----
             
          orientation   -1 Grid: Hay que doblar el tamano del Grid para duplicar las posibilidades
@@ -164,15 +164,12 @@ class ComplexAssociation(Activity):
 
             '''Guardamos las imagenes en el Grid'''   
             self.Grid1.Cells[i].contentCell.img2 = self.Grid1.Cells[i].contentCell.img
-	    print "eeeeeeeeeeeeeeeeee"
-	    print cell.toxml()
 	    id = cell.getAttribute('id')
-	    print id
 	    if cell.hasAttribute('id'):
 		self.Grid1.Cells[i].contentCell.id = int(cell.getAttribute('id'))
 		id2 = id
 	    else:
-		self.Grid1.Cells[i].contentCell.id = id2
+		self.Grid1.Cells[i].contentCell.id = int(id2)
 		
             
             i = i+1
@@ -260,7 +257,7 @@ class ComplexAssociation(Activity):
 
         
     def OnRender(self,display_surf):
-        display_surf.fill(self.containerBg)
+        display_surf.blit(self.containerBg,(0,0))
         #repintamos el grid...
         self.Grid1.OnRender(display_surf)
 	self.Grid2.OnRender(display_surf)

@@ -149,7 +149,8 @@ class Activity(object):
                 centerPosition = (0,0)
         
             '''Blit text'''
-            cell.contentCell.img.blit(text,centerPosition)
+            #cell.contentCell.img.blit(text,centerPosition)
+	    self.renderText(texto,cell.Rect,font,cell.contentCell.img,cell.actualColorCell)
         
         ''' Border in cell'''
         cell.contentCell.border = styleCell.hasBorder
@@ -163,4 +164,26 @@ class Activity(object):
             coef = coefHeight
         return coef
     
- 
+    def renderText(self,text,rect,font,surf,colour):
+        lines = []
+        line = ''
+        words = text.split(' ')
+
+        for word in words:
+            test_line = line + word + ' '
+            # Build the line while the words fit.
+            if font.size(test_line)[0] < rect.width:
+                line = test_line
+	    else:
+                lines.append(line)
+                line = word + ' '
+        lines.append(line)
+
+        acum_heigth = 8
+
+        for line in lines:
+            if line != "":
+                textline = font.render(line,1,colour)
+                surf.blit(textline,(8,acum_heigth))
+
+            acum_heigth += font.size(line)[1]
