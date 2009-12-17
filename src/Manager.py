@@ -174,7 +174,7 @@ class Manager:
         self.vboxPlay = self.xml.get_widget('vboxPlay')
         #initialize play_clics area
         self.area = self.xml.get_widget('playArea')
-        self.area.set_size_request(800,600)
+        self.area.set_size_request(1024,768)
         #translates GTK events into Pygame events 
         t = gtkEvent.Translator(self.area)
         self.area.connect('map-event', self.__callback)

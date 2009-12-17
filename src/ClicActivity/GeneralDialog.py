@@ -68,8 +68,8 @@ class GeneralDialog(object):
         display_surf.fill(Constants.colorBorder,rectInt)
 
         ''' TEXT Dialog'''
-        self.rectTextExt= Rect(130,Constants.MAX_HEIGHT-(50),590,40)
-        self.rectTextInt= Rect(132,Constants.MAX_HEIGHT-(48),586,36)
+        self.rectTextExt= Rect(130,Constants.MAX_HEIGHT-(50),790,40)
+        self.rectTextInt= Rect(132,Constants.MAX_HEIGHT-(48),786,36)
         display_surf.fill(Constants.colorBorderDark,self.rectTextExt)
         display_surf.fill(Constants.colorBackground,self.rectTextInt)
         
@@ -89,7 +89,7 @@ class GeneralDialog(object):
     def printMessage(self,display_surf,message):
         
 
-        rectText= Rect(137,Constants.MAX_HEIGHT-(40),586,36)
+        rectText= Rect(137,Constants.MAX_HEIGHT-(40),786,36)
         font = pygame.font.Font(None,int(25) )
         text  = font.render(message, True, (0,0,0),Constants.colorMessage)    
         
