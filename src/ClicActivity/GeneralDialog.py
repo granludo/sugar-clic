@@ -62,22 +62,16 @@ class GeneralDialog(object):
         ''' Print all rectancles form the General Dialog'''
        
         ''' THIS PART CAN BE IMPROOVED!!!'''
-        rectExt = Rect(0,0,Constants.MAX_WIDTH,Constants.MAX_HEIGHT)
-        weidth = Constants.MAX_WIDTH -(32+30)
-        height = Constants.MAX_HEIGHT-(32+75)
-        rectborder= Rect(30,30,weidth,height)
-        weidth = Constants.MAX_WIDTH-(28+30)
-        height= Constants.MAX_HEIGHT-(28+75)
-        rectInt=    Rect(28,28,weidth,height)
-        display_surf.fill(Constants.colorBorder,rectExt)
-        display_surf.fill(Constants.colorBorderDark,rectInt)
-        display_surf.fill(Constants.colorBackground,rectborder)
-        
+        rectExt = Rect(0,Constants.MAX_HEIGHT-60,Constants.MAX_WIDTH,60)
+        rectInt=    Rect(4,Constants.MAX_HEIGHT-57,Constants.MAX_WIDTH-7,55)
+        display_surf.fill(Constants.colorBorderDark,rectExt)
+        display_surf.fill(Constants.colorBorder,rectInt)
+
         ''' TEXT Dialog'''
-        rectTextExt= Rect(130,Constants.MAX_HEIGHT-(50),590,40)
-        rectTextInt= Rect(132,Constants.MAX_HEIGHT-(48),586,36)
-        display_surf.fill(Constants.colorBorderDark,rectTextExt)
-        display_surf.fill(Constants.colorBackground,rectTextInt)
+        self.rectTextExt= Rect(130,Constants.MAX_HEIGHT-(50),590,40)
+        self.rectTextInt= Rect(132,Constants.MAX_HEIGHT-(48),586,36)
+        display_surf.fill(Constants.colorBorderDark,self.rectTextExt)
+        display_surf.fill(Constants.colorBackground,self.rectTextInt)
         
         ''' Buttons'''
         self.rectPrev = display_surf.blit(self.ImgPrevious, (self.pointPrevious.getX(), self.pointPrevious.getY()) )
@@ -94,14 +88,13 @@ class GeneralDialog(object):
             return False
     def printMessage(self,display_surf,message):
         
-        rectTextExt= Rect(130,Constants.MAX_HEIGHT-(50),590,40)
-        rectTextInt= Rect(132,Constants.MAX_HEIGHT-(48),586,36)
+
         rectText= Rect(137,Constants.MAX_HEIGHT-(40),586,36)
         font = pygame.font.Font(None,int(25) )
         text  = font.render(message, True, (0,0,0),Constants.colorMessage)    
         
-        display_surf.fill(Constants.colorBorderDark,rectTextExt)
-        display_surf.fill(Constants.colorBackground,rectTextInt)
+        display_surf.fill(Constants.colorBorderDark,self.rectTextExt)
+        display_surf.fill(Constants.colorBackground,self.rectTextInt)
        
         display_surf.blit(text,rectText)
     def isOverPreviousButton(self,PointOfMouse):

@@ -50,6 +50,9 @@ from ClicActivity import Constants
 
 class ClicActivities:
     display = None
+    path_to_clic = None
+    mediaBagXML = None
+    settingsXML = None
     
     def __init__(self, path, mediaTag, settingsTag,clic_name):
         print 'clicname = ',clic_name
@@ -60,15 +63,15 @@ class ClicActivities:
         
     #starts the activity declared in activityTag
     def start_activity(self, activityTag):
-# Inicialize screen and buttons of ClicXO
+        
         self.screen = pygame.display.get_surface()
         self.dialog = GeneralDialog()
         self.dialog.renderDialog(self.screen)
         
         '''HardCodded:creating the subsurface for ACTIVITIES'''
-        weidth = Constants.MAX_WIDTH -(Constants.MARGIN_LEFT+Constants.MARGIN_RIGHT)
-        height = Constants.MAX_HEIGHT-(Constants.MARGIN_TOP+Constants.MARGIN_BOTTOM)
-        rectborder= Rect(30,30,weidth,height)
+        weidth = Constants.MAX_WIDTH
+        height = Constants.MAX_HEIGHT-(60)
+        rectborder= Rect(0,0,weidth,height)
         self.activity_surf = self.screen.subsurface(rectborder)
        
         '''por si acaso no hay actividad'''
@@ -77,30 +80,27 @@ class ClicActivities:
        
         if self.canExecuteActivity(activityTag):
            
-            mesages  = activityTag.getElementsByTagName('messages')[0].getElementsByTagName('cell')
-            for mesage in mesages:
-                if mesage.getAttribute('type') == 'initial':
-                    self.dialog.printMessage(self.screen,mesage.getElementsByTagName('p')[0].firstChild.nodeValue)
+
+                
             self.activityInUse = self.executeActivity(activityTag)
             self.activityInUse.pathToMedia = self.path_to_clic
             self.activityInUse.Load(self.activity_surf)
+            self.dialog.printMessage(self.screen,self.activityInUse.getInitMessage())
         
         else: 
+            ''' this case never ocurss.. teorically... heheheh'''
             self.activityInUse = FinishActivity(activityTag)
             
             self.dialog.printMessage(self.screen,'activitat no disponible' )
         
         '''Initial rendering'''
         self.activityInUse.OnRender( self.activity_surf)
-	#Prova: mostrem per pantalla el nom de l'activitat actual de la sequencia	
+	
        
 
-        # TODO
-	# Recollir parametres i class de clic_activity
-	# executar activity_class.main(parametres)
 
 
-    def update_activity(self, evento):
+    def update_activity(self, evento,isFirstActivity=False,isLastActivity=False):
         
         if evento.type == pygame.MOUSEBUTTONDOWN:
             pointMouse = Point(pygame.mouse.get_pos())
@@ -119,9 +119,15 @@ class ClicActivities:
                 return -1
             
             if self.dialog.isOverActivity(pointMouse):
-                self.activityInUse.OnEvent((pointMouse.getX()-32,pointMouse.getY()-32))
+                self.activityInUse.OnEvent((pointMouse.getX(),pointMouse.getY()))
         
             self.activityInUse.OnRender( self.activity_surf)
+            
+            
+            '''EXTRA:  if activity end, then print the end message '''
+            if self.activityInUse.isGameFinished():
+                 self.dialog.printMessage(self.screen,self.activityInUse.getFinishMessage())
+                
             
         return 0
         #self.activityInUse.onRender(self.screen)
