@@ -77,27 +77,6 @@ class SimpleAssociation(Activity):
         '''Cargamos grupo de celdas comunes...'''
         cellsPrimary = self.xmlActivity.getElementsByTagName('cells')[0]
 
-        '''Load grid...
-            Notar que el NumCols se ha multiplicado x 2 para Duplicar el tamano del Grid...
-        '''
-
-        print "1"
-	print self.Grid1.numRows
-	print self.Grid1.numCols
-	print width
-	print height
-	print xActual
-	print yActual
-
-        print "2"
-	print self.Grid2.numRows
-	print self.Grid2.numCols
-	print width2
-	print height2
-	print xActual
-	print yActual
-	
-
         self.Grid1.Load(self.Grid1.numRows,self.Grid1.numCols,width,height,xActual ,yActual, display_surf)
 
 
@@ -111,7 +90,6 @@ class SimpleAssociation(Activity):
             self.Grid2.Load(self.Grid2.numRows,self.Grid2.numCols,newWidth,height,xActual + width +10 ,yActual, display_surf)
 
 
-        #if self.xmlActivity.getElementsByTagName('cells').length == 2:
             
         '''Cargamos secondaryCells'''
         cellsSecondary = self.xmlActivity.getElementsByTagName('cells')[1]
@@ -163,16 +141,12 @@ class SimpleAssociation(Activity):
                         print 'id PressedCell = ',self.PressedCell.contentCell.id
                         print 'id cell = ',cell.contentCell.id
                         if self.PressedCell.contentCell.id == cell.contentCell.id:
-                            #if self.PressedCell.idCell != cell.idCell:
+                            #COINCIDES CELDAS
 			    if self.PressedGrid ==2:
-                                print 'COINCIDEN LAS CELDAS!!'
-                                #cell.contentCell.img = cell.contentCell.img2
                             	self.PressedCell.actualColorCell = Constants.colorCell
 				self.PressedCell.contentCell.img.fill(Constants.colorBackground)
 				self.PressedCell.contentCell.borders=False
 				cell.contentCell.img.fill(Constants.colorBackground)				
-				#anulamos valor de img2 para indicar k ta ok
-				#cell.contentCell.img = Constants.colorCell
                                 cell.contentCell.img2 = None
                                 self.PressedCell.contentCell.img2 = None
                                 self.PressedCell = None
@@ -205,7 +179,6 @@ class SimpleAssociation(Activity):
                         if self.PressedCell.contentCell.id == cell.contentCell.id:
                             #if self.PressedCell.idCell != cell.idCell:
 			    if self.PressedGrid == 1:
-                                print 'COINCIDEN LAS CELDAS!!'
                                 #cell.contentCell.img = cell.contentCell.img2
                             	self.PressedCell.actualColorCell = Constants.colorCell
 				self.PressedCell.contentCell.img.fill(Constants.colorBackground)
