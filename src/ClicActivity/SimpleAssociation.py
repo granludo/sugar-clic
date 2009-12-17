@@ -111,49 +111,31 @@ class SimpleAssociation(Activity):
             self.Grid2.Load(self.Grid2.numRows,self.Grid2.numCols,newWidth,height,xActual + width +10 ,yActual, display_surf)
 
 
-        if self.xmlActivity.getElementsByTagName('cells').length == 2:
+        #if self.xmlActivity.getElementsByTagName('cells').length == 2:
             
-            '''Cargamos secondaryCells'''
-            cellsSecondary = self.xmlActivity.getElementsByTagName('cells')[1]
-            
-            '''Cargamos primer Grid del XML'''
-            cells = cellsPrimary.getElementsByTagName('cell')
-            '''indexCell  = Numero de Celda que ocupa:'''
-            indexCell = 0
-            indexCell = self.doBucle(cells,indexCell)
-            
-            '''Cargamos segundo Grid del XML'''
-            cells2 = cellsSecondary.getElementsByTagName('cell')
-            
-	    print "whola"
-	    #print cells[0].toxml()
-	    #print cellsSecondary.toxml()
+        '''Cargamos secondaryCells'''
+        cellsSecondary = self.xmlActivity.getElementsByTagName('cells')[1]
 
-            #self.doBucle(cellsSecondary,0)
-	    #indexCell = self.doBucle(cells,indexCell)
+        '''Cargamos primer Grid del XML'''
+        cells = cellsPrimary.getElementsByTagName('cell')
+        '''indexCell  = Numero de Celda que ocupa:'''
+        indexCell = 0
+        indexCell = self.doBucle(cells,indexCell)
 
-	    i = 0
-	    id = 0
+        '''Cargamos segundo Grid del XML'''
+        cells2 = cellsSecondary.getElementsByTagName('cell')
 
-	    for cell in cells2:
-		    self.printxmlCellinCell(self.Grid2.Cells[i], cell)         
-		    '''Guardamos las imagenes en el Grid'''   
-		    self.Grid2.Cells[i].contentCell.img2 = self.Grid2.Cells[i].contentCell.img
-		    self.Grid2.Cells[i].contentCell.id = id 
-		    id = id+1
-		    i = i+1
-	    #indexCell = self.doBucle(cells2,indexCell)
 
-        else:
-            '''indexCell  = Numero de Celda que ocupa:'''
-            indexCell = 0
-            
-            '''Cargamos primer Grid del XML'''
-            cells = cellsPrimary.getElementsByTagName('cell')
-            indexCell = self.doBucle(cells,indexCell)
-            
-            '''Recargamos el primer Grid del XML'''
-            indexCell = self.doBucle(cells,indexCell)
+        i = 0
+        id = 0
+
+        for cell in cells2:
+                self.printxmlCellinCell(self.Grid2.Cells[i], cell)
+                '''Guardamos las imagenes en el Grid'''
+                self.Grid2.Cells[i].contentCell.img2 = self.Grid2.Cells[i].contentCell.img
+                self.Grid2.Cells[i].contentCell.id = id
+                id = id+1
+                i = i+1
             
         self.Grid1.unsort()
 	self.Grid2.unsort()
