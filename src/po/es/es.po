@@ -14,4 +14,19 @@ msgstr "Juega ahora!"
 msgid "Clics"
 msgstr "Clics"
 
+#managerdata.py
+msgid "Title"
+msgstr "Título"
+
+#managerdata.py
+msgid "Author"
+msgstr "Autor"
+
+#managerdata.py
+msgid "Area"
+msgstr "Area"
+
+#managerdata.py
+msgid "Language"
+msgstr "Idioma"
 

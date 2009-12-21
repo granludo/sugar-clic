@@ -31,7 +31,6 @@
     @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 '''
 #Module that interacts with the web service, downloads clics and install clics
-from SOAPpy import WSDL
 import os
 import paths
 

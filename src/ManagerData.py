@@ -32,6 +32,7 @@
 '''
 import gtk
 import gobject
+from gettext import gettext as _
 (
     COLUMN_TITLE,
     COLUMN_AUTHOR,
@@ -63,24 +64,24 @@ def add_clics_data(data):
 def put_columns(tree):
         
     #column for title
-    column = gtk.TreeViewColumn('Clic Title', gtk.CellRendererText(), 
+    column = gtk.TreeViewColumn(_('Title'), gtk.CellRendererText(), 
                                     text=COLUMN_TITLE)
     column.set_sort_column_id(COLUMN_TITLE)
     tree.append_column(column)
 
 
     # column for authors
-    column = gtk.TreeViewColumn('Author', gtk.CellRendererText(),text=COLUMN_AUTHOR)
+    column = gtk.TreeViewColumn(_('Author'), gtk.CellRendererText(),text=COLUMN_AUTHOR)
     column.set_sort_column_id(COLUMN_AUTHOR)
     tree.append_column(column)
 
     # columns for areas
-    column = gtk.TreeViewColumn('Area', gtk.CellRendererText(),text=COLUMN_AREA)
+    column = gtk.TreeViewColumn(_('Area'), gtk.CellRendererText(),text=COLUMN_AREA)
     column.set_sort_column_id(COLUMN_AREA)
     tree.append_column(column)
 
     # column for languages
-    column = gtk.TreeViewColumn('Language', gtk.CellRendererText(),text=COLUMN_LANGUAGE)
+    column = gtk.TreeViewColumn(_('Language'), gtk.CellRendererText(),text=COLUMN_LANGUAGE)
     column.set_sort_column_id(COLUMN_LANGUAGE)
     tree.append_column(column)
     
