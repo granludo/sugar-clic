@@ -43,6 +43,7 @@ import ManagerData
 from olpcgames import gtkEvent
 import pygame
 #from browser import Browser
+from ClicActivity import Constants
 
 
 
@@ -94,26 +95,26 @@ class Manager:
         self.ImageAbout = self.xml.get_widget('imageAbout')
         self.ImageAbout.set_from_file(icons_path + '/about.png')
         
-        if not runaslib:
-            self.hboxWS = self.xml.get_widget('hboxWS')
-            self.bD = self.xml.get_widget('buttonDownload')
-            self.bD = self.bD.connect('clicked', self.__download_clics_view)  
-            self.hboxWS.show()
-            #loading download_clics widget  
-            self.xml = gtk.glade.XML(views_path + '/WSview.glade') 
-            self.winDow = self.xml.get_widget('window')
-
-            self.labelInfo = self.xml.get_widget('labelInfo')
-            self.labelXo = self.xml.get_widget('labelXo')
-            self.bDF = self.xml.get_widget('buttonDownloadFile')
-            self.bDF.connect('clicked', self.__clic_selected)
-            self.bDM = self.xml.get_widget('buttonDownMain')
-            self.bDM.connect('clicked', self.__main_view)
-            self.tree = self.xml.get_widget('treeviewClics')
-            self.tree.connect('cursor-changed',self.__is_clicked)
-            self.vboxDownload = self.xml.get_widget('vboxDownload')
-            #remove parent (in glade there is always a parent (window))
-            gtk.Container.remove(self.winDow ,self.vboxDownload)
+#        if not runaslib:
+#            self.hboxWS = self.xml.get_widget('hboxWS')
+#            self.bD = self.xml.get_widget('buttonDownload')
+#            self.bD = self.bD.connect('clicked', self.__download_clics_view)  
+#            self.hboxWS.show()
+#            #loading download_clics widget  
+#            self.xml = gtk.glade.XML(views_path + '/WSview.glade') 
+#            self.winDow = self.xml.get_widget('window')
+#
+#            self.labelInfo = self.xml.get_widget('labelInfo')
+#            self.labelXo = self.xml.get_widget('labelXo')
+#            self.bDF = self.xml.get_widget('buttonDownloadFile')
+#            self.bDF.connect('clicked', self.__clic_selected)
+#            self.bDM = self.xml.get_widget('buttonDownMain')
+#            self.bDM.connect('clicked', self.__main_view)
+#            self.tree = self.xml.get_widget('treeviewClics')
+#            self.tree.connect('cursor-changed',self.__is_clicked)
+#            self.vboxDownload = self.xml.get_widget('vboxDownload')
+#            #remove parent (in glade there is always a parent (window))
+#            gtk.Container.remove(self.winDow ,self.vboxDownload)
             
 
 
@@ -174,7 +175,7 @@ class Manager:
         self.vboxPlay = self.xml.get_widget('vboxPlay')
         #initialize play_clics area
         self.area = self.xml.get_widget('playArea')
-        self.area.set_size_request(1024,768)
+        self.area.set_size_request(Constants.MAX_WIDTH,Constants.MAX_HEIGHT)
         #translates GTK events into Pygame events 
         t = gtkEvent.Translator(self.area)
         self.area.connect('map-event', self.__callback)

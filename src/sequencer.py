@@ -58,7 +58,7 @@ class Sequencer:
         self.controller = controller.Controller() #gets a controller instance (necessary to have activity tags)
         clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the first activity(tag) of the sequence
         self.__start_pygame_view() #initiate pygame view
-        self.act_handler.start_activity(clic_activity)#initiate activity view
+        self.act_handler.start_activity(clic_activity, self.screen)#initiate activity view
     
     #function called all the time to refresh the screen and the activity
     #also returns activity information
@@ -79,7 +79,7 @@ class Sequencer:
                         self.index = self.index + 1
                         clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the first activity(tag) of the sequence
                         if self.act_handler.canExecuteActivity(clic_activity):
-                            self.act_handler.start_activity(clic_activity)#initiate activity view
+                            self.act_handler.start_activity(clic_activity, self.screen)#initiate activity view
                             break
         
                 #Previous activity
@@ -89,7 +89,7 @@ class Sequencer:
                         self.index = self.index - 1
                         clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the first activity(tag) of the sequence
                         if self.act_handler.canExecuteActivity(clic_activity):
-                            self.act_handler.start_activity(clic_activity)#initiate activity view
+                            self.act_handler.start_activity(clic_activity, self.screen)#initiate activity view
                             break
             
             
@@ -108,6 +108,7 @@ class Sequencer:
     #this function is to init all the pygame variables (screen, mouse,...)
     def __start_pygame_view(self):
         #Pygame initiation
+        self.screen = pygame.display.get_surface()
         self.exit= False
         
     

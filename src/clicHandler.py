@@ -62,9 +62,9 @@ class ClicActivities:
         self.settingsXML = settingsTag
         
     #starts the activity declared in activityTag
-    def start_activity(self, activityTag):
+    def start_activity(self, activityTag, pygameScreen):
         
-        self.screen = pygame.display.get_surface()
+        self.screen = pygameScreen
         self.dialog = GeneralDialog()
         self.dialog.renderDialog(self.screen)
         

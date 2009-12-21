@@ -1,5 +1,5 @@
 [Activity]
-name = JClicDownloader
+name = Clic Player
 bundle_id = net.netii.kumuolpc.JClicDownloader
 service_name = net.netii.kumuolpc.JClicDownloader
 class = activity.JClicDownloaderActivity
