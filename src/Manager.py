@@ -74,7 +74,8 @@ class Manager:
         self.xmlMain = gtk.glade.XML(views_path + '/windowApp.glade')
         #loading window (OLPC has it owns window - not this one)
         self.window = self.xmlMain.get_widget('window')
-        self.window.connect('delete_event', self.__destroy) 
+        self.window.connect("destroy", gtk.main_quit)
+        #self.window.connect('delete_event', self.__destroy) 
 
         # Get Windows child (Vertical Box with the views)
         self.w_child = self.window.get_child()      
@@ -200,11 +201,11 @@ class Manager:
         self.w_child.add(self.current_view)
         
         if not runaslib: 
+            #called every 100 miliseconds (for pygame)
+            gobject.timeout_add(100, self.updating)
             self.window.show() 
-            while self.iterate == True:
-                gtk.main_iteration(block=False)
-                self.updating()
-                self.area.grab_focus()
+            gtk.main()
+
 
     def __destroy(self, *args):
         self.iterate = False
@@ -216,6 +217,8 @@ class Manager:
 	    if nou==-1:
                 nou = 0
                 self.__available_clics_view()
+        return True
+
     
     #main view
     def __main_view(self,*args):

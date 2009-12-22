@@ -40,7 +40,7 @@ from Manager import Manager
 from sugar.activity import activity  
 from gettext import gettext as _
 
-class JClicDownloaderActivity(activity.Activity):
+class ClicPlayerActivity(activity.Activity):
     def __init__(self, handle):
         activity.Activity.__init__(self, handle)
         self._name = handle
@@ -74,10 +74,6 @@ class JClicDownloaderActivity(activity.Activity):
         self.set_canvas(self._main_view)
         self.show()
         
-        # Get the mainloop ready to run (this should come last).
-        gobject.timeout_add(20, self.mainloop)
-    def mainloop (self):
-        # Runs the game loop. Note that this doesn't actually return until the activity ends.
-        while True:
-            self.Manager.updating()
-            gtk.main_iteration(False)
+        #called every 100 miliseconds (for pygame)
+        gobject.timeout_add(100, self.Manager.updating)
+
