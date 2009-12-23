@@ -43,7 +43,7 @@ class Cell(object):
     classdocs
     '''
     Rect = None
-    Points = None
+    #Points = None
     idCell = None
     contentCell= None
     borderSize = Constants.DEFAULT_BORDER_SIZE
@@ -51,14 +51,14 @@ class Cell(object):
     actualColorCell = Constants.colorCell
    
     
-    def __init__(self,points,display_surf,id):
+    def __init__(self,rect,display_surf,id,hasBorder):
 
-        self.Rect =[]
+        self.Rect = rect
         self.Point=[]
         self.idCell = id
-        self.Points = points
-       
-        self.Rect = pygame.draw.lines(display_surf,Constants.colorCell,True,points,self.borderSize)
+        #self.Points = points
+        if hasBorder:
+            pygame.draw.rect(display_surf,Constants.colorCell,self.Rect,self.borderSize)
 
     def isOverCell(self,x,y):
         #print 'x=',x,' y=',y,' Rect=',self.Rect
@@ -74,8 +74,8 @@ class Cell(object):
         
         ''' Draw borders'''
         if self.contentCell.border == True:
-            pygame.draw.lines(display_surf,self.actualColorCell ,True,self.Points,self.borderSize)
+            pygame.draw.rect(display_surf,self.actualColorCell ,self.Rect,self.borderSize)
         
     def OnRenderPressedCell(self,display_surf):
         if self.contentCell.border == True:
-            pygame.draw.lines(display_surf,self.actualColorCell ,True,self.Points,self.borderSize)
+            pygame.draw.rect(display_surf,self.actualColorCell ,self.Rect,self.borderSize)

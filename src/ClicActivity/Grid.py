@@ -97,14 +97,26 @@ class Grid(object):
             except:
                 self.cellHeight =  float(30)
                 self.cellWidth =   float(30)
+            try:
+                if xml.getAttribute('border') == "false":
+                    self.hasBorder = False
+            except:
+                pass
             
             self.numRows = float(xml.getAttribute('rows'))
-            self.numCols = float(xml.getAttribute('cols'))
+            try:
+                self.numCols = float(xml.getAttribute('cols'))
+            except:
+                '''Si l'atribut es columns es textGrid i rows <--> cols'''
+                tmp = self.numRows
+                self.numRows = float(xml.getAttribute('columns'))
+                self.numCols = tmp
         
             if xml.hasAttribute('image'):
             
                 self.imagePath = xml.getAttribute('image')
 
+    
 
     def LoadWithImage (self,rows,cols,width,height,xInicial, yInicial,display_surf,pathToMedia):  
         ''' Load 1 image for the full Grid'''
@@ -127,7 +139,7 @@ class Grid(object):
             surfaceEmpty.fill(self.backgroundColor)
         else:
             print 'surface transparent'
- 
+        
         surfaceEmpty.blit(img2,(0, 0)) 
         img2 = surfaceEmpty
         
@@ -136,22 +148,14 @@ class Grid(object):
         actualCol = 0
         xActual=xInicial
         yActual=yInicial
-        xNext= xActual+widthPart
-        yNext= yActual+heightPart
         ''' Calculate the size and the position of Rects'''
 
         
         while (i < self.rows*self.cols):
-
-            points = ((xActual,yActual),
-                      (xNext,yActual),
-                      (xNext,yNext),
-                      (xActual,yNext))
-            
             
             '''Initializing the cell'''
-            
-            cell = Cell(points,display_surf,i)
+            borderCell  = Rect(xActual,yActual,widthPart,heightPart)
+            cell = Cell(borderCell,display_surf,i,self.hasBorder)
            
             '''Calculating the rect size and position'''
             rect  = Rect (xActual-xInicial,yActual-yInicial,widthPart,heightPart)
@@ -168,7 +172,6 @@ class Grid(object):
             
             actualCol = actualCol +1
             xActual = xActual+widthPart
-            xNext= xNext+widthPart
             
             
             ''' Counters increment for the loop'''
@@ -177,9 +180,7 @@ class Grid(object):
                 actualRow +=1
 
                 yActual = yActual+heightPart
-                yNext= yNext+heightPart
                 xActual = xInicial
-                xNext= xActual+widthPart
                 
             i= i+1
             
@@ -215,47 +216,31 @@ class Grid(object):
         actualCol = 0
         xActual=xInicial
         yActual=yInicial
-        xNext= xActual+widthPart
-        yNext= yActual+heightPart
         while (i < self.rows*self.cols):
-
-            points = ((xActual,yActual),
-                      (xNext,yActual),
-                      (xNext,yNext),
-                      (xActual,yNext))
             
-            
-            ##Ahora pasamos la imagen...
-            
-            cell = Cell(points,display_surf,i)
+            border  = Rect (xActual,yActual,widthPart,heightPart)
+            cell = Cell(border,display_surf,i,self.hasBorder)
 
             contentCell = ContentCell()
             
-
             contentCell.id = i
             contentCell.img = surfaceEmpty.copy()
+            contentCell.border = self.hasBorder
             
             cell.contentCell = contentCell
             self.Cells.append(cell)
             
             actualCol = actualCol +1
             xActual = xActual+widthPart
-            xNext= xNext+widthPart
-            
-            
             
             if actualCol == self.cols:
                 actualCol = 0
                 actualRow +=1
 
                 yActual = yActual+heightPart
-                yNext= yNext+heightPart
                 xActual = xInicial
-                xNext= xActual+widthPart
                 
             i= i+1
-            
-      
 
     def OnRender(self,display_surf):
         

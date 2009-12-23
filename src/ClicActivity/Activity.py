@@ -128,16 +128,52 @@ class Activity(object):
     
             newImg = pygame.image.load(imagePath).convert_alpha()
     
-            newImg = pygame.transform.scale(newImg, ( cell.contentCell.img.get_width(),  cell.contentCell.img.get_height()))
+            newImg = pygame.transform.scale(newImg, (cell.contentCell.img.get_width(),  cell.contentCell.img.get_height()))
             cell.contentCell.img.blit(newImg,(0,0))
+            tmpSurf = surface.Surface()
         except:
             pass
         '''Text in cell'''
-        elementP = xmlcell2.getElementsByTagName('p')
-        if elementP.length !=0:
-            texto = elementP[0].firstChild.nodeValue
+        try:
+            elementP = xmlcell2.getElementsByTagName('p')
+            if elementP.length !=0:
+                texto = elementP[0].firstChild.nodeValue
+                font = pygame.font.Font(None, styleCell.fontSize)
+                #text = font.render(texto, True, styleCell.foregroundColor)
+                
+                '''Center text  -- horitzontal/vertical'''
+                try:
+                    '''TODO'''
+                    '''Center cell...'''
+                    centerPosition = (20,20)
+                except:
+                    '''Not centered'''
+                    centerPosition = (0,0)
+            
+                '''Blit text'''
+                self.renderText(texto,cell.Rect,font,cell.contentCell.img,cell.actualColorCell)
+    
+            
+            ''' Border in cell'''
+            cell.contentCell.border = styleCell.hasBorder
+        except:
+            pass
+        
+    def printLetterinCell(self,cell,xmlcell,letterColour=Constants.colorBlack,backColour=Constants.colorWhite):    
+       
+        styleCell  = StyleCell(xmlcell)
+        
+        
+        if styleCell.transparent == False:
+            print backColour
+            #cell.contentCell.img.fill(styleCell.backgroundColor)
+            cell.contentCell.img.fill(backColour)
+    
+        '''Print letter in cell'''
+        try:
+            texto = cell.contentCell.letter
             font = pygame.font.Font(None, styleCell.fontSize)
-            text = font.render(texto, True, styleCell.foregroundColor)
+            #text = font.render(texto, True, styleCell.foregroundColor)
             
             '''Center text  -- horitzontal/vertical'''
             try:
@@ -149,11 +185,12 @@ class Activity(object):
                 centerPosition = (0,0)
         
             '''Blit text'''
-            #cell.contentCell.img.blit(text,centerPosition)
-	    self.renderText(texto,cell.Rect,font,cell.contentCell.img,cell.actualColorCell)
-        
-        ''' Border in cell'''
+            self.renderText(texto,cell.Rect,font,cell.contentCell.img,letterColour)
+        except:
+            pass
+        '''Border in cell'''
         cell.contentCell.border = styleCell.hasBorder
+        
     def calculateCoef(self,width,height):
         coefWidth =  Constants.ACTIVITY_WIDTH /width
         coefHeight = Constants.ACTIVITY_HEIGHT / height
@@ -173,11 +210,11 @@ class Activity(object):
             test_line = line + word + ' '
             # Build the line while the words fit.
             if font.size(test_line)[0] < rect.width:
-                line = test_line
-	    else:
-                lines.append(line)
-                line = word + ' '
-        lines.append(line)
+                line = test_line 
+            else: 
+                lines.append(line) 
+                line = word + ' ' 
+            lines.append(line)
 
         acum_heigth = 8
 

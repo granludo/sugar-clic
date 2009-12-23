@@ -86,3 +86,8 @@ class StyleCell(object):
         except:
             ''' Has no border -> default border'''
             pass
+        try:
+            font = xml.getElementsByTagName('font')[0].getAttribute('size')
+            self.fontSize = int(font)
+        except:
+            pass

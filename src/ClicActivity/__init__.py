@@ -46,4 +46,5 @@ from MemoryGame import MemoryGame
 from PanelsExplore import PanelsExplore
 from Point import Point
 from styleCell import StyleCell
+from WordSearch import WordSearch
 

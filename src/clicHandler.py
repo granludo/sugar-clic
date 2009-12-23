@@ -45,6 +45,7 @@ from ClicActivity.PanelsExplore import PanelsExplore
 from ClicActivity.GeneralDialog import GeneralDialog
 from ClicActivity.SimpleAssociation import SimpleAssociation
 from ClicActivity.ComplexAssociation import ComplexAssociation
+from ClicActivity.WordSearch import WordSearch
 from ClicActivity import Constants
 
 
@@ -156,6 +157,8 @@ class ClicActivities:
                         return True
         elif  node.getAttribute('class') =='@associations.ComplexAssociation':
                         return True
+        elif  node.getAttribute('class') =='@textGrid.WordSearch':
+                        return True
         else:
              return False
     def executeActivity(self,node):
@@ -177,4 +180,6 @@ class ClicActivities:
                         return SimpleAssociation(node)
         elif  node.getAttribute('class') =='@associations.ComplexAssociation':
                         return ComplexAssociation(node)
+        elif  node.getAttribute('class') =='@textGrid.WordSearch':
+                        return WordSearch(node)
                 

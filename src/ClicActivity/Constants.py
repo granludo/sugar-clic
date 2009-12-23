@@ -33,8 +33,8 @@
 
 
 
-MAX_WIDTH = 1200
-MAX_HEIGHT = 825
+MAX_WIDTH = 1000
+MAX_HEIGHT = 750 #825
 MARGIN_TOP = 20
 MARGIN_BOTTOM = 75
 MARGIN_LEFT = 20
@@ -47,7 +47,8 @@ colorBorder = (255,127,36)
 colorBorderDark = ( 92,51,23)
 colorBackground = (171,171,171)
 
-colorWhite = (256,256,256)
+colorWhite = (255,255,255)
+colorBlack = (0,0,0)
 colorDefault= (42,42,42)
 colorMessage = (171,171,171)
 

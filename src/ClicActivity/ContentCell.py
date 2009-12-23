@@ -35,6 +35,7 @@ class ContentCell(object):
     img2=None
     id = None
     border = True
+    letter= ''
     
     
 
