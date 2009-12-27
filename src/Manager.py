@@ -201,8 +201,8 @@ class Manager:
         self.w_child.add(self.current_view)
         
         if not runaslib: 
-            #called every 100 miliseconds (for pygame)
-            gobject.timeout_add(100, self.updating)
+            #called every 20 miliseconds (for pygame)
+            gobject.timeout_add(20, self.updating)
             self.window.show() 
             gtk.main()
 
