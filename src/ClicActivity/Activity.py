@@ -42,9 +42,14 @@ class Activity(object):
     pathToMedia = None
     
     
+    
     def __init__(self,xmlActivity):
         
         self.xmlActivity = xmlActivity
+        a, b, c, d = pygame.cursors.load_xbm(Constants.Images.CURSOR,Constants.Images.CURSOR)
+        pygame.mouse.set_cursor(a, b, c, d)
+
+        '''pygame.mouse.set_cursor(*pygame.cursors.broken_x)'''
         
     def OnEvent(self,PointOfMouse):
         print 'MOTHER CLASS'
@@ -224,3 +229,20 @@ class Activity(object):
                 surf.blit(textline,(8,acum_heigth))
 
             acum_heigth += font.size(line)[1]
+
+    def play_sound(self):
+        pygame.mixer.pre_init(44100,-16,2, 1024 * 3)
+        if pygame.mixer.get_init():
+            try:
+                print "hola"
+                music = os.path.join('data','clics','conill', '4.wav')
+                print music
+                '''pygame.mixer.music.load("/home/roger/Escriptori/PFC(2)/PFC/newJclic/media/moc.mp3")'''
+                sound = pygame.mixer.Sound("/home/roger/Escriptori/monkeystomp/data/jump.wav")
+                sound.set_volume(1)
+                print sound.get_length()
+                sound.play()
+            except:
+                print "No se pudo cargar el sonido:", fullname
+                raise SystemExit, message
+

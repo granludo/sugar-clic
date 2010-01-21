@@ -54,6 +54,7 @@ colorMessage = (171,171,171)
 
 DEFAULT_BORDER_SIZE = 3
 class Images:
+    CURSOR = "img/standardcursor.xbm"
     NEXT = "img/next.png"
     PREV = "img/prev.png"
     HOME = "img/home2.png"
