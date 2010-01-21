@@ -74,6 +74,6 @@ class ClicPlayerActivity(activity.Activity):
         self.set_canvas(self._main_view)
         self.show()
         
-        #called every 100 miliseconds (for pygame)
-        gobject.timeout_add(100, self.Manager.updating)
+        #called every 20 miliseconds (for pygame)
+        gobject.timeout_add(20, self.Manager.updating)
 
