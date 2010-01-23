@@ -38,9 +38,12 @@ import os
 web_service = 'http://potato.lsi.upc.edu/jclicrepository/index.php?wsdl'
 
 #paths to use outside the Xo laptop
-bundle = '.'
-data = './data'
-clics = './data/clics'
+current_path = os.getcwd()
+bundle = current_path
+data = current_path + '/data'
+clics = current_path + '/data/clics'
+
+
 
 # root path of the activity (in a Xo laptop is /home/olpc/Activities/activity/)
 application_bundle_path = bundle

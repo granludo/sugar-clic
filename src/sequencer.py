@@ -68,7 +68,6 @@ class Sequencer:
             pygame.display.flip()
 
             for evento in pygame.event.get():
-    
                 #With resultat we controll what we do next
                 resultat = self.act_handler.update_activity(evento)    
     

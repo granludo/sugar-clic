@@ -1,4 +1,4 @@
- ''' 
+''' 
     This file is part of Sugar-Clic
     
     Sugar-Clic is copyrigth 2009 by Maria Jose Casany Guerrero and Marc Alier Forment
