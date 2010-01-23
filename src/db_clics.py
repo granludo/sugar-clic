@@ -53,14 +53,17 @@ class DbClics:
                     'Author': '',
                     'Area': '',
                     'Language': '',
-                    'File': ''              
+                    'File': '',  
+                    'Icon': ''            
                 }
+        
         for file in files.childNodes: 
             clic = {'Title': file.childNodes[0].childNodes[0].data,
                     'Author': file.childNodes[1].childNodes[0].data,
                     'Area': file.childNodes[2].childNodes[0].data,
                     'Language': file.childNodes[3].childNodes[0].data,
-                    'File': file.childNodes[4].childNodes[0].data              
+                    'File': file.childNodes[4].childNodes[0].data,
+                    'Icon': self.__getText(file.childNodes[5].childNodes)               
                     }
             l.append(clic)
         return l
@@ -99,6 +102,11 @@ class DbClics:
         element.appendChild(fileName)
         nodeFile = doc.createTextNode(clic['File'])
         fileName.appendChild(nodeFile)
+        
+        iconName = doc.createElement('icon_name')
+        element.appendChild(iconName)
+        nodeIcon = doc.createTextNode(clic['Icon'])
+        iconName.appendChild(nodeIcon)
             
         file = doc.toxml()
         f = open(self.path_db, 'w')
@@ -117,6 +125,13 @@ class DbClics:
         f = open(self.path_db, 'w')
         f.write(file)
         f.close()
+        
+    def __getText(self, nodelist):
+        rc = ""
+        for node in nodelist:
+            if node.nodeType == node.TEXT_NODE:
+                rc = rc + node.data
+        return rc
 
 #def remove_clic():
 #        print 'Not yet implemented'        

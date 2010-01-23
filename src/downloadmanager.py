@@ -37,6 +37,7 @@ from sugar.graphics.alert import Alert, TimeoutAlert
 from sugar.graphics.icon import Icon
 from sugar.activity import activity
 import paths
+from clicInstaller import Installer
 #import progressbar
 
 # #3903 - this constant can be removed and assumed to be 1 when dbus-python
@@ -77,9 +78,12 @@ class HelperAppLauncherDialog:
     def promptForSaveToFile(self, launcher, window_context,
                             default_file, suggested_file_extension,
                             force_prompt=False):
+        
+        
         file_class = components.classes['@mozilla.org/file/local;1']
         dest_file = file_class.createInstance(interfaces.nsILocalFile)
-        print default_file
+
+
         if default_file:
             default_file = default_file.encode('utf-8', 'replace')
             base_name, extension = os.path.splitext(default_file)
@@ -89,8 +93,13 @@ class HelperAppLauncherDialog:
                 extension = '.' + suggested_file_extension
             else:
                 extension = ''
+
+        if extension == '.xmlclic':
+            temp_path = paths.application_data_path
+            file_path = (temp_path + '/' + default_file)
+            dest_file.initWithPath(file_path)
                 
-        temp_path = paths.application_data_path
+        
 #        temp_path = os.path.join('/home/niobst/Desktop', 'instance')
 #        temp_path = os.path.join(activity.get_activity_root(), 'instance')
 #        if not os.path.exists(temp_path):
@@ -98,13 +107,10 @@ class HelperAppLauncherDialog:
 #        fd, file_path = tempfile.mkstemp(dir=temp_path, prefix=base_name, suffix=extension)
 #        os.close(fd)
 #        os.chmod(file_path, 0644)
-        file_path = (temp_path + '/' + default_file)
-        print file_path
-        dest_file.initWithPath(file_path)
 
-        requestor = window_context.queryInterface(interfaces.nsIInterfaceRequestor)
-        dom_window = requestor.getInterface(interfaces.nsIDOMWindow)
-        _dest_to_window[file_path] = dom_window
+            requestor = window_context.queryInterface(interfaces.nsIInterfaceRequestor)
+            dom_window = requestor.getInterface(interfaces.nsIDOMWindow)
+            _dest_to_window[file_path] = dom_window
         
         return dest_file
                             
@@ -135,6 +141,8 @@ class Download:
         self._last_update_time = 0
         self._last_update_percent = 0
         self._stop_alert = None
+        
+        self.installer = Installer()
 
         dom_window = _dest_to_window[self._target_file.path]
         del _dest_to_window[self._target_file.path]
@@ -170,13 +178,17 @@ class Download:
 #            self._stop_alert.connect('response', self.__stop_response_cb)
 #            self._stop_alert.show()
             
-            self.win = gtk.Window(gtk.WINDOW_TOPLEVEL)
-            self.win.set_size_request(175,50)
-            self.button = gtk.Button("Download Finished (OK)")
-            self.button.connect('clicked', self.__destroy_win)
-            self.button.show()
-            self.win.add(self.button)
-            self.win.show()
+            self.installer.get_clic_info(self._get_file_name())
+            
+            
+            
+#            self.win = gtk.Window(gtk.WINDOW_TOPLEVEL)
+#            self.win.set_size_request(175,50)
+#            self.button = gtk.Button("Download Finished (OK)")
+#            self.button.connect('clicked', self.__destroy_win)
+#            self.button.show()
+#            self.win.add(self.button)
+#            self.win.show()
 
     def __destroy_win(self, *args):
         self.win.destroy()

@@ -61,14 +61,10 @@ class Controller:
         self.ws = self.__ws
         self.mh = self.__mh
         
-    #downloads and installs a new clic (after that, is ready to play)
+    #adds new clic to db list
     def add_new_clic(self, clic):
-        t = self.ws.download_clic(clic['File'])
-        if t == 0 :
-            t = self.ws.install_clic(clic)
-            if t == 0:
-                self.db.insert_clic(clic)
-        return t
+        self.db.insert_clic(clic)
+
        
     #returns a list of clics available in the web service
     def get_clics_list(self):
@@ -95,3 +91,4 @@ class Controller:
     #plays the clic and starts the first activity of the clic
     def play_clic(self):
         self.seq.play()
+
