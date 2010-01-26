@@ -30,6 +30,7 @@
     
     @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 '''
+from sugar.activity import activity
 import os
 import hulahop
 import paths
@@ -37,9 +38,13 @@ import paths
 import gtk
 import gtk.glade
 import gobject
-#import threading
 
-hulahop.startup(paths.application_data_path + '/test')
+try:
+    hula_path = os.path.join(activity.get_activity_root(), 'data/test')
+    hulahop.startup(hula_path)
+except RuntimeError:
+    hula_path = os.path.join(os.getcwd(), 'data/test')
+    hulahop.startup(hula_path)
 
 from gettext import gettext as _
 from controller import Controller
@@ -55,7 +60,7 @@ class Manager:
     def __init__(self, runaslib = True):                
         self.clicked = False #is a clic chosen to download?
         self.selected = False #is a clic chosen to play?
-        self.start = False #is a clic_activity running?
+        self.start_clic_view = False #is a clic_activity running?
         self.listView = False #are the user in the list view?
         
         #if runaslib = True -> we are in a Xo laptop
@@ -106,16 +111,15 @@ class Manager:
         self.bS = self.bS.connect('clicked', self.__search_clics_view)  
         self.ImageSearch = self.xml.get_widget('imageSearch')
         self.ImageSearch.set_from_file(icons_path + '/lupa.png')        
-
-            
+    
   
         #loading available_clics widget 
         self.xml = gtk.glade.XML(views_path + '/MyClicsView.glade') 
         #loading window
         self.windowAva = self.xml.get_widget('window')
         
-        self.treeAvailable = self.xml.get_widget('treeviewAvailable')
-        self.treeAvailable.connect('item-activated',self.__clics_view)
+        self.iconView = self.xml.get_widget('treeviewAvailable')
+        self.iconView.connect('item-activated',self.__clics_view)
 
         self.bAllClics = self.xml.get_widget('buttonAllClics')
         self.bAllClics = self.bAllClics.connect('clicked', self.__available_clics_view)
@@ -125,26 +129,18 @@ class Manager:
                        
         self.bPM = self.xml.get_widget('buttonAvaMain')
         self.bPM.connect('clicked', self.__main_view)
-        
-#        self.bGV = self.xml.get_widget('playClic')
-#        self.bGV.connect('clicked', self.__play_clics_view)
-#        self.ImagePlay = self.xml.get_widget('imagePlay')
-#        self.ImagePlay.set_from_file(icons_path + '/play.png')
-        
-        
+                
         self.labelMy = self.xml.get_widget('labelMyClics')
         self.vboxAvailable = self.xml.get_widget('vboxAvailable')
         gtk.Container.remove(self.windowAva, self.vboxAvailable)
         self.ImageHome = self.xml.get_widget('imageHome')
         self.ImageHome.set_from_file(icons_path + '/home.png')
 
-
-     
+   
         #loading search_clics widget (Browser)
         self.xml = gtk.glade.XML(views_path + '/BrowserView.glade') 
         #loading window
         self.windowBrowser = self.xml.get_widget('window')
-        self.browser = Browser()
         self.bBM = self.xml.get_widget('buttonHome')
         self.bBM.connect('clicked', self.__main_view)
         self.ImageBr = self.xml.get_widget('imageHome') 
@@ -154,7 +150,6 @@ class Manager:
         self.vboxBrowser.add(self.browser)       
         gtk.Container.remove(self.windowBrowser, self.vboxBrowser)
         
-
       
         #loading play_clics widget
         self.xml = gtk.glade.XML(views_path + '/PlayView.glade') 
@@ -178,19 +173,6 @@ class Manager:
 
         #initiate controller
         self.controller = Controller()
-        clics = self.controller.get_installed_clics()
-        
-        lstore = ManagerData.add_clics_data(clics)
-        self.treeAvailable.set_selection_mode(gtk.SELECTION_MULTIPLE)
-        self.treeAvailable.set_model(lstore)
-        
-        ManagerData.put_columns(self.treeAvailable)
-
-        
-        
-
-
-
 
         self.current_view = self.Main
         self.w_child.add(self.current_view)
@@ -204,7 +186,7 @@ class Manager:
 
     #calls the clic infinite times (until the clic ends) 
     def updating(self):        
-        if self.start:
+        if self.start_clic_view:
             nou = self.controller.updating_activity()    
 	    if nou==-1:
                 nou = 0
@@ -226,14 +208,13 @@ class Manager:
     def __available_clics_view(self, *args):
         self.labelMy.set_text(_('Select a Clic'))
         self.listView = False
-        if self.start:
-            self.start = False
-        else:
-            clics = self.controller.get_installed_clics()
-            lstore = ManagerData.add_clics_data(clics)
-            self.treeAvailable.set_model(lstore)
+        self.start_clic_view = False
             
-        
+        clics = self.controller.get_installed_clics()
+        lstore = ManagerData.add_clics_data(clics)
+        self.iconView.set_model(lstore)
+        ManagerData.put_columns(self.iconView)
+                            
         if (self.current_view == self.vboxPlay):
             self.vboxPlay.hide()
             self.current_view = self.vboxAvailable
@@ -244,7 +225,7 @@ class Manager:
     def __lists_clics_view(self, *args):
         self.labelMy.set_text(_('Clics ordered by different criteria'))
         lstore = ManagerData.list_clics()
-        self.treeAvailable.set_model(lstore)
+        self.iconView.set_model(lstore)
         self.listView = True
 
         
@@ -252,8 +233,8 @@ class Manager:
     def __clics_view(self, *args):
         #check if the user is in the clic view (not in list-clic view)
         if self.listView == False:
-            dir = ManagerData.get_clic_data(self.treeAvailable)
-            self.controller.load_clic(dir)
+            folder, default = ManagerData.get_clic_data(self.iconView)
+            self.controller.load_clic(folder, default)
             self.vboxPlay.show()
             self.__change_current_view(self.vboxPlay)   
             
@@ -274,7 +255,7 @@ class Manager:
     #shows the about view    
     def __about_view(self, *args):
         #check if the user is in the clic view (not in list-clic view)
-        self.controller.load_clic("sugar_clic_help")
+        self.controller.load_about()
         self.vboxPlay.show()
         self.__change_current_view(self.vboxPlay)   
         
@@ -316,7 +297,7 @@ class Manager:
     #Initiates the clic 
     def __play_clic(self):
         self.controller.play_clic()
-        self.start = True
+        self.start_clic_view = True
 
 #To execute outside the Xo laptop
 if __name__=="__main__":

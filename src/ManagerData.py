@@ -78,15 +78,21 @@ def add_clics_data(data):
 #        gobject.TYPE_STRING,
 #        gobject.TYPE_STRING,
 #        gobject.TYPE_STRING)
-    lstore = gtk.ListStore(str, gtk.gdk.Pixbuf, str, str, str, str)
+    lstore = gtk.ListStore(str, gtk.gdk.Pixbuf,str, str, str, str, str)
     lstore.set_sort_column_id(COL_PATH, gtk.SORT_ASCENDING)
     lstore.clear()
 
     defaultIcon = get_icon(gtk.STOCK_OPEN)
     for item in data:
         icon = item['Icon']
+        default = item['Default']
+        if default == '0':
+            path = paths.new_clics_path
+        else:
+            path = paths.clics_path
+            
         if  icon != '':
-            Icon = gtk.gdk.pixbuf_new_from_file_at_size(paths.clics_path + '/' + item['File'] + '/' + item['Icon'] , 100, 100)
+            Icon = gtk.gdk.pixbuf_new_from_file_at_size(path + '/' + item['File'] + '/' + item['Icon'] , 100, 100)
         else :
             Icon = defaultIcon
             
@@ -98,7 +104,7 @@ def add_clics_data(data):
 #            COLUMN_AREA, item['Area'],
 #            COLUMN_LANGUAGE, item['Language'],
 #            COLUMN_FILE, item['File'])
-        lstore.append([item['Title'], Icon , item['File'], item['Area'], item['Language'], item['Author']])
+        lstore.append([item['Title'], Icon , item['File'], item['Default'], item['Area'], item['Language'], item['Author']])
     return lstore
 
 #put columns in treeView
@@ -137,6 +143,6 @@ def get_clic_data(tree):
 #            'Language': tree.get_model().get_value(iter,3),
 #            'File': tree.get_model().get_value(iter,4)                   
 #            }
-    file = tree.get_model().get_value(iter,2)
-    dir = file
-    return dir
+    folder = tree.get_model().get_value(iter,2)
+    is_default = tree.get_model().get_value(iter,3)
+    return folder, is_default

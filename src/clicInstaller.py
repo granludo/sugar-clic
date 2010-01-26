@@ -40,7 +40,8 @@ import controller
 
 class Installer:
     def __init__(self):
-        self.clics_path = paths.clics_path #folder to install clics
+        self.clics_path = paths.new_clics_path  #folder to install clics
+        
         self.data_path = paths.application_data_path
         if not os.path.exists(self.clics_path):
             t = os.system('mkdir ' + self.clics_path)
@@ -100,10 +101,6 @@ class Installer:
         l.append(fileUrls)
         l.append(iconUrls)
             
-
-            
-
-#        ##############thread test########################
         hilo = threading.Thread(target=self.__download_file, args=(l))
         hilo.start()
 
@@ -120,12 +117,6 @@ class Installer:
         return t  
     
     def __download_file(self, *urls):
-        #enter in the thread
-        #gtk.gdk.threads_enter()
-
-#        list = self.__get_urls(urlsClics)
-#
-#        print 'c: '+ list
         clic = urls[0]
         urls_to_download = urls[1]
         icons_to_download = urls[2]
@@ -150,7 +141,6 @@ class Installer:
                     if t == 0:
                         print 'Installed in folder clics/' + folder
                         self.controller = controller.Controller()
-                        #calls the controller to add a new clic to the db list
                         done = True
                         
             i = i + 1
@@ -164,7 +154,7 @@ class Installer:
                 clic['Icon'] = icon  
             else :
                 clic['Icon'] = ''
-                    
+            #calls the controller to add a new clic to the db list     
             self.controller.add_new_clic(clic)
                     
         

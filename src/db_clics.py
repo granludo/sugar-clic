@@ -36,16 +36,23 @@ import paths
 
 class DbClics:
     def __init__(self):
-        self.path_db = paths.get_db_path() #Absolute path of the downloaded.xml (File with information about clics downloaded)          
-        self.__load_db()
+        self.loaded = False
+
 
     #Creation of the DB
     def __load_db(self):
-        if not os.path.exists(self.path_db):
-            self.__create_db()   
+        if not os.path.exists(self.path_db_new):
+            self.__create_db(self.path_db_new)     
+        
             
-    #Returns a list with all the clics downloaded          
-    def get_clics(self):
+    #Returns a list with all the clics (default and downloaded)          
+    def get_clics(self):  
+        if not self.loaded :
+            self.path_db = paths.db_default #Absolute path of the default.xml (File with information about clics stored in the same app)    
+            self.path_db_new = paths.db_downloaded#Absolute path of the downloaded.xml (File with information about clics downloaded from the web)       
+            self.__load_db()
+            self.loaded = True      
+  
         doc = minidom.parse(self.path_db)        
         files = doc.childNodes[0]
         l = list()
@@ -63,14 +70,36 @@ class DbClics:
                     'Area': file.childNodes[2].childNodes[0].data,
                     'Language': file.childNodes[3].childNodes[0].data,
                     'File': file.childNodes[4].childNodes[0].data,
-                    'Icon': self.__getText(file.childNodes[5].childNodes)               
+                    'Icon': self.__getText(file.childNodes[5].childNodes), 
+                    'Default' : '1'              
                     }
             l.append(clic)
+            
+        doc = minidom.parse(self.path_db_new)        
+        files = doc.childNodes[0]
+        
+        for file in files.childNodes: 
+            clic = {'Title': file.childNodes[0].childNodes[0].data,
+                    'Author': file.childNodes[1].childNodes[0].data,
+                    'Area': file.childNodes[2].childNodes[0].data,
+                    'Language': file.childNodes[3].childNodes[0].data,
+                    'File': file.childNodes[4].childNodes[0].data,
+                    'Icon': self.__getText(file.childNodes[5].childNodes),
+                    'Default' : '0'               
+                    }
+            l.append(clic)
+        
         return l
 
     #insert clic to the DB    
     def insert_clic(self, clic):
-        doc = minidom.parse(self.path_db)
+        if not self.loaded :
+            self.path_db = paths.db_default #Absolute path of the default.xml (File with information about clics stored in the same app)    
+            self.path_db_new = paths.db_downloaded#Absolute path of the downloaded.xml (File with information about clics downloaded from the web)       
+            self.__load_db()
+            self.loaded = True
+        
+        doc = minidom.parse(self.path_db_new)
         wml = doc.childNodes[0]
             
         #Create the main <card> element
@@ -109,20 +138,18 @@ class DbClics:
         iconName.appendChild(nodeIcon)
             
         file = doc.toxml()
-        f = open(self.path_db, 'w')
+        f = open(self.path_db_new, 'w')
         f.write(file)
         f.close()
 
     #Creates the file downloaded.xml       
-    def __create_db(self):
+    def __create_db(self, path):
         doc = minidom.Document()
         # Create the <wml> base element
         wml = doc.createElement('files')
         doc.appendChild(wml)
-        doc.toxml
         file = doc.toxml()
-        global path_db
-        f = open(self.path_db, 'w')
+        f = open(path, 'w')
         f.write(file)
         f.close()
         
