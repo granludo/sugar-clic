@@ -64,19 +64,18 @@ class Controller:
     #adds new clic to db list
     def add_new_clic(self, clic):
         self.db.insert_clic(clic)
-
-       
-    #returns a list of clics available in the web service
-    def get_clics_list(self):
-        return self.ws.get_clics_from_webservice()
     
     #returns a list of installed clics
     def get_installed_clics(self):
         return self.db.get_clics()
+    
+    def load_about(self):
+        sequence, media, settings = self.mh.get_clic_info(paths.about_path, 'sugar_clic_help')
+        self.seq.begin_sequence(sequence, media, settings, paths.about_path, 'sugar_clic_help')       
 
     #initialize all the structure information to play the clic
-    def load_clic(self, clic_name):
-        clic_path = paths.get_clic_path(clic_name)
+    def load_clic(self, clic_name, is_default):
+        clic_path = paths.get_clic_path(clic_name, is_default)
         sequence, media, settings = self.mh.get_clic_info(clic_path, clic_name)
         self.seq.begin_sequence(sequence, media, settings, clic_path,clic_name)
     
