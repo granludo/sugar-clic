@@ -34,6 +34,7 @@ from db_clics import DbClics
 from ws_handler import WSHandler
 from module_handler import ClicParser 
 from sequencer import Sequencer
+from clicInstaller import Installer
 import paths
 
 
@@ -54,12 +55,14 @@ class Controller:
     __db = DbClics()
     __ws = WSHandler()
     __mh = ClicParser() 
+    __ins = Installer()
     
     def __init__(self):
         self.db = self.__db
         self.seq = self.__seq
         self.ws = self.__ws
         self.mh = self.__mh
+        self.ins = self.__ins
         
     #adds new clic to db list
     def add_new_clic(self, clic):
@@ -90,4 +93,9 @@ class Controller:
     #plays the clic and starts the first activity of the clic
     def play_clic(self):
         self.seq.play()
+        
+    #remove clic
+    def remove_clic(self, clic):
+        self.db.remove_clic_from_db(clic)
+        self.ins.delete_clic_folder(clic)
 

@@ -69,7 +69,7 @@ class Manager:
         img_app_path = os.path.join(paths.application_bundle_path, 'img/app') 
         views_path = os.path.join(img_app_path, 'appViews')
         icons_path = os.path.join(img_app_path, 'appIcons')
-        
+        self.icons_path = icons_path
 #        self.window.connect('delete_event', gtk.main_quit) 
 #        #self.window.set_size_request(800,600)  
 #        # Get Windows child (Vertical Box with the views)
@@ -94,23 +94,41 @@ class Manager:
         #remove parent (in glade there is always a parent (window))
         gtk.Container.remove(self.win ,self.Main)
         
+        self.ImageSearch = self.xml.get_widget('imageTitle')
+        self.ImageSearch.set_from_file(icons_path + '/title.png')  
+        
         #MyClics button
         self.bMy = self.xml.get_widget('buttonMyClics')
-        self.bMy = self.bMy.connect('clicked', self.__available_clics_view)
+        self.bMy.connect('clicked', self.__available_clics_view)
+        self.bMy.connect('enter', self.rview2) 
+        self.bMy.connect('leave', self.lview2) 
         self.ImageMy = self.xml.get_widget('imageMyClics')
-        self.ImageMy.set_from_file(icons_path + '/myclics.png')
+        self.ImageMy.set_from_file(icons_path + '/clics.png')
+
+        #Manual button
+        self.bManual = self.xml.get_widget('buttonManual')
+        self.bManual.connect('clicked', self.__about_view)
+        self.ImageManual = self.xml.get_widget('imageManual')
+        self.ImageManual.set_from_file(icons_path + '/manual.png')
         
         #About button
         self.bAbout = self.xml.get_widget('buttonAbout')
-        self.bAbout = self.bAbout.connect('clicked', self.__about_view)
+        self.bAbout.connect('clicked', self.__about_view)
         self.ImageAbout = self.xml.get_widget('imageAbout')
         self.ImageAbout.set_from_file(icons_path + '/about.png')
         
+#        self.tooltips = gtk.Tooltips()
+#        self.HH = self.xml.get_widget('hbuttonbox2')
+#        self.HH.pack_start(self.bAbout, False, False, 3)
+#        self.tooltips.set_tip(self.bAbout, "SHADOW_IN")
+        
         #Search button
         self.bS = self.xml.get_widget('buttonSearch')
-        self.bS = self.bS.connect('clicked', self.__search_clics_view)  
+        self.bS.connect('clicked', self.__search_clics_view) 
+        self.bS.connect('enter', self.rview) 
+        self.bS.connect('leave', self.lview) 
         self.ImageSearch = self.xml.get_widget('imageSearch')
-        self.ImageSearch.set_from_file(icons_path + '/lupa.png')        
+        self.ImageSearch.set_from_file(icons_path + '/download.png')        
     
   
         #loading available_clics widget 
@@ -118,18 +136,20 @@ class Manager:
         #loading window
         self.windowAva = self.xml.get_widget('window')
         
-        self.iconView = self.xml.get_widget('treeviewAvailable')
-        self.iconView.connect('item-activated',self.__clics_view)
+        self.iconView = self.xml.get_widget('iconviewAvailable')
+        #self.iconView.connect('selection-changed',self.__clics_view)
+        self.iconView.connect('item-activated', self.__delete_clic) #item-activated 2 clicks //selection-changed 1 click
 
         self.bAllClics = self.xml.get_widget('buttonAllClics')
-        self.bAllClics = self.bAllClics.connect('clicked', self.__available_clics_view)
+        self.bAllClics.connect('clicked', self.__available_clics_view)
+        self.bAllClics.hide()  
         self.bLists = self.xml.get_widget('buttonLists')
-        self.bLists.hide()
-        self.bLists = self.bLists.connect('clicked', self.__lists_clics_view)
-                       
+        self.bLists.connect('clicked', self.__lists_clics_view)
+        self.bLists.hide()      
+                         
         self.bPM = self.xml.get_widget('buttonAvaMain')
         self.bPM.connect('clicked', self.__main_view)
-                
+                        
         self.labelMy = self.xml.get_widget('labelMyClics')
         self.vboxAvailable = self.xml.get_widget('vboxAvailable')
         gtk.Container.remove(self.windowAva, self.vboxAvailable)
@@ -184,6 +204,7 @@ class Manager:
             gtk.main()
 
 
+            
     #calls the clic infinite times (until the clic ends) 
     def updating(self):        
         if self.start_clic_view:
@@ -203,17 +224,25 @@ class Manager:
     def __main_view(self,*args):
         self.__change_current_view(self.Main)
 
- 
+    def rview(self, *args):
+        self.ImageSearch.set_from_file(self.icons_path + '/download_2.png')   
+
+    def lview(self, *args):
+        self.ImageSearch.set_from_file(self.icons_path + '/download.png')
+        
+    def rview2(self, *args):
+        self.ImageMy.set_from_file(self.icons_path + '/clics_2.png')     
+    def lview2(self, *args):
+        self.ImageMy.set_from_file(self.icons_path + '/clics.png')   
+        
+        
     #View to see the available clics in the computer and select one to play
     def __available_clics_view(self, *args):
         self.labelMy.set_text(_('Select a Clic'))
         self.listView = False
         self.start_clic_view = False
             
-        clics = self.controller.get_installed_clics()
-        lstore = ManagerData.add_clics_data(clics)
-        self.iconView.set_model(lstore)
-        ManagerData.put_columns(self.iconView)
+        self.__refresh_clics_view()
                             
         if (self.current_view == self.vboxPlay):
             self.vboxPlay.hide()
@@ -238,8 +267,6 @@ class Manager:
             self.vboxPlay.show()
             self.__change_current_view(self.vboxPlay)   
             
-
-            
     #Browser -> find new clics
     def __search_clics_view(self, *args):        
         self.vboxBrowser.remove(self.browser)
@@ -250,40 +277,13 @@ class Manager:
         self.__change_current_view(self.vboxBrowser)
         
         self.browser.load_uri('http://www.sbennel.es')
-        
-    
+            
     #shows the about view    
     def __about_view(self, *args):
         #check if the user is in the clic view (not in list-clic view)
         self.controller.load_about()
         self.vboxPlay.show()
-        self.__change_current_view(self.vboxPlay)   
-        
-
-
-    #a clic is chosen to download    
-    def __is_clicked(self, *args):
-        self.clicked = True
-     
-    #a clic is chosen to play       
-    def __is_selected(self, *args):
-        self.selected = True
-        self.labelMy.set_text(_('Play now!'))
-        
-    #calls the controller to download and install a clic
-#    def __clic_selected(self, *args):
-#        if self.clicked:
-#            self.labelInfo.set_text(_('Clics'))
-#            clic = ManagerData.get_clic_data(self.tree)
-#            t = self.controller.add_new_clic(clic)
-#            if t == 0 :
-#                print 'File downloaded (Manager)'
-#                self.labelInfo.set_text(clic['Title'] + ' downloaded')
-#                self.newclic = True
-#            else:
-#                self.labelInfo.set_text(clic['Title'] + ' not downloaded')
-#                raise RuntimeError, 'File not downloaded' 
-#            self.clicked = False
+        self.__change_current_view(self.vboxPlay)           
     
     #connects the pygtk area with the pygame surface
     def __callback(self, *args):
@@ -298,6 +298,24 @@ class Manager:
     def __play_clic(self):
         self.controller.play_clic()
         self.start_clic_view = True
+        
+    #Remove a clic
+    def __delete_clic(self, *args):
+        print 'delete'
+        #check if the user is in the clic view (not in list-clic view)
+        if self.listView == False:
+            clic, default = ManagerData.get_clic_data(self.iconView)
+        if default == '0':
+            self.controller.remove_clic(clic)
+            self.__refresh_clics_view()
+        else :
+            print 'DEFAULT CLIC'
+            
+    def __refresh_clics_view(self):
+        clics = self.controller.get_installed_clics()
+        lstore = ManagerData.add_clics_data(clics)
+        self.iconView.set_model(lstore)
+        ManagerData.put_columns(self.iconView)
 
 #To execute outside the Xo laptop
 if __name__=="__main__":

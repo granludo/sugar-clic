@@ -35,19 +35,18 @@ import os
 import re
 import threading
 import paths
+import shutil
 
 import controller
 
 class Installer:
     def __init__(self):
-        self.clics_path = paths.new_clics_path  #folder to install clics
-        
-        self.data_path = paths.application_data_path
-        if not os.path.exists(self.clics_path):
-            t = os.system('mkdir ' + self.clics_path)
+        self.clics_path = ""
+        self.data_path = ""
+
             
             
-    def getText(self, nodelist):
+    def __getText(self, nodelist):
         rc = ""
         for node in nodelist:
             if node.nodeType == node.TEXT_NODE:
@@ -57,6 +56,8 @@ class Installer:
 
     #Parse information about the clic (sequence, mediaBag, settings)
     def get_clic_info(self, file):
+        self.clics_path = paths.new_clics_path  #folder to install clics
+        self.data_path = paths.application_data_path
         t = self.__unzip_xmlclic(file)
         
         clicInfo = minidom.parse(self.data_path + '/' + file)
@@ -80,7 +81,7 @@ class Installer:
                 'Author': self.author,
                 'Area': self.theme,
                 'Language': self.language,
-                'File': '',
+                'Folder': '',
                 'Icon': ''
                 }     
         
@@ -89,7 +90,7 @@ class Installer:
         iconUrls = list()
         
         for url in  urlsC:
-            oneUrl = self.getText(url.childNodes)
+            oneUrl = self.__getText(url.childNodes)
             if oneUrl != "" :
                 fileUrls.append(url.childNodes[0].data)
                 
@@ -107,8 +108,8 @@ class Installer:
         self.__delete_file(file)
         
     def __delete_file(self, file):
-        t = os.system('rm '+ self.data_path + '/'+ file)                 
-        return t       
+        os.remove(self.data_path + '/'+ file)                 
+   
             
     #Unzips the Jclic to a local folder and removes the file
     def __unzip_xmlclic(self, file):   
@@ -131,13 +132,13 @@ class Installer:
             
             file =  urls_to_download[i].split("/")[-1]
             folder = file.split('.',1)[0]
-            clic['File'] = folder        
+            clic['Folder'] = folder        
                 
             t = os.system('wget -q ' + urls_to_download[i] + ' --directory-prefix=' + self.clics_path )    
             if t == 0:
                 t = os.system('unzip '+ self.clics_path + '/'+ file + ' -d ' + self.clics_path + '/' + folder)            
                 if t == 0:
-                    t = os.system('rm '+ self.clics_path + '/' + file)
+                    os.remove(self.clics_path + '/' + file)
                     if t == 0:
                         print 'Installed in folder clics/' + folder
                         self.controller = controller.Controller()
@@ -160,7 +161,10 @@ class Installer:
         
         if done == False:
             print 'NOT INSTALLED'
-        
+    
+    def delete_clic_folder(self, folder):
+        shutil.rmtree(paths.new_clics_path + '/' + folder)
+   
     
     
     
