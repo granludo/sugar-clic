@@ -36,14 +36,6 @@ import paths
 import os
 from gettext import gettext as _
 
-#(
-#    COLUMN_TITLE,
-#    COLUMN_AUTHOR,
-#    COLUMN_AREA,
-#    COLUMN_LANGUAGE,
-#    COLUMN_FILE
-#) = range(5)
-
 COL_PATH = 0
 COL_PIXBUF = 1
 
@@ -72,12 +64,7 @@ def list_clics():
 
 #add web service information in a list
 def add_clics_data(data):
-#    lstore = gtk.ListStore(
-#        gobject.TYPE_STRING,
-#        gobject.TYPE_STRING,
-#        gobject.TYPE_STRING,
-#        gobject.TYPE_STRING,
-#        gobject.TYPE_STRING)
+
     lstore = gtk.ListStore(str, gtk.gdk.Pixbuf,str, str, str, str, str)
     lstore.set_sort_column_id(COL_PATH, gtk.SORT_ASCENDING)
     lstore.clear()
@@ -92,7 +79,7 @@ def add_clics_data(data):
             path = paths.clics_path
             
         if  icon != '':
-            Icon = gtk.gdk.pixbuf_new_from_file_at_size(path + '/' + item['File'] + '/' + item['Icon'] , 100, 100)
+            Icon = gtk.gdk.pixbuf_new_from_file_at_size(path + '/' + item['Folder'] + '/' + item['Icon'] , 100, 100)
         else :
             Icon = defaultIcon
             
@@ -103,8 +90,8 @@ def add_clics_data(data):
 #            COLUMN_AUTHOR, item['Author'],
 #            COLUMN_AREA, item['Area'],
 #            COLUMN_LANGUAGE, item['Language'],
-#            COLUMN_FILE, item['File'])
-        lstore.append([item['Title'], Icon , item['File'], item['Default'], item['Area'], item['Language'], item['Author']])
+#            COLUMN_FILE, item['Folder'])
+        lstore.append([item['Title'], Icon , item['Folder'], item['Default'], item['Area'], item['Language'], item['Author']])
     return lstore
 
 #put columns in treeView
@@ -134,15 +121,15 @@ def put_columns(iconView):
 #    column.set_sort_column_id(COLUMN_LANGUAGE)
 #    tree.append_column(column)
     
-def get_clic_data(tree):
-    pos =  tree.get_cursor()[0][0]
-    iter = tree.get_model().get_iter(pos)
+def get_clic_data(iconview):
+    pos =  iconview.get_cursor()[0][0]
+    iter = iconview.get_model().get_iter(pos)
 #    clic = {'Title': tree.get_model().get_value(iter,0),
 #            'Author': tree.get_model().get_value(iter,1),
 #            'Area': tree.get_model().get_value(iter,2),
 #            'Language': tree.get_model().get_value(iter,3),
-#            'File': tree.get_model().get_value(iter,4)                   
+#            'Folder': tree.get_model().get_value(iter,4)                   
 #            }
-    folder = tree.get_model().get_value(iter,2)
-    is_default = tree.get_model().get_value(iter,3)
+    folder = iconview.get_model().get_value(iter, 2)
+    is_default = iconview.get_model().get_value(iter, 3)
     return folder, is_default

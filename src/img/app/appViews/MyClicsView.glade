@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Mon Jan 18 20:22:11 2010 -->
+<!--Generated with glade3 3.4.5 on Wed Jan 27 17:31:03 2010 -->
 <glade-interface>
   <widget class="GtkWindow" id="window">
     <child>
@@ -74,7 +74,7 @@
             <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
             <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
             <child>
-              <widget class="GtkIconView" id="treeviewAvailable">
+              <widget class="GtkIconView" id="iconviewAvailable">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="spacing">50</property>

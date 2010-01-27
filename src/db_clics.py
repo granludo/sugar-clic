@@ -60,8 +60,9 @@ class DbClics:
                     'Author': '',
                     'Area': '',
                     'Language': '',
-                    'File': '',  
-                    'Icon': ''            
+                    'Folder': '',  
+                    'Icon': '',
+                    'Default': ''            
                 }
         
         for file in files.childNodes: 
@@ -69,7 +70,7 @@ class DbClics:
                     'Author': file.childNodes[1].childNodes[0].data,
                     'Area': file.childNodes[2].childNodes[0].data,
                     'Language': file.childNodes[3].childNodes[0].data,
-                    'File': file.childNodes[4].childNodes[0].data,
+                    'Folder': file.childNodes[4].childNodes[0].data,
                     'Icon': self.__getText(file.childNodes[5].childNodes), 
                     'Default' : '1'              
                     }
@@ -83,7 +84,7 @@ class DbClics:
                     'Author': file.childNodes[1].childNodes[0].data,
                     'Area': file.childNodes[2].childNodes[0].data,
                     'Language': file.childNodes[3].childNodes[0].data,
-                    'File': file.childNodes[4].childNodes[0].data,
+                    'Folder': file.childNodes[4].childNodes[0].data,
                     'Icon': self.__getText(file.childNodes[5].childNodes),
                     'Default' : '0'               
                     }
@@ -129,7 +130,7 @@ class DbClics:
                     
         fileName = doc.createElement('file_name')
         element.appendChild(fileName)
-        nodeFile = doc.createTextNode(clic['File'])
+        nodeFile = doc.createTextNode(clic['Folder'])
         fileName.appendChild(nodeFile)
         
         iconName = doc.createElement('icon_name')
@@ -160,5 +161,38 @@ class DbClics:
                 rc = rc + node.data
         return rc
 
-#def remove_clic():
-#        print 'Not yet implemented'        
+    def remove_clic_from_db(self, folder):
+        if not self.loaded :
+            self.path_db = paths.db_default #Absolute path of the default.xml (File with information about clics stored in the same app)    
+            self.path_db_new = paths.db_downloaded#Absolute path of the downloaded.xml (File with information about clics downloaded from the web)       
+            self.__load_db()
+            self.loaded = True 
+            
+        doc = minidom.parse(self.path_db_new)        
+        files = doc.childNodes[0]
+        
+        for file in files.childNodes: 
+            print file.childNodes[4].childNodes[0].data
+            print folder
+            if file.childNodes[4].childNodes[0].data == folder:
+                files.removeChild(file)
+                
+        doc.chilNodes = files
+        d = doc.toxml()
+        f = open(self.path_db_new, 'w')
+        f.write(d)
+        f.close()
+
+        
+#        for nodeList in files.childNodes:  
+#            
+#            for subnode in nodelist:
+#                if (subnode.nodeType == subnode.ELEMENT_NODE):
+#                    which = subnode.tagName
+#                    called = "" # in case it's not an img or title
+#                    if (which == "file_name"):
+#                        called = subnode.getAttribute("name")
+#                        if (len(called) < 6):
+#                            parent.removeChild(subnode)
+#                        cull_children(subnode.childNodes,"  "+inset,subnode)
+            

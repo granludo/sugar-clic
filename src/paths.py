@@ -75,9 +75,11 @@ def set_environment(is_Xo):
         
         db_downloaded = os.path.join(application_data_path , 'downloaded.xml')
         db_default = os.path.join(application_bundle_path , 'data/default.xml')
+    __create_clics_path()
         
 
-        
-    
+def __create_clics_path():        
+    if not os.path.exists(clics_path):
+            t = os.system('mkdir ' + clics_path)
     
     
