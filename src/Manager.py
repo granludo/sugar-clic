@@ -138,14 +138,14 @@ class Manager:
         
         self.iconView = self.xml.get_widget('iconviewAvailable')
         #self.iconView.connect('selection-changed',self.__clics_view)
-        self.iconView.connect('item-activated', self.__delete_clic) #item-activated 2 clicks //selection-changed 1 click
-
+        #self.iconView.connect('item-activated', self.__delete_clic) #item-activated 2 clicks //selection-changed 1 click
+        self.iconView.connect('selection-changed', self.__clics_view)
+        
         self.bAllClics = self.xml.get_widget('buttonAllClics')
         self.bAllClics.connect('clicked', self.__available_clics_view)
         self.bAllClics.hide()  
         self.bLists = self.xml.get_widget('buttonLists')
-        self.bLists.connect('clicked', self.__lists_clics_view)
-        self.bLists.hide()      
+        self.bLists.connect('clicked', self.__lists_clics_view)     
                          
         self.bPM = self.xml.get_widget('buttonAvaMain')
         self.bPM.connect('clicked', self.__main_view)
@@ -212,6 +212,9 @@ class Manager:
 	    if nou==-1:
                 nou = 0
                 self.__available_clics_view()
+#        if nou==-2:
+#                nou = 0
+#                self.__main_view()
         return True
 
     #Changes the view of the application

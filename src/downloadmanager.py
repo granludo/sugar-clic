@@ -148,7 +148,6 @@ class Download:
         del _dest_to_window[self._target_file.path]
 
 #        view = hulahop.get_view_for_window(dom_window)
-#        print dom_window
 #        self._activity = view.get_toplevel()
         
         return NS_OK
@@ -167,19 +166,18 @@ class Download:
             if NS_FAILED(status): # download cancelled
                 return
 #
-#            self._stop_alert = Alert()
-#            self._stop_alert.props.title = ('Download completed') 
-#            self._stop_alert.props.msg = ('%s' % self._get_file_name()) 
-#
-#            ok_icon = Icon(icon_name='dialog-ok') 
-#            self._stop_alert.add_button(gtk.RESPONSE_OK, _('Ok'), ok_icon) 
-#            ok_icon.show()            
-#            #self._activity.add_alert(self._stop_alert) 
-#            self._stop_alert.connect('response', self.__stop_response_cb)
-#            self._stop_alert.show()
+            self._stop_alert = Alert()
+            self._stop_alert.props.title = ('Download completed') 
+            self._stop_alert.props.msg = ('%s' % self._get_file_name()) 
+
+            ok_icon = Icon(icon_name='dialog-ok') 
+            self._stop_alert.add_button(gtk.RESPONSE_OK, _('Ok'), ok_icon) 
+            ok_icon.show()            
+            #self._activity.add_alert(self._stop_alert) 
+            self._stop_alert.connect('response', self.__stop_response_cb)
+            self._stop_alert.show()
             
-            self.installer.get_clic_info(self._get_file_name())
-            
+            self.installer.get_clic_info(self._get_file_name())      
             
             
 #            self.win = gtk.Window(gtk.WINDOW_TOPLEVEL)
