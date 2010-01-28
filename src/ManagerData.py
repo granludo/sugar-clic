@@ -73,7 +73,7 @@ def add_clics_data(data):
     for item in data:
         icon = item['Icon']
         default = item['Default']
-        if default == '0':
+        if default == 0:
             path = paths.new_clics_path
         else:
             path = paths.clics_path
