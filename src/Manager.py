@@ -61,7 +61,6 @@ class Manager:
         self.clicked = False #is a clic chosen to download?
         self.selected = False #is a clic chosen to play?
         self.start_clic_view = False #is a clic_activity running?
-        self.listView = False #are the user in the list view?
         
         #if runaslib = True -> we are in a Xo laptop
         paths.set_environment(runaslib)
@@ -70,12 +69,8 @@ class Manager:
         views_path = os.path.join(img_app_path, 'appViews')
         icons_path = os.path.join(img_app_path, 'appIcons')
         self.icons_path = icons_path
-#        self.window.connect('delete_event', gtk.main_quit) 
-#        #self.window.set_size_request(800,600)  
-#        # Get Windows child (Vertical Box with the views)
-#        self.w_child = self.window.get_child()  
-#      
-        
+
+#              
         #loading application views
         self.xmlMain = gtk.glade.XML(views_path + '/windowApp.glade')
         #loading window (OLPC has it owns window - not this one)
@@ -141,11 +136,11 @@ class Manager:
         #self.iconView.connect('item-activated', self.__delete_clic) #item-activated 2 clicks //selection-changed 1 click
         self.iconView.connect('selection-changed', self.__clics_view)
         
-        self.bAllClics = self.xml.get_widget('buttonAllClics')
-        self.bAllClics.connect('clicked', self.__available_clics_view)
-        self.bAllClics.hide()  
-        self.bLists = self.xml.get_widget('buttonLists')
-        self.bLists.connect('clicked', self.__lists_clics_view)     
+        self.bClics = self.xml.get_widget('buttonClics')
+        self.bClics.connect('clicked', self.__generate_list)
+        self.currentClicsView = 'Clics'
+
+   
                          
         self.bPM = self.xml.get_widget('buttonAvaMain')
         self.bPM.connect('clicked', self.__main_view)
@@ -161,6 +156,8 @@ class Manager:
         self.xml = gtk.glade.XML(views_path + '/BrowserView.glade') 
         #loading window
         self.windowBrowser = self.xml.get_widget('window')
+        self.bFirstPage = self.xml.get_widget('buttonFirstPage')
+        self.bFirstPage.connect('clicked', self.__search_clics_view_home)
         self.bBM = self.xml.get_widget('buttonHome')
         self.bBM.connect('clicked', self.__main_view)
         self.ImageBr = self.xml.get_widget('imageHome') 
@@ -189,7 +186,6 @@ class Manager:
         # self.widget will be attached to the XO-Activity
         # This can be any GTK widget except a window
         self.widget = self.w_child
-        
 
         #initiate controller
         self.controller = Controller()
@@ -242,10 +238,9 @@ class Manager:
     #View to see the available clics in the computer and select one to play
     def __available_clics_view(self, *args):
         self.labelMy.set_text(_('Select a Clic'))
-        self.listView = False
         self.start_clic_view = False
             
-        self.__refresh_clics_view()
+        self.__refresh_clics_view(True)
                             
         if (self.current_view == self.vboxPlay):
             self.vboxPlay.hide()
@@ -254,21 +249,42 @@ class Manager:
         else :
             self.__change_current_view(self.vboxAvailable)   
             
-    def __lists_clics_view(self, *args):
-        self.labelMy.set_text(_('Clics ordered by different criteria'))
-        lstore = ManagerData.list_clics()
-        self.iconView.set_model(lstore)
-        self.listView = True
+    def __generate_list(self, *args):
+        if self.currentClicsView == 'Clics':
+            self.__remove_clics_view()
+            self.currentClicsView = 'Delete'
+        else:
+            self.__list_clics_view()
+            self.currentClicsView = 'Clics'        
+            
+    #List of clics to play (view)
+    def __list_clics_view(self):
+        self.labelMy.set_text(_('Elige un Clic para jugar'))
+        self.bClics.set_label(_('Borrar Clic'))
+        self.__refresh_clics_view(True)
+
+    #RList of clics to remove (view)
+    def __remove_clics_view(self, *args):
+        self.labelMy.set_text(_('Elige un Clic para eliminarlo'))
+        self.bClics.set_label(_('Lista de Clics'))
+        self.__refresh_clics_view(False)
 
         
     #View that shows the clics (and its activities)
+    #View that delete clics
     def __clics_view(self, *args):
-        #check if the user is in the clic view (not in list-clic view)
-        if self.listView == False:
-            folder, default = ManagerData.get_clic_data(self.iconView)
-            self.controller.load_clic(folder, default)
+        clic, default = ManagerData.get_clic_data(self.iconView)
+        
+        if self.currentClicsView == 'Delete':
+            self.controller.remove_clic(clic)
+            self.__refresh_clics_view(False)
+        else :
+            self.controller.load_clic(clic, default)
             self.vboxPlay.show()
             self.__change_current_view(self.vboxPlay)   
+     
+    def __search_clics_view_home(self, *args):        
+        self.browser.load_uri('http://www.sbennel.es')
             
     #Browser -> find new clics
     def __search_clics_view(self, *args):        
@@ -276,9 +292,7 @@ class Manager:
         self.browser = Browser()
         self.browser.show()
         self.vboxBrowser.add(self.browser)
-        
         self.__change_current_view(self.vboxBrowser)
-        
         self.browser.load_uri('http://www.sbennel.es')
             
     #shows the about view    
@@ -288,7 +302,21 @@ class Manager:
         self.vboxPlay.show()
         self.__change_current_view(self.vboxPlay)           
     
-    #connects the pygtk area with the pygame surface
+           
+    #Initiates the clic 
+    def __play_clic(self):
+        self.controller.play_clic()
+        self.start_clic_view = True
+        
+
+            
+    def __refresh_clics_view(self, default):
+        clics = self.controller.get_installed_clics(default)
+        lstore = ManagerData.add_clics_data(clics)
+        self.iconView.set_model(lstore)
+        ManagerData.put_columns(self.iconView)
+        
+        #connects the pygtk area with the pygame surface
     def __callback(self, *args):
             handle = self.area.window.xid
             os.environ['SDL_WINDOWID'] = str(handle)
@@ -296,29 +324,6 @@ class Manager:
             pygame.display.init()
             pygame.display.set_mode(self.area.size_request())
             self.__play_clic()
-               
-    #Initiates the clic 
-    def __play_clic(self):
-        self.controller.play_clic()
-        self.start_clic_view = True
-        
-    #Remove a clic
-    def __delete_clic(self, *args):
-        print 'delete'
-        #check if the user is in the clic view (not in list-clic view)
-        if self.listView == False:
-            clic, default = ManagerData.get_clic_data(self.iconView)
-        if default == '0':
-            self.controller.remove_clic(clic)
-            self.__refresh_clics_view()
-        else :
-            print 'DEFAULT CLIC'
-            
-    def __refresh_clics_view(self):
-        clics = self.controller.get_installed_clics()
-        lstore = ManagerData.add_clics_data(clics)
-        self.iconView.set_model(lstore)
-        ManagerData.put_columns(self.iconView)
 
 #To execute outside the Xo laptop
 if __name__=="__main__":

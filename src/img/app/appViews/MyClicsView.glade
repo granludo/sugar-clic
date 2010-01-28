@@ -1,66 +1,58 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Wed Jan 27 17:31:03 2010 -->
+<!--Generated with glade3 3.4.5 on Thu Jan 28 19:16:47 2010 -->
 <glade-interface>
   <widget class="GtkWindow" id="window">
     <child>
       <widget class="GtkVBox" id="vboxAvailable">
         <property name="visible">True</property>
         <child>
-          <widget class="GtkHButtonBox" id="hbuttonbox5">
+          <widget class="GtkAlignment" id="alignment1">
             <property name="visible">True</property>
-            <property name="spacing">18</property>
             <child>
-              <widget class="GtkButton" id="buttonAllClics">
+              <widget class="GtkHBox" id="hbox1">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="label" translatable="yes">All Clics</property>
-                <property name="response_id">0</property>
-              </widget>
-              <packing>
-                <property name="expand">False</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="GtkButton" id="buttonLists">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="label" translatable="yes">Lists</property>
-                <property name="response_id">0</property>
-              </widget>
-              <packing>
-                <property name="expand">False</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="GtkLabel" id="labelMyClics">
-                <property name="visible">True</property>
-                <property name="label" translatable="yes">Please, select a Clic</property>
-              </widget>
-              <packing>
-                <property name="position">2</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="GtkButton" id="buttonAvaMain">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="relief">GTK_RELIEF_NONE</property>
-                <property name="response_id">0</property>
                 <child>
-                  <widget class="GtkImage" id="imageHome">
+                  <widget class="GtkButton" id="buttonClics">
                     <property name="visible">True</property>
-                    <property name="stock">gtk-missing-image</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="label" translatable="yes">Borrar Clics</property>
+                    <property name="response_id">0</property>
                   </widget>
+                  <packing>
+                    <property name="expand">False</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkLabel" id="labelMyClics">
+                    <property name="visible">True</property>
+                    <property name="label" translatable="yes">Elige un Clic para jugar</property>
+                  </widget>
+                  <packing>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkButton" id="buttonAvaMain">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="relief">GTK_RELIEF_NONE</property>
+                    <property name="response_id">0</property>
+                    <child>
+                      <widget class="GtkImage" id="imageHome">
+                        <property name="visible">True</property>
+                        <property name="stock">gtk-missing-image</property>
+                      </widget>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="position">2</property>
+                  </packing>
                 </child>
               </widget>
-              <packing>
-                <property name="position">3</property>
-              </packing>
             </child>
           </widget>
           <packing>

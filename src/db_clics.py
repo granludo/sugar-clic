@@ -46,7 +46,7 @@ class DbClics:
         
             
     #Returns a list with all the clics (default and downloaded)          
-    def get_clics(self):  
+    def get_clics(self, default):  
         if not self.loaded :
             self.path_db = paths.db_default #Absolute path of the default.xml (File with information about clics stored in the same app)    
             self.path_db_new = paths.db_downloaded#Absolute path of the downloaded.xml (File with information about clics downloaded from the web)       
@@ -65,17 +65,18 @@ class DbClics:
                     'Default': ''            
                 }
         
-        for file in files.childNodes: 
-            clic = {'Title': file.childNodes[0].childNodes[0].data,
-                    'Author': file.childNodes[1].childNodes[0].data,
-                    'Area': file.childNodes[2].childNodes[0].data,
-                    'Language': file.childNodes[3].childNodes[0].data,
-                    'Folder': file.childNodes[4].childNodes[0].data,
-                    'Icon': self.__getText(file.childNodes[5].childNodes), 
-                    'Default' : '1'              
-                    }
-            l.append(clic)
-            
+        if default == True :            
+            for file in files.childNodes: 
+                clic = {'Title': file.childNodes[0].childNodes[0].data,
+                        'Author': file.childNodes[1].childNodes[0].data,
+                        'Area': file.childNodes[2].childNodes[0].data,
+                        'Language': file.childNodes[3].childNodes[0].data,
+                        'Folder': file.childNodes[4].childNodes[0].data,
+                        'Icon': self.__getText(file.childNodes[5].childNodes), 
+                        'Default' : 1              
+                        }
+                l.append(clic)
+                
         doc = minidom.parse(self.path_db_new)        
         files = doc.childNodes[0]
         
@@ -86,7 +87,7 @@ class DbClics:
                     'Language': file.childNodes[3].childNodes[0].data,
                     'Folder': file.childNodes[4].childNodes[0].data,
                     'Icon': self.__getText(file.childNodes[5].childNodes),
-                    'Default' : '0'               
+                    'Default' : 0              
                     }
             l.append(clic)
         

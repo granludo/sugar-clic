@@ -69,8 +69,8 @@ class Controller:
         self.db.insert_clic(clic)
     
     #returns a list of installed clics
-    def get_installed_clics(self):
-        return self.db.get_clics()
+    def get_installed_clics(self, default):
+        return self.db.get_clics(default)
     
     def load_about(self):
         sequence, media, settings = self.mh.get_clic_info(paths.about_path, 'sugar_clic_help')
