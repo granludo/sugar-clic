@@ -237,7 +237,6 @@ class Manager:
         
     #View to see the available clics in the computer and select one to play
     def __available_clics_view(self, *args):
-        self.labelMy.set_text(_('Select a Clic'))
         self.start_clic_view = False
             
         self.__refresh_clics_view(True)
