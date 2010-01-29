@@ -36,6 +36,7 @@ class ContentCell(object):
     id = None
     border = True
     letter= ''
+    audio = None
     
     
 
