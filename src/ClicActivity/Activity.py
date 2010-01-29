@@ -105,6 +105,21 @@ class Activity(object):
             return text
         except:
             return ""
+
+        def getFinishMessageAudio(self):
+            try:
+                cells = self.xmlActivity.getElementsByTagName('messages')[0]
+                cells = cells.getElementsByTagName('cell')
+                for cell in cells:
+                    if cell.getAttribute('type')  == 'final':
+                        audio = cell.getElementsByTagName('media')
+                        if audio.getAttribute('type')=='PLAY_AUDIO':
+                            return audio.getAttribute('file')
+                return ""
+            except:
+                return ""
+
+
     def getInitMessage(self):
         '''Recuperamos mensaje de  fin partida'''
         try:
@@ -114,6 +129,19 @@ class Activity(object):
                 if cell.getAttribute('type')  == 'initial':
                     text = cell.getElementsByTagName('p')[0].firstChild.nodeValue
                     return text
+        except:
+            return ""
+
+    def getInitMessageAudio(self):
+        try:
+            cells = self.xmlActivity.getElementsByTagName('messages')[0]
+            cells = cells.getElementsByTagName('cell')
+            for cell in cells:
+                if cell.getAttribute('type')  == 'initial':
+                    audio = cell.getElementsByTagName('media')
+                    if audio.getAttribute('type')=='PLAY_AUDIO':
+                        return audio.getAttribute('file')
+            return ""
         except:
             return ""
         
@@ -128,7 +156,13 @@ class Activity(object):
     
         ''' Image in cell'''
         try:
-            pathImage =xmlcell2.getAttribute('image')  
+            pathImage =xmlcell2.getAttribute('image')
+            #audio = xmlcell2.getElementByName('media')
+
+            #if audio != None and audio.getAttribute('type') == 'PLAY_AUDIO':
+            #    audioPath = audio.getAttribute('file')
+            #    cell.contentCell.audio = audioPath
+
             imagePath = self.pathToMedia+'/'+pathImage
     
             newImg = pygame.image.load(imagePath).convert_alpha()
@@ -219,7 +253,7 @@ class Activity(object):
             else: 
                 lines.append(line) 
                 line = word + ' ' 
-            lines.append(line)
+        lines.append(line)
 
         acum_heigth = 8
 
@@ -245,4 +279,4 @@ class Activity(object):
             except:
                 print "No se pudo cargar el sonido:", fullname
                 raise SystemExit, message
-
+            
