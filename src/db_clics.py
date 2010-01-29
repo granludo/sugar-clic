@@ -100,45 +100,48 @@ class DbClics:
             self.path_db_new = paths.db_downloaded#Absolute path of the downloaded.xml (File with information about clics downloaded from the web)       
             self.__load_db()
             self.loaded = True
+            
+        if ( self.__is_already_installed(clic['Folder']) == True):
+            self.remove_clic_from_db(clic['Folder'])
         
         doc = minidom.parse(self.path_db_new)
         wml = doc.childNodes[0]
-            
+                
         #Create the main <card> element
         element = doc.createElement('file')
         wml.appendChild(element)
-    
+        
         #Add the new file
         title = doc.createElement('title')
         element.appendChild(title)
         nodeTitle = doc.createTextNode(clic['Title'])
         title.appendChild(nodeTitle)
-            
+                
         author = doc.createElement('author')
         element.appendChild(author)
         ptext = doc.createTextNode(clic['Author'])
         author.appendChild(ptext)
-                    
+                        
         area = doc.createElement('area')
         element.appendChild(area)
         ptext = doc.createTextNode(clic['Area'])
         area.appendChild(ptext)
-                    
+                        
         language = doc.createElement('language')
         element.appendChild(language)
         ptext = doc.createTextNode(clic['Language'])
         language.appendChild(ptext)
-                    
+                        
         fileName = doc.createElement('file_name')
         element.appendChild(fileName)
         nodeFile = doc.createTextNode(clic['Folder'])
         fileName.appendChild(nodeFile)
-        
+            
         iconName = doc.createElement('icon_name')
         element.appendChild(iconName)
         nodeIcon = doc.createTextNode(clic['Icon'])
         iconName.appendChild(nodeIcon)
-            
+                
         file = doc.toxml()
         f = open(self.path_db_new, 'w')
         f.write(file)
@@ -183,6 +186,34 @@ class DbClics:
         f = open(self.path_db_new, 'w')
         f.write(d)
         f.close()
+        
+    
+    def __is_already_installed(self, folder):
+        if not self.loaded :
+            self.path_db = paths.db_default #Absolute path of the default.xml (File with information about clics stored in the same app)    
+            self.path_db_new = paths.db_downloaded#Absolute path of the downloaded.xml (File with information about clics downloaded from the web)       
+            self.__load_db()
+            self.loaded = True 
+            
+        doc = minidom.parse(self.path_db_new)        
+        files = doc.childNodes[0]
+        
+        for file in files.childNodes: 
+            print file.childNodes[4].childNodes[0].data
+            print folder
+            if file.childNodes[4].childNodes[0].data == folder:
+                return True
+                
+        doc = minidom.parse(self.path_db)        
+        files = doc.childNodes[0]
+        
+        for file in files.childNodes: 
+            print file.childNodes[4].childNodes[0].data
+            print folder
+            if file.childNodes[4].childNodes[0].data == folder:
+                return True 
+            
+        return False
 
         
 #        for nodeList in files.childNodes:  

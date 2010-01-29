@@ -238,7 +238,10 @@ class Manager:
     #View to see the available clics in the computer and select one to play
     def __available_clics_view(self, *args):
         self.start_clic_view = False
-            
+        self.currentClicsView = 'Clics'  
+        self.labelMy.set_text(_('Elige un Clic para jugar'))
+        self.bClics.set_label(_('Borrar Clic'))
+        
         self.__refresh_clics_view(True)
                             
         if (self.current_view == self.vboxPlay):
@@ -307,15 +310,14 @@ class Manager:
         self.controller.play_clic()
         self.start_clic_view = True
         
-
-            
+    #Update clics view      
     def __refresh_clics_view(self, default):
         clics = self.controller.get_installed_clics(default)
         lstore = ManagerData.add_clics_data(clics)
         self.iconView.set_model(lstore)
         ManagerData.put_columns(self.iconView)
         
-        #connects the pygtk area with the pygame surface
+    #connects the pygtk area with the pygame surface
     def __callback(self, *args):
             handle = self.area.window.xid
             os.environ['SDL_WINDOWID'] = str(handle)

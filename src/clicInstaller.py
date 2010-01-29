@@ -136,7 +136,7 @@ class Installer:
                 
             t = os.system('wget -q ' + urls_to_download[i] + ' --directory-prefix=' + self.clics_path )    
             if t == 0:
-                t = os.system('unzip '+ self.clics_path + '/'+ file + ' -d ' + self.clics_path + '/' + folder)            
+                t = os.system('unzip -o '+ self.clics_path + '/'+ file + ' -d ' + self.clics_path + '/' + folder)            
                 if t == 0:
                     os.remove(self.clics_path + '/' + file)
                     if t == 0:

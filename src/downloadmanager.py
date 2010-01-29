@@ -37,7 +37,7 @@ from sugar.graphics.alert import Alert, TimeoutAlert
 from sugar.graphics.icon import Icon
 from sugar.activity import activity
 import paths
-from clicInstaller import Installer
+import controller
 #import progressbar
 
 # #3903 - this constant can be removed and assumed to be 1 when dbus-python
@@ -142,8 +142,6 @@ class Download:
         self._last_update_percent = 0
         self._stop_alert = None
         
-        self.installer = Installer()
-
         dom_window = _dest_to_window[self._target_file.path]
         del _dest_to_window[self._target_file.path]
 
@@ -177,8 +175,18 @@ class Download:
             self._stop_alert.connect('response', self.__stop_response_cb)
             self._stop_alert.show()
             
-            self.installer.get_clic_info(self._get_file_name())      
+            self.controller = controller.Controller()
+            self.controller.install_new_clic(self._get_file_name())      
             
+            img_app_path = os.path.join(paths.application_bundle_path, 'img/app') 
+            views_path = os.path.join(img_app_path, 'appViews')
+            self.xml = gtk.glade.XML(views_path + '/DownloadingInfo.glade')
+
+            self.button = self.xml.get_widget('button')
+
+            self.button.connect('clicked', self.__destroy_win)
+            self.dialog = self.xml.get_widget('dialog')
+            self.dialog.show()
             
 #            self.win = gtk.Window(gtk.WINDOW_TOPLEVEL)
 #            self.win.set_size_request(175,50)
@@ -189,7 +197,7 @@ class Download:
 #            self.win.show()
 
     def __destroy_win(self, *args):
-        self.win.destroy()
+        self.dialog.destroy()
 
     def __start_response_cb(self, alert, response_id):
         global _active_downloads

@@ -53,13 +53,13 @@ class Controller:
     __seq = Sequencer()
     __db = DbClics()
     __mh = ClicParser() 
-    __ins = Installer()
+    __installer = Installer()
     
     def __init__(self):
         self.db = self.__db
         self.seq = self.__seq
         self.mh = self.__mh
-        self.ins = self.__ins
+        self.installer = self.__installer
         
     #adds new clic to db list
     def add_new_clic(self, clic):
@@ -94,5 +94,9 @@ class Controller:
     #remove clic
     def remove_clic(self, clic):
         self.db.remove_clic_from_db(clic)
-        self.ins.delete_clic_folder(clic)
+        self.installer.delete_clic_folder(clic)
+    
+    #installs a new clic
+    def install_new_clic(self, name):
+        self.installer.get_clic_info(name) 
 
