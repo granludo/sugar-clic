@@ -33,19 +33,23 @@
 
 
 
-MAX_WIDTH = 1000
-MAX_HEIGHT = 750 #825
+MAX_WIDTH = 1200
+MAX_HEIGHT = 900 #825
 MARGIN_TOP = 20
 MARGIN_BOTTOM = 75
 MARGIN_LEFT = 20
-MARGIN_RIGHT = 20
-ACTIVITY_WIDTH = MAX_WIDTH -MARGIN_RIGHT - MARGIN_RIGHT
+MARGIN_RIGHT = 220
+ACTIVITY_WIDTH = MAX_WIDTH -MARGIN_RIGHT - MARGIN_LEFT - 20
 ACTIVITY_HEIGHT= MAX_HEIGHT  -MARGIN_BOTTOM -MARGIN_TOP
 colorCell = (0,0,0)
 colorPressedCell =(255,127,36)
 colorBorder = (255,127,36)
 colorBorderDark = ( 92,51,23)
 colorBackground = (171,171,171)
+
+colorGroc = (255,12*15,0)
+colorLila = (102,44,146)
+#colorVermellSolta(,,)
 
 colorWhite = (255,255,255)
 colorBlack = (0,0,0)
@@ -55,7 +59,11 @@ colorMessage = (171,171,171)
 DEFAULT_BORDER_SIZE = 3
 class Images:
     CURSOR = "img/standardcursor.xbm"
-    NEXT = "img/next.png"
-    PREV = "img/prev.png"
-    HOME = "img/home2.png"
+    NEXT = "img/siguiente.png"
+    PREV = "img/anterior.png"
+    FIRST = "img/primero.png"
+    LAST = "img/ultimo.png"
+    RETRY = "img/reiniciar.png"
+    HOME = "img/misclics.png"
+    LOGO = "img/logotipo6.png"
     
