@@ -31,7 +31,6 @@
     @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 '''
 from db_clics import DbClics
-from ws_handler import WSHandler
 from module_handler import ClicParser 
 from sequencer import Sequencer
 from clicInstaller import Installer
@@ -53,14 +52,12 @@ class Controller:
     #c = controller.Controller()
     __seq = Sequencer()
     __db = DbClics()
-    __ws = WSHandler()
     __mh = ClicParser() 
     __ins = Installer()
     
     def __init__(self):
         self.db = self.__db
         self.seq = self.__seq
-        self.ws = self.__ws
         self.mh = self.__mh
         self.ins = self.__ins
         
