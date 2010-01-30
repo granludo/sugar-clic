@@ -272,32 +272,8 @@ class Activity(object):
                 surface.blit(tempsurface, ((rect.width - tempsurface.get_width()) / 2, accumulated_height))
                 
             accumulated_height += font.size(line)[1]
-    
-    '''
-    def renderText(self,text,rect,font,surf,colour):
-        lines = []
-        line = ''
-        words = text.split(' ')
 
-        for word in words:
-            test_line = line + word + ' '
-            # Build the line while the words fit.
-            if font.size(test_line)[0] < rect.width:
-                line = test_line 
-            else: 
-                lines.append(line) 
-                line = word + ' ' 
-        lines.append(line)
 
-        acum_heigth = 8
-
-        for line in lines:
-            if line != "":
-                textline = font.render(line,1,colour)
-                surf.blit(textline,(8,acum_heigth))
-
-            acum_heigth += font.size(line)[1]
-            '''
     def play_sound(self):
         pygame.mixer.pre_init(44100,-16,2, 1024 * 3)
         if pygame.mixer.get_init():
