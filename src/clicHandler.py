@@ -121,9 +121,8 @@ class ClicActivities:
             
             if self.dialog.isOverActivity(pointMouse):
                 self.activityInUse.OnEvent((pointMouse.getX(),pointMouse.getY()))
-        
+                
             self.activityInUse.OnRender( self.activity_surf)
-            
             
             '''EXTRA:  if activity end, then print the end message '''
             if self.activityInUse.isGameFinished():

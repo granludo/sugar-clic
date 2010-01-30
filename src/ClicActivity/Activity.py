@@ -175,22 +175,14 @@ class Activity(object):
         '''Text in cell'''
         try:
             elementP = xmlcell2.getElementsByTagName('p')
-            if elementP.length !=0:
-                texto = elementP[0].firstChild.nodeValue
-                font = pygame.font.Font(None, styleCell.fontSize)
-                #text = font.render(texto, True, styleCell.foregroundColor)
-                
-                '''Center text  -- horitzontal/vertical'''
-                try:
-                    '''TODO'''
-                    '''Center cell...'''
-                    centerPosition = (20,20)
-                except:
-                    '''Not centered'''
-                    centerPosition = (0,0)
+            texto = ''
+            for element in elementP:
+                texto = texto + element.firstChild.nodeValue + '\n'
             
-                '''Blit text'''
-                self.renderText(texto,cell.Rect,font,cell.contentCell.img,cell.actualColorCell)
+            font = pygame.font.Font(None, styleCell.fontSize)
+            
+            '''Blit text'''
+            self.renderText(texto,cell.Rect,font,cell.contentCell.img,cell.actualColorCell,(20,20))
     
             
             ''' Border in cell'''
@@ -214,17 +206,13 @@ class Activity(object):
             font = pygame.font.Font(None, styleCell.fontSize)
             #text = font.render(texto, True, styleCell.foregroundColor)
             
-            '''Center text  -- horitzontal/vertical'''
-            try:
-                '''TODO'''
-                '''Center cell...'''
-                centerPosition = (20,20)
-            except:
-                '''Not centered'''
-                centerPosition = (0,0)
-        
+            if float(xmlcell.getAttribute('cellWidth')) > 20.0:
+                position = (8,8)
+            else:
+                position = (4,4)
+
             '''Blit text'''
-            self.renderText(texto,cell.Rect,font,cell.contentCell.img,letterColour)
+            self.renderText(texto,cell.Rect,font,cell.contentCell.img,letterColour,position)
         except:
             pass
         '''Border in cell'''
@@ -240,6 +228,52 @@ class Activity(object):
             coef = coefHeight
         return coef
     
+    
+    def renderText(self,text,rect,font,surface,colour,pos):
+        print 'entra en rendertext'
+        final_lines = []
+    
+        requested_lines = text.splitlines()
+    
+        # Create a series of lines that will fit on the provided
+        # rectangle.
+    
+        for requested_line in requested_lines:
+            if font.size(requested_line)[0] > rect.width:
+                words = requested_line.split(' ')
+                # if any of our words are too long to fit, return.
+                for word in words:
+                    if font.size(word)[0] >= rect.width:
+                        raise TextRectException, "The word " + word + " is too long to fit in the rect passed."
+                # Start a new line
+                accumulated_line = ""
+                for word in words:
+                    test_line = accumulated_line + word + " "
+                    # Build the line while the words fit.    
+                    if font.size(test_line)[0] < rect.width:
+                        accumulated_line = test_line 
+                    else: 
+                        final_lines.append(accumulated_line) 
+                        accumulated_line = word + " " 
+                final_lines.append(accumulated_line)
+            else: 
+                final_lines.append(requested_line) 
+    
+        # Let's try to write the text out on the surface.
+    
+        #surf = pygame.Surface(rect.size) 
+    
+        accumulated_height = pos[1]
+        for line in final_lines: 
+            if accumulated_height + font.size(line)[1] >= rect.height:
+                raise TextRectException, "Once word-wrapped, the text string was too tall to fit in the rect."
+            if line != "":
+                tempsurface = font.render(line, 1, colour)
+                surface.blit(tempsurface, ((rect.width - tempsurface.get_width()) / 2, accumulated_height))
+                
+            accumulated_height += font.size(line)[1]
+    
+    '''
     def renderText(self,text,rect,font,surf,colour):
         lines = []
         line = ''
@@ -263,7 +297,7 @@ class Activity(object):
                 surf.blit(textline,(8,acum_heigth))
 
             acum_heigth += font.size(line)[1]
-
+            '''
     def play_sound(self):
         pygame.mixer.pre_init(44100,-16,2, 1024 * 3)
         if pygame.mixer.get_init():
