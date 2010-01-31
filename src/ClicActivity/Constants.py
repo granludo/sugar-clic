@@ -39,7 +39,7 @@ MARGIN_TOP = 20
 MARGIN_BOTTOM = 75
 MARGIN_LEFT = 20
 MARGIN_RIGHT = 220
-ACTIVITY_WIDTH = MAX_WIDTH -MARGIN_RIGHT - MARGIN_LEFT - 20
+ACTIVITY_WIDTH = MAX_WIDTH -MARGIN_RIGHT - MARGIN_LEFT
 ACTIVITY_HEIGHT= MAX_HEIGHT  -MARGIN_BOTTOM -MARGIN_TOP
 colorCell = (0,0,0)
 colorPressedCell =(255,127,36)
@@ -56,6 +56,9 @@ colorBlack = (0,0,0)
 colorDefault= (42,42,42)
 colorMessage = (171,171,171)
 
+widthCross = 50 #Ample de la cell de la orientacio al crossword
+minFontSize = 20
+
 DEFAULT_BORDER_SIZE = 3
 class Images:
     CURSOR = "img/standardcursor.xbm"
@@ -66,4 +69,6 @@ class Images:
     RETRY = "img/reiniciar.png"
     HOME = "img/misclics.png"
     LOGO = "img/logotipo6.png"
+    ACROSS = "img/across.png"
+    DOWN = "img/down.png"
     
