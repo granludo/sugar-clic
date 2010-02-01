@@ -71,8 +71,8 @@ class ClicActivities:
         self.dialog.renderDialog(self.screen)
         
         '''HardCodded:creating the subsurface for ACTIVITIES'''
-        weidth = Constants.ACTIVITY_WIDTH + 20
-        height = Constants.ACTIVITY_HEIGHT
+        weidth = Constants.MAX_WIDTH-220
+        height = Constants.MAX_HEIGHT-(60)
 
         rectborder= Rect(0,0,weidth,height)
         self.activity_surf = self.screen.subsurface(rectborder)
@@ -89,6 +89,10 @@ class ClicActivities:
             self.activityInUse.pathToMedia = self.path_to_clic
             self.activityInUse.Load(self.activity_surf)
             self.dialog.printMessage(self.screen,self.activityInUse.getInitMessage())
+            #audio = self.activityInUse.getInitMessageAudio()
+            #if audio!="":
+            #    self.activityInUse.play_sound(audio)
+            #aqui s'hauria de reproduir l'audio del principi
         
         else: 
             ''' this case never ocurss.. teorically... heheheh'''
@@ -119,6 +123,18 @@ class ClicActivities:
             if self.dialog.isOverPreviousButton(pointMouse):
                 return -3
 
+            #Retornem -4 tractant l'activitat primera
+            if self.dialog.isOverFirstButton(pointMouse):
+                return -4
+
+            #Retornem -5 tractant l'activitat ultima
+            if self.dialog.isOverLastButton(pointMouse):
+                return -5
+
+            #Retornem -6 tractant el reinici de l'activitat
+            if self.dialog.isOverRetryButton(pointMouse):
+                return -6
+
             #Retornem -1 perque es tracti al clic_player per tornar a comensar
             if self.dialog.isOverChangeClicButton(pointMouse):
                 return -1
@@ -142,6 +158,10 @@ class ClicActivities:
             '''EXTRA:  if activity end, then print the end message '''
             if self.activityInUse.isGameFinished():
                  self.dialog.printMessage(self.screen,self.activityInUse.getFinishMessage())
+            #     audio = self.activityInUse.getFinishMessageAudio()
+            #     if audio!="":
+            #        self.activityInUse.play_sound(audio)
+                 #Aqui s'hauria de reproduir l'audio del final
                 
             
         return 0
