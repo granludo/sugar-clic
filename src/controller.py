@@ -31,7 +31,7 @@
     @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 '''
 from db_clics import DbClics
-from module_handler import ClicParser 
+from clicParser import Parser 
 from sequencer import Sequencer
 from clicInstaller import Installer
 import paths
@@ -50,15 +50,15 @@ class Controller:
     #after the first call, do:
     #import controller
     #c = controller.Controller()
-    __seq = Sequencer()
+    __sequencer = Sequencer()
     __db = DbClics()
-    __mh = ClicParser() 
+    __parser = Parser() 
     __installer = Installer()
     
     def __init__(self):
         self.db = self.__db
-        self.seq = self.__seq
-        self.mh = self.__mh
+        self.sequencer = self.__sequencer
+        self.parser = self.__parser
         self.installer = self.__installer
         
     #adds new clic to db list
@@ -70,26 +70,26 @@ class Controller:
         return self.db.get_clics(default)
     
     def load_about(self):
-        sequence, media, settings = self.mh.get_clic_info(paths.about_path, 'sugar_clic_help')
-        self.seq.begin_sequence(sequence, media, settings, paths.about_path, 'sugar_clic_help')       
+        sequence, media, settings = self.parser.get_clic_info(paths.about_path, 'sugar_clic_help')
+        self.sequencer.begin_sequence(sequence, media, settings, paths.about_path, 'sugar_clic_help')       
 
     #initialize all the structure information to play the clic
     def load_clic(self, clic_name, is_default):
         clic_path = paths.get_clic_path(clic_name, is_default)
-        sequence, media, settings = self.mh.get_clic_info(clic_path, clic_name)
-        self.seq.begin_sequence(sequence, media, settings, clic_path,clic_name)
+        sequence, media, settings = self.parser.get_clic_info(clic_path, clic_name)
+        self.sequencer.begin_sequence(sequence, media, settings, clic_path,clic_name)
     
     #returns all the xml code related with this clic_activity
     def get_clic_activity(self, activity_name):
-        return self.mh.get_clic_activity(activity_name)
+        return self.parser.get_clic_activity(activity_name)
     
     #calls the activity_clic and returns new information about it
     def updating_activity(self):
-        return self.seq.activity_clic_information()
+        return self.sequencer.activity_clic_information()
     
     #plays the clic and starts the first activity of the clic
     def play_clic(self):
-        self.seq.play()
+        self.sequencer.play()
         
     #remove clic
     def remove_clic(self, clic):

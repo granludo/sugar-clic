@@ -208,7 +208,7 @@ class Manager:
             if (nou == -1):
                 nou = 0
                 self.__available_clics_view()
-            if (nou == -6):
+            if (nou == -7):
                 nou = 0
                 self.__main_view()    
         return True

@@ -34,7 +34,7 @@ import pygame
 import random
 
 import controller
-from clicHandler import ClicActivities
+from clicActivitiesHandler import ClicActivities
 
 
 class Sequencer:
@@ -68,7 +68,8 @@ class Sequencer:
     # -3 : go to the previous Activity
     # -4 : go to the first Activity
     # -5 : go to the last Activity
-    # -6 : go back to the Main View of the application
+    # -6 : restart the current Activity
+    # -7 : go back to the Main View of the application
     def activity_clic_information(self):
         # Pygame updating
         if not self.exit:
@@ -100,21 +101,28 @@ class Sequencer:
                         
                 #First activity of the sequence
                 if (resultat == -4) :
-                    clic_activity = self.controller.get_clic_activity(self.activities[0]) #gets the first activity(tag) of the sequence
+                    self.index = 0
+                    clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the first activity(tag) of the sequence
                     if self.act_handler.canExecuteActivity(clic_activity):
                         self.act_handler.start_activity(clic_activity, self.screen)#initiate activity view
                         break
                       
                 #Last activity of the sequence  
                 if (resultat == -5) :
-                    clic_activity = self.controller.get_clic_activity(self.activities[self.size-1]) #gets the first activity(tag) of the sequence
+                    self.index = size - 1
+                    clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the first activity(tag) of the sequence
                     if self.act_handler.canExecuteActivity(clic_activity):
                         self.act_handler.start_activity(clic_activity, self.screen)#initiate activity view
                         break         
                     
-                #Return -6 to go to the main view of the application
-                if (resultat == -6) :           
-                    return -6
+                #Restart the current activity
+                if (resultat == -6) :
+                    self.act_handler.start_activity(clic_activity, self.screen)#initiate activity view
+                    break   
+                    
+                #Return -7 to go to the main view of the application
+                if (resultat == -7) :           
+                    return -7
             
                 #Return -1 to see available clics
                 if(resultat == -1):
