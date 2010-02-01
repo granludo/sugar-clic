@@ -62,6 +62,13 @@ class Sequencer:
     
     #function called all the time to refresh the screen and the activity
     #also returns activity information
+    #return values:
+    # -1 : go back to MyClics View of the application
+    # -2 : go to the next Activity
+    # -3 : go to the previous Activity
+    # -4 : go to the first Activity
+    # -5 : go to the last Activity
+    # -6 : go back to the Main View of the application
     def activity_clic_information(self):
         # Pygame updating
         if not self.exit:
@@ -90,9 +97,26 @@ class Sequencer:
                         if self.act_handler.canExecuteActivity(clic_activity):
                             self.act_handler.start_activity(clic_activity, self.screen)#initiate activity view
                             break
+                        
+                #First activity of the sequence
+                if (resultat == -4) :
+                    clic_activity = self.controller.get_clic_activity(self.activities[0]) #gets the first activity(tag) of the sequence
+                    if self.act_handler.canExecuteActivity(clic_activity):
+                        self.act_handler.start_activity(clic_activity, self.screen)#initiate activity view
+                        break
+                      
+                #Last activity of the sequence  
+                if (resultat == -5) :
+                    clic_activity = self.controller.get_clic_activity(self.activities[self.size-1]) #gets the first activity(tag) of the sequence
+                    if self.act_handler.canExecuteActivity(clic_activity):
+                        self.act_handler.start_activity(clic_activity, self.screen)#initiate activity view
+                        break         
+                    
+                #Return -6 to go to the main view of the application
+                if (resultat == -6) :           
+                    return -6
             
-            
-                #Return -1 to see available clics, controled in clic_player.py
+                #Return -1 to see available clics
                 if(resultat == -1):
                     return -1            
     
