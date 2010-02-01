@@ -109,7 +109,7 @@ class Sequencer:
                       
                 #Last activity of the sequence  
                 if (resultat == -5) :
-                    self.index = size - 1
+                    self.index = self.size - 1
                     clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the first activity(tag) of the sequence
                     if self.act_handler.canExecuteActivity(clic_activity):
                         self.act_handler.start_activity(clic_activity, self.screen)#initiate activity view
@@ -117,6 +117,7 @@ class Sequencer:
                     
                 #Restart the current activity
                 if (resultat == -6) :
+                    clic_activity = self.controller.get_clic_activity(self.activities[self.index])
                     self.act_handler.start_activity(clic_activity, self.screen)#initiate activity view
                     break   
                     
