@@ -163,9 +163,10 @@ class MemoryGame(Activity):
                                 
     
                                 self.PressedCell = None
+                                self.play_sound(Constants.Sounds.OK)
                             #los dos son diferentes..
                         else:
-                            
+                            self.play_sound(Constants.Sounds.ERROR)
                             self.changeSecondImage(self.PressedCell)
 
                             self.PressedCell.actualColorCell = Constants.colorCell

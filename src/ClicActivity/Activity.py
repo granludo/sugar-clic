@@ -274,18 +274,17 @@ class Activity(object):
             accumulated_height += font.size(line)[1]
 
 
-    def play_sound(self):
-        pygame.mixer.pre_init(44100,-16,2, 1024 * 3)
+    def play_sound(self,filename):
+        #pygame.mixer.pre_init(44100,-16,2, 1024)
         if pygame.mixer.get_init():
             try:
                 print "hola"
-                music = os.path.join('data','clics','conill', '4.wav')
-                print music
-                '''pygame.mixer.music.load("/home/roger/Escriptori/PFC(2)/PFC/newJclic/media/moc.mp3")'''
-                sound = pygame.mixer.Sound("/home/roger/Escriptori/monkeystomp/data/jump.wav")
-                sound.set_volume(1)
-                print sound.get_length()
-                sound.play()
+                #music = os.path.join('data','clics','conill', '4.wav')
+                #print music
+                #pygame.mixer.music.load("/home/roger/NetBeansProjects/sugarhg/src/sounds/action_ok.mp3")
+                pygame.mixer.music.load(filename)
+                #sound = pygame.mixer.Sound("/home/roger/Escriptori/monkeystomp/data/jump.wav")
+                pygame.mixer.music.play()
             except:
                 print "No se pudo cargar el sonido:", fullname
                 raise SystemExit, message

@@ -122,6 +122,9 @@ class IdentifyPanels(Activity):
                     if cell.contentCell.id == 1:
                         cell.contentCell.img = self.Grid2.Cells[cell.idCell].contentCell.img
                         cell.contentCell.id = -1
+                        self.play_sound(Constants.Sounds.OK)
+                else:
+                        self.play_sound(Constants.Sounds.ERROR)
 
                         '''pygame.mixer.music.play()'''
                             
