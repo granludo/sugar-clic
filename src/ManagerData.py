@@ -39,11 +39,9 @@ from gettext import gettext as _
 COL_PATH = 0
 COL_PIXBUF = 1
 
-def get_icon(name):
+def __get_icon(name):
     theme = gtk.icon_theme_get_default()
     return theme.load_icon(name, 100, 0)
-
-
 
 #generate order lists
 def list_clics():
@@ -69,7 +67,7 @@ def add_clics_data(data):
     lstore.set_sort_column_id(COL_PATH, gtk.SORT_ASCENDING)
     lstore.clear()
 
-    defaultIcon = get_icon(gtk.STOCK_OPEN)
+    defaultIcon = __get_icon(gtk.STOCK_OPEN)
     for item in data:
         icon = item['Icon']
         default = item['Default']
@@ -82,15 +80,7 @@ def add_clics_data(data):
             Icon = gtk.gdk.pixbuf_new_from_file_at_size(path + '/' + item['Folder'] + '/' + item['Icon'] , 100, 100)
         else :
             Icon = defaultIcon
-            
-            
-#        iter = lstore.append()
-#        lstore.set(iter,
-#            COLUMN_TITLE, item['Title'],
-#            COLUMN_AUTHOR, item['Author'],
-#            COLUMN_AREA, item['Area'],
-#            COLUMN_LANGUAGE, item['Language'],
-#            COLUMN_FILE, item['Folder'])
+
         lstore.append([item['Title'], Icon , item['Folder'], item['Default'], item['Area'], item['Language'], item['Author']])
     return lstore
 
@@ -124,12 +114,6 @@ def put_columns(iconView):
 def get_clic_data(iconview):
     pos =  iconview.get_cursor()[0][0]
     iter = iconview.get_model().get_iter(pos)
-#    clic = {'Title': tree.get_model().get_value(iter,0),
-#            'Author': tree.get_model().get_value(iter,1),
-#            'Area': tree.get_model().get_value(iter,2),
-#            'Language': tree.get_model().get_value(iter,3),
-#            'Folder': tree.get_model().get_value(iter,4)                   
-#            }
     folder = iconview.get_model().get_value(iter, 2)
     is_default = iconview.get_model().get_value(iter, 3)
     return folder, is_default

@@ -204,13 +204,13 @@ class Manager:
     #calls the clic infinite times (until the clic ends) 
     def updating(self):        
         if self.start_clic_view:
-            nou = self.controller.updating_activity()    
-	    if nou==-1:
+            nou = self.controller.updating_activity()
+            if (nou == -1):
                 nou = 0
                 self.__available_clics_view()
-#        if nou==-2:
-#                nou = 0
-#                self.__main_view()
+            if (nou == -6):
+                nou = 0
+                self.__main_view()    
         return True
 
     #Changes the view of the application
