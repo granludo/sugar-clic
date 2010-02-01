@@ -71,4 +71,9 @@ class Images:
     LOGO = "img/logotipo6.png"
     ACROSS = "img/across.png"
     DOWN = "img/down.png"
+
+class Sounds:
+    OK = "sounds/action_ok.mp3"
+    ERROR = "sounds/action_error.mp3"
+    CLICK = "sounds/click.mp3"
     
