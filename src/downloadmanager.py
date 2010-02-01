@@ -98,15 +98,6 @@ class HelperAppLauncherDialog:
             temp_path = paths.application_data_path
             file_path = (temp_path + '/' + default_file)
             dest_file.initWithPath(file_path)
-                
-        
-#        temp_path = os.path.join('/home/niobst/Desktop', 'instance')
-#        temp_path = os.path.join(activity.get_activity_root(), 'instance')
-#        if not os.path.exists(temp_path):
-#            os.makedirs(temp_path)
-#        fd, file_path = tempfile.mkstemp(dir=temp_path, prefix=base_name, suffix=extension)
-#        os.close(fd)
-#        os.chmod(file_path, 0644)
 
             requestor = window_context.queryInterface(interfaces.nsIInterfaceRequestor)
             dom_window = requestor.getInterface(interfaces.nsIDOMWindow)
@@ -178,26 +169,16 @@ class Download:
             self.controller = controller.Controller()
             self.controller.install_new_clic(self._get_file_name())      
             
-            img_app_path = os.path.join(paths.application_bundle_path, 'img/app') 
-            views_path = os.path.join(img_app_path, 'appViews')
-            self.xml = gtk.glade.XML(views_path + '/DownloadingInfo.glade')
-
-            self.button = self.xml.get_widget('button')
-
+            self.win = gtk.Window(gtk.WINDOW_TOPLEVEL)
+            self.win.set_size_request(175,50)
+            self.button = gtk.Button("Download Finished (OK)")
             self.button.connect('clicked', self.__destroy_win)
-            self.dialog = self.xml.get_widget('dialog')
-            self.dialog.show()
-            
-#            self.win = gtk.Window(gtk.WINDOW_TOPLEVEL)
-#            self.win.set_size_request(175,50)
-#            self.button = gtk.Button("Download Finished (OK)")
-#            self.button.connect('clicked', self.__destroy_win)
-#            self.button.show()
-#            self.win.add(self.button)
-#            self.win.show()
+            self.button.show()
+            self.win.add(self.button)
+            self.win.show()
 
     def __destroy_win(self, *args):
-        self.dialog.destroy()
+        self.win.destroy()
 
     def __start_response_cb(self, alert, response_id):
         global _active_downloads
