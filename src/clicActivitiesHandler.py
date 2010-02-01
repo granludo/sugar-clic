@@ -46,6 +46,7 @@ from ClicActivity.GeneralDialog import GeneralDialog
 from ClicActivity.SimpleAssociation import SimpleAssociation
 from ClicActivity.ComplexAssociation import ComplexAssociation
 from ClicActivity.WordSearch import WordSearch
+#from ClicActivity.CrossWord import CrossWord
 from ClicActivity import Constants
 
 
@@ -70,8 +71,9 @@ class ClicActivities:
         self.dialog.renderDialog(self.screen)
         
         '''HardCodded:creating the subsurface for ACTIVITIES'''
-        weidth = Constants.MAX_WIDTH
+        weidth = Constants.MAX_WIDTH-220
         height = Constants.MAX_HEIGHT-(60)
+
         rectborder= Rect(0,0,weidth,height)
         self.activity_surf = self.screen.subsurface(rectborder)
        
@@ -87,6 +89,10 @@ class ClicActivities:
             self.activityInUse.pathToMedia = self.path_to_clic
             self.activityInUse.Load(self.activity_surf)
             self.dialog.printMessage(self.screen,self.activityInUse.getInitMessage())
+            #audio = self.activityInUse.getInitMessageAudio()
+            #if audio!="":
+            #    self.activityInUse.play_sound(audio)
+            #aqui s'hauria de reproduir l'audio del principi
         
         else: 
             ''' this case never ocurss.. teorically... heheheh'''
@@ -102,8 +108,10 @@ class ClicActivities:
 
 
     def update_activity(self, evento,isFirstActivity=False,isLastActivity=False):
+        event = False
         
         if evento.type == pygame.MOUSEBUTTONDOWN:
+            event = True
             pointMouse = Point(pygame.mouse.get_pos())
             
             
@@ -115,6 +123,18 @@ class ClicActivities:
             if self.dialog.isOverPreviousButton(pointMouse):
                 return -3
 
+            #Retornem -4 tractant l'activitat primera
+            if self.dialog.isOverFirstButton(pointMouse):
+                return -4
+
+            #Retornem -5 tractant l'activitat ultima
+            if self.dialog.isOverLastButton(pointMouse):
+                return -5
+
+            #Retornem -6 tractant el reinici de l'activitat
+            if self.dialog.isOverRetryButton(pointMouse):
+                return -6
+
             #Retornem -1 perque es tracti al clic_player per tornar a comensar
             if self.dialog.isOverChangeClicButton(pointMouse):
                 return -1
@@ -122,12 +142,26 @@ class ClicActivities:
             if self.dialog.isOverActivity(pointMouse):
                 self.activityInUse.OnEvent((pointMouse.getX(),pointMouse.getY()))
         
+        elif evento.type == pygame.KEYDOWN:
+            event = True
+            print 'evento de teclado'
+            key = pygame.key.name(evento.key) #retorna l'identificador de la tecla
+            k = self.validKey(key)
+            if k != None: #Si no es valida, no fem res
+                print k
+                self.activityInUse.OnKeyEvent(k)
+        
+        #Si ha hagut event, renderitzem i mirem si s'ha acabat l'activitat
+        if event:
             self.activityInUse.OnRender( self.activity_surf)
-            
             
             '''EXTRA:  if activity end, then print the end message '''
             if self.activityInUse.isGameFinished():
                  self.dialog.printMessage(self.screen,self.activityInUse.getFinishMessage())
+            #     audio = self.activityInUse.getFinishMessageAudio()
+            #     if audio!="":
+            #        self.activityInUse.play_sound(audio)
+                 #Aqui s'hauria de reproduir l'audio del final
                 
             
         return 0
@@ -135,6 +169,19 @@ class ClicActivities:
         # TODO
         # activity_class.update()
 	# return resultats, temps, ...
+    
+    def validKey(self,key):
+        '''Llista de tecles que ens interessa processar i la traduccio'''
+        validKeyList = {'delete':'delete','backspace':'backspace','a':'A','b':'B','c':'C','d':'D',
+                        'e':'E','f':'F','g':'G','h':'H','i':'I','j':'J','k':'K','l':'L','m':'M',
+                        'n':'N','o':'O','p':'P','q':'Q','r':'R','s':'S','t':'T','u':'U','v':'V',
+                        'w':'W','x':'X','y':'Y','z':'Z'}
+        
+        if key in validKeyList:
+            return validKeyList[key]
+        
+        return None
+    
     
     def canExecuteActivity(self,node):
         ''' at the end this function is not necessary'''
@@ -159,6 +206,8 @@ class ClicActivities:
                         return True
         elif  node.getAttribute('class') =='@textGrid.WordSearch':
                         return True
+        elif  node.getAttribute('class') =='@textGrid.CrossWord':
+                        return False
         else:
              return False
     def executeActivity(self,node):
@@ -182,4 +231,5 @@ class ClicActivities:
                         return ComplexAssociation(node)
         elif  node.getAttribute('class') =='@textGrid.WordSearch':
                         return WordSearch(node)
-                
+        elif  node.getAttribute('class') =='@textGrid.CrossWord':
+                        return CrossWord(node)

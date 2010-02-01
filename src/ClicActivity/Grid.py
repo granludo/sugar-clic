@@ -59,6 +59,8 @@ class Grid(object):
     borderColor = Constants.colorCell
     hasBorder = True
     imagePath = None
+    crossClues = False
+    across = False
     
     def __init__(self,xml=None):
 
@@ -115,7 +117,15 @@ class Grid(object):
             if xml.hasAttribute('image'):
             
                 self.imagePath = xml.getAttribute('image')
-
+            
+            '''Comprova si el grid es de definicions de crosswords, te tractament diferent en load'''
+            try:
+                if xml.getAttribute('id') == 'acrossClues' or xml.getAttribute('id') == 'downClues':
+                    self.crossClues = True
+                    if xml.getAttribute('id') == 'acrossClues':
+                        self.across = True
+            except:
+                pass
     
 
     def LoadWithImage (self,rows,cols,width,height,xInicial, yInicial,display_surf,pathToMedia):  
@@ -186,61 +196,106 @@ class Grid(object):
             
 
     def Load (self,rows,cols,width,height,xInicial, yInicial,display_surf):  
-
         
-        self.rows = int(rows)
-        self.cols = int(cols)
-        
-        widthPart = width / self.cols
-        heightPart  = height / self.rows
-       
-        
-        surfaceEmpty = surface.Surface((int(widthPart),int(heightPart)),0)
-                 
-        
-        '''IF INCORRECTE'''
-        if self.transparent == False: 
-            print 'grid-> color fondo = ',self.backgroundColor
-            surfaceEmpty.fill(self.backgroundColor)
-        else:
+        if self.crossClues:
+            '''Tractament especific per grid de crossClues'''
             
-            print 'surface transparent'
-
-        self.cellHeight = heightPart
-        self.cellWidth  = widthPart    
-
-
-
-        i = 0;
-        actualRow = 0
-        actualCol = 0
-        xActual=xInicial
-        yActual=yInicial
-        while (i < self.rows*self.cols):
+            '''1r Crea el cell amb la imatge de la orientacio'''
+            border  = Rect (xInicial,yInicial,Constants.widthCross,height)
+            cell = Cell(border,display_surf,0,self.hasBorder)
             
-            border  = Rect (xActual,yActual,widthPart,heightPart)
-            cell = Cell(border,display_surf,i,self.hasBorder)
+            surfaceEmpty = surface.Surface((int(Constants.widthCross),int(height)),0)
+            if self.across:
+                img = pygame.image.load(Constants.Images.ACROSS).convert_alpha()
+            else:
+                img = pygame.image.load(Constants.Images.DOWN).convert_alpha()
+            
+            img2 = pygame.transform.scale(img,(surfaceEmpty.get_width(),surfaceEmpty.get_height()))
+            surfaceEmpty.blit(img,(0,0))
 
             contentCell = ContentCell()
             
-            contentCell.id = i
-            contentCell.img = surfaceEmpty.copy()
+            contentCell.id = 0
+            contentCell.img = surfaceEmpty
             contentCell.border = self.hasBorder
             
             cell.contentCell = contentCell
             self.Cells.append(cell)
             
-            actualCol = actualCol +1
-            xActual = xActual+widthPart
+            '''2n Crea el cell per les definicions'''
+            border  = Rect (xInicial+Constants.widthCross,yInicial,width,height)
+            cell = Cell(border,display_surf,1,self.hasBorder)
             
-            if actualCol == self.cols:
-                actualCol = 0
-                actualRow +=1
-
-                yActual = yActual+heightPart
-                xActual = xInicial
+            surfaceEmpty = surface.Surface((int(width),int(height)),0)
+            
+            if self.transparent == False: 
+                print 'grid-> color fondo = ',self.backgroundColor
+                surfaceEmpty.fill(self.backgroundColor)
+            
+            contentCell = ContentCell()
+            
+            contentCell.id = 1
+            contentCell.img = surfaceEmpty
+            contentCell.border = self.hasBorder
+            
+            cell.contentCell = contentCell
+            self.Cells.append(cell)
+            
+        
+        else:
+            '''Si no es grid de crossClues, tractament general'''
+            
+            self.rows = int(rows)
+            self.cols = int(cols)
+            
+            widthPart = width / self.cols
+            heightPart  = height / self.rows
+           
+            
+            surfaceEmpty = surface.Surface((int(widthPart),int(heightPart)),0)
+                     
+            
+            '''IF INCORRECTE'''
+            if self.transparent == False: 
+                print 'grid-> color fondo = ',self.backgroundColor
+                surfaceEmpty.fill(self.backgroundColor)
+            else:
                 
-            i= i+1
+                print 'surface transparent'
+    
+            self.cellHeight = heightPart
+            self.cellWidth  = widthPart    
+            
+            i = 0;
+            actualRow = 0
+            actualCol = 0
+            xActual=xInicial
+            yActual=yInicial
+            while (i < self.rows*self.cols):
+                
+                border  = Rect (xActual,yActual,widthPart,heightPart)
+                cell = Cell(border,display_surf,i,self.hasBorder)
+    
+                contentCell = ContentCell()
+                
+                contentCell.id = i
+                contentCell.img = surfaceEmpty.copy()
+                contentCell.border = self.hasBorder
+                
+                cell.contentCell = contentCell
+                self.Cells.append(cell)
+                
+                actualCol = actualCol +1
+                xActual = xActual+widthPart
+                
+                if actualCol == self.cols:
+                    actualCol = 0
+                    actualRow +=1
+    
+                    yActual = yActual+heightPart
+                    xActual = xInicial
+                    
+                i= i+1
 
     def OnRender(self,display_surf):
         
