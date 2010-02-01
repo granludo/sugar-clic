@@ -70,7 +70,7 @@ class ClicActivities:
         self.dialog.renderDialog(self.screen)
         
         '''HardCodded:creating the subsurface for ACTIVITIES'''
-        weidth = Constants.MAX_WIDTH
+        weidth = Constants.MAX_WIDTH-220
         height = Constants.MAX_HEIGHT-(60)
         rectborder= Rect(0,0,weidth,height)
         self.activity_surf = self.screen.subsurface(rectborder)
@@ -87,6 +87,10 @@ class ClicActivities:
             self.activityInUse.pathToMedia = self.path_to_clic
             self.activityInUse.Load(self.activity_surf)
             self.dialog.printMessage(self.screen,self.activityInUse.getInitMessage())
+            #audio = self.activityInUse.getInitMessageAudio()
+            #if audio!="":
+            #    self.activityInUse.play_sound(audio)
+            #aqui s'hauria de reproduir l'audio del principi
         
         else: 
             ''' this case never ocurss.. teorically... heheheh'''
@@ -127,6 +131,10 @@ class ClicActivities:
             '''EXTRA:  if activity end, then print the end message '''
             if self.activityInUse.isGameFinished():
                  self.dialog.printMessage(self.screen,self.activityInUse.getFinishMessage())
+            #     audio = self.activityInUse.getFinishMessageAudio()
+            #     if audio!="":
+            #        self.activityInUse.play_sound(audio)
+                 #Aqui s'hauria de reproduir l'audio del final
                 
             
         return 0
