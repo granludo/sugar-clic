@@ -126,6 +126,31 @@ class GeneralDialog(object):
             return True
         else:
             return False
+
+    def isOverFirstButton(self,PointOfMouse):
+        x = PointOfMouse.getX()
+        y = PointOfMouse.getY()
+        if self.rectFirst.collidepoint(x,y):
+            return True
+        else:
+            return False
+
+    def isOverLastButton(self,PointOfMouse):
+        x = PointOfMouse.getX()
+        y = PointOfMouse.getY()
+        if self.rectLast.collidepoint(x,y):
+            return True
+        else:
+            return False
+
+    def isOverRetryButton(self,PointOfMouse):
+        x = PointOfMouse.getX()
+        y = PointOfMouse.getY()
+        if self.rectRetry.collidepoint(x,y):
+            return True
+        else:
+            return False
+
     def isOverChangeClicButton(self,PointOfMouse):
         x = PointOfMouse.getX()
         y = PointOfMouse.getY()

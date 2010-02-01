@@ -122,24 +122,8 @@ class IdentifyPanels(Activity):
                     if cell.contentCell.id == 1:
                         cell.contentCell.img = self.Grid2.Cells[cell.idCell].contentCell.img
                         cell.contentCell.id = -1
-                        pygame.mixer.pre_init(44100,-16,2, 1024 * 3)
-                        if pygame.mixer.get_init():
-                            try:
-                                print "hola"
-                                music = os.path.join('data','clics','conill', '4.wav')
-                                print music
-                                '''pygame.mixer.music.load("/home/roger/Escriptori/PFC(2)/PFC/newJclic/media/moc.mp3")'''
-                                sound = pygame.mixer.Sound("/home/roger/Escriptori/monkeystomp/data/ull.wav")
-                                sound2 = pygame.mixer.Sound("/home/roger/Escriptori/monkeystomp/data/jump.wav")
-                                sound.set_volume(1)
-                                print sound.get_length()
-                                print sound2.get_length()
-                                sound.play()
-                            except:
-                                print "No se pudo cargar el sonido:", fullname
-                                raise SystemExit, message
 
-                            '''pygame.mixer.music.play()'''
+                        '''pygame.mixer.music.play()'''
                             
 
                
