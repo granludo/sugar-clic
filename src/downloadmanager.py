@@ -169,9 +169,10 @@ class Download:
             self.controller = controller.Controller()
             self.controller.install_new_clic(self._get_file_name())      
             
-            self.win = gtk.Window(gtk.WINDOW_TOPLEVEL)
-            self.win.set_size_request(175,50)
-            self.button = gtk.Button("Download Finished (OK)")
+            self.win = gtk.Window(gtk.WINDOW_POPUP)
+            self.win.set_size_request(200,50)
+            self.win.move(600, 450)
+            self.button = gtk.Button("Descargando actividad (OK)")
             self.button.connect('clicked', self.__destroy_win)
             self.button.show()
             self.win.add(self.button)
