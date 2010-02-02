@@ -6,10 +6,10 @@ try:
     bundlebuilder.start()
 except ImportError:
     import os
-    os.system("find ./ | sed 's,^./,JClicDownloader.activity/,g' > MANIFEST")
+    os.system("find ./ | sed 's,^./,ClicPlayer.activity/,g' > MANIFEST")
     os.system('rm gtktest.xo')
     os.chdir('..')
-    os.system('zip -r JClicDownloader.xo JClicDownloader.activity')
-    os.system('mv JClicDownloader.xo ./JClicDownloader.activity')
-    os.chdir('JClicDownloader.activity')
+    os.system('zip -r ClicPlayer-1.xo ClicPlayer.activity')
+    os.system('mv ClicPlayer-1.xo ./ClicPlayer.activity')
+    os.chdir('ClicPlayer.activity')
 
