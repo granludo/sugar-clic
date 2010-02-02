@@ -120,11 +120,14 @@ class DoublePuzzle(Activity):
                 if cell.isOverCell(PointOfMouse[0],PointOfMouse[1]):
                     ''' si ids son iguales --> cambiamos celdas.. '''
                     if cell.contentCell.id == self.PressedCell.contentCell.id:
-                        
                         tmpImg = self.PressedCell.contentCell.img
                         self.PressedCell.contentCell.img = cell.contentCell.img
                         cell.contentCell.img = tmpImg
                         self.PressedCell.contentCell.id = -1
+                        self.play_sound(Constants.Sounds.OK)
+                    else:
+                        self.play_sound(Constants.Sounds.ERROR)
+
                     ''' desmarcamos pressedCell'''
                     self.PressedCell.actualColorCell = Constants.colorCell
                     self.PressedCell = None
@@ -142,6 +145,7 @@ class DoublePuzzle(Activity):
                        
 
         else:
+            self.play_sound(Constants.Sounds.CLICK)
             ''' si click en alguna celda izkierda nothing...--> no ponemos nada '''
              
             

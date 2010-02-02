@@ -64,15 +64,15 @@ class ClicActivities:
         self.settingsXML = settingsTag
         
     #starts the activity declared in activityTag
-    def start_activity(self, activityTag, pygameScreen):
-        
+    def start_activity(self, activityTag, pygameScreen, first = False, last = False):
+
         self.screen = pygameScreen
-        self.dialog = GeneralDialog()
+        self.dialog = GeneralDialog(first, last)
         self.dialog.renderDialog(self.screen)
         
         '''HardCodded:creating the subsurface for ACTIVITIES'''
-        weidth = Constants.MAX_WIDTH-220
-        height = Constants.MAX_HEIGHT-(60)
+        weidth = Constants.MAX_WIDTH- Constants.MARGIN_RIGHT
+        height = Constants.MAX_HEIGHT-(Constants.MARGIN_BOTTOM-15)
 
         rectborder= Rect(0,0,weidth,height)
         self.activity_surf = self.screen.subsurface(rectborder)
