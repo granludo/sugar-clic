@@ -6,7 +6,6 @@
   <descriptors />
  </settings>
  <sequence>
-  <item id="start" name="inicio" />
   <item name="ANTERIOR" />
   <item name="siguiente_2" />
   <item name="siguiente_3" />
@@ -19,41 +18,6 @@
   </item>
  </sequence>
  <activities>
-  <activity class="@panels.InformationScreen" name="inicio" code="">
-   <description />
-   <messages>
-    <cell type="initial">
-     <style />
-     <p>BIENVENIDO!!</p>
-    </cell>
-   </messages>
-   <settings margin="8" report="false">
-    <container bgColor="0xC0C0C0">
-     <counters time="true" actions="true" score="true" />
-    </container>
-    <window bgColor="0xC0C0C0" border="true" />
-    <eventSounds enabled="false" />
-   </settings>
-   <cells rows="4" cols="1" cellWidth="748.0" cellHeight="140.0" border="false">
-    <style />
-    <shaper class="@Rectangular" cols="1" rows="4" />
-    <cell />
-    <cell>
-     <style borderStroke="0.7" markerStroke="5.0">
-      <font family="Arial" size="28" />
-     </style>
-     <p>BIENVENDIO AL SUGAR-CLIC. UNA APLICACIÓN EDUCATIVA DONDE PODRÁS JUGAR A DIFERENTES TIPOS DE ACTIVIDADES</p>
-    </cell>
-    <cell />
-    <cell>
-     <style borderStroke="0.7" markerStroke="5.0">
-      <font family="Arial" size="20" />
-      <color foreground="0x0000FF" />
-     </style>
-     <p>A CONTINUACIÓN TE EXPLICAREMOS LA MECÁNICA DE ESTAS ACTIVIDADES MEDIANTE UN EJEMPLO VISUAL.</p>
-    </cell>
-   </cells>
-  </activity>
   <activity class="@panels.InformationScreen" name="ANTERIOR" code="">
    <description />
    <messages>
