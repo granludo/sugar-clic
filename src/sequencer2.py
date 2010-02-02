@@ -58,7 +58,7 @@ class Sequencer:
         self.controller = controller.Controller() #gets a controller instance (necessary to have activity tags)
         clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the first activity(tag) of the sequence
         self.__start_pygame_view() #initiate pygame view
-        self.act_handler.start_activity(clic_activity, self.screen, True, False)#initiate activity view
+        self.act_handler.start_activity(clic_activity, self.screen)#initiate activity view
     
     #function called all the time to refresh the screen and the activity
     #also returns activity information
@@ -78,20 +78,15 @@ class Sequencer:
             for evento in pygame.event.get():
                 #With resultat we controll what we do next
                 resultat = self.act_handler.update_activity(evento)    
-
-                first = False
-                last = False
-
+    
                 #Next activity
                 if(resultat == -2 and self.index < self.size-1):
                     #searching for a new and valid clic activity
                     while (self.index < self.size-1):
                         self.index = self.index + 1
-                        if(self.index == self.size-1):
-                            last = True
                         clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the first activity(tag) of the sequence
                         if self.act_handler.canExecuteActivity(clic_activity):
-                            self.act_handler.start_activity(clic_activity, self.screen, first, last)#initiate activity view
+                            self.act_handler.start_activity(clic_activity, self.screen)#initiate activity view
                             break
         
                 #Previous activity
@@ -99,33 +94,30 @@ class Sequencer:
                     #searching for a new and valid clic activity
                     while (self.index > 0):
                         self.index = self.index - 1
-                        if (self.index == 0):
-                            first = True
                         clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the first activity(tag) of the sequence
                         if self.act_handler.canExecuteActivity(clic_activity):
-                            self.act_handler.start_activity(clic_activity, self.screen, first, last)#initiate activity view
+                            self.act_handler.start_activity(clic_activity, self.screen)#initiate activity view
                             break
                         
                 #First activity of the sequence
                 if (resultat == -4) :
                     self.index = 0
-                    first = True
                     clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the first activity(tag) of the sequence
                     if self.act_handler.canExecuteActivity(clic_activity):
-                        self.act_handler.start_activity(clic_activity, self.screen, first, last)#initiate activity view
+                        self.act_handler.start_activity(clic_activity, self.screen)#initiate activity view
                         break
                       
                 #Last activity of the sequence  
                 if (resultat == -5) :
-                    last = True
                     self.index = self.size - 1
                     clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the first activity(tag) of the sequence
                     if self.act_handler.canExecuteActivity(clic_activity):
-                        self.act_handler.start_activity(clic_activity, self.screen, first, last)#initiate activity view
+                        self.act_handler.start_activity(clic_activity, self.screen)#initiate activity view
                         break         
                     
-                #Restart the current activitytrue
+                #Restart the current activity
                 if (resultat == -6) :
+                    clic_activity = self.controller.get_clic_activity(self.activities[self.index])
                     self.act_handler.start_activity(clic_activity, self.screen)#initiate activity view
                     break   
                     
