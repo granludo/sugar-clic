@@ -1,0 +1,87 @@
+Generated File. Do not edit.
+
+[HEADER]
+Version:0.09:$
+
+[PLUGINS]
+/usr/lib/totem/gstreamer/libtotem-narrowspace-plugin.so:$
+:$
+1224888799000:1:5:$
+The <a href="http://www.gnome.org/projects/totem/">Totem</a> 2.24.2 plugin handles video and audio streams.:$
+QuickTime Plug-in 7.2.0:$
+5
+0:video/quicktime:vídeo QuickTime:mov:$
+1:video/mp4:vídeo MPEG-4:mp4:$
+2:image/x-macpaint:imatge de mapa de bits MacPaint:pntg:$
+3:image/x-quicktime:dibuix Quickdraw/PICT de Macintosh:pict, pict1, pict2:$
+4:video/x-m4v:vídeo MPEG-4:m4v:$
+/usr/lib/totem/gstreamer/libtotem-mully-plugin.so:$
+:$
+1224888799000:1:5:$
+DivX Web Player version 1.4.0.233:$
+DivX® Web Player:$
+1
+0:video/divx:vídeo AVI:divx:$
+/usr/lib/totem/gstreamer/libtotem-gmp-plugin.so:$
+:$
+1224888799000:1:5:$
+The <a href="http://www.gnome.org/projects/totem/">Totem</a> 2.24.2 plugin handles video and audio streams.:$
+Windows Media Player Plug-in 10 (compatible; Totem):$
+13
+0:application/x-mplayer2:vídeo AVI:avi, wma, wmv:$
+1:video/x-ms-asf-plugin:vídeo ASF:asf, wmv:$
+2:video/x-msvideo:vídeo AVI:asf, wmv:$
+3:video/x-ms-asf:vídeo ASF:asf:$
+4:video/x-ms-wmv:vídeo Windows Media:wmv:$
+5:video/x-wmv:vídeo Windows Media:wmv:$
+6:video/x-ms-wvx:vídeo Windows Media:wmv:$
+7:video/x-ms-wm:vídeo Windows Media:wmv:$
+8:video/x-ms-wmp:vídeo Windows Media:wmv:$
+9:application/x-ms-wms:vídeo Windows Media:wms:$
+10:application/x-ms-wmp:vídeo Windows Media:wmp:$
+11:application/asx:llista de reproducció ASX de Microsoft:asx:$
+12:audio/x-ms-wma:àudio Windows Media:wma:$
+/usr/lib/totem/gstreamer/libtotem-basic-plugin.so:$
+:$
+1224888799000:1:5:$
+The <a href="http://www.gnome.org/projects/totem/">Totem</a> 2.24.2 plugin handles video and audio streams.:$
+Totem Web Browser Plugin 2.24.2:$
+16
+0:application/x-ogg:fitxer Ogg multimèdia:ogg:$
+1:application/ogg:fitxer Ogg multimèdia:ogg:$
+2:audio/ogg:àudio Ogg:oga:$
+3:audio/x-ogg:àudio Ogg:ogg:$
+4:video/ogg:vídeo Ogg:ogv:$
+5:video/x-ogg:vídeo Ogg:ogg:$
+6:application/annodex:application/annodex type:anx:$
+7:audio/annodex:audio/annodex type:axa:$
+8:video/annodex:video/annodex type:axv:$
+9:video/mpeg:vídeo MPEG:mpg, mpeg, mpe:$
+10:audio/wav:àudio WAV:wav:$
+11:audio/x-wav:àudio WAV:wav:$
+12:audio/mpeg:àudio MP3:mp3:$
+13:application/x-nsv-vp3-mp3:vídeo NullSoft:nsv:$
+14:video/flv:vídeo de Flash:flv:$
+15:application/x-totem-plugin:Totem Multimedia plugin::$
+/usr/lib/flashplugin-nonfree/libflashplayer.so:$
+:$
+1235729777000:1:5:$
+Shockwave Flash 10.0 r22:$
+Shockwave Flash:$
+2
+0:application/x-shockwave-flash:Shockwave Flash:swf:$
+1:application/futuresplash:FutureSplash Player:spl:$
+/usr/lib/xulrunner-addons/plugins/libunixprintplugin.so:$
+:$
+1262756448000:1:5:$
+The demo print plugin for unix.:$
+Demo Print Plugin for unix/linux:$
+1
+0:application/x-print-unix-nsplugin:Demo Print Plugin for Unix/Linux:.pnt:$
+/usr/lib/xulrunner-addons/plugins/libnullplugin.so:$
+:$
+1262756448000:1:5:$
+The default plugin handles plugin data for mimetypes and extensions that are not specified and facilitates downloading of new plugins.:$
+Default Plugin:$
+1
+0:*:All types:.*:$
