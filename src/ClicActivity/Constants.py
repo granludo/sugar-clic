@@ -34,12 +34,12 @@
 
 
 MAX_WIDTH = 1200
-MAX_HEIGHT = 700
+MAX_HEIGHT = 900
 MARGIN_TOP = 20
-MARGIN_BOTTOM = 75
+MARGIN_BOTTOM = 120
 MARGIN_LEFT = 20
 MARGIN_RIGHT = 220
-ACTIVITY_WIDTH = MAX_WIDTH -MARGIN_RIGHT - MARGIN_LEFT
+ACTIVITY_WIDTH = MAX_WIDTH -MARGIN_RIGHT - MARGIN_LEFT - 20
 ACTIVITY_HEIGHT= MAX_HEIGHT  -MARGIN_BOTTOM -MARGIN_TOP
 colorCell = (0,0,0)
 colorPressedCell =(255,127,36)
@@ -63,7 +63,9 @@ DEFAULT_BORDER_SIZE = 3
 class Images:
     CURSOR = "img/standardcursor.xbm"
     NEXT = "img/siguiente.png"
+    NEXT_DES= "img/siguiente_des.png"
     PREV = "img/anterior.png"
+    PREV_DES = "img/anterior_des.png"
     FIRST = "img/primero.png"
     LAST = "img/ultimo.png"
     RETRY = "img/reiniciar.png"
@@ -71,4 +73,9 @@ class Images:
     LOGO = "img/logotipo6.png"
     ACROSS = "img/across.png"
     DOWN = "img/down.png"
+
+class Sounds:
+    OK = "sounds/action_ok.mp3"
+    ERROR = "sounds/action_error.mp3"
+    CLICK = "sounds/click.mp3"
     
