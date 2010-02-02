@@ -48,10 +48,18 @@ class GeneralDialog(object):
     rectNext = None
     rectPrev = None
     changeClic = None
-    def __init__(self):
+    def __init__(self, first, last):
 
-        self.ImgNext     =  pygame.image.load(Constants.Images.NEXT).convert_alpha()
-        self.ImgPrevious =  pygame.image.load(Constants.Images.PREV).convert_alpha()
+        if(last == True):
+            self.ImgNext     =  pygame.image.load(Constants.Images.NEXT_DES).convert_alpha()
+        else:
+            self.ImgNext     =  pygame.image.load(Constants.Images.NEXT).convert_alpha()
+
+        if(first == True):
+            self.ImgPrevious =  pygame.image.load(Constants.Images.PREV_DES).convert_alpha()
+        else:
+            self.ImgPrevious =  pygame.image.load(Constants.Images.PREV).convert_alpha()
+            
         self.ImgChangeClic =  pygame.image.load(Constants.Images.HOME).convert_alpha()
         self.ImgFirst =  pygame.image.load(Constants.Images.FIRST).convert_alpha()
         self.ImgLast =  pygame.image.load(Constants.Images.LAST).convert_alpha()
