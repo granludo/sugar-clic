@@ -84,7 +84,7 @@ class Manager:
             gtk.Container.remove(self.window, self.w_child)
         else :
             state = gtk.STATE_NORMAL    
-            color = gtk.gdk.Color("#FF8000")
+            color = gtk.gdk.Color("orange")
             self.window.modify_bg(state, color)
         
         
@@ -100,8 +100,8 @@ class Manager:
         #MyClics button
         self.bMy = self.xml.get_widget('buttonMyClics')
         self.bMy.connect('clicked', self.__available_clics_view)
-        self.bMy.connect('enter', self.__rview2) 
-        self.bMy.connect('leave', self.__lview2) 
+        self.bMy.connect('enter', self.__change_icon, '/clics_2.png', 0) 
+        self.bMy.connect('leave', self.__change_icon, '/clics.png', 0) 
         self.ImageMy = self.xml.get_widget('imageMyClics')
         self.ImageMy.set_from_file(icons_path + '/clics.png')
 
@@ -125,8 +125,8 @@ class Manager:
         #Search button
         self.bS = self.xml.get_widget('buttonSearch')
         self.bS.connect('clicked', self.__search_clics_view) 
-        self.bS.connect('enter', self.__rview) 
-        self.bS.connect('leave', self.__lview) 
+        self.bS.connect('enter', self.__change_icon, '/download_2.png', 1) 
+        self.bS.connect('leave', self.__change_icon, '/download.png', 1) 
         self.ImageSearch = self.xml.get_widget('imageSearch')
         self.ImageSearch.set_from_file(icons_path + '/download.png')        
   
@@ -225,22 +225,19 @@ class Manager:
                 nou = 0
                 self.__main_view()    
         return True
+    
+    def __change_icon(self, *args):
+        image = args[2]
+        if image == 0:
+            self.ImageMy.set_from_file(self.icons_path + args[1]) 
+        elif image == 1 :
+            self.ImageSearch.set_from_file(self.icons_path + args[1]) 
 
     #Changes the view of the application
     def __change_current_view(self, view):
         self.w_child.remove(self.current_view)
         self.current_view = view
         self.w_child.add(self.current_view)  
-        
-        
-    def __lview(self, *args):
-        self.ImageSearch.set_from_file(self.icons_path + '/download.png')
-    def __rview(self, *args):
-        self.ImageSearch.set_from_file(self.icons_path + '/download_2.png')   
-    def __rview2(self, *args):
-        self.ImageMy.set_from_file(self.icons_path + '/clics_2.png')     
-    def __lview2(self, *args):
-        self.ImageMy.set_from_file(self.icons_path + '/clics.png')   
         
     #main view
     def __main_view(self,*args):
