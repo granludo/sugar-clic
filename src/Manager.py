@@ -78,9 +78,14 @@ class Manager:
         self.window.connect("destroy", gtk.main_quit)
 
         # Get Windows child (Vertical Box with the views)
-        self.w_child = self.window.get_child()      
+        self.w_child = self.window.get_child()  
+
         if runaslib:
             gtk.Container.remove(self.window, self.w_child)
+        else :
+            state = gtk.STATE_NORMAL    
+            color = gtk.gdk.Color("orange")
+            self.window.modify_bg(state, color)
         
         
         self.xml = gtk.glade.XML(views_path + '/mainView.glade') 
@@ -95,8 +100,8 @@ class Manager:
         #MyClics button
         self.bMy = self.xml.get_widget('buttonMyClics')
         self.bMy.connect('clicked', self.__available_clics_view)
-        self.bMy.connect('enter', self.rview2) 
-        self.bMy.connect('leave', self.lview2) 
+        self.bMy.connect('enter', self.__change_icon, '/clics_2.png', 0) 
+        self.bMy.connect('leave', self.__change_icon, '/clics.png', 0) 
         self.ImageMy = self.xml.get_widget('imageMyClics')
         self.ImageMy.set_from_file(icons_path + '/clics.png')
 
@@ -120,48 +125,57 @@ class Manager:
         #Search button
         self.bS = self.xml.get_widget('buttonSearch')
         self.bS.connect('clicked', self.__search_clics_view) 
-        self.bS.connect('enter', self.rview) 
-        self.bS.connect('leave', self.lview) 
+        self.bS.connect('enter', self.__change_icon, '/download_2.png', 1) 
+        self.bS.connect('leave', self.__change_icon, '/download.png', 1) 
         self.ImageSearch = self.xml.get_widget('imageSearch')
         self.ImageSearch.set_from_file(icons_path + '/download.png')        
-    
   
-        #loading available_clics widget 
+        #loading My Clics View
         self.xml = gtk.glade.XML(views_path + '/MyClicsView.glade') 
         #loading window
         self.windowAva = self.xml.get_widget('window')
         
         self.iconView = self.xml.get_widget('iconviewAvailable')
-        #self.iconView.connect('selection-changed',self.__clics_view)
-        #self.iconView.connect('item-activated', self.__delete_clic) #item-activated 2 clicks //selection-changed 1 click
-        self.iconView.connect('selection-changed', self.__clics_view)
+        self.iconView.connect('selection-changed', self.__clics_view) #item-activated 2 clicks //selection-changed 1 click
         
         self.bClics = self.xml.get_widget('buttonClics')
         self.bClics.connect('clicked', self.__generate_list)
         self.currentClicsView = 'Clics'
-
-   
                          
         self.bPM = self.xml.get_widget('buttonAvaMain')
         self.bPM.connect('clicked', self.__main_view)
                         
         self.labelMy = self.xml.get_widget('labelMyClics')
         self.vboxAvailable = self.xml.get_widget('vboxAvailable')
-        gtk.Container.remove(self.windowAva, self.vboxAvailable)
+        
         self.ImageHome = self.xml.get_widget('imageHome')
         self.ImageHome.set_from_file(icons_path + '/home.png')
+        
+        self.hboxSure = self.xml.get_widget('hboxSure')
+        self.buttonSI = self.xml.get_widget('buttonSI')
+        self.buttonSI.connect('clicked', self.__remove_clic)
+        self.buttonNO = self.xml.get_widget('buttonNO')
+        self.buttonNO.connect('clicked', self.__dont_remove_clic)
+        self.labelSure = self.xml.get_widget('labelSure')
+        
+        
+        gtk.Container.remove(self.windowAva, self.vboxAvailable)
+
 
    
         #loading search_clics widget (Browser)
         self.xml = gtk.glade.XML(views_path + '/BrowserView.glade') 
         #loading window
         self.windowBrowser = self.xml.get_widget('window')
+        
         self.bFirstPage = self.xml.get_widget('buttonFirstPage')
         self.bFirstPage.connect('clicked', self.__search_clics_view_home)
+        
         self.bBM = self.xml.get_widget('buttonHome')
         self.bBM.connect('clicked', self.__main_view)
         self.ImageBr = self.xml.get_widget('imageHome') 
         self.ImageBr.set_from_file(icons_path + '/home.png')
+        
         self.vboxBrowser = self.xml.get_widget('vboxBrowser')
         self.browser = Browser()
         self.vboxBrowser.add(self.browser)       
@@ -199,7 +213,6 @@ class Manager:
             self.window.show() 
             gtk.main()
 
-
             
     #calls the clic infinite times (until the clic ends) 
     def updating(self):        
@@ -212,28 +225,26 @@ class Manager:
                 nou = 0
                 self.__main_view()    
         return True
+    
+    def __change_icon(self, *args):
+        image = args[2]
+        if image == 0:
+            self.ImageMy.set_from_file(self.icons_path + args[1]) 
+        elif image == 1 :
+            self.ImageSearch.set_from_file(self.icons_path + args[1]) 
 
     #Changes the view of the application
     def __change_current_view(self, view):
         self.w_child.remove(self.current_view)
         self.current_view = view
         self.w_child.add(self.current_view)  
-    
+        
     #main view
     def __main_view(self,*args):
-        self.__change_current_view(self.Main)
-
-    def rview(self, *args):
-        self.ImageSearch.set_from_file(self.icons_path + '/download_2.png')   
-
-    def lview(self, *args):
+        self.__change_current_view(self.Main)   
         self.ImageSearch.set_from_file(self.icons_path + '/download.png')
-        
-    def rview2(self, *args):
-        self.ImageMy.set_from_file(self.icons_path + '/clics_2.png')     
-    def lview2(self, *args):
-        self.ImageMy.set_from_file(self.icons_path + '/clics.png')   
-        
+        self.ImageMy.set_from_file(self.icons_path + '/clics.png')  
+        self.hboxSure.hide() 
         
     #View to see the available clics in the computer and select one to play
     def __available_clics_view(self, *args):
@@ -250,7 +261,8 @@ class Manager:
             self.w_child.add(self.current_view)  
         else :
             self.__change_current_view(self.vboxAvailable)   
-            
+    
+    #Show the list of clics to play or delete     
     def __generate_list(self, *args):
         if self.currentClicsView == 'Clics':
             self.__remove_clics_view()
@@ -264,22 +276,32 @@ class Manager:
         self.labelMy.set_text(_('Elige un Clic para jugar'))
         self.bClics.set_label(_('Borrar Clic'))
         self.__refresh_clics_view(True)
+        self.hboxSure.hide()
 
     #RList of clics to remove (view)
     def __remove_clics_view(self, *args):
         self.labelMy.set_text(_('Elige un Clic para eliminarlo'))
         self.bClics.set_label(_('Lista de Clics'))
         self.__refresh_clics_view(False)
+        
+    def __remove_clic(self, *args):
+        name, clic, default = ManagerData.get_clic_data(self.iconView)
+        self.controller.remove_clic(clic)
+        self.__refresh_clics_view(False)
+        self.hboxSure.hide()
+        
+    def __dont_remove_clic(self, *args):
+        self.hboxSure.hide()
 
         
     #View that shows the clics (and its activities)
     #View that delete clics
     def __clics_view(self, *args):
-        clic, default = ManagerData.get_clic_data(self.iconView)
-        
+        name, clic, default = ManagerData.get_clic_data(self.iconView)
         if self.currentClicsView == 'Delete':
-            self.controller.remove_clic(clic)
-            self.__refresh_clics_view(False)
+            text = 'Seguro que quieres borrar el clic "' + name +'"?'
+            self.labelSure.set_text(text)
+            self.hboxSure.show()
         else :
             self.controller.load_clic(clic, default)
             self.vboxPlay.show()

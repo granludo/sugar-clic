@@ -43,7 +43,7 @@ small {
 	font-size: 90%;
 }
 #page {
-	background: url(images/main-bg.jpg) no-repeat center top;
+	/*background: url(images/main-bg.jpg) no-repeat center top;*/
 }
 #wrapper {
 	width: 770px;
@@ -60,17 +60,17 @@ small {
 	padding: 0px;
 }
 #header {
-	height: 150px;
+	height: 130px;
 }
 /* ------------------------------------- site title */
 #header h2 {
 	position: absolute;
-	top: 40px;
+	top: 20px;
 	left: 100px;
 	color: #FFFFFF;
 	margin-left: 70px;
 	padding: 0px;
-	font: normal 30px/100% "Trebuchet MS", Arial, sans-serif;
+	font: normal 35px/100% "Trebuchet MS", Arial, sans-serif;
 }
 #header h2 a, h2 a:visited {
 	color: #FFFFFF;
@@ -85,7 +85,8 @@ small {
 	top: 77px;
 	left: 150px;
 	color: #000000;
-	font: 12px Arial, Helvetica, sans-serif;
+	margin-top:35px;
+	font: 18px Arial, Helvetica, sans-serif;
 }
 /* search form */
 .form-item label {
@@ -228,7 +229,7 @@ small {
 }
 .post .title {
 	float: left;
-	margin-left: 10px;
+	margin-left: 40px;
 	width: 438px;
 }
 .submitted {
@@ -564,7 +565,7 @@ ul.menu li.expanded {
 	background: transparent url(images/menu-expanded.gif) no-repeat 1px .4em;
 }
 ul.menu li.collapsed {
-	background: transparent url(images/menu-collapsed.gif) no-repeat 1px .4em;
+	/*background: transparent url(images/menu-collapsed.gif) no-repeat 1px .4em;*/
 }
 ul.menu li.leaf a, ul.menu li.expanded a, ul.menu li.collapsed a {
 	display: block;
