@@ -108,12 +108,16 @@ class Manager:
         #Manual button
         self.bManual = self.xml.get_widget('buttonManual')
         self.bManual.connect('clicked', self.__about_view)
+        self.bManual.connect('enter', self.__change_icon, '/manual_2.png', 1) 
+        self.bManual.connect('leave', self.__change_icon, '/manual.png', 1) 
         self.ImageManual = self.xml.get_widget('imageManual')
         self.ImageManual.set_from_file(icons_path + '/manual.png')
         
         #About button
         self.bAbout = self.xml.get_widget('buttonAbout')
         self.bAbout.connect('clicked', self.__about_view)
+        self.bAbout.connect('enter', self.__change_icon, '/about_2.png', 2) 
+        self.bAbout.connect('leave', self.__change_icon, '/about.png', 2) 
         self.ImageAbout = self.xml.get_widget('imageAbout')
         self.ImageAbout.set_from_file(icons_path + '/about.png')
         
@@ -125,8 +129,8 @@ class Manager:
         #Search button
         self.bS = self.xml.get_widget('buttonSearch')
         self.bS.connect('clicked', self.__search_clics_view) 
-        self.bS.connect('enter', self.__change_icon, '/download_2.png', 1) 
-        self.bS.connect('leave', self.__change_icon, '/download.png', 1) 
+        self.bS.connect('enter', self.__change_icon, '/download_2.png', 3) 
+        self.bS.connect('leave', self.__change_icon, '/download.png', 3) 
         self.ImageSearch = self.xml.get_widget('imageSearch')
         self.ImageSearch.set_from_file(icons_path + '/download.png')        
   
@@ -237,7 +241,12 @@ class Manager:
         if image == 0:
             self.ImageMy.set_from_file(self.icons_path + args[1]) 
         elif image == 1 :
+            self.ImageManual.set_from_file(self.icons_path + args[1]) 
+        elif image == 2:
+            self.ImageAbout.set_from_file(self.icons_path + args[1])
+        elif image == 3 :
             self.ImageSearch.set_from_file(self.icons_path + args[1]) 
+
 
     #Changes the view of the application
     def __change_current_view(self, view):
