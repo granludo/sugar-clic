@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Wed Jan 27 21:25:21 2010 -->
+<!--Generated with glade3 3.4.5 on Wed Feb  3 15:49:04 2010 -->
 <glade-interface>
   <widget class="GtkWindow" id="window">
     <child>
@@ -28,32 +28,60 @@
                   <widget class="GtkVButtonBox" id="vbuttonbox1">
                     <property name="visible">True</property>
                     <child>
-                      <widget class="GtkButton" id="buttonManual">
+                      <widget class="GtkVBox" id="vbox4">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="relief">GTK_RELIEF_NONE</property>
-                        <property name="response_id">0</property>
                         <child>
-                          <widget class="GtkImage" id="imageManual">
+                          <widget class="GtkButton" id="buttonManual">
                             <property name="visible">True</property>
-                            <property name="stock">gtk-missing-image</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">GTK_RELIEF_NONE</property>
+                            <property name="response_id">0</property>
+                            <child>
+                              <widget class="GtkImage" id="imageManual">
+                                <property name="visible">True</property>
+                                <property name="stock">gtk-missing-image</property>
+                              </widget>
+                            </child>
                           </widget>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="label5">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">MANUAL</property>
+                          </widget>
+                          <packing>
+                            <property name="position">1</property>
+                          </packing>
                         </child>
                       </widget>
                     </child>
                     <child>
-                      <widget class="GtkButton" id="buttonAbout">
+                      <widget class="GtkVBox" id="vbox3">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="relief">GTK_RELIEF_NONE</property>
-                        <property name="response_id">0</property>
                         <child>
-                          <widget class="GtkImage" id="imageAbout">
+                          <widget class="GtkButton" id="buttonAbout">
                             <property name="visible">True</property>
-                            <property name="stock">gtk-missing-image</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">GTK_RELIEF_NONE</property>
+                            <property name="response_id">0</property>
+                            <child>
+                              <widget class="GtkImage" id="imageAbout">
+                                <property name="visible">True</property>
+                                <property name="stock">gtk-missing-image</property>
+                              </widget>
+                            </child>
                           </widget>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="label4">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">ACERCA DE...</property>
+                          </widget>
+                          <packing>
+                            <property name="position">1</property>
+                          </packing>
                         </child>
                       </widget>
                       <packing>
@@ -102,32 +130,60 @@ delicatissimi nam, per no nulla iuvaret expetenda.</property>
                   <widget class="GtkHButtonBox" id="hbuttonbox3">
                     <property name="visible">True</property>
                     <child>
-                      <widget class="GtkButton" id="buttonSearch">
+                      <widget class="GtkVBox" id="vbox1">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="relief">GTK_RELIEF_NONE</property>
-                        <property name="response_id">0</property>
                         <child>
-                          <widget class="GtkImage" id="imageSearch">
+                          <widget class="GtkButton" id="buttonSearch">
                             <property name="visible">True</property>
-                            <property name="stock">gtk-missing-image</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">GTK_RELIEF_NONE</property>
+                            <property name="response_id">0</property>
+                            <child>
+                              <widget class="GtkImage" id="imageSearch">
+                                <property name="visible">True</property>
+                                <property name="stock">gtk-missing-image</property>
+                              </widget>
+                            </child>
                           </widget>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="label2">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">DESCARGAR CLICS</property>
+                          </widget>
+                          <packing>
+                            <property name="position">1</property>
+                          </packing>
                         </child>
                       </widget>
                     </child>
                     <child>
-                      <widget class="GtkButton" id="buttonMyClics">
+                      <widget class="GtkVBox" id="vbox2">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="relief">GTK_RELIEF_NONE</property>
-                        <property name="response_id">0</property>
                         <child>
-                          <widget class="GtkImage" id="imageMyClics">
+                          <widget class="GtkButton" id="buttonMyClics">
                             <property name="visible">True</property>
-                            <property name="stock">gtk-missing-image</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="relief">GTK_RELIEF_NONE</property>
+                            <property name="response_id">0</property>
+                            <child>
+                              <widget class="GtkImage" id="imageMyClics">
+                                <property name="visible">True</property>
+                                <property name="stock">gtk-missing-image</property>
+                              </widget>
+                            </child>
                           </widget>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="label3">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">MIS CLICS</property>
+                          </widget>
+                          <packing>
+                            <property name="position">1</property>
+                          </packing>
                         </child>
                       </widget>
                       <packing>

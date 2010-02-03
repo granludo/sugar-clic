@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Tue Feb  2 11:07:25 2010 -->
+<!--Generated with glade3 3.4.5 on Wed Feb  3 16:27:19 2010 -->
 <glade-interface>
   <widget class="GtkWindow" id="window">
     <child>
@@ -17,8 +17,14 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <property name="label" translatable="yes">Borrar Clics</property>
+                    <property name="relief">GTK_RELIEF_NONE</property>
                     <property name="response_id">0</property>
+                    <child>
+                      <widget class="GtkImage" id="imageClics">
+                        <property name="visible">True</property>
+                        <property name="stock">gtk-missing-image</property>
+                      </widget>
+                    </child>
                   </widget>
                   <packing>
                     <property name="expand">False</property>
@@ -65,7 +71,7 @@
             <child>
               <widget class="GtkLabel" id="labelSure">
                 <property name="visible">True</property>
-                <property name="label" translatable="yes">¿Seguro que quieres borrar el clic</property>
+                <property name="label" translatable="yes">Seguro que quieres borrar el clic</property>
               </widget>
             </child>
             <child>
@@ -73,8 +79,14 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="label" translatable="yes">     SI     </property>
+                <property name="relief">GTK_RELIEF_NONE</property>
                 <property name="response_id">0</property>
+                <child>
+                  <widget class="GtkImage" id="imageSI">
+                    <property name="visible">True</property>
+                    <property name="stock">gtk-missing-image</property>
+                  </widget>
+                </child>
               </widget>
               <packing>
                 <property name="expand">False</property>
@@ -86,8 +98,14 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="label" translatable="yes">     NO     </property>
+                <property name="relief">GTK_RELIEF_NONE</property>
                 <property name="response_id">0</property>
+                <child>
+                  <widget class="GtkImage" id="imageNO">
+                    <property name="visible">True</property>
+                    <property name="stock">gtk-missing-image</property>
+                  </widget>
+                </child>
               </widget>
               <packing>
                 <property name="expand">False</property>
