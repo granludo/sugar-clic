@@ -148,6 +148,12 @@ class Manager:
         self.labelMy = self.xml.get_widget('labelMyClics')
         self.vboxAvailable = self.xml.get_widget('vboxAvailable')
         
+        self.imageBorrar = self.xml.get_widget('imageClics')
+        self.imageSI = self.xml.get_widget('imageSI')
+        self.imageSI.set_from_file(icons_path + '/si.png')
+        self.imageNO = self.xml.get_widget('imageNO')
+        self.imageNO.set_from_file(icons_path + '/no.png')
+        
         self.ImageHome = self.xml.get_widget('imageHome')
         self.ImageHome.set_from_file(icons_path + '/home.png')
         
@@ -250,8 +256,8 @@ class Manager:
     def __available_clics_view(self, *args):
         self.start_clic_view = False
         self.currentClicsView = 'Clics'  
-        self.labelMy.set_text(_('Elige un Clic para jugar'))
-        self.bClics.set_label(_('Borrar Clic'))
+        self.labelMy.set_text(_('ELIGE UN CLIC PARA JUGAR'))
+        self.imageBorrar.set_from_file(self.icons_path + '/borrar.png')
         
         self.__refresh_clics_view(True)
                             
@@ -273,15 +279,15 @@ class Manager:
             
     #List of clics to play (view)
     def __list_clics_view(self):
-        self.labelMy.set_text(_('Elige un Clic para jugar'))
-        self.bClics.set_label(_('Borrar Clic'))
+        self.labelMy.set_text(_('ELIGE UN CLIC PARA JUGAR'))
+        self.imageBorrar.set_from_file(self.icons_path + '/borrar.png')
         self.__refresh_clics_view(True)
         self.hboxSure.hide()
 
     #RList of clics to remove (view)
     def __remove_clics_view(self, *args):
-        self.labelMy.set_text(_('Elige un Clic para eliminarlo'))
-        self.bClics.set_label(_('Lista de Clics'))
+        self.labelMy.set_text(_('ELIGE UN CLIC PARA BORRAR'))
+        c = self.imageBorrar.set_from_file(self.icons_path + '/clics_mini.png')
         self.__refresh_clics_view(False)
         
     def __remove_clic(self, *args):
@@ -299,7 +305,7 @@ class Manager:
     def __clics_view(self, *args):
         name, clic, default = ManagerData.get_clic_data(self.iconView)
         if self.currentClicsView == 'Delete':
-            text = 'Seguro que quieres borrar el clic "' + name +'"?'
+            text = 'SEGURO QUE QUIERES BORRAR "' + name +'"?'
             self.labelSure.set_text(text)
             self.hboxSure.show()
         else :
