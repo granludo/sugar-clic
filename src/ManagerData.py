@@ -114,6 +114,7 @@ def put_columns(iconView):
 def get_clic_data(iconview):
     pos =  iconview.get_cursor()[0][0]
     iter = iconview.get_model().get_iter(pos)
+    name = iconview.get_model().get_value(iter, 0)
     folder = iconview.get_model().get_value(iter, 2)
     is_default = iconview.get_model().get_value(iter, 3)
-    return folder, is_default
+    return name, folder, is_default

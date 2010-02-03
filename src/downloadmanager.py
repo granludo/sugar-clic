@@ -169,16 +169,18 @@ class Download:
             self.controller = controller.Controller()
             self.controller.install_new_clic(self._get_file_name())      
             
-            self.win = gtk.Window(gtk.WINDOW_TOPLEVEL)
-            self.win.set_size_request(175,50)
-            self.button = gtk.Button("Download Finished (OK)")
+            img_app_path = os.path.join(paths.application_bundle_path, 'img/app') 
+            views_path = os.path.join(img_app_path, 'appViews')
+            self.xml = gtk.glade.XML(views_path + '/DownloadingInfo.glade')
+            self.window = self.xml.get_widget('dialog')
+            self.window.set_size_request(400,100)
+            self.window.move(600, 450)
+            self.window.show()
+            self.button = self.xml.get_widget('button')
             self.button.connect('clicked', self.__destroy_win)
-            self.button.show()
-            self.win.add(self.button)
-            self.win.show()
 
     def __destroy_win(self, *args):
-        self.win.destroy()
+        self.window.destroy()
 
     def __start_response_cb(self, alert, response_id):
         global _active_downloads
