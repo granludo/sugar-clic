@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Wed Feb  3 16:27:19 2010 -->
+<!--Generated with glade3 3.4.5 on Thu Feb  4 15:43:12 2010 -->
 <glade-interface>
   <widget class="GtkWindow" id="window">
     <child>
@@ -66,8 +66,29 @@
           </packing>
         </child>
         <child>
+          <widget class="GtkScrolledWindow" id="scrolledwindow2">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
+            <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
+            <child>
+              <widget class="GtkIconView" id="iconviewAvailable">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="spacing">75</property>
+                <property name="row_spacing">75</property>
+                <property name="column_spacing">75</property>
+                <property name="margin">50</property>
+              </widget>
+            </child>
+          </widget>
+          <packing>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
           <widget class="GtkHBox" id="hboxSure">
-            <property name="spacing">15</property>
+            <property name="spacing">25</property>
             <child>
               <widget class="GtkLabel" id="labelSure">
                 <property name="visible">True</property>
@@ -115,27 +136,6 @@
           </widget>
           <packing>
             <property name="expand">False</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
-          <widget class="GtkScrolledWindow" id="scrolledwindow2">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
-            <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
-            <child>
-              <widget class="GtkIconView" id="iconviewAvailable">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="spacing">50</property>
-                <property name="row_spacing">50</property>
-                <property name="column_spacing">50</property>
-                <property name="margin">25</property>
-              </widget>
-            </child>
-          </widget>
-          <packing>
             <property name="position">2</property>
           </packing>
         </child>

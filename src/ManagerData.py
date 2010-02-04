@@ -43,22 +43,6 @@ def __get_icon(name):
     theme = gtk.icon_theme_get_default()
     return theme.load_icon(name, 100, 0)
 
-#generate order lists
-def list_clics():
-    img_app_path = os.path.join(paths.application_bundle_path, 'img/app') 
-    icons_path = os.path.join(img_app_path, 'appIcons')
-    
-    lstore = gtk.ListStore(str, gtk.gdk.Pixbuf)
-    lstore.set_sort_column_id(COL_PATH, gtk.SORT_ASCENDING)
-    lstore.clear()
-
-    areaIcon = gtk.gdk.pixbuf_new_from_file_at_size(icons_path + '/area.jpg', 100, 100)
-    lstore.append(['Area', areaIcon])
-    authorIcon = gtk.gdk.pixbuf_new_from_file_at_size(icons_path + '/author.jpg', 100, 100)
-    lstore.append(['Author', authorIcon])
-    langIcon = gtk.gdk.pixbuf_new_from_file_at_size(icons_path + '/language.jpg', 100, 100)
-    lstore.append(['Language', langIcon])
-    return lstore
 
 #add web service information in a list
 def add_clics_data(data):
@@ -77,7 +61,7 @@ def add_clics_data(data):
             path = paths.clics_path
             
         if  icon != '':
-            Icon = gtk.gdk.pixbuf_new_from_file_at_size(path + '/' + item['Folder'] + '/' + item['Icon'] , 100, 100)
+            Icon = gtk.gdk.pixbuf_new_from_file_at_size(path + '/' + item['Folder'] + '/' + item['Icon'] , 150, 150)
         else :
             Icon = defaultIcon
 
