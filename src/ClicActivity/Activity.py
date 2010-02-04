@@ -151,6 +151,7 @@ class Activity(object):
         
         
         if styleCell.transparent == False:
+            cell.contentCell.img.set_colorkey(styleCell.backgroundColor)
             cell.contentCell.img.fill(styleCell.backgroundColor)
     
     
@@ -177,12 +178,12 @@ class Activity(object):
             elementP = xmlcell2.getElementsByTagName('p')
             texto = ''
             for element in elementP:
-                texto = texto + element.firstChild.nodeValue + '\n'
+                texto = texto + element.firstChild.nodeValue #+ '\n'
             
             font = pygame.font.Font(None, styleCell.fontSize)
             
             '''Blit text'''
-            self.renderText(texto,cell.Rect,font,cell.contentCell.img,cell.actualColorCell,(20,20))
+            self.renderText(texto,cell.Rect,font,cell.contentCell.img,cell.actualColorCell)
     
             
             ''' Border in cell'''
@@ -205,14 +206,9 @@ class Activity(object):
             texto = cell.contentCell.letter
             font = pygame.font.Font(None, styleCell.fontSize)
             #text = font.render(texto, True, styleCell.foregroundColor)
-            
-            if float(xmlcell.getAttribute('cellWidth')) > 20.0:
-                position = (8,8)
-            else:
-                position = (4,4)
 
             '''Blit text'''
-            self.renderText(texto,cell.Rect,font,cell.contentCell.img,letterColour,position)
+            self.renderText(texto,cell.Rect,font,cell.contentCell.img,letterColour)
         except:
             pass
         '''Border in cell'''
@@ -229,7 +225,7 @@ class Activity(object):
         return coef
     
     
-    def renderText(self,text,rect,font,surface,colour,pos):
+    def renderText(self,text,rect,font,surf,colour):
         print 'entra en rendertext'
         final_lines = []
     
@@ -260,19 +256,19 @@ class Activity(object):
                 final_lines.append(requested_line) 
     
         # Let's try to write the text out on the surface.
-    
-        #surf = pygame.Surface(rect.size) 
-    
-        accumulated_height = pos[1]
+        
+        total_height = len(final_lines) * font.size(final_lines[0])[1]
+        
+        accumulated_height = (rect.height - total_height) / 2
         for line in final_lines: 
             if accumulated_height + font.size(line)[1] >= rect.height:
                 raise TextRectException, "Once word-wrapped, the text string was too tall to fit in the rect."
             if line != "":
                 tempsurface = font.render(line, 1, colour)
-                surface.blit(tempsurface, ((rect.width - tempsurface.get_width()) / 2, accumulated_height))
+                surf.blit(tempsurface, ((rect.width - tempsurface.get_width()) / 2, accumulated_height))
                 
-            accumulated_height += font.size(line)[1]
-
+            accumulated_height += font.size(line)[1] #font.size returns (width,height)
+ 
 
     def play_sound(self,filename):
         #pygame.mixer.pre_init(44100,-16,2, 1024)

@@ -57,7 +57,8 @@ colorDefault= (42,42,42)
 colorMessage = (171,171,171)
 
 widthCross = 50 #Ample de la cell de la orientacio al crossword
-minFontSize = 20
+minFontSize = 25
+MIN_CELL = 30
 
 DEFAULT_BORDER_SIZE = 3
 class Images:

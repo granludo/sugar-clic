@@ -95,7 +95,11 @@ class Grid(object):
                 pass
             try:
                 self.cellHeight =  float(xml.getAttribute('cellHeight'))
+                if self.cellHeight < Constants.MIN_CELL: 
+                    self.cellHeight = Constants.MIN_CELL
                 self.cellWidth =   float(xml.getAttribute('cellWidth'))
+                if self.cellWidth < Constants.MIN_CELL: 
+                    self.cellWidth = Constants.MIN_CELL
             except:
                 self.cellHeight =  float(30)
                 self.cellWidth =   float(30)

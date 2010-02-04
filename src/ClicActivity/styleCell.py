@@ -89,5 +89,7 @@ class StyleCell(object):
         try:
             font = xml.getElementsByTagName('font')[0].getAttribute('size')
             self.fontSize = int(font)
+            if self.fontSize < Constants.minFontSize:
+                self.fontSize = Constants.minFontSize
         except:
             pass
