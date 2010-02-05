@@ -46,7 +46,7 @@ class Activity(object):
     def __init__(self,xmlActivity):
         
         self.xmlActivity = xmlActivity
-        a, b, c, d = pygame.cursors.load_xbm(Constants.Images.CURSOR,Constants.Images.CURSOR)
+        a, b, c, d = pygame.cursors.load_xbm(Constants.Images.CURSOR,Constants.Images.MASK)
         pygame.mouse.set_cursor(a, b, c, d)
 
         '''pygame.mouse.set_cursor(*pygame.cursors.broken_x)'''

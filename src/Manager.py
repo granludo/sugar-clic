@@ -219,7 +219,7 @@ class Manager:
         
         if not runaslib: 
             #called every 20 miliseconds (for pygame)
-            gobject.timeout_add(20, self.updating)
+            gobject.timeout_add(150, self.updating)
             self.window.show() 
             gtk.main()
 
