@@ -95,11 +95,11 @@ class Grid(object):
                 pass
             try:
                 self.cellHeight =  float(xml.getAttribute('cellHeight'))
-                if self.cellHeight < Constants.MIN_CELL: 
-                    self.cellHeight = Constants.MIN_CELL
+                #if self.cellHeight < Constants.MIN_CELL: 
+                #    self.cellHeight = Constants.MIN_CELL
                 self.cellWidth =   float(xml.getAttribute('cellWidth'))
-                if self.cellWidth < Constants.MIN_CELL: 
-                    self.cellWidth = Constants.MIN_CELL
+                #if self.cellWidth < Constants.MIN_CELL: 
+                #    self.cellWidth = Constants.MIN_CELL
             except:
                 self.cellHeight =  float(30)
                 self.cellWidth =   float(30)
@@ -205,17 +205,17 @@ class Grid(object):
             '''Tractament especific per grid de crossClues'''
             
             '''1r Crea el cell amb la imatge de la orientacio'''
-            border  = Rect (xInicial,yInicial,Constants.widthCross,height)
+            border  = Rect (xInicial,yInicial,height,height)
             cell = Cell(border,display_surf,0,self.hasBorder)
             
-            surfaceEmpty = surface.Surface((int(Constants.widthCross),int(height)),0)
+            surfaceEmpty = surface.Surface((int(height),int(height)))
             if self.across:
                 img = pygame.image.load(Constants.Images.ACROSS).convert_alpha()
             else:
                 img = pygame.image.load(Constants.Images.DOWN).convert_alpha()
             
-            img2 = pygame.transform.scale(img,(surfaceEmpty.get_width(),surfaceEmpty.get_height()))
-            surfaceEmpty.blit(img,(0,0))
+            img2 = pygame.transform.scale(img,surfaceEmpty.get_size())
+            surfaceEmpty.blit(img2,(0,0))
 
             contentCell = ContentCell()
             
@@ -227,10 +227,10 @@ class Grid(object):
             self.Cells.append(cell)
             
             '''2n Crea el cell per les definicions'''
-            border  = Rect (xInicial+Constants.widthCross,yInicial,width,height)
+            border  = Rect (xInicial+height,yInicial,width-height,height)
             cell = Cell(border,display_surf,1,self.hasBorder)
             
-            surfaceEmpty = surface.Surface((int(width),int(height)),0)
+            surfaceEmpty = surface.Surface((int(width)-int(height),int(height)))
             
             if self.transparent == False: 
                 print 'grid-> color fondo = ',self.backgroundColor
