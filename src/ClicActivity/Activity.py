@@ -178,7 +178,7 @@ class Activity(object):
             elementP = xmlcell2.getElementsByTagName('p')
             texto = ''
             for element in elementP:
-                texto = texto + element.firstChild.nodeValue #+ '\n'
+                texto = texto + element.firstChild.nodeValue + '\n'
             
             font = pygame.font.Font(None, styleCell.fontSize)
             
@@ -246,7 +246,7 @@ class Activity(object):
                 for word in words:
                     test_line = accumulated_line + word + " "
                     # Build the line while the words fit.    
-                    if font.size(test_line)[0] < rect.width:
+                    if font.size(test_line)[0] < rect.width-4:
                         accumulated_line = test_line 
                     else: 
                         final_lines.append(accumulated_line) 
@@ -256,8 +256,15 @@ class Activity(object):
                 final_lines.append(requested_line) 
     
         # Let's try to write the text out on the surface.
-        
-        total_height = len(final_lines) * font.size(final_lines[0])[1]
+        ok = False
+        while not ok:
+            total_height = len(final_lines) * font.size(final_lines[0])[1]
+            if total_height < rect.height:
+                ok = True
+            else:
+                '''HAURIA DE FER MES PETITA LA FONT'''
+                total_height = rect.height - 1
+                ok = True
         
         accumulated_height = (rect.height - total_height) / 2
         for line in final_lines: 

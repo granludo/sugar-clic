@@ -78,7 +78,7 @@ class WordSearch(Activity):
         for i in range(0,len(tmpClues)):
             self.clues.append(tmpClues[i].firstChild.data)
             
-        orientation =  self.xmlActivity.getElementsByTagName('layout')[0].getAttribute('position')   
+        orientation =  self.xmlActivity.getElementsByTagName('layout')[0].getAttribute('position')
         
         ''' Calculate Real size'''
         heightText = self.textGrid.cellHeight * self.textGrid.numRows
@@ -91,6 +91,25 @@ class WordSearch(Activity):
             relation = heightText/heightCells
             heightCells = heightText
             widthCells = widthCells * relation
+
+        '''Maximize size'''
+        if orientation == 'AB' or 'BA':
+            if heightText < heightCells:
+                coef = self.calculateCoef(widthText+widthCells, heightCells)
+            else:
+                coef = self.calculateCoef(widthText+widthCells, heightText)
+        else:
+            if widthText < widthCells:
+                coef = self.calculateCoef(widthCells, heightText+heightCells)
+            else:
+                coef = self.calculateCoef(widthCells, heightText+heightCells)
+        
+        heightText = heightText * coef
+        widthText = widthText * coef
+        
+        heightCells = heightCells * coef
+        widthCells = widthCells * coef
+        
                
         '''Loading constants for the activity'''
 

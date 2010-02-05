@@ -46,7 +46,7 @@ from ClicActivity.GeneralDialog import GeneralDialog
 from ClicActivity.SimpleAssociation import SimpleAssociation
 from ClicActivity.ComplexAssociation import ComplexAssociation
 from ClicActivity.WordSearch import WordSearch
-from ClicActivity.CrossWord import CrossWord
+#from ClicActivity.CrossWord import CrossWord
 from ClicActivity import Constants
 
 
@@ -207,7 +207,7 @@ class ClicActivities:
         elif  node.getAttribute('class') =='@textGrid.WordSearch':
                         return True
         elif  node.getAttribute('class') =='@textGrid.CrossWord':
-                        return True
+                        return False
         else:
              return False
     def executeActivity(self,node):
