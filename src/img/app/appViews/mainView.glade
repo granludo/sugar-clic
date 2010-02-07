@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Sun Feb  7 17:10:03 2010 -->
+<!--Generated with glade3 3.4.5 on Sun Feb  7 19:11:58 2010 -->
 <glade-interface>
   <widget class="GtkWindow" id="window">
     <child>
@@ -100,7 +100,7 @@
         <child>
           <widget class="GtkAlignment" id="alignment3">
             <property name="visible">True</property>
-            <property name="left_padding">200</property>
+            <property name="left_padding">150</property>
             <property name="right_padding">200</property>
             <child>
               <widget class="GtkLabel" id="label1">
@@ -109,8 +109,8 @@
 Accommodare interpretaris qui no, at aeque nemore dicunt his. Fabulas 
 indoctum erroribus ei mea, accusam gloriatur qui at, ei vel posse soleat 
 legimus. Solum dicant putant te sed, nobis iuvaret oporteat no pri. Ut sumo 
-impedit vis, quis voluptatibus an has, ex brute hendrerit mea. Ei diam honestatis 
-delicatissimi nam, per no nulla iuvaret expetenda.</property>
+impedit vis, quis voluptatibus an has, ex brute hendrerit mea. Ei diam 
+honestatis delicatissimi nam, per no nulla iuvaret expetenda.</property>
               </widget>
             </child>
           </widget>

@@ -1,42 +1,38 @@
 #activity.py
 msgid "Clics Player"
-msgstr "Reproductor de Clics"
+msgstr "Clics Joueur"
 
 
 #manager.py
 msgid "SELECT A CLIC TO PLAY"
-msgstr "ELIGE UN CLIC PARA JUGAR"
+msgstr "SÉLECTIONNE UN CLIC POUR JOUER"
 
 
 #manager.py
 msgid "SELECT A CLIC TO DELETE"
-msgstr "ELIGE UN CLIC PARA BORRAR"
-
+msgstr "SÉLECTIONNE UN CLIC POUR SUPPRIMER"
 
 #manager.py
 msgid "DO YOU REALLY WANT TO DELETE"
-msgstr "SEGURO QUE QUIERES BORRAR"
+msgstr "ETES-VOUS SÛR DE VOULOIR SUPPRIMER"
 
 
 #downloadmanager.py
 msgid "ONCE DOWNLOADED, YOU WILL HAVE THE CLIC ON YOUR LIST."
-msgstr "UNA VEZ DESCARGADO, TENDRAS EL CLIC EN TU LISTADO."
+msgstr "UNE FOIS TÉLÉCHARGÉ, VOUS AUREZ LE CLIC DANS VOTRE LISTE"
 
 #manager.py
 msgid "MANUAL"
-msgstr "MANUAL"
+msgstr "MANUEL"
 
 #manager.py
-msgid "ABOUT"
-msgstr "ACERCA DE..."
+msgid "ABOUT SUGARCLIC"
+msgstr "AU SUJET DE SUGARCLIC"
 
 #manager.py
 msgid "DOWNLOAD CLICS"
-msgstr "DESCARGAR CLICS"
+msgstr "TÉLÉCHARGER CLICS"
 
 #manager.py
 msgid "MY CLICS"
-msgstr "MIS CLICS"
-
-
-
+msgstr "MES CLICS"
