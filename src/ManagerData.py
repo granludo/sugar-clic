@@ -61,7 +61,7 @@ def add_clics_data(data):
             path = paths.clics_path
             
         if  icon != '':
-            Icon = gtk.gdk.pixbuf_new_from_file_at_size(path + '/' + item['Folder'] + '/' + item['Icon'] , 125, 125)
+            Icon = gtk.gdk.pixbuf_new_from_file_at_size(path + '/' + item['Folder'] + '/' + item['Icon'] , 100, 100)
         else :
             Icon = defaultIcon
 

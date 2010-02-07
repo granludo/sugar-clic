@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 ''' 
     This file is part of Sugar-Clic
     
@@ -133,7 +134,7 @@ class Manager:
         self.labelMan = self.xml.get_widget('labelManual')
         self.labelMan.set_text(_('MANUAL'))
         self.labelAbout = self.xml.get_widget('labelAbout')
-        self.labelAbout.set_text(_('ABOUT'))    
+        self.labelAbout.set_text(_('ABOUT SUGARCLIC'))    
         self.labelSearch = self.xml.get_widget('labelSearch')
         self.labelSearch.set_text(_('DOWNLOAD CLICS'))
         self.labelMYCLICS = self.xml.get_widget('labelMyClics')
