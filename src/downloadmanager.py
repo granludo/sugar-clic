@@ -176,7 +176,7 @@ class Download:
             self.label.set_text(_('ONCE DOWNLOADED, YOU WILL HAVE THE CLIC ON YOUR LIST.'))
             self.ImageGo = self.xml.get_widget('image') 
             self.ImageGo.set_from_file(icons_path + '/si.png')
-            self.window.set_size_request(400,100)
+            self.window.set_size_request(400,150)
             self.window.move(600, 450)
             self.window.show()
             self.button = self.xml.get_widget('button')
