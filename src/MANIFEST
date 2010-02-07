@@ -1,88 +1,4 @@
 new/data/downloaded.xml
-new/data/clics/colorsp3/poma.JPG
-new/data/clics/colorsp3/trianglegroc.gif
-new/data/clics/colorsp3/cerclevermell.gif
-new/data/clics/colorsp3/trianglevermell.gif
-new/data/clics/colorsp3/nuvol.JPG
-new/data/clics/colorsp3/triangleblau.gif
-new/data/clics/colorsp3/quadravermell.gif
-new/data/clics/colorsp3/sol.JPG
-new/data/clics/colorsp3/color_icon.jpeg
-new/data/clics/colorsp3/quadratblau.gif
-new/data/clics/colorsp3/colorsp3.jclic
-new/data/clics/colorsp3/quadratverd.gif
-new/data/clics/colorsp3/triangleverd.gif
-new/data/clics/colorsp3/cerclegroc.gif
-new/data/clics/colorsp3/titolnou.JPG
-new/data/clics/colorsp3/cercleblau.gif
-new/data/clics/colorsp3/cercleverd.gif
-new/data/clics/colorsp3/quadratgroc.gif
-new/data/clics/aves/Delfines2.jpg
-new/data/clics/aves/lion.jpg
-new/data/clics/aves/orca.jpg
-new/data/clics/aves/Pel+¡cula3.avi
-new/data/clics/aves/Avestruz.jpg
-new/data/clics/aves/Delfines3.jpg
-new/data/clics/aves/Pel+¡cula5.avi
-new/data/clics/aves/aves.jclic
-new/data/clics/aves/Dromedario1.jpg
-new/data/clics/aves/Delfinamazona.jpg
-new/data/clics/aves/pezestan.jpg
-new/data/clics/aves/BebeFoca.jpg
-new/data/clics/aves/frailecillo.jpg
-new/data/clics/aves/Condor.jpg
-new/data/clics/aves/provincias2.gif
-new/data/clics/aves/criafoca.jpg
-new/data/clics/aves/ballena1.jpg
-new/data/clics/aves/flamencos7.jpg
-new/data/clics/aves/Pel+¡cula2.avi
-new/data/clics/aves/delfin.jpg
-new/data/clics/aves/Agapornis2.jpg
-new/data/clics/aves/Delfintwist2.jpg
-new/data/clics/aves/leoncachorros.jpg
-new/data/clics/aves/zapatero.jpg
-new/data/clics/aves/delfi.jpg
-new/data/clics/aves/Periquitoaustral.jpg
-new/data/clics/dinos4/Tiranosaure Rex.mp3
-new/data/clics/dinos4/Esquelet III.jpg
-new/data/clics/dinos4/30037731.JPG
-new/data/clics/dinos4/potes.mp3
-new/data/clics/dinos4/cua.mp3
-new/data/clics/dinos4/Stegosaurus.jpg
-new/data/clics/dinos4/Triceratops I.JPG
-new/data/clics/dinos4/plaques.mp3
-new/data/clics/dinos4/Tyrannosaurus-rex.jpg
-new/data/clics/dinos4/nariu.mp3
-new/data/clics/dinos4/Troballa.jpg
-new/data/clics/dinos4/coll.mp3
-new/data/clics/dinos4/Jurassic_Park.mid
-new/data/clics/dinos4/urpes.mp3
-new/data/clics/dinos4/tricer.jpg
-new/data/clics/dinos4/banyes.mp3
-new/data/clics/dinos4/Diplodocus II.jpg
-new/data/clics/dinos4/ASTEGOSAURE.gif
-new/data/clics/dinos4/Estegosaure .mp3
-new/data/clics/dinos4/Carn.jpg
-new/data/clics/dinos4/Tiranosaure Rex III.gif
-new/data/clics/dinos4/Tiranosaure Rex II.jpg
-new/data/clics/dinos4/Transport.jpg
-new/data/clics/dinos4/Tyrannosaurus-rex I.jpg
-new/data/clics/dinos4/dinosaurio.jpg
-new/data/clics/dinos4/espines.mp3
-new/data/clics/dinos4/Triceratops VI.gif
-new/data/clics/dinos4/Diplodocus.mp3
-new/data/clics/dinos4/cap.mp3
-new/data/clics/dinos4/dinos4.jclic
-new/data/clics/dinos4/Tricerartops.mp3
-new/data/clics/dinos4/Estegosaure I.JPG
-new/data/clics/dinos4/Estegosaure X.jpg
-new/data/clics/dinos4/Triceratops V.jpg
-new/data/clics/dinos4/Diplodocus II.gif
-new/data/clics/dinos4/Herba IV.jpg
-new/data/clics/dinos4/Esquelet XII.jpg
-new/data/clics/dinos4/Neteja.jpg
-new/data/clics/dinos4/Portada.jpg
-new/data/clics/dinos4/Estegosaure XI.jpg
 clicParser.pyc
 clicHandler.pyc
 ClicActivity/ContentCell.pyc
@@ -171,7 +87,6 @@ setup.py
 Manager.py
 paths.py
 data/default.xml
-data/test/places.sqlite-journal
 data/test/places.sqlite
 data/test/permissions.sqlite
 data/test/secmod.db

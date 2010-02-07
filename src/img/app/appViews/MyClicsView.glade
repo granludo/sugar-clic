@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Sun Feb  7 23:41:44 2010 -->
+<!--Generated with glade3 3.4.5 on Mon Feb  8 00:26:06 2010 -->
 <glade-interface>
   <widget class="GtkWindow" id="window">
     <child>
@@ -109,10 +109,10 @@
               <widget class="GtkIconView" id="iconviewAvailable">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="spacing">50</property>
+                <property name="spacing">25</property>
                 <property name="row_spacing">50</property>
                 <property name="column_spacing">50</property>
-                <property name="margin">50</property>
+                <property name="margin">25</property>
               </widget>
             </child>
           </widget>
