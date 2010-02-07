@@ -169,10 +169,13 @@ class Download:
             
             img_app_path = os.path.join(paths.application_bundle_path, 'img/app') 
             views_path = os.path.join(img_app_path, 'appViews')
+            icons_path = os.path.join(img_app_path, 'appIcons')
             self.xml = gtk.glade.XML(views_path + '/DownloadingInfo.glade')
             self.window = self.xml.get_widget('dialog')
             self.label = self.xml.get_widget('label')
             self.label.set_text(_('ONCE DOWNLOADED, YOU WILL HAVE THE CLIC ON YOUR LIST.'))
+            self.ImageGo = self.xml.get_widget('image') 
+            self.ImageGo.set_from_file(icons_path + '/si.png')
             self.window.set_size_request(400,100)
             self.window.move(600, 450)
             self.window.show()

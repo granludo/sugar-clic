@@ -160,6 +160,9 @@ class Manager:
                         
         self.labelMy = self.xml.get_widget('labelMyClics')
         self.vboxAvailable = self.xml.get_widget('vboxAvailable')
+        self.labelButBorrar = self.xml.get_widget('labelButBorrar')
+        self.labelButAvaMain = self.xml.get_widget('labelButAvaMain')
+        self.labelButAvaMain.set_text(_('MAIN MENU'))
         
         self.imageBorrar = self.xml.get_widget('imageClics')
         self.imageSI = self.xml.get_widget('imageSI')
@@ -187,13 +190,25 @@ class Manager:
         #loading window
         self.windowBrowser = self.xml.get_widget('window')
         
-        self.bFirstPage = self.xml.get_widget('buttonFirstPage')
-        self.bFirstPage.connect('clicked', self.__search_clics_view_home)
-        
         self.bBM = self.xml.get_widget('buttonHome')
         self.bBM.connect('clicked', self.__main_view)
         self.ImageBr = self.xml.get_widget('imageHome') 
         self.ImageBr.set_from_file(icons_path + '/home.png')
+        
+        self.bGo = self.xml.get_widget('buttonFirstPage')
+        self.bGo.connect('clicked', self.__search_clics_view_home)
+        self.ImageGo = self.xml.get_widget('imageGoBack') 
+        self.ImageGo.set_from_file(icons_path + '/goBack.png')
+        
+        self.bGo = self.xml.get_widget('buttonFirstPage')
+        self.bGo.connect('clicked', self.__search_clics_view_home)
+        self.ImageGo = self.xml.get_widget('imageGoBack') 
+        self.ImageGo.set_from_file(icons_path + '/goBack.png')
+        
+        self.labelButHome = self.xml.get_widget('labelButHome')
+        self.labelButHome.set_text(_('MAIN MENU'))
+        self.labelButFirst = self.xml.get_widget('labelButFirst')
+        self.labelButFirst.set_text(_('HOME PAGE'))
         
         self.vboxBrowser = self.xml.get_widget('vboxBrowser')
         self.browser = Browser()
@@ -275,6 +290,7 @@ class Manager:
         self.start_clic_view = False
         self.currentClicsView = 'Clics'  
         self.labelMy.set_text(_('SELECT A CLIC TO PLAY'))
+        self.labelButBorrar.set_text(_('DELETE CLICS'))
         self.imageBorrar.set_from_file(self.icons_path + '/borrar.png')
         
         self.__refresh_clics_view(True)
@@ -298,6 +314,7 @@ class Manager:
     #List of clics to play (view)
     def __list_clics_view(self):
         self.labelMy.set_text(_('SELECT A CLIC TO PLAY'))
+        self.labelButBorrar.set_text(_('DELETE CLICS'))
         self.imageBorrar.set_from_file(self.icons_path + '/borrar.png')
         self.__refresh_clics_view(True)
         self.hboxSure.hide()
@@ -305,6 +322,7 @@ class Manager:
     #RList of clics to remove (view)
     def __remove_clics_view(self, *args):
         self.labelMy.set_text(_('SELECT A CLIC TO DELETE'))
+        self.labelButBorrar.set_text(_('MY CLICS'))
         c = self.imageBorrar.set_from_file(self.icons_path + '/clics_mini.png')
         self.__refresh_clics_view(False)
         

@@ -23,6 +23,18 @@ msgid "ONCE DOWNLOADED, YOU WILL HAVE THE CLIC ON YOUR LIST."
 msgstr "UNA VEGADA DESCARREGAT, TINDRÀS EL CLIC EN EL TEU LLISTAT."
 
 #manager.py
+msgid "HOME PAGE"
+msgstr "INICI"
+
+#manager.py
+msgid "MAIN MENU"
+msgstr "MENÚ PRINCIPAL"
+
+#manager.py
+msgid "DELETE CLICS"
+msgstr "ESBORRAR CLICS"
+
+#manager.py
 msgid "MANUAL"
 msgstr "MANUAL"
 
