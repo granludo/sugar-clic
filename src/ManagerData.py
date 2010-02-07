@@ -61,7 +61,7 @@ def add_clics_data(data):
             path = paths.clics_path
             
         if  icon != '':
-            Icon = gtk.gdk.pixbuf_new_from_file_at_size(path + '/' + item['Folder'] + '/' + item['Icon'] , 150, 150)
+            Icon = gtk.gdk.pixbuf_new_from_file_at_size(path + '/' + item['Folder'] + '/' + item['Icon'] , 125, 125)
         else :
             Icon = defaultIcon
 
@@ -73,27 +73,6 @@ def put_columns(iconView):
     iconView.set_text_column(COL_PATH)
     iconView.set_pixbuf_column(COL_PIXBUF)
         
-#    #column for title
-#    column = gtk.TreeViewColumn(_('Title'), gtk.CellRendererText(), 
-#                                    text=COLUMN_TITLE)
-#    column.set_sort_column_id(COLUMN_TITLE)
-#    tree.append_column(column)
-#
-#
-#    # column for authors
-#    column = gtk.TreeViewColumn(_('Author'), gtk.CellRendererText(),text=COLUMN_AUTHOR)
-#    column.set_sort_column_id(COLUMN_AUTHOR)
-#    tree.append_column(column)
-#
-#    # columns for areas
-#    column = gtk.TreeViewColumn(_('Area'), gtk.CellRendererText(),text=COLUMN_AREA)
-#    column.set_sort_column_id(COLUMN_AREA)
-#    tree.append_column(column)
-#
-#    # column for languages
-#    column = gtk.TreeViewColumn(_('Language'), gtk.CellRendererText(),text=COLUMN_LANGUAGE)
-#    column.set_sort_column_id(COLUMN_LANGUAGE)
-#    tree.append_column(column)
     
 def get_clic_data(iconview):
     pos =  iconview.get_cursor()[0][0]

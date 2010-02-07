@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Wed Feb  3 15:49:04 2010 -->
+<!--Generated with glade3 3.4.5 on Sun Feb  7 17:10:03 2010 -->
 <glade-interface>
   <widget class="GtkWindow" id="window">
     <child>
@@ -46,7 +46,7 @@
                           </widget>
                         </child>
                         <child>
-                          <widget class="GtkLabel" id="label5">
+                          <widget class="GtkLabel" id="labelManual">
                             <property name="visible">True</property>
                             <property name="label" translatable="yes">MANUAL</property>
                           </widget>
@@ -75,7 +75,7 @@
                           </widget>
                         </child>
                         <child>
-                          <widget class="GtkLabel" id="label4">
+                          <widget class="GtkLabel" id="labelAbout">
                             <property name="visible">True</property>
                             <property name="label" translatable="yes">ACERCA DE...</property>
                           </widget>
@@ -148,7 +148,7 @@ delicatissimi nam, per no nulla iuvaret expetenda.</property>
                           </widget>
                         </child>
                         <child>
-                          <widget class="GtkLabel" id="label2">
+                          <widget class="GtkLabel" id="labelSearch">
                             <property name="visible">True</property>
                             <property name="label" translatable="yes">DESCARGAR CLICS</property>
                           </widget>
@@ -177,7 +177,7 @@ delicatissimi nam, per no nulla iuvaret expetenda.</property>
                           </widget>
                         </child>
                         <child>
-                          <widget class="GtkLabel" id="label3">
+                          <widget class="GtkLabel" id="labelMyClics">
                             <property name="visible">True</property>
                             <property name="label" translatable="yes">MIS CLICS</property>
                           </widget>

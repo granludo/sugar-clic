@@ -36,6 +36,7 @@ from sugar import mime
 from sugar.graphics.alert import Alert, TimeoutAlert
 from sugar.graphics.icon import Icon
 from sugar.activity import activity
+from gettext import gettext as _
 import paths
 import controller
 #import progressbar
@@ -50,10 +51,6 @@ else:
 
 NS_BINDING_ABORTED = 0x804b0002             # From nsNetError.h
 NS_ERROR_SAVE_LINK_AS_TIMEOUT = 0x805d0020  # From nsURILoader.h
-
-DS_DBUS_SERVICE = 'org.laptop.sugar.DataStore'
-DS_DBUS_INTERFACE = 'org.laptop.sugar.DataStore'
-DS_DBUS_PATH = '/org/laptop/sugar/DataStore'
 
 _MIN_TIME_UPDATE = 5        # In seconds
 _MIN_PERCENT_UPDATE = 10
@@ -173,6 +170,8 @@ class Download:
             views_path = os.path.join(img_app_path, 'appViews')
             self.xml = gtk.glade.XML(views_path + '/DownloadingInfo.glade')
             self.window = self.xml.get_widget('dialog')
+            self.label = self.xml.get_widget('label')
+            self.label.set_text(_('ONCE DOWNLOADED, YOU WILL HAVE THE CLIC ON YOUR LIST.'))
             self.window.set_size_request(400,100)
             self.window.move(600, 450)
             self.window.show()
@@ -210,13 +209,6 @@ class Download:
             os.remove(self.dl_jobject.file_path)
         self.dl_jobject.destroy()
         self.dl_jobject = None
-#
-#    def _internal_save_cb(self):
-#        self.cleanup_datastore_write()
-#
-#    def _internal_save_error_cb(self, err):
-#        logging.debug("Error saving activity object to datastore: %s" % err)
-#        self.cleanup_datastore_write()
 
     def onProgressChange64(self, web_progress, request, cur_self_progress,
                            max_self_progress, cur_total_progress,
