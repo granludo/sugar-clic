@@ -1,5 +1,5 @@
 [Activity]
-name = Clic Player
+name = Reproductor de Clics
 bundle_id = net.netii.kumuolpc.ClicPlayer
 service_name = net.netii.kumuolpc.CliclPlayer
 class = activity.ClicPlayerActivity

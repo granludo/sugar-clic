@@ -87,7 +87,7 @@ class Manager:
             color = gtk.gdk.Color("orange")
             self.window.modify_bg(state, color)
         
-        
+        #loading main view
         self.xml = gtk.glade.XML(views_path + '/mainView.glade') 
         self.win = self.xml.get_widget('window')
         self.Main = self.xml.get_widget('Main')
@@ -121,18 +121,26 @@ class Manager:
         self.ImageAbout = self.xml.get_widget('imageAbout')
         self.ImageAbout.set_from_file(icons_path + '/about.png')
         
-#        self.tooltips = gtk.Tooltips()
-#        self.HH = self.xml.get_widget('hbuttonbox2')
-#        self.HH.pack_start(self.bAbout, False, False, 3)
-#        self.tooltips.set_tip(self.bAbout, "SHADOW_IN")
-        
         #Search button
         self.bS = self.xml.get_widget('buttonSearch')
         self.bS.connect('clicked', self.__search_clics_view) 
         self.bS.connect('enter', self.__change_icon, '/download_2.png', 3) 
         self.bS.connect('leave', self.__change_icon, '/download.png', 3) 
         self.ImageSearch = self.xml.get_widget('imageSearch')
-        self.ImageSearch.set_from_file(icons_path + '/download.png')        
+        self.ImageSearch.set_from_file(icons_path + '/download.png')    
+        
+        #set the labels to translate
+        self.labelMan = self.xml.get_widget('labelManual')
+        self.labelMan.set_text(_('MANUAL'))
+        self.labelAbout = self.xml.get_widget('labelAbout')
+        self.labelAbout.set_text(_('ABOUT'))    
+        self.labelSearch = self.xml.get_widget('labelSearch')
+        self.labelSearch.set_text(_('DOWNLOAD CLICS'))
+        self.labelMYCLICS = self.xml.get_widget('labelMyClics')
+        self.labelMYCLICS.set_text(_('MY CLICS'))
+  
+  
+  
   
         #loading My Clics View
         self.xml = gtk.glade.XML(views_path + '/MyClicsView.glade') 
@@ -265,7 +273,7 @@ class Manager:
     def __available_clics_view(self, *args):
         self.start_clic_view = False
         self.currentClicsView = 'Clics'  
-        self.labelMy.set_text(_('ELIGE UN CLIC PARA JUGAR'))
+        self.labelMy.set_text(_('SELECT A CLIC TO PLAY'))
         self.imageBorrar.set_from_file(self.icons_path + '/borrar.png')
         
         self.__refresh_clics_view(True)
@@ -288,14 +296,14 @@ class Manager:
             
     #List of clics to play (view)
     def __list_clics_view(self):
-        self.labelMy.set_text(_('ELIGE UN CLIC PARA JUGAR'))
+        self.labelMy.set_text(_('SELECT A CLIC TO PLAY'))
         self.imageBorrar.set_from_file(self.icons_path + '/borrar.png')
         self.__refresh_clics_view(True)
         self.hboxSure.hide()
 
     #RList of clics to remove (view)
     def __remove_clics_view(self, *args):
-        self.labelMy.set_text(_('ELIGE UN CLIC PARA BORRAR'))
+        self.labelMy.set_text(_('SELECT A CLIC TO DELETE'))
         c = self.imageBorrar.set_from_file(self.icons_path + '/clics_mini.png')
         self.__refresh_clics_view(False)
         
@@ -314,7 +322,7 @@ class Manager:
     def __clics_view(self, *args):
         name, clic, default = ManagerData.get_clic_data(self.iconView)
         if self.currentClicsView == 'Delete':
-            text = 'SEGURO QUE QUIERES BORRAR "' + name +'"?'
+            text = _('DO YOU REALLY WANT TO DELETE') + ' "' + name +'"?'
             self.labelSure.set_text(text)
             self.hboxSure.show()
         else :
