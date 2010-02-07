@@ -171,7 +171,7 @@ class Download:
             views_path = os.path.join(img_app_path, 'appViews')
             icons_path = os.path.join(img_app_path, 'appIcons')
             self.xml = gtk.glade.XML(views_path + '/DownloadingInfo.glade')
-            self.window = self.xml.get_widget('dialog')
+            self.window = self.xml.get_widget('window')
             self.label = self.xml.get_widget('label')
             self.label.set_text(_('ONCE DOWNLOADED, YOU WILL HAVE THE CLIC ON YOUR LIST.'))
             self.ImageGo = self.xml.get_widget('image') 
