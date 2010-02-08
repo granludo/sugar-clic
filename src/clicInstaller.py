@@ -36,7 +36,8 @@ import re
 import threading
 import paths
 import shutil
-
+import gtk
+from gettext import gettext as _
 import controller
 
 class Installer:
@@ -45,7 +46,6 @@ class Installer:
         self.data_path = ""
 
             
-            
     def __getText(self, nodelist):
         rc = ""
         for node in nodelist:
@@ -53,12 +53,13 @@ class Installer:
                 rc = rc + node.data
         return rc
 
-
     #Parse information about the clic (sequence, mediaBag, settings)
     def get_clic_info(self, file):
         self.clics_path = paths.new_clics_path  #folder to install clics
         self.data_path = paths.application_data_path
-        t = self.__unzip_xmlclic(file)
+        
+        from_path = os.path.join(self.data_path, file)
+        t = self.__unzip_file(from_path, self.data_path)
         
         clicInfo = minidom.parse(self.data_path + '/' + file)
         urlsC = clicInfo.getElementsByTagName('urlClic')   
@@ -69,7 +70,6 @@ class Installer:
         licenseP = clicInfo.getElementsByTagName('License')
         themeP = clicInfo.getElementsByTagName('Theme')
         languageP = clicInfo.getElementsByTagName('Language')
-        
        
         self.subject =  subjectP[0].childNodes[0].data
         self.author =  authorP[0].childNodes[0].data
@@ -105,68 +105,97 @@ class Installer:
         hilo = threading.Thread(target=self.__download_file, args=(l))
         hilo.start()
 
-        self.__delete_file(file)
+        self.__delete_file(self.data_path, file)
         
-    def __delete_file(self, file):
-        os.remove(self.data_path + '/'+ file)                 
-   
-            
-    #Unzips the Jclic to a local folder and removes the file
-    def __unzip_xmlclic(self, file):   
-        #self.label.set_text('File downloaded')
-        t = os.system('unzip -o '+ self.data_path + '/'+ file + ' -d ' + self.data_path)                 
-        return t  
-    
+
     def __download_file(self, *urls):
+        initial_text = 'ONCE DOWNLOADED, YOU WILL HAVE THE CLIC ON YOUR LIST.'
+        self.__show_warning(initial_text, None)
+        
         clic = urls[0]
         urls_to_download = urls[1]
         icons_to_download = urls[2]
         print icons_to_download
 
-        
-        done = False
-                
+        done = False                
         i = 0
         
+        #Find a valid url and download the clic.
         while ((done == False) and (i < len(urls_to_download))) : 
             
             file =  urls_to_download[i].split("/")[-1]
             folder = file.split('.',1)[0]
-            clic['Folder'] = folder        
-                
-            t = os.system('wget -q ' + urls_to_download[i] + ' --directory-prefix=' + self.clics_path )    
+            clic['Folder'] = folder
+            
+            t = self.__wget_file(urls_to_download[i], self.clics_path)  
             if t == 0:
-                t = os.system('unzip -o '+ self.clics_path + '/'+ file + ' -d ' + self.clics_path + '/' + folder)            
+                from_path = os.path.join(self.clics_path, file)
+                to_path = os.path.join(self.clics_path, folder)
+                t = self.__unzip_file(from_path, to_path)   
                 if t == 0:
-                    os.remove(self.clics_path + '/' + file)
-                    if t == 0:
-                        print 'Installed in folder clics/' + folder
-                        self.controller = controller.Controller()
-                        done = True
+                    self.__delete_file(self.clics_path, file)
+                    print 'Installed in folder clics/' + folder
+                    self.controller = controller.Controller()
+                    done = True
                         
             i = i + 1
         
-                        
-                        
+        #If it was possible to download the clic, download its icon.         
         if done == True :
-            icon =  icons_to_download[0].split("/")[-1]
-            t = os.system('wget -q ' + icons_to_download[0] + ' --directory-prefix=' + self.clics_path + '/' + folder )  
+            to_path = os.path.join(self.clics_path, folder)
+            t = self.__wget_file(icons_to_download[0], to_path)
             if t == 0:
+                icon =  icons_to_download[0].split("/")[-1]
                 clic['Icon'] = icon  
             else :
                 clic['Icon'] = ''
             #calls the controller to add a new clic to the db list     
             self.controller.add_new_clic(clic)
-                    
-        
+                           
         if done == False:
-            print 'NOT INSTALLED'
+            self.__show_warning('IT WAS NOT POSSIBLE TO DOWNLOAD', clic['Title'])
     
-    def delete_clic_folder(self, folder):
-        shutil.rmtree(paths.new_clics_path + '/' + folder)
-   
+    #removes all the data of a clic's folder.
+    def delete_clic_folder(self, clics_folder):
+        shutil.rmtree(paths.new_clics_path + '/' + clics_folder)
     
+    #removes zip file.
+    def __delete_file(self, path, file):
+        file_to_remove = os.path.join(path, file)
+        t = os.remove(file_to_remove)      
+            
+    #Unzips a file to a new path (it will overwrite content if exists).
+    def __unzip_file(self, from_path, to_path):   
+        t = os.system('unzip -o '+ from_path + ' -d ' + to_path)                 
+        return t  
     
+    #Wget downloads a file from a url and stores it in a path
+    def __wget_file(self, url, to_path):
+        t = os.system('wget -q ' + url + ' --directory-prefix=' + to_path)  
+        return t
     
+    #shows an alert to the user to inform about the status of the download (clic).  
+    def __show_warning(self, text, clic):     
+        img_app_path = os.path.join(paths.application_bundle_path, 'img/app') 
+        views_path = os.path.join(img_app_path, 'appViews')
+        icons_path = os.path.join(img_app_path, 'appIcons')
+        self.xml = gtk.glade.XML(views_path + '/DownloadingInfo.glade')
+        self.window = self.xml.get_widget('window')
+        self.label = self.xml.get_widget('label')
+        if clic == None :
+            self.label.set_text(_(text))
+        else :
+            text = _(text) + ' "' + clic + '"'
+            self.label.set_text(text)
+        self.ImageGo = self.xml.get_widget('image') 
+        self.ImageGo.set_from_file(icons_path + '/si.png')
+        self.window.resize(1200, 75)
+        self.window.move(0, 825)
+        self.window.show()
+        self.button = self.xml.get_widget('button')
+        self.button.connect('clicked', self.__destroy_win)
+
+    def __destroy_win(self, *args):
+        self.window.destroy()
     
 

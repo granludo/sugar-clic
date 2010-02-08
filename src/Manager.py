@@ -35,7 +35,7 @@ from sugar.activity import activity
 import os
 import hulahop
 import paths
-
+import logging
 import gtk
 import gtk.glade
 import gobject
@@ -70,8 +70,7 @@ class Manager:
         views_path = os.path.join(img_app_path, 'appViews')
         icons_path = os.path.join(img_app_path, 'appIcons')
         self.icons_path = icons_path
-
-#              
+              
         #loading application views
         self.xmlMain = gtk.glade.XML(views_path + '/windowApp.glade')
         #loading window (OLPC has it owns window - not this one)

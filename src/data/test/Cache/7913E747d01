@@ -234,7 +234,7 @@ jQuery.extend(Drupal.settings, { "basePath": "/", "lightbox2": { "rtl": "0", "fi
 <input type="submit" name="op" id="edit-submit" value="Log in"  class="form-submit" />
 <div class="item-list"><ul><li class="first"><a href="/?q=user/register" title="Create a new user account.">Create new account</a></li>
 <li class="last"><a href="/?q=user/password" title="Request new password via e-mail.">Request new password</a></li>
-</ul></div><input type="hidden" name="form_build_id" id="form-86f9a396c5716455b9c52dc94b3e1854" value="form-86f9a396c5716455b9c52dc94b3e1854"  />
+</ul></div><input type="hidden" name="form_build_id" id="form-d31e0ec4d488e3d2d3eb45a62a799ff6" value="form-d31e0ec4d488e3d2d3eb45a62a799ff6"  />
 <input type="hidden" name="form_id" id="edit-user-login-block" value="user_login_block"  />
 
 </div></form>

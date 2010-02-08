@@ -18,9 +18,13 @@ msgid "DO YOU REALLY WANT TO DELETE"
 msgstr "ESTÀS SEGUR D'ESBORRAR"
 
 
-#downloadmanager.py
+#clicInstaller.py
 msgid "ONCE DOWNLOADED, YOU WILL HAVE THE CLIC ON YOUR LIST."
 msgstr "UNA VEGADA DESCARREGAT, TINDRÀS EL CLIC EN EL TEU LLISTAT."
+
+#clicInstaller.py
+msgid "IT WAS NOT POSSIBLE TO DOWNLOAD"
+msgstr "NO HA SIGUT POSSIBLE DESCARREGAR"
 
 #manager.py
 msgid "HOME PAGE"

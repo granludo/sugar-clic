@@ -39,9 +39,10 @@ from gettext import gettext as _
 COL_PATH = 0
 COL_PIXBUF = 1
 
-def __get_icon(name):
-    theme = gtk.icon_theme_get_default()
-    return theme.load_icon(name, 100, 0)
+def __get_alternative_icon():
+    img_app_path = os.path.join(paths.application_bundle_path, 'img/app') 
+    alternative_icon_path = os.path.join(img_app_path, 'appIcons/defaultIcon.png')
+    return gtk.gdk.pixbuf_new_from_file_at_size(alternative_icon_path , 100, 100)
 
 
 #add web service information in a list
@@ -51,7 +52,6 @@ def add_clics_data(data):
     lstore.set_sort_column_id(COL_PATH, gtk.SORT_ASCENDING)
     lstore.clear()
 
-    defaultIcon = __get_icon(gtk.STOCK_OPEN)
     for item in data:
         icon = item['Icon']
         default = item['Default']
@@ -59,11 +59,12 @@ def add_clics_data(data):
             path = paths.new_clics_path
         else:
             path = paths.clics_path
-            
+        #gets the icon of the clic
         if  icon != '':
             Icon = gtk.gdk.pixbuf_new_from_file_at_size(path + '/' + item['Folder'] + '/' + item['Icon'] , 100, 100)
         else :
-            Icon = defaultIcon
+            #if the clic doesn't have an icon, take an alternative icon to show in the list 
+            Icon = __get_alternative_icon()
 
         lstore.append([item['Title'], Icon , item['Folder'], item['Default'], item['Area'], item['Language'], item['Author']])
     return lstore
