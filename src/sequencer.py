@@ -89,7 +89,7 @@ class Sequencer:
                         self.index = self.index + 1
                         if(self.index == self.size-1):
                             last = True
-                        clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the first activity(tag) of the sequence
+                        clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the next activity(tag) of the sequence
                         if self.act_handler.canExecuteActivity(clic_activity):
                             self.act_handler.start_activity(clic_activity, self.screen, first, last)#initiate activity view
                             break
@@ -101,7 +101,7 @@ class Sequencer:
                         self.index = self.index - 1
                         if (self.index == 0):
                             first = True
-                        clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the first activity(tag) of the sequence
+                        clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the previous activity(tag) of the sequence
                         if self.act_handler.canExecuteActivity(clic_activity):
                             self.act_handler.start_activity(clic_activity, self.screen, first, last)#initiate activity view
                             break
@@ -119,7 +119,7 @@ class Sequencer:
                 if (resultat == -5) :
                     last = True
                     self.index = self.size - 1
-                    clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the first activity(tag) of the sequence
+                    clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the last activity(tag) of the sequence
                     if self.act_handler.canExecuteActivity(clic_activity):
                         self.act_handler.start_activity(clic_activity, self.screen, first, last)#initiate activity view
                         break         
