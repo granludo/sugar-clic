@@ -16,7 +16,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import os
-import logging
+
 from gettext import gettext as _
 import time
 import tempfile
@@ -152,44 +152,25 @@ class Download:
         elif state_flags & interfaces.nsIWebProgressListener.STATE_STOP:
             if NS_FAILED(status): # download cancelled
                 return
-#
-            self._stop_alert = Alert()
-            self._stop_alert.props.title = ('Download completed') 
-            self._stop_alert.props.msg = ('%s' % self._get_file_name()) 
-
-            ok_icon = Icon(icon_name='dialog-ok') 
-            self._stop_alert.add_button(gtk.RESPONSE_OK, _('Ok'), ok_icon) 
-            ok_icon.show()            
-            #self._activity.add_alert(self._stop_alert) 
-            self._stop_alert.connect('response', self.__stop_response_cb)
-            self._stop_alert.show()
-            
             self.controller = controller.Controller()
-            self.controller.install_new_clic(self._get_file_name())      
+            self.controller.install_new_clic(self._get_file_name())
+#            self._stop_alert = Alert()
+#            self._stop_alert.props.title = ('Download completed') 
+#            self._stop_alert.props.msg = ('%s' % self._get_file_name()) 
+#
+#            ok_icon = Icon(icon_name='dialog-ok') 
+#            self._stop_alert.add_button(gtk.RESPONSE_OK, _('Ok'), ok_icon) 
+#            ok_icon.show()            
+#            #self._activity.add_alert(self._stop_alert) 
+#            self._stop_alert.connect('response', self.__stop_response_cb)
+#            self._stop_alert.show()
             
-            img_app_path = os.path.join(paths.application_bundle_path, 'img/app') 
-            views_path = os.path.join(img_app_path, 'appViews')
-            icons_path = os.path.join(img_app_path, 'appIcons')
-            self.xml = gtk.glade.XML(views_path + '/DownloadingInfo.glade')
-            self.window = self.xml.get_widget('window')
-            self.label = self.xml.get_widget('label')
-            self.label.set_text(_('ONCE DOWNLOADED, YOU WILL HAVE THE CLIC ON YOUR LIST.'))
-            self.ImageGo = self.xml.get_widget('image') 
-            self.ImageGo.set_from_file(icons_path + '/si.png')
-            self.window.resize(1200,75)
-            self.window.move(0,825)
-            self.window.show()
-            self.button = self.xml.get_widget('button')
-            self.button.connect('clicked', self.__destroy_win)
 
-    def __destroy_win(self, *args):
-        self.window.destroy()
 
     def __start_response_cb(self, alert, response_id):
         global _active_downloads
         if response_id is gtk.RESPONSE_CANCEL:
             print 'Download Canceled'
-#            logging.debug('Download Canceled')
             self.cancelable.cancel(NS_ERROR_FAILURE)
             if self.dl_jobject is not None:
                 self.cleanup_datastore_write()
@@ -201,7 +182,6 @@ class Download:
     def __stop_response_cb(self, alert, response_id):        
         global _active_downloads 
         if response_id is gtk.RESPONSE_APPLY: 
-            logging.debug('Start application with downloaded object') 
             activity.show_object_in_journal(self._object_id) 
         self._activity.remove_alert(alert)
             
@@ -338,7 +318,7 @@ class _SaveLinkProgressListener(object):
 
     def onStartRequest(self, request, context):
         if request.status != NS_OK:
-            logging.error("Error downloading link")
+#            logging.error("Error downloading link")
             return
 
         cls = components.classes[
