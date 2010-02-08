@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 ''' 
     This file is part of Sugar-Clic
     
@@ -102,9 +103,9 @@ class Installer:
         l.append(fileUrls)
         l.append(iconUrls)
             
+        #downloads the new clic file in background
         hilo = threading.Thread(target=self.__download_file, args=(l))
         hilo.start()
-
         self.__delete_file(self.data_path, file)
         
 
@@ -113,21 +114,21 @@ class Installer:
         self.__show_warning(initial_text, None)
         
         clic = urls[0]
-        urls_to_download = urls[1]
-        icons_to_download = urls[2]
+        file_urls_to_download = urls[1]
+        icons_url_to_download = urls[2]
         print icons_to_download
 
         done = False                
         i = 0
         
         #Find a valid url and download the clic.
-        while ((done == False) and (i < len(urls_to_download))) : 
+        while ((done == False) and (i < len(file_urls_to_download))) : 
             
-            file =  urls_to_download[i].split("/")[-1]
+            file =  file_urls_to_download[i].split("/")[-1]
             folder = file.split('.',1)[0]
             clic['Folder'] = folder
             
-            t = self.__wget_file(urls_to_download[i], self.clics_path)  
+            t = self.__wget_file(file_urls_to_download[i], self.clics_path)  
             if t == 0:
                 from_path = os.path.join(self.clics_path, file)
                 to_path = os.path.join(self.clics_path, folder)
@@ -176,16 +177,16 @@ class Installer:
     
     #shows an alert to the user to inform about the status of the download (clic).  
     def __show_warning(self, text, clic):     
-        img_app_path = os.path.join(paths.application_bundle_path, 'img/app') 
-        views_path = os.path.join(img_app_path, 'appViews')
-        icons_path = os.path.join(img_app_path, 'appIcons')
+        views_path = paths.views_path
+        icons_path = paths.icons_path
+        
         self.xml = gtk.glade.XML(views_path + '/DownloadingInfo.glade')
         self.window = self.xml.get_widget('window')
         self.label = self.xml.get_widget('label')
         if clic == None :
             self.label.set_text(_(text))
         else :
-            text = _(text) + ' "' + clic + '"'
+            text = _(text) + ' "' + clic + '".'
             self.label.set_text(text)
         self.ImageGo = self.xml.get_widget('image') 
         self.ImageGo.set_from_file(icons_path + '/si.png')
