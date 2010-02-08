@@ -116,7 +116,6 @@ class Installer:
         clic = urls[0]
         file_urls_to_download = urls[1]
         icons_url_to_download = urls[2]
-        print icons_to_download
 
         done = False                
         i = 0
@@ -144,9 +143,9 @@ class Installer:
         #If it was possible to download the clic, download its icon.         
         if done == True :
             to_path = os.path.join(self.clics_path, folder)
-            t = self.__wget_file(icons_to_download[0], to_path)
+            t = self.__wget_file(icons_url_to_download[0], to_path)
             if t == 0:
-                icon =  icons_to_download[0].split("/")[-1]
+                icon =  icons_url_to_download[0].split("/")[-1]
                 clic['Icon'] = icon  
             else :
                 clic['Icon'] = ''
