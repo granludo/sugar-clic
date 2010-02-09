@@ -205,10 +205,10 @@ class Grid(object):
             '''Tractament especific per grid de crossClues'''
             
             '''1r Crea el cell amb la imatge de la orientacio'''
-            border  = Rect (xInicial,yInicial,height,height)
+            border  = Rect (xInicial,yInicial,width/4,height)
             cell = Cell(border,display_surf,0,self.hasBorder)
             
-            surfaceEmpty = surface.Surface((int(height),int(height)))
+            surfaceEmpty = surface.Surface((int(width/4),int(height)))
             if self.across:
                 img = pygame.image.load(Constants.Images.ACROSS).convert_alpha()
             else:
@@ -227,10 +227,10 @@ class Grid(object):
             self.Cells.append(cell)
             
             '''2n Crea el cell per les definicions'''
-            border  = Rect (xInicial+height,yInicial,width-height,height)
+            border  = Rect (xInicial+(width/4),yInicial,width-(width/4),height)
             cell = Cell(border,display_surf,1,self.hasBorder)
             
-            surfaceEmpty = surface.Surface((int(width)-int(height),int(height)))
+            surfaceEmpty = surface.Surface((int(width)-int(width/4),int(height)))
             
             if self.transparent == False: 
                 print 'grid-> color fondo = ',self.backgroundColor

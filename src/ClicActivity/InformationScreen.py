@@ -72,7 +72,12 @@ class InformationScreen(Activity):
             height =Constants.ACTIVITY_HEIGHT
             self.Grid1.LoadWithImage(1,1,width,height,xActual ,yActual, display_surf,self.pathToMedia)
         else:
-            self.Grid1.Load(self.Grid1.numRows, self.Grid1.numCols, width, height, xActual, yActual, display_surf)
+            xGrid = (Constants.ACTIVITY_WIDTH - width) / 2
+            yGrid = (Constants.ACTIVITY_HEIGHT - height) / 2
+            xGrid = max(xGrid,xActual)
+            yGrid = max(yGrid,yActual)
+            
+            self.Grid1.Load(self.Grid1.numRows, self.Grid1.numCols, width, height, xGrid, yGrid, display_surf)
             i = 0
             cells = xmlGrid1.getElementsByTagName('cell')
             if cells.length !=0:

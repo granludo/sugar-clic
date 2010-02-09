@@ -85,7 +85,13 @@ class MemoryGame(Activity):
 
         xActual=Constants.MARGIN_TOP
         yActual=Constants.MARGIN_LEFT
-
+        
+        '''Calculate position to be centered'''
+        xCenter = (Constants.ACTIVITY_WIDTH - width) / 2
+        xCenter = max(xActual,xCenter)
+        yCenter = (Constants.ACTIVITY_HEIGHT - height) / 2
+        yCenter = max(yActual,yCenter)
+        
         '''Cargamos grupo de celdas comunes...'''
         cellsPrimary = self.xmlActivity.getElementsByTagName('cells')[0]
 
@@ -93,7 +99,7 @@ class MemoryGame(Activity):
             Notar que el NumCols se ha multiplicado x 2 para Duplicar el tamano del Grid...
         '''
         
-        self.Grid1.Load(self.Grid1.numRows,self.Grid1.numCols,width,height,xActual ,yActual, display_surf)
+        self.Grid1.Load(self.Grid1.numRows,self.Grid1.numCols,width,height,xCenter ,yCenter, display_surf)
         '''Caso de 2 Grids:'''
 
         if self.xmlActivity.getElementsByTagName('cells').length == 2:
