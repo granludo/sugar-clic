@@ -136,8 +136,13 @@ class Manager:
         self.labelSearch.set_text(_('DOWNLOAD CLICS'))
         self.labelMYCLICS = self.xml.get_widget('labelMyClics')
         self.labelMYCLICS.set_text(_('MY CLICS'))
-  
-  
+        
+        #load the test that appears in the centre of the main menu
+        path_to_texto = os.path.join(paths.application_bundle_path, 'data/textoInicio.txt')
+        file = open(path_to_texto, 'r')
+        self.labelTextoInicial = self.xml.get_widget('labelInitText')
+        self.labelTextoInicial.set_text(file.read())
+        file.close()
   
   
         #LOADING MY CLICS VIEW
