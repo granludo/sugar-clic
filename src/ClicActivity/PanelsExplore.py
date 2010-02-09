@@ -72,9 +72,6 @@ class PanelsExplore(Activity):
         
         ''' Calculamos porcentaje...'''
         
-        
-
-        
         '''Maximize size'''
         coef = self.calculateCoef(width, height)
               
@@ -87,22 +84,29 @@ class PanelsExplore(Activity):
         xActual=Constants.MARGIN_TOP
         yActual=Constants.MARGIN_LEFT
 
-        
-
-        
-        self.Grid1.Load(self.Grid1.numRows,self.Grid1.numCols,width,height,xActual ,yActual, display_surf)
+        xGrid1 = (Constants.ACTIVITY_WIDTH - width) / 2
+        yGrid1 = (Constants.ACTIVITY_HEIGHT - height) / 2
+        xGrid1 = max(xGrid1,xActual)
+        yGrid1 = max(yGrid1,yActual)
+            
         '''Grid auxiliar...'''
         self.Grid3.Load(self.Grid1.numRows,self.Grid1.numCols,width,height,xActual ,yActual, display_surf)
+        
         if orientation == 'AUB' or orientation == 'BUA':
             '''Sumamos el height al tamano'''
             newHeight = self.Grid2.cellHeight * coef
-            self.Grid2.Load(1,1,width,newHeight,xActual ,yActual+ height, display_surf)
-
+            yGrid1 = (Constants.ACTIVITY_HEIGHT - height - newHeight) / 2
+            yGrid1 = max(yGrid1,yActual)
+            self.Grid2.Load(1,1,width,newHeight,xGrid1 ,yGrid1 + height, display_surf)
         else:
             '''Sumamos el width al tamano total'''
             newWidth = self.Grid2.cellWidth * coef
-            self.Grid2.Load(1,1,newWidth,height,xActual + width ,yActual, display_surf)
-            
+            xGrid1 = (Constants.ACTIVITY_WIDTH - width - newWidth) / 2
+            xGrid1 = max(xGrid1,xActual)
+            self.Grid2.Load(1,1,newWidth,height,xGrid1 + width ,yGrid1, display_surf)
+        
+        self.Grid1.Load(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid1 ,yGrid1, display_surf)
+        
         self.Grid2.Cells[0].contentCell.img2 = self.Grid2.Cells[0].contentCell.img.copy()
         cells = xmlGrid1.getElementsByTagName('cell')
         i = 0

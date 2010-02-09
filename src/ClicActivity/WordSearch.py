@@ -79,7 +79,7 @@ class WordSearch(Activity):
             self.clues.append(tmpClues[i].firstChild.data)
             
         orientation =  self.xmlActivity.getElementsByTagName('layout')[0].getAttribute('position')
-        
+
         ''' Calculate Real size'''
         heightText = self.textGrid.cellHeight * self.textGrid.numRows
         widthText = self.textGrid.cellWidth * self.textGrid.numCols
@@ -91,7 +91,7 @@ class WordSearch(Activity):
             relation = heightText/heightCells
             heightCells = heightText
             widthCells = widthCells * relation
-
+        
         '''Maximize size'''
         if orientation == 'AB' or 'BA':
             if heightText < heightCells:
@@ -102,7 +102,7 @@ class WordSearch(Activity):
             if widthText < widthCells:
                 coef = self.calculateCoef(widthCells, heightText+heightCells)
             else:
-                coef = self.calculateCoef(widthCells, heightText+heightCells)
+                coef = self.calculateCoef(widthText, heightText+heightCells)
         
         heightText = heightText * coef
         widthText = widthText * coef
@@ -121,19 +121,46 @@ class WordSearch(Activity):
         else:
             self.cellsGrid.Load(self.cellsGrid.numRows,self.cellsGrid.numCols,widthCells,heightCells,1,1, display_surf)
         
-        
         if orientation == 'AB':
-            self.textGrid.Load(self.textGrid.numRows,self.textGrid.numCols,widthText,heightText,xActual,yActual, display_surf)
-            self.auxGrid.Load(self.cellsGrid.numRows,self.cellsGrid.numCols,widthCells,heightCells,xActual+widthText+10,yActual, display_surf)
+            xText = (Constants.ACTIVITY_WIDTH - widthText - widthCells - 10) / 2
+            yText = (Constants.ACTIVITY_HEIGHT - heightText) / 2
+            xText = max(xActual,xText)
+            yText = max(yActual,yText)
+            xCells = xText + widthText + 10
+            yCells = (Constants.ACTIVITY_HEIGHT - heightCells) / 2
+            yCells = max(yActual, yCells)
+            self.textGrid.Load(self.textGrid.numRows,self.textGrid.numCols,widthText,heightText,xText,yText, display_surf)
+            self.auxGrid.Load(self.cellsGrid.numRows,self.cellsGrid.numCols,widthCells,heightCells,xCells,yCells, display_surf)
         elif orientation == 'BA':
-            self.auxGrid.Load(self.cellsGrid.numRows,self.cellsGrid.numCols,widthCells,heightCells,xActual,yActual, display_surf)
-            self.textGrid.Load(self.textGrid.numRows,self.textGrid.numCols,widthText,heightText,xActual+widthCells+10,yActual, display_surf)
+            xCells = (Constants.ACTIVITY_WIDTH - widthText - widthCells - 10) / 2
+            yCells = (Constants.ACTIVITY_HEIGHT - heightCells) / 2
+            xCells = max(xActual, xCells)
+            yCells = max(yActual, yCells)
+            xText = xCells + widthCells + 10
+            yText = (Constants.ACTIVITY_HEIGHT - heightText) / 2
+            yText = max(yActual,yText)
+            self.auxGrid.Load(self.cellsGrid.numRows,self.cellsGrid.numCols,widthCells,heightCells,xCells,yCells, display_surf)
+            self.textGrid.Load(self.textGrid.numRows,self.textGrid.numCols,widthText,heightText,xText,yText, display_surf)
         elif orientation == 'AUB':
-            self.textGrid.Load(self.textGrid.numRows,self.textGrid.numCols,widthText,heightText,xActual,yActual, display_surf)
-            self.auxGrid.Load(self.cellsGrid.numRows,self.cellsGrid.numCols,widthCells,heightCells,xActual,yActual+heightText+10, display_surf)
+            xText = (Constants.ACTIVITY_WIDTH - widthText) / 2
+            yText = (Constants.ACTIVITY_HEIGHT - heightText - heightCells - 10) / 2
+            xText = max(xActual,xText)
+            yText = max(yActual,yText)
+            xCells = (Constants.ACTIVITY_WIDTH - widthCells) / 2
+            yCells = yText + heightText + 10
+            xCells = max(xActual,xCells)
+            self.textGrid.Load(self.textGrid.numRows,self.textGrid.numCols,widthText,heightText,xText,yText, display_surf)
+            self.auxGrid.Load(self.cellsGrid.numRows,self.cellsGrid.numCols,widthCells,heightCells,xCells,yCells, display_surf)
         elif orientation == 'BUA':
-            self.textGrid.Load(self.textGrid.numRows,self.textGrid.numCols,widthText,heightText,xActual,yActual+heightCells +10, display_surf)
-            self.auxGrid.Load(self.cellsGrid.numRows,self.cellsGrid.numCols,widthCells,heightCells,xActual,yActual, display_surf)
+            xCells = (Constants.ACTIVITY_WIDTH - widthCells) / 2
+            yCells = (Constants.ACTIVITY_HEIGHT - heightText - heightCells - 10) / 2
+            xCells = max(xActual,xCells)
+            yCells = max(yActual, yCells)
+            xText = (Constants.ACTIVITY_WIDTH - widthText) / 2
+            yText = yCells + heightCells + 10
+            xText = max(xActual,xText)
+            self.textGrid.Load(self.textGrid.numRows,self.textGrid.numCols,widthText,heightText,xText,yText, display_surf)
+            self.auxGrid.Load(self.cellsGrid.numRows,self.cellsGrid.numCols,widthCells,heightCells,xCells,yCells, display_surf)
                 
         self.textHasBorder = self.textGrid.hasBorder
         
