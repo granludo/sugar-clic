@@ -7,7 +7,7 @@ try:
 except ImportError:
     import os
     os.system("find ./ | sed 's,^./,ClicPlayer.activity/,g' > MANIFEST")
-    os.system('rm gtktest.xo')
+    os.system('rm ClicPlayer-1.xo')
     os.chdir('..')
     os.system('zip -r ClicPlayer-1.xo ClicPlayer.activity')
     os.system('mv ClicPlayer-1.xo ./ClicPlayer.activity')
