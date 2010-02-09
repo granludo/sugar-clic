@@ -96,18 +96,25 @@ class ComplexAssociation(Activity):
 	print xActual
 	print yActual
 	
-
-        self.Grid1.Load(self.Grid1.numRows,self.Grid1.numCols,width,height,xActual ,yActual, display_surf)
+        xGrid1 = (Constants.ACTIVITY_WIDTH - width) / 2
+        yGrid1 = (Constants.ACTIVITY_HEIGHT - height) / 2
+        xGrid1 = max(xGrid1,xActual)
+        yGrid1 = max(yGrid1,yActual)
 
         if orientation == 'AUB' or orientation == 'BUA':
             '''Sumamos el height al tamano'''
-	    newHeight = self.Grid2.cellHeight * coef
-            self.Grid2.Load(self.Grid2.numRows,self.Grid2.numCols,width,newHeight,xActual ,yActual + height +10, display_surf)
+            newHeight = self.Grid2.cellHeight * coef
+            yGrid1 = (Constants.ACTIVITY_HEIGHT - height - newHeight - 10) / 2
+            yGrid1 = max(yGrid1,yActual)
+            self.Grid2.Load(self.Grid2.numRows,self.Grid2.numCols,width,newHeight,xGrid1 ,yGrid1 + height +10, display_surf)
         else:
             '''Sumamos el width al tamano total'''
-	    newWidth = self.Grid2.cellWidth * coef
-            self.Grid2.Load(self.Grid2.numRows,self.Grid2.numCols,newWidth,height,xActual + width +10 ,yActual, display_surf)
+            newWidth = self.Grid2.cellWidth * coef
+            xGrid1 = (Constants.ACTIVITY_WIDTH - width - newWidth - 10) / 2
+            xGrid1 = max(xGrid1,xActual)
+            self.Grid2.Load(self.Grid2.numRows,self.Grid2.numCols,newWidth,height,xGrid1 + width +10 ,yGrid1, display_surf)
 
+        self.Grid1.Load(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid1 ,yGrid1, display_surf)
 
 
         if self.xmlActivity.getElementsByTagName('cells').length == 2:

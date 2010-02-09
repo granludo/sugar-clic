@@ -79,10 +79,16 @@ class IdentifyPanels(Activity):
         xActual=Constants.MARGIN_TOP
         yActual=Constants.MARGIN_LEFT
 
+        xGrid = (Constants.ACTIVITY_WIDTH - width) / 2
+        yGrid = (Constants.ACTIVITY_HEIGHT - height) / 2
+        
+        xGrid = max(xGrid,xActual)
+        yGrid = max(yGrid,yActual)
+        
         '''Cargamos grupo de celdas comunes...'''
         
         ''' 1 Imagen por cada celda ( tipo texto)''' 
-        self.Grid1.Load(self.Grid1.numRows,self.Grid1.numCols,width,height,xActual ,yActual, display_surf)
+        self.Grid1.Load(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid ,yGrid, display_surf)
         
         cells = xmlGrid1.getElementsByTagName('cell')
                 

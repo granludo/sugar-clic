@@ -93,7 +93,12 @@ class HolePuzzle(Activity):
            
         else:
             ''' 1 Imagen por cada celda ( tipo texto)''' 
-            self.Grid1.Load(self.numRows,self.numCols,width,height,xActual ,yActual, display_surf)
+            xGrid = (Constants.ACTIVITY_WIDTH - width) / 2
+            xGrid = max(xGrid,xActual)
+            yGrid = (Constants.ACTIVITY_HEIGHT - height) / 2
+            yGrid = max(yGrid,yActual)
+
+            self.Grid1.Load(self.numRows,self.numCols,width,height,xGrid ,yGrid, display_surf)
             cells = xmlGrid.getElementsByTagName('cell')
             i = 0
            
