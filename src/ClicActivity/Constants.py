@@ -63,6 +63,7 @@ MIN_CELL = 30
 DEFAULT_BORDER_SIZE = 3
 class Images:
     CURSOR = "img/standardcursor.xbm"
+    CURSOR_MASK = "img/standardcursor_mask.xbm"
     NEXT = "img/siguiente.png"
     NEXT_DES= "img/siguiente_des.png"
     PREV = "img/anterior.png"
