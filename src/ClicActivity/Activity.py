@@ -235,7 +235,7 @@ class Activity(object):
         # rectangle.
     
         for requested_line in requested_lines:
-            if font.size(requested_line)[0] > rect.width:
+            if font.size(requested_line)[0] > rect.width-4:
                 words = requested_line.split(' ')
                 # if any of our words are too long to fit, return.
                 for word in words:
