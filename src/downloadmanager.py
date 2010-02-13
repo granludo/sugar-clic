@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright (C) 2007, One Laptop Per Child
 #
 # This program is free software; you can redistribute it and/or modify
@@ -15,7 +16,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import os
-import logging
+
 from gettext import gettext as _
 import time
 import tempfile
@@ -36,6 +37,7 @@ from sugar import mime
 from sugar.graphics.alert import Alert, TimeoutAlert
 from sugar.graphics.icon import Icon
 from sugar.activity import activity
+from gettext import gettext as _
 import paths
 import controller
 #import progressbar
@@ -50,10 +52,6 @@ else:
 
 NS_BINDING_ABORTED = 0x804b0002             # From nsNetError.h
 NS_ERROR_SAVE_LINK_AS_TIMEOUT = 0x805d0020  # From nsURILoader.h
-
-DS_DBUS_SERVICE = 'org.laptop.sugar.DataStore'
-DS_DBUS_INTERFACE = 'org.laptop.sugar.DataStore'
-DS_DBUS_PATH = '/org/laptop/sugar/DataStore'
 
 _MIN_TIME_UPDATE = 5        # In seconds
 _MIN_PERCENT_UPDATE = 10
@@ -154,39 +152,25 @@ class Download:
         elif state_flags & interfaces.nsIWebProgressListener.STATE_STOP:
             if NS_FAILED(status): # download cancelled
                 return
-#
-            self._stop_alert = Alert()
-            self._stop_alert.props.title = ('Download completed') 
-            self._stop_alert.props.msg = ('%s' % self._get_file_name()) 
-
-            ok_icon = Icon(icon_name='dialog-ok') 
-            self._stop_alert.add_button(gtk.RESPONSE_OK, _('Ok'), ok_icon) 
-            ok_icon.show()            
-            #self._activity.add_alert(self._stop_alert) 
-            self._stop_alert.connect('response', self.__stop_response_cb)
-            self._stop_alert.show()
-            
             self.controller = controller.Controller()
-            self.controller.install_new_clic(self._get_file_name())      
+            self.controller.install_new_clic(self._get_file_name())
+#            self._stop_alert = Alert()
+#            self._stop_alert.props.title = ('Download completed') 
+#            self._stop_alert.props.msg = ('%s' % self._get_file_name()) 
+#
+#            ok_icon = Icon(icon_name='dialog-ok') 
+#            self._stop_alert.add_button(gtk.RESPONSE_OK, _('Ok'), ok_icon) 
+#            ok_icon.show()            
+#            #self._activity.add_alert(self._stop_alert) 
+#            self._stop_alert.connect('response', self.__stop_response_cb)
+#            self._stop_alert.show()
             
-            img_app_path = os.path.join(paths.application_bundle_path, 'img/app') 
-            views_path = os.path.join(img_app_path, 'appViews')
-            self.xml = gtk.glade.XML(views_path + '/DownloadingInfo.glade')
-            self.window = self.xml.get_widget('dialog')
-            self.window.set_size_request(400,100)
-            self.window.move(600, 450)
-            self.window.show()
-            self.button = self.xml.get_widget('button')
-            self.button.connect('clicked', self.__destroy_win)
 
-    def __destroy_win(self, *args):
-        self.window.destroy()
 
     def __start_response_cb(self, alert, response_id):
         global _active_downloads
         if response_id is gtk.RESPONSE_CANCEL:
             print 'Download Canceled'
-#            logging.debug('Download Canceled')
             self.cancelable.cancel(NS_ERROR_FAILURE)
             if self.dl_jobject is not None:
                 self.cleanup_datastore_write()
@@ -198,7 +182,6 @@ class Download:
     def __stop_response_cb(self, alert, response_id):        
         global _active_downloads 
         if response_id is gtk.RESPONSE_APPLY: 
-            logging.debug('Start application with downloaded object') 
             activity.show_object_in_journal(self._object_id) 
         self._activity.remove_alert(alert)
             
@@ -210,13 +193,6 @@ class Download:
             os.remove(self.dl_jobject.file_path)
         self.dl_jobject.destroy()
         self.dl_jobject = None
-#
-#    def _internal_save_cb(self):
-#        self.cleanup_datastore_write()
-#
-#    def _internal_save_error_cb(self, err):
-#        logging.debug("Error saving activity object to datastore: %s" % err)
-#        self.cleanup_datastore_write()
 
     def onProgressChange64(self, web_progress, request, cur_self_progress,
                            max_self_progress, cur_total_progress,
@@ -342,7 +318,7 @@ class _SaveLinkProgressListener(object):
 
     def onStartRequest(self, request, context):
         if request.status != NS_OK:
-            logging.error("Error downloading link")
+#            logging.error("Error downloading link")
             return
 
         cls = components.classes[

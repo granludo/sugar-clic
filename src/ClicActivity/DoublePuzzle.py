@@ -81,22 +81,34 @@ class DoublePuzzle(Activity):
 
         '''Loading constants for the activity'''
         
-        
         xActual=Constants.MARGIN_TOP
         yActual=Constants.MARGIN_LEFT
         
-       
+        if layout == 'AB':
+            xGrid1 = (Constants.ACTIVITY_WIDTH - width*2 - 10) / 2
+            yGrid1 = (Constants.ACTIVITY_HEIGHT - height) / 2
+        else:
+            xGrid1 = (Constants.ACTIVITY_WIDTH - width) / 2
+            yGrid1 = (Constants.ACTIVITY_HEIGHT - height*2 - 10) / 2
+        
+        xGrid1 = max(xGrid1,xActual)
+        yGrid1 = max(yGrid1, yActual)
+        
         ''' 1 Imagen de fondo '''
 
-        self.Grid1.LoadWithImage(self.Grid1.numRows,self.Grid1.numCols,width,height,xActual ,yActual, display_surf,self.pathToMedia)
+        self.Grid1.LoadWithImage(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid1 ,yGrid1, display_surf,self.pathToMedia)
         
         if layout == 'AB':
-            xActual = xActual + width + 10
+            xGrid2 = xGrid1 + width + 10
+            yGrid2 = yGrid1
         else:
-            yActual = yActual + height + 10
+            xGrid2 = xGrid1
+            yGrid2 = yGrid1 + height + 10
         
+        xGrid2 = max(xGrid2,xActual)
+        yGrid2 = max(yGrid2, yActual)
         
-        self.Grid2.LoadWithImage(self.Grid1.numRows,self.Grid1.numCols,width,height,xActual ,yActual, display_surf,self.pathToMedia)
+        self.Grid2.LoadWithImage(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid2 ,yGrid2, display_surf,self.pathToMedia)
         
         for cell in self.Grid1.Cells:
             cell.contentCell.img.fill(Constants.colorBackground)

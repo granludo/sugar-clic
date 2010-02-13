@@ -102,6 +102,7 @@ class ClicActivities:
         
         '''Initial rendering'''
         self.activityInUse.OnRender( self.activity_surf)
+        pygame.display.flip()
 	
        
 
@@ -158,6 +159,7 @@ class ClicActivities:
             '''EXTRA:  if activity end, then print the end message '''
             if self.activityInUse.isGameFinished():
                  self.dialog.printMessage(self.screen,self.activityInUse.getFinishMessage())
+            pygame.display.flip()
             #     audio = self.activityInUse.getFinishMessageAudio()
             #     if audio!="":
             #        self.activityInUse.play_sound(audio)

@@ -44,6 +44,9 @@ about_path = ''                 #path to the folder that contains the about info
 db_downloaded = ''              #path to db of new clics
 db_default = ''                 #path to db of default clics
 
+icons_path = ''                 #path to the icons used in the application (clics icon, button icons,...)
+views_path = ''                 #path to the views of the application
+
 
 #Returns the absolute path of the clic folder
 def get_clic_path(clic_name, is_default):
@@ -53,8 +56,9 @@ def get_clic_path(clic_name, is_default):
     return os.path.join(p , clic_name)
     
 def set_environment(is_Xo):
-    global application_bundle_path, application_data_path, clics_path, about_path, new_clics_path, db_downloaded, db_default
-    if is_Xo :
+    global application_bundle_path, application_data_path, clics_path, about_path, new_clics_path, db_downloaded, db_default, icons_path, views_path
+    if is_Xo : #Sets environment for a XO-laptop.
+        
         application_data_path = os.path.join(activity.get_activity_root(), 'data')
         application_bundle_path = activity.get_bundle_path()
         
@@ -64,17 +68,28 @@ def set_environment(is_Xo):
         
         db_downloaded = os.path.join(application_data_path , 'downloaded.xml')
         db_default = os.path.join(application_bundle_path , 'data/default.xml')
-    else:
+        
+        img_app_path = os.path.join(application_bundle_path, 'img/app') 
+        views_path = os.path.join(img_app_path, 'appViews')
+        icons_path = os.path.join(img_app_path, 'appIcons')
+        
+    else: #Sets environment for a UNIX computer.
+        
         current_path = os.getcwd()
-        application_data_path = os.path.join(current_path, 'new/data') # activity.get_activity_root()
+        application_data_path = os.path.join(current_path, 'new/data')
         application_bundle_path = current_path
         
-        clics_path = os.path.join(application_bundle_path , 'data/clics') #path to the folder that contains the clics
+        clics_path = os.path.join(application_bundle_path , 'data/clics')
         new_clics_path = application_data_path + '/clics'
         about_path = application_bundle_path + '/data/clics/sugar_clic_help'
         
         db_downloaded = os.path.join(application_data_path , 'downloaded.xml')
         db_default = os.path.join(application_bundle_path , 'data/default.xml')
+        
+        img_app_path = os.path.join(application_bundle_path, 'img/app') 
+        views_path = os.path.join(img_app_path, 'appViews')
+        icons_path = os.path.join(img_app_path, 'appIcons')
+        
     __create_clics_path()
         
 

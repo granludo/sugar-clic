@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 ''' 
     This file is part of Sugar-Clic
     
@@ -34,18 +35,17 @@ from sugar.activity import activity
 import os
 import hulahop
 import paths
-
+import logging
 import gtk
 import gtk.glade
 import gobject
-
+#starting module hulahop
 try:
     hula_path = os.path.join(activity.get_activity_root(), 'data/test')
     hulahop.startup(hula_path)
 except RuntimeError:
     hula_path = os.path.join(os.getcwd(), 'data/test')
     hulahop.startup(hula_path)
-
 from gettext import gettext as _
 from controller import Controller
 import ManagerData
@@ -57,45 +57,43 @@ from ClicActivity import Constants
 
 
 class Manager:
-    def __init__(self, runaslib = True):                
+    def __init__(self, runaslib = True):           
+        #if runaslib is True -> we are in a Xo laptop
+        paths.set_environment(runaslib) 
+        
+        #local variables    
         self.clicked = False #is a clic chosen to download?
         self.selected = False #is a clic chosen to play?
         self.start_clic_view = False #is a clic_activity running?
-        
-        #if runaslib = True -> we are in a Xo laptop
-        paths.set_environment(runaslib)
-        
-        img_app_path = os.path.join(paths.application_bundle_path, 'img/app') 
-        views_path = os.path.join(img_app_path, 'appViews')
-        icons_path = os.path.join(img_app_path, 'appIcons')
-        self.icons_path = icons_path
-
-#              
+        self.views_path = paths.views_path #path to the icons folder (appIcons)
+        self.icons_path = paths.icons_path #path to the views folder (appViews)
+      
         #loading application views
-        self.xmlMain = gtk.glade.XML(views_path + '/windowApp.glade')
-        #loading window (OLPC has it owns window - not this one)
+        self.xmlMain = gtk.glade.XML(self.views_path + '/windowApp.glade')
+        #loading window (Sugar has it owns window - not this one)
         self.window = self.xmlMain.get_widget('window')
         self.window.connect("destroy", gtk.main_quit)
 
         # Get Windows child (Vertical Box with the views)
         self.w_child = self.window.get_child()  
-
+        # Needs to remove the parent (we will use the Sugar's window)
         if runaslib:
             gtk.Container.remove(self.window, self.w_child)
-        else :
-            state = gtk.STATE_NORMAL    
-            color = gtk.gdk.Color("orange")
-            self.window.modify_bg(state, color)
+#        else :
+#            state = gtk.STATE_NORMAL    
+#            color = gtk.gdk.Color("orange")
+#            self.window.modify_bg(state, color)
         
-        
-        self.xml = gtk.glade.XML(views_path + '/mainView.glade') 
+        #LOADING MAIN VIEW
+        self.xml = gtk.glade.XML(self.views_path + '/mainView.glade') 
         self.win = self.xml.get_widget('window')
         self.Main = self.xml.get_widget('Main')
         #remove parent (in glade there is always a parent (window))
         gtk.Container.remove(self.win ,self.Main)
         
+        #loading the image of the title (SugarClic)
         self.ImageSearch = self.xml.get_widget('imageTitle')
-        self.ImageSearch.set_from_file(icons_path + '/title.png')  
+        self.ImageSearch.set_from_file(self.icons_path + '/title.png')  
         
         #MyClics button
         self.bMy = self.xml.get_widget('buttonMyClics')
@@ -103,7 +101,7 @@ class Manager:
         self.bMy.connect('enter', self.__change_icon, '/clics_2.png', 0) 
         self.bMy.connect('leave', self.__change_icon, '/clics.png', 0) 
         self.ImageMy = self.xml.get_widget('imageMyClics')
-        self.ImageMy.set_from_file(icons_path + '/clics.png')
+        self.ImageMy.set_from_file(self.icons_path + '/clics.png')
 
         #Manual button
         self.bManual = self.xml.get_widget('buttonManual')
@@ -111,7 +109,7 @@ class Manager:
         self.bManual.connect('enter', self.__change_icon, '/manual_2.png', 1) 
         self.bManual.connect('leave', self.__change_icon, '/manual.png', 1) 
         self.ImageManual = self.xml.get_widget('imageManual')
-        self.ImageManual.set_from_file(icons_path + '/manual.png')
+        self.ImageManual.set_from_file(self.icons_path + '/manual.png')
         
         #About button
         self.bAbout = self.xml.get_widget('buttonAbout')
@@ -119,23 +117,36 @@ class Manager:
         self.bAbout.connect('enter', self.__change_icon, '/about_2.png', 2) 
         self.bAbout.connect('leave', self.__change_icon, '/about.png', 2) 
         self.ImageAbout = self.xml.get_widget('imageAbout')
-        self.ImageAbout.set_from_file(icons_path + '/about.png')
-        
-#        self.tooltips = gtk.Tooltips()
-#        self.HH = self.xml.get_widget('hbuttonbox2')
-#        self.HH.pack_start(self.bAbout, False, False, 3)
-#        self.tooltips.set_tip(self.bAbout, "SHADOW_IN")
+        self.ImageAbout.set_from_file(self.icons_path + '/about.png')
         
         #Search button
         self.bS = self.xml.get_widget('buttonSearch')
-        self.bS.connect('clicked', self.__search_clics_view) 
+        self.bS.connect('clicked', self.__browser_view) 
         self.bS.connect('enter', self.__change_icon, '/download_2.png', 3) 
         self.bS.connect('leave', self.__change_icon, '/download.png', 3) 
         self.ImageSearch = self.xml.get_widget('imageSearch')
-        self.ImageSearch.set_from_file(icons_path + '/download.png')        
+        self.ImageSearch.set_from_file(self.icons_path + '/download.png')    
+        
+        #set the labels to translate
+        self.labelMan = self.xml.get_widget('labelManual')
+        self.labelMan.set_text(_('MANUAL'))
+        self.labelAbout = self.xml.get_widget('labelAbout')
+        self.labelAbout.set_text(_('ABOUT SUGARCLIC'))    
+        self.labelSearch = self.xml.get_widget('labelSearch')
+        self.labelSearch.set_text(_('DOWNLOAD CLICS'))
+        self.labelMYCLICS = self.xml.get_widget('labelMyClics')
+        self.labelMYCLICS.set_text(_('MY CLICS'))
+        
+        #load the test that appears in the centre of the main menu
+        path_to_texto = os.path.join(paths.application_bundle_path, 'data/textoInicio.txt')
+        file = open(path_to_texto, 'r')
+        self.labelTextoInicial = self.xml.get_widget('labelInitText')
+        self.labelTextoInicial.set_text(file.read())
+        file.close()
   
-        #loading My Clics View
-        self.xml = gtk.glade.XML(views_path + '/MyClicsView.glade') 
+  
+        #LOADING MY CLICS VIEW
+        self.xml = gtk.glade.XML(self.views_path + '/MyClicsView.glade') 
         #loading window
         self.windowAva = self.xml.get_widget('window')
         
@@ -151,15 +162,18 @@ class Manager:
                         
         self.labelMy = self.xml.get_widget('labelMyClics')
         self.vboxAvailable = self.xml.get_widget('vboxAvailable')
+        self.labelButBorrar = self.xml.get_widget('labelButBorrar')
+        self.labelButAvaMain = self.xml.get_widget('labelButAvaMain')
+        self.labelButAvaMain.set_text(_('MAIN MENU'))
         
         self.imageBorrar = self.xml.get_widget('imageClics')
         self.imageSI = self.xml.get_widget('imageSI')
-        self.imageSI.set_from_file(icons_path + '/si.png')
+        self.imageSI.set_from_file(self.icons_path + '/si.png')
         self.imageNO = self.xml.get_widget('imageNO')
-        self.imageNO.set_from_file(icons_path + '/no.png')
+        self.imageNO.set_from_file(self.icons_path + '/no.png')
         
         self.ImageHome = self.xml.get_widget('imageHome')
-        self.ImageHome.set_from_file(icons_path + '/home.png')
+        self.ImageHome.set_from_file(self.icons_path + '/home.png')
         
         self.hboxSure = self.xml.get_widget('hboxSure')
         self.buttonSI = self.xml.get_widget('buttonSI')
@@ -173,18 +187,30 @@ class Manager:
 
 
    
-        #loading search_clics widget (Browser)
-        self.xml = gtk.glade.XML(views_path + '/BrowserView.glade') 
+        #LOADING BROWSER VIEW
+        self.xml = gtk.glade.XML(self.views_path + '/BrowserView.glade') 
         #loading window
         self.windowBrowser = self.xml.get_widget('window')
-        
-        self.bFirstPage = self.xml.get_widget('buttonFirstPage')
-        self.bFirstPage.connect('clicked', self.__search_clics_view_home)
         
         self.bBM = self.xml.get_widget('buttonHome')
         self.bBM.connect('clicked', self.__main_view)
         self.ImageBr = self.xml.get_widget('imageHome') 
-        self.ImageBr.set_from_file(icons_path + '/home.png')
+        self.ImageBr.set_from_file(self.icons_path + '/home.png')
+        
+        self.bGo = self.xml.get_widget('buttonFirstPage')
+        self.bGo.connect('clicked', self.__browser_view_home)
+        self.ImageGo = self.xml.get_widget('imageGoBack') 
+        self.ImageGo.set_from_file(self.icons_path + '/goBack.png')
+        
+        self.bGo = self.xml.get_widget('buttonFirstPage')
+        self.bGo.connect('clicked', self.__browser_view_home)
+        self.ImageGo = self.xml.get_widget('imageGoBack') 
+        self.ImageGo.set_from_file(self.icons_path + '/goBack.png')
+        
+        self.labelButHome = self.xml.get_widget('labelButHome')
+        self.labelButHome.set_text(_('MAIN MENU'))
+        self.labelButFirst = self.xml.get_widget('labelButFirst')
+        self.labelButFirst.set_text(_('HOME PAGE'))
         
         self.vboxBrowser = self.xml.get_widget('vboxBrowser')
         self.browser = Browser()
@@ -192,8 +218,8 @@ class Manager:
         gtk.Container.remove(self.windowBrowser, self.vboxBrowser)
         
       
-        #loading play_clics widget
-        self.xml = gtk.glade.XML(views_path + '/PlayView.glade') 
+        #LOADING VIEW FOR CLICS PLAYER
+        self.xml = gtk.glade.XML(self.views_path + '/PlayView.glade') 
         #loading window
         self.windowPlay = self.xml.get_widget('window')
         self.vboxPlay = self.xml.get_widget('vboxPlay')
@@ -214,28 +240,32 @@ class Manager:
         #initiate controller
         self.controller = Controller()
 
+        #current(first) view is the main menu
         self.current_view = self.Main
         self.w_child.add(self.current_view)
         
         if not runaslib: 
-            #called every 20 miliseconds (for pygame)
-            gobject.timeout_add(150, self.updating)
+            #called every 250 miliseconds (for communication with pygame module (player))
+            gobject.timeout_add(250, self.updating)
             self.window.show() 
             gtk.main()
 
             
-    #calls the clic infinite times (until the clic ends) 
+    #this method calls the clic player (pygame) until the user stops playing a clic 
     def updating(self):        
         if self.start_clic_view:
             nou = self.controller.updating_activity()
+            #stops calling, goes to My Clics View
             if (nou == -1):
                 nou = 0
                 self.__available_clics_view()
+            #stops callings, goes to the Main Menu View
             if (nou == -7):
                 nou = 0
                 self.__main_view()    
         return True
     
+    #changes the bright of an icon
     def __change_icon(self, *args):
         image = args[2]
         if image == 0:
@@ -248,24 +278,26 @@ class Manager:
             self.ImageSearch.set_from_file(self.icons_path + args[1]) 
 
 
-    #Changes the view of the application
+    #Changes the current view of the application.
     def __change_current_view(self, view):
         self.w_child.remove(self.current_view)
         self.current_view = view
         self.w_child.add(self.current_view)  
         
-    #main view
+    #Shows the Main Menu View of the application.
     def __main_view(self,*args):
         self.__change_current_view(self.Main)   
         self.ImageSearch.set_from_file(self.icons_path + '/download.png')
         self.ImageMy.set_from_file(self.icons_path + '/clics.png')  
         self.hboxSure.hide() 
         
-    #View to see the available clics in the computer and select one to play
+    #Shows all the clics of the user (default clics, downloaded clics).
     def __available_clics_view(self, *args):
         self.start_clic_view = False
+        
         self.currentClicsView = 'Clics'  
-        self.labelMy.set_text(_('ELIGE UN CLIC PARA JUGAR'))
+        self.labelMy.set_text(_('SELECT A CLIC TO PLAY'))
+        self.labelButBorrar.set_text(_('DELETE CLICS'))
         self.imageBorrar.set_from_file(self.icons_path + '/borrar.png')
         
         self.__refresh_clics_view(True)
@@ -288,14 +320,16 @@ class Manager:
             
     #List of clics to play (view)
     def __list_clics_view(self):
-        self.labelMy.set_text(_('ELIGE UN CLIC PARA JUGAR'))
+        self.labelMy.set_text(_('SELECT A CLIC TO PLAY'))
+        self.labelButBorrar.set_text(_('DELETE CLICS'))
         self.imageBorrar.set_from_file(self.icons_path + '/borrar.png')
         self.__refresh_clics_view(True)
         self.hboxSure.hide()
 
     #RList of clics to remove (view)
     def __remove_clics_view(self, *args):
-        self.labelMy.set_text(_('ELIGE UN CLIC PARA BORRAR'))
+        self.labelMy.set_text(_('SELECT A CLIC TO DELETE'))
+        self.labelButBorrar.set_text(_('MY CLICS'))
         c = self.imageBorrar.set_from_file(self.icons_path + '/clics_mini.png')
         self.__refresh_clics_view(False)
         
@@ -314,19 +348,20 @@ class Manager:
     def __clics_view(self, *args):
         name, clic, default = ManagerData.get_clic_data(self.iconView)
         if self.currentClicsView == 'Delete':
-            text = 'SEGURO QUE QUIERES BORRAR "' + name +'"?'
+            text = _('DO YOU REALLY WANT TO DELETE') + ' "' + name +'"?'
             self.labelSure.set_text(text)
             self.hboxSure.show()
         else :
-            self.controller.load_clic(clic, default)
+            self.controller.load_clic_information(clic, default)
             self.vboxPlay.show()
             self.__change_current_view(self.vboxPlay)   
-     
-    def __search_clics_view_home(self, *args):        
+            
+    #Shows the home page of 'http://www.sbennel.es' (website of PortalClic)
+    def __browser_view_home(self, *args):        
         self.browser.load_uri('http://www.sbennel.es')
             
-    #Browser -> find new clics
-    def __search_clics_view(self, *args):        
+    #Shows the Browser with the website of PortaClic that allows user to download new clics 
+    def __browser_view(self, *args):        
         self.vboxBrowser.remove(self.browser)
         self.browser = Browser()
         self.browser.show()
@@ -342,7 +377,7 @@ class Manager:
         self.__change_current_view(self.vboxPlay)           
     
            
-    #Initiates the clic 
+    #Initiates the clic selected by the user to play 
     def __play_clic(self):
         self.controller.play_clic()
         self.start_clic_view = True
