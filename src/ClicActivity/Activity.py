@@ -46,7 +46,7 @@ class Activity(object):
     def __init__(self,xmlActivity):
         
         self.xmlActivity = xmlActivity
-        a, b, c, d = pygame.cursors.load_xbm(Constants.Images.CURSOR,Constants.Images.MASK)
+        a, b, c, d = pygame.cursors.load_xbm(Constants.Images.CURSOR, Constants.Images.CURSOR_MASK)
         pygame.mouse.set_cursor(a, b, c, d)
 
         '''pygame.mouse.set_cursor(*pygame.cursors.broken_x)'''
@@ -235,7 +235,7 @@ class Activity(object):
         # rectangle.
     
         for requested_line in requested_lines:
-            if font.size(requested_line)[0] > rect.width:
+            if font.size(requested_line)[0] > rect.width-4:
                 words = requested_line.split(' ')
                 # if any of our words are too long to fit, return.
                 for word in words:

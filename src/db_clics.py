@@ -213,18 +213,4 @@ class DbClics:
             if file.childNodes[4].childNodes[0].data == folder:
                 return True 
             
-        return False
-
-        
-#        for nodeList in files.childNodes:  
-#            
-#            for subnode in nodelist:
-#                if (subnode.nodeType == subnode.ELEMENT_NODE):
-#                    which = subnode.tagName
-#                    called = "" # in case it's not an img or title
-#                    if (which == "file_name"):
-#                        called = subnode.getAttribute("name")
-#                        if (len(called) < 6):
-#                            parent.removeChild(subnode)
-#                        cull_children(subnode.childNodes,"  "+inset,subnode)
-            
+        return False  

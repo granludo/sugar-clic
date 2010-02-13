@@ -87,6 +87,7 @@ setup.py
 Manager.py
 paths.py
 data/default.xml
+data/textoInicio.txt
 data/test/places.sqlite
 data/test/permissions.sqlite
 data/test/secmod.db
@@ -101,11 +102,11 @@ data/test/compatibility.ini
 data/test/Cache/_CACHE_003_
 data/test/Cache/_CACHE_001_
 data/test/Cache/AF212412d01
-data/test/Cache/6236A26Dd01
 data/test/Cache/D778DA62d01
 data/test/Cache/_CACHE_MAP_
 data/test/Cache/_CACHE_002_
 data/test/Cache/C50930B0d01
+data/test/Cache/7913E747d01
 data/clics/sugar_clic_help/Imagen 1.png
 data/clics/sugar_clic_help/imagen_42.png
 data/clics/sugar_clic_help/Imagen 4.png
@@ -216,19 +217,24 @@ downloadmanager.pyc
 browser.pyc
 ManagerData.pyc
 controller.py
-sequencer.py.orig
 Manager.pyc
 db_clics.pyc
 activity.py
 ManagerData.py
 clicInstaller.pyc
 sequencer.py
+locale/fr/activity.linfo
+locale/fr/LC_MESSAGES/net.netii.kumuolpc.ClicPlayer.mo
 locale/es/activity.linfo
-locale/es/LC_MESSAGES/net.netii.kumuolpc.JClicDownloader.mo
+locale/es/LC_MESSAGES/net.netii.kumuolpc.ClicPlayer.mo
+locale/ca/activity.linfo
+locale/ca/LC_MESSAGES/net.netii.kumuolpc.ClicPlayer.mo
 clicActivitiesHandler.py
 clicInstaller.py
 controller.pyc
-po/es/es.po
+po/fr.po
+po/es.po
+po/ca.po
 img/siguiente.png
 img/reiniciar.png
 img/prev.png
@@ -238,6 +244,7 @@ img/primero.png
 img/anterior.png
 img/siguiente_des.png
 img/ultimo.png
+img/app/appIcons/defaultIcon.png
 img/app/appIcons/manual.png
 img/app/appIcons/clics_2.png
 img/app/appIcons/title.png
@@ -251,6 +258,7 @@ img/app/appIcons/clics.png
 img/app/appIcons/manual_2.png
 img/app/appIcons/borrar.png
 img/app/appIcons/si.png
+img/app/appIcons/goBack.png
 img/app/appIcons/about.png
 img/app/appViews/PlayView.glade
 img/app/appViews/MyClicsView.glade

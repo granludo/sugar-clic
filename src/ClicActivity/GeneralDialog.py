@@ -123,7 +123,8 @@ class GeneralDialog(object):
         #display_surf.fill(Constants.colorBorderDark,self.rectTextExt)
         display_surf.fill(Constants.colorLila,self.rectTextInt)
 
-	self.renderText(message,self.rectTextInt, font, display_surf,(255,255,255))
+        if message != None:
+            self.renderText(message,self.rectTextInt, font, display_surf,(255,255,255))
 
         #display_surf.blit(text,rectText)
 

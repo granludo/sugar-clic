@@ -69,12 +69,13 @@ class Controller:
     def get_installed_clics(self, default):
         return self.db.get_clics(default)
     
+    #loads the about information that appears in the main menu
     def load_about(self):
         sequence, media, settings = self.parser.get_clic_info(paths.about_path, 'sugar_clic_help')
         self.sequencer.begin_sequence(sequence, media, settings, paths.about_path, 'sugar_clic_help')       
 
     #initialize all the structure information to play the clic
-    def load_clic(self, clic_name, is_default):
+    def load_clic_information(self, clic_name, is_default):
         clic_path = paths.get_clic_path(clic_name, is_default)
         sequence, media, settings = self.parser.get_clic_info(clic_path, clic_name)
         self.sequencer.begin_sequence(sequence, media, settings, clic_path,clic_name)

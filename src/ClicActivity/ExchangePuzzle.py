@@ -82,9 +82,13 @@ class ExchangePuzzle(Activity):
             height = self.Grid1.cellHeight * self.Grid1.numRows * coef
             width = self.Grid1.cellWidth * self.Grid1.numCols * coef
             
+            xGrid = (Constants.ACTIVITY_WIDTH - width) / 2
+            yGrid = (Constants.ACTIVITY_HEIGHT - height) / 2
+            xGrid = max(xGrid,xActual)
+            yGrid = max(yGrid,yActual)
             
             ''' 1 Imagen por cada celda ''' 
-            self.Grid1.Load(self.Grid1.numRows,self.Grid1.numCols,width,height,xActual ,yActual, display_surf)
+            self.Grid1.Load(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid ,yGrid, display_surf)
             cells = xmlGrid1.getElementsByTagName('cell')
             
             i = 0
