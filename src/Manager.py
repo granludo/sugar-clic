@@ -181,10 +181,8 @@ class Manager:
         self.buttonNO = self.xml.get_widget('buttonNO')
         self.buttonNO.connect('clicked', self.__dont_remove_clic)
         self.labelSure = self.xml.get_widget('labelSure')
-        
-        
+                
         gtk.Container.remove(self.windowAva, self.vboxAvailable)
-
 
    
         #LOADING BROWSER VIEW
@@ -198,19 +196,14 @@ class Manager:
         self.ImageBr.set_from_file(self.icons_path + '/home.png')
         
         self.bGo = self.xml.get_widget('buttonFirstPage')
-        self.bGo.connect('clicked', self.__browser_view_home)
-        self.ImageGo = self.xml.get_widget('imageGoBack') 
-        self.ImageGo.set_from_file(self.icons_path + '/goBack.png')
-        
-        self.bGo = self.xml.get_widget('buttonFirstPage')
-        self.bGo.connect('clicked', self.__browser_view_home)
+        self.bGo.connect('clicked', self.__browser_view_galeria)
         self.ImageGo = self.xml.get_widget('imageGoBack') 
         self.ImageGo.set_from_file(self.icons_path + '/goBack.png')
         
         self.labelButHome = self.xml.get_widget('labelButHome')
         self.labelButHome.set_text(_('MAIN MENU'))
         self.labelButFirst = self.xml.get_widget('labelButFirst')
-        self.labelButFirst.set_text(_('HOME PAGE'))
+        self.labelButFirst.set_text(_('CLICS TO DOWNLOAD'))
         
         self.vboxBrowser = self.xml.get_widget('vboxBrowser')
         self.browser = Browser()
@@ -356,9 +349,9 @@ class Manager:
             self.vboxPlay.show()
             self.__change_current_view(self.vboxPlay)   
             
-    #Shows the home page of 'http://www.sbennel.es' (website of PortalClic)
-    def __browser_view_home(self, *args):        
-        self.browser.load_uri('http://www.sbennel.es')
+    #Shows the page with the clics of 'http://www.sbennel.es' (website of PortalClic)
+    def __browser_view_galeria(self, *args):        
+        self.browser.load_uri('http://www.sbennel.es/?q=galeria')
             
     #Shows the Browser with the website of PortaClic that allows user to download new clics 
     def __browser_view(self, *args):        
