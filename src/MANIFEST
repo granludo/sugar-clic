@@ -88,6 +88,7 @@ Manager.py
 paths.py
 data/default.xml
 data/textoInicio.txt
+data/test/places.sqlite-journal
 data/test/places.sqlite
 data/test/permissions.sqlite
 data/test/secmod.db
@@ -237,6 +238,7 @@ po/es.po
 po/ca.po
 img/siguiente.png
 img/reiniciar.png
+img/standardcursor_mask.xbm
 img/prev.png
 img/misclics.png
 img/standardcursor.xbm
