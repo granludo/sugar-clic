@@ -47,6 +47,7 @@ from ClicActivity.SimpleAssociation import SimpleAssociation
 from ClicActivity.ComplexAssociation import ComplexAssociation
 from ClicActivity.WordSearch import WordSearch
 #from ClicActivity.CrossWord import CrossWord
+from ClicActivity.Complete import Complete
 from ClicActivity import Constants
 
 
@@ -184,7 +185,6 @@ class ClicActivities:
     
     
     def canExecuteActivity(self,node):
-        ''' at the end this function is not necessary'''
         print 'classtype=',node.getAttribute('class')
         if  node.getAttribute('class') =='@puzzles.ExchangePuzzle':
                         return True
@@ -207,6 +207,8 @@ class ClicActivities:
         elif  node.getAttribute('class') =='@textGrid.WordSearch':
                         return True
         elif  node.getAttribute('class') =='@textGrid.CrossWord':
+                        return False
+        elif node.getAttribute('class') == '@text.Complete':
                         return False
         else:
              return False
@@ -233,3 +235,6 @@ class ClicActivities:
                         return WordSearch(node)
         elif  node.getAttribute('class') =='@textGrid.CrossWord':
                         return CrossWord(node)
+        elif node.getAttribute('class') == '@text.Complete' :
+                        return Complete(node)
+                    

@@ -47,4 +47,5 @@ from PanelsExplore import PanelsExplore
 from Point import Point
 from styleCell import StyleCell
 from WordSearch import WordSearch
+from Complete import Complete
 
