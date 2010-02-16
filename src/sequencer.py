@@ -51,6 +51,7 @@ class Sequencer:
             self.activities.append(item.getAttribute('name'))            
         self.size = self.activities.__len__()
         self.act_handler = ClicActivities(clic_path, mediaBag, settings,clic_name)
+        self.manual = settings.getElementsByTagName('actinicial')
     
     #play clic
     def play(self):
@@ -73,9 +74,7 @@ class Sequencer:
     def activity_clic_information(self):
         # Pygame updating
         if not self.exit:
-            #pygame.display.flip()
-            mouse_pos_x, mouse_pos_y = pygame.mouse.get_pos()
-            print pygame.display.toggle_fullscreen()
+            pygame.display.flip()
 
             for evento in pygame.event.get():
                 #With resultat we controll what we do next
@@ -91,11 +90,18 @@ class Sequencer:
                         self.index = self.index + 1
                         if(self.index == self.size-1):
                             last = True
-                        pygame.mouse.get_focused()
-                        clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the first activity(tag) of the sequence
+                        clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the next activity(tag) of the sequence
                         if self.act_handler.canExecuteActivity(clic_activity):
-                            self.act_handler.start_activity(clic_activity, self.screen, first, last)#initiate activity view
-                            break
+                            if(self.manual.length==0):
+                                self.act_handler.start_activity(clic_activity, self.screen, first, last)#initiate activity view
+                                break
+                            else:
+                                self.act_handler.start_activity(clic_activity, self.screen, first, last)
+                                if (self.index == self.size -1):
+                                    return -7
+                                    print "Fora del manual"
+                                break
+                            #break
         
                 #Previous activity
                 if(resultat == -3 and self.index > 0):
