@@ -12,9 +12,11 @@ class Complete(Activity):
      
     def Load(self, display_surf):
         self.setBgColor(display_surf)
+        
         #contains the text to show in the button
         buttonText = self.xmlActivity.getElementsByTagName('checkButton')[0].childNodes[0].data
         #contains the text to show in the text entry
+        section = self.xmlActivity.getElementsByTagName('section')[0]
         print 'Complete.Load'
     
     def OnEvent(self,PointOfMouse):
