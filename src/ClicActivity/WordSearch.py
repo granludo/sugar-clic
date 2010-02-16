@@ -43,6 +43,7 @@ class WordSearch(Activity):
     cellsGrid = None
     auxGrid = None
     clues = []
+    hasCells = False
     cols = 0
     pressedCellIni = None
     pressedCellFi = None
@@ -62,47 +63,61 @@ class WordSearch(Activity):
         self.xmlText = self.xmlActivity.getElementsByTagName('textGrid')[0]
         '''xml amb els ids que correspon a cada paraula'''
         xmlClues = self.xmlActivity.getElementsByTagName('clues')[0]
-        '''xml amb les imatges a mostrar per cada paraula'''
-        self.xmlCells = self.xmlActivity.getElementsByTagName('cells')[0]
-        
+        try:
+            '''xml amb les imatges a mostrar per cada paraula'''
+            self.xmlCells = self.xmlActivity.getElementsByTagName('cells')[0]
+            self.hasCells = True
+            print self.hasCells
+        except:
+            pass
         '''Crea el grid de la sopa'''
         self.textGrid = Grid(self.xmlText)
-        '''Crea el grid de les imatges'''
-        self.cellsGrid = Grid(self.xmlCells)
-        '''Grid auxiliar per anar mostrant les imatges'''
-        self.auxGrid = Grid(self.xmlCells)
+        if self.hasCells:
+            '''Crea el grid de les imatges'''
+            self.cellsGrid = Grid(self.xmlCells)
+            '''Grid auxiliar per anar mostrant les imatges'''
+            self.auxGrid = Grid(self.xmlCells)
 
         '''Loading clues'''
         self.clues = []
         tmpClues = xmlClues.getElementsByTagName('clue')
         for i in range(0,len(tmpClues)):
             self.clues.append(tmpClues[i].firstChild.data)
-            
-        orientation =  self.xmlActivity.getElementsByTagName('layout')[0].getAttribute('position')
-
+        
+        if self.hasCells:   
+            orientation =  self.xmlActivity.getElementsByTagName('layout')[0].getAttribute('position')
+        else:
+            orientation = 'AB'
         ''' Calculate Real size'''
         heightText = self.textGrid.cellHeight * self.textGrid.numRows
         widthText = self.textGrid.cellWidth * self.textGrid.numCols
         
-        heightCells = self.cellsGrid.cellHeight * self.cellsGrid.numRows
-        widthCells = self.cellsGrid.cellWidth * self.cellsGrid.numCols
+        if self.hasCells:
+            heightCells = self.cellsGrid.cellHeight * self.cellsGrid.numRows
+            widthCells = self.cellsGrid.cellWidth * self.cellsGrid.numCols
         
-        if heightCells < heightText:
-            relation = heightText/heightCells
-            heightCells = heightText
-            widthCells = widthCells * relation
-        
-        '''Maximize size'''
-        if orientation == 'AB' or 'BA':
-            if heightText < heightCells:
-                coef = self.calculateCoef(widthText+widthCells, heightCells)
-            else:
-                coef = self.calculateCoef(widthText+widthCells, heightText)
+            if heightCells < heightText:
+                relation = heightText/heightCells
+                heightCells = heightText
+                widthCells = widthCells * relation
         else:
-            if widthText < widthCells:
-                coef = self.calculateCoef(widthCells, heightText+heightCells)
+            heightCells = 0
+            widthCells = 0
+            
+        if self.hasCells:
+            '''Maximize size'''
+            if orientation == 'AB' or 'BA':
+                if heightText < heightCells:
+                    coef = self.calculateCoef(widthText+widthCells, heightCells)
+                else:
+                    coef = self.calculateCoef(widthText+widthCells, heightText)
             else:
-                coef = self.calculateCoef(widthText, heightText+heightCells)
+                if widthText < widthCells:
+                    coef = self.calculateCoef(widthCells, heightText+heightCells)
+                else:
+                    coef = self.calculateCoef(widthText, heightText+heightCells)
+        else:
+            coef = self.calculateCoef(widthText, heightText)
         
         heightText = heightText * coef
         widthText = widthText * coef
@@ -115,11 +130,12 @@ class WordSearch(Activity):
 
         xActual=Constants.MARGIN_TOP
         yActual=Constants.MARGIN_LEFT
-
-        if self.cellsGrid.imagePath != None:
-            self.cellsGrid.LoadWithImage(self.cellsGrid.numRows,self.cellsGrid.numCols,widthCells,heightCells,1,1, display_surf,self.pathToMedia)
-        else:
-            self.cellsGrid.Load(self.cellsGrid.numRows,self.cellsGrid.numCols,widthCells,heightCells,1,1, display_surf)
+        
+        if self.hasCells:
+            if self.cellsGrid.imagePath != None:
+                self.cellsGrid.LoadWithImage(self.cellsGrid.numRows,self.cellsGrid.numCols,widthCells,heightCells,1,1, display_surf,self.pathToMedia)
+            else:
+                self.cellsGrid.Load(self.cellsGrid.numRows,self.cellsGrid.numCols,widthCells,heightCells,1,1, display_surf)
         
         if orientation == 'AB':
             xText = (Constants.ACTIVITY_WIDTH - widthText - widthCells - 10) / 2
@@ -130,7 +146,8 @@ class WordSearch(Activity):
             yCells = (Constants.ACTIVITY_HEIGHT - heightCells) / 2
             yCells = max(yActual, yCells)
             self.textGrid.Load(self.textGrid.numRows,self.textGrid.numCols,widthText,heightText,xText,yText, display_surf)
-            self.auxGrid.Load(self.cellsGrid.numRows,self.cellsGrid.numCols,widthCells,heightCells,xCells,yCells, display_surf)
+            if self.hasCells:
+                self.auxGrid.Load(self.cellsGrid.numRows,self.cellsGrid.numCols,widthCells,heightCells,xCells,yCells, display_surf)
         elif orientation == 'BA':
             xCells = (Constants.ACTIVITY_WIDTH - widthText - widthCells - 10) / 2
             yCells = (Constants.ACTIVITY_HEIGHT - heightCells) / 2
@@ -139,7 +156,8 @@ class WordSearch(Activity):
             xText = xCells + widthCells + 10
             yText = (Constants.ACTIVITY_HEIGHT - heightText) / 2
             yText = max(yActual,yText)
-            self.auxGrid.Load(self.cellsGrid.numRows,self.cellsGrid.numCols,widthCells,heightCells,xCells,yCells, display_surf)
+            if self.hasCells:
+                self.auxGrid.Load(self.cellsGrid.numRows,self.cellsGrid.numCols,widthCells,heightCells,xCells,yCells, display_surf)
             self.textGrid.Load(self.textGrid.numRows,self.textGrid.numCols,widthText,heightText,xText,yText, display_surf)
         elif orientation == 'AUB':
             xText = (Constants.ACTIVITY_WIDTH - widthText) / 2
@@ -150,7 +168,8 @@ class WordSearch(Activity):
             yCells = yText + heightText + 10
             xCells = max(xActual,xCells)
             self.textGrid.Load(self.textGrid.numRows,self.textGrid.numCols,widthText,heightText,xText,yText, display_surf)
-            self.auxGrid.Load(self.cellsGrid.numRows,self.cellsGrid.numCols,widthCells,heightCells,xCells,yCells, display_surf)
+            if self.hasCells:
+                self.auxGrid.Load(self.cellsGrid.numRows,self.cellsGrid.numCols,widthCells,heightCells,xCells,yCells, display_surf)
         elif orientation == 'BUA':
             xCells = (Constants.ACTIVITY_WIDTH - widthCells) / 2
             yCells = (Constants.ACTIVITY_HEIGHT - heightText - heightCells - 10) / 2
@@ -160,7 +179,8 @@ class WordSearch(Activity):
             yText = yCells + heightCells + 10
             xText = max(xActual,xText)
             self.textGrid.Load(self.textGrid.numRows,self.textGrid.numCols,widthText,heightText,xText,yText, display_surf)
-            self.auxGrid.Load(self.cellsGrid.numRows,self.cellsGrid.numCols,widthCells,heightCells,xCells,yCells, display_surf)
+            if self.hasCells:
+                self.auxGrid.Load(self.cellsGrid.numRows,self.cellsGrid.numCols,widthCells,heightCells,xCells,yCells, display_surf)
                 
         self.textHasBorder = self.textGrid.hasBorder
         
@@ -231,13 +251,14 @@ class WordSearch(Activity):
                 if clueID >= 0 and self.clues[clueID] != None:
                     self.encerts += 1
                     self.clues[clueID] = None
-                    if self.cellsGrid.imagePath != None:
-                        '''Una sola imatge dividida a les cells'''
-                        self.auxGrid.Cells[clueID].contentCell.img = self.cellsGrid.Cells[clueID].contentCell.img                        
-                    else:
-                        '''Una imatge per cada cell'''
-                        xmlCell = self.xmlCells.getElementsByTagName('cell')[clueID]
-                        self.printxmlCellinCell(self.auxGrid.Cells[clueID],xmlCell)
+                    if self.hasCells:
+                        if self.cellsGrid.imagePath != None:
+                            '''Una sola imatge dividida a les cells'''
+                            self.auxGrid.Cells[clueID].contentCell.img = self.cellsGrid.Cells[clueID].contentCell.img                        
+                        else:
+                            '''Una imatge per cada cell'''
+                            xmlCell = self.xmlCells.getElementsByTagName('cell')[clueID]
+                            self.printxmlCellinCell(self.auxGrid.Cells[clueID],xmlCell)
                     print 'paraula trobada'
                     if d > -self.cols and d < self.cols:
                         if self.pressedCellFi.contentCell.id > self.pressedCellIni.contentCell.id:
@@ -271,7 +292,8 @@ class WordSearch(Activity):
         display_surf.blit(self.containerBg,(0,0))
         '''repintamos el grid...'''
         self.textGrid.OnRender(display_surf)
-        self.auxGrid.OnRender(display_surf)
+        if self.hasCells:
+            self.auxGrid.OnRender(display_surf)
         if self.pressedCellIni != None:
             self.pressedCellIni.contentCell.border = True
             self.pressedCellIni.OnRenderPressedCell(display_surf)
