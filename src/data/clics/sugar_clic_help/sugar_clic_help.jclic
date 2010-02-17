@@ -4,18 +4,21 @@
   <title>sugar-clic-help</title>
   <revision description="created" date="12/16/09" />
   <descriptors />
+  <actinicial />
  </settings>
  <sequence>
-  <item name="ANTERIOR" />
+  <item id="start" name="ANTERIOR" />
   <item name="siguiente_2" />
-  <item name="siguiente_3" />
-  <item name="siguiente" />
   <item name="siguiente_4" />
+  <item name="siguiente_3" />
   <item name="siguiente_5" />
   <item name="siguiente_6" />
-  <item name="inicio_2">
-   <jump action="EXIT" id="forward" />
-  </item>
+  <item name="siguiente_7" />
+  <item name="siguiente_8" />
+  <item name="siguiente_9" />
+  <item name="siguiente_10" />
+  <item name="siguiente_11" />
+  <item name="inicio_2" />
  </sequence>
  <activities>
   <activity class="@panels.InformationScreen" name="ANTERIOR" code="">
@@ -179,6 +182,41 @@
     <cell />
     <cell />
     <cell />
+   </cells>
+  </activity>
+  <activity class="@panels.InformationScreen" name="inicio_2" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style />
+     <p>PRESIONA EL BOTÓN AZUL PARA VER LOS CLICS</p>
+    </cell>
+   </messages>
+   <settings margin="8" report="false">
+    <container bgColor="0xC0C0C0">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0xC0C0C0" border="true" />
+    <eventSounds enabled="false" />
+   </settings>
+   <cells rows="4" cols="1" cellWidth="748.0" cellHeight="140.0" border="false">
+    <style />
+    <shaper class="@Rectangular" cols="1" rows="4" />
+    <cell />
+    <cell>
+     <style borderStroke="0.7" markerStroke="5.0">
+      <font family="Arial" size="28" />
+      <color foreground="0x0033FF" />
+     </style>
+     <p>YA PUEDES EMPEZAR A JUGAR!!!</p>
+    </cell>
+    <cell />
+    <cell>
+     <style borderStroke="0.7" markerStroke="5.0">
+      <font family="Arial" size="20" />
+      <color foreground="0x0000FF" />
+     </style>
+    </cell>
    </cells>
   </activity>
   <activity class="@panels.InformationScreen" name="siguiente" code="">
@@ -383,12 +421,12 @@
     <cell />
    </cells>
   </activity>
-  <activity class="@panels.InformationScreen" name="siguiente_2" code="">
+  <activity class="@panels.InformationScreen" name="siguiente_10" code="">
    <description />
    <messages>
     <cell type="initial">
      <style />
-     <p>BOTON ANTERIOR: PÚLSALO PARA VOLVER ATRÁS</p>
+     <p>PULSA SIGUIENTE PARA CONTINUAR</p>
     </cell>
    </messages>
    <settings margin="8" report="false">
@@ -397,7 +435,411 @@
     </container>
     <window bgColor="0xC0C0C0" border="true" />
    </settings>
-   <cells rows="10" cols="14" border="false" image="Imagen 4_3ES.png">
+   <cells rows="10" cols="14" border="false" image="b11.gif">
+    <style />
+    <shaper class="@Rectangular" cols="14" rows="10" />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell border="false">
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell border="false">
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell border="false" />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell border="false">
+     <style borderStroke="6.9" markerStroke="2.7">
+      <color border="0x990000" />
+     </style>
+    </cell>
+    <cell border="false">
+     <style borderStroke="8.9" markerStroke="2.7">
+      <color border="0x990000" />
+     </style>
+    </cell>
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+   </cells>
+  </activity>
+  <activity class="@panels.InformationScreen" name="siguiente_11" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style />
+     <p>PULSA SIGUIENTE PARA CONTINUAR</p>
+    </cell>
+   </messages>
+   <settings margin="8" report="false">
+    <container bgColor="0xC0C0C0">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0xC0C0C0" border="true" />
+   </settings>
+   <cells rows="10" cols="14" border="false" image="b12.gif">
+    <style />
+    <shaper class="@Rectangular" cols="14" rows="10" />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell border="false">
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell border="false">
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell border="false" />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell border="false">
+     <style borderStroke="6.9" markerStroke="2.7">
+      <color border="0x990000" />
+     </style>
+    </cell>
+    <cell border="false">
+     <style borderStroke="8.9" markerStroke="2.7">
+      <color border="0x990000" />
+     </style>
+    </cell>
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+   </cells>
+  </activity>
+  <activity class="@panels.InformationScreen" name="siguiente_2" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style />
+     <p>PULSA EL BOTÓN SIGUIENTE</p>
+    </cell>
+   </messages>
+   <settings margin="8" report="false">
+    <container bgColor="0xC0C0C0">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0xC0C0C0" border="true" />
+   </settings>
+   <cells rows="10" cols="14" border="false" image="b2.gif">
     <style />
     <shaper class="@Rectangular" cols="14" rows="10" />
     <cell />
@@ -590,7 +1032,7 @@
    <messages>
     <cell type="initial">
      <style />
-     <p> BOTON AZUL: PÚLSALO PARA VER LOS CLICS</p>
+     <p>PULSA EL BOTÓN SIGUIENTE</p>
     </cell>
    </messages>
    <settings margin="8" report="false">
@@ -801,244 +1243,7 @@
     </container>
     <window bgColor="0xC0C0C0" border="true" />
    </settings>
-   <cells rows="10" cols="14" border="false" image="Imagen 4_4ES.png">
-    <style />
-    <shaper class="@Rectangular" cols="14" rows="10" />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell border="false">
-     <style borderStroke="0.7" markerStroke="2.7">
-      <font family="Arial" size="36" bold="true" />
-      <color foreground="0xCC0000" />
-     </style>
-    </cell>
-    <cell>
-     <style borderStroke="0.7" markerStroke="2.7">
-      <font family="Arial" size="36" bold="true" />
-      <color foreground="0xCC0000" />
-     </style>
-    </cell>
-    <cell>
-     <style borderStroke="0.7" markerStroke="2.7">
-      <font family="Arial" size="36" bold="true" />
-      <color foreground="0xCC0000" />
-     </style>
-    </cell>
-    <cell>
-     <style borderStroke="0.7" markerStroke="2.7">
-      <font family="Arial" size="36" bold="true" />
-      <color foreground="0xCC0000" />
-     </style>
-    </cell>
-    <cell>
-     <style borderStroke="0.7" markerStroke="2.7">
-      <font family="Arial" size="36" bold="true" />
-      <color foreground="0xCC0000" />
-     </style>
-    </cell>
-    <cell>
-     <style borderStroke="0.7" markerStroke="2.7">
-      <font family="Arial" size="36" bold="true" />
-      <color foreground="0xCC0000" />
-     </style>
-    </cell>
-    <cell border="false">
-     <style borderStroke="0.7" markerStroke="2.7">
-      <font family="Arial" size="36" bold="true" />
-      <color foreground="0xCC0000" />
-     </style>
-    </cell>
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell border="false" />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell border="false">
-     <style borderStroke="6.9" markerStroke="2.7">
-      <color border="0x990000" />
-     </style>
-    </cell>
-    <cell border="false">
-     <style borderStroke="8.9" markerStroke="2.7">
-      <color border="0x990000" />
-     </style>
-    </cell>
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-    <cell />
-   </cells>
-  </activity>
-  <activity class="@panels.InformationScreen" name="inicio_2" code="">
-   <description />
-   <messages>
-    <cell type="initial">
-     <style />
-     <p>PRESIONA EL BOTÓN AZUL PARA VER LOS CLICS</p>
-    </cell>
-   </messages>
-   <settings margin="8" report="false">
-    <container bgColor="0xC0C0C0">
-     <counters time="true" actions="true" score="true" />
-    </container>
-    <window bgColor="0xC0C0C0" border="true" />
-    <eventSounds enabled="false" />
-   </settings>
-   <cells rows="4" cols="1" cellWidth="748.0" cellHeight="140.0" border="false">
-    <style />
-    <shaper class="@Rectangular" cols="1" rows="4" />
-    <cell />
-    <cell>
-     <style borderStroke="0.7" markerStroke="5.0">
-      <font family="Arial" size="28" />
-      <color foreground="0x0033FF" />
-     </style>
-     <p>YA PUEDES EMPEZAR A JUGAR!!!</p>
-    </cell>
-    <cell />
-    <cell>
-     <style borderStroke="0.7" markerStroke="5.0">
-      <font family="Arial" size="20" />
-      <color foreground="0x0000FF" />
-     </style>
-    </cell>
-   </cells>
-  </activity>
-  <activity class="@panels.InformationScreen" name="siguiente_6" code="">
-   <description />
-   <messages>
-    <cell type="initial">
-     <style />
-     <p>ZAS! DESAPARECE Y PUEDES CONTINUAR JUGANDO</p>
-    </cell>
-   </messages>
-   <settings margin="8" report="false">
-    <container bgColor="0xC0C0C0">
-     <counters time="true" actions="true" score="true" />
-    </container>
-    <window bgColor="0xC0C0C0" border="true" />
-   </settings>
-   <cells rows="10" cols="14" border="false" image="imagen_42.png">
+   <cells rows="10" cols="14" border="false" image="b3.gif">
     <style />
     <shaper class="@Rectangular" cols="14" rows="10" />
     <cell />
@@ -1240,7 +1445,815 @@
     </container>
     <window bgColor="0xC0C0C0" border="true" />
    </settings>
-   <cells rows="10" cols="14" border="false" image="Imagen 4_6ES.png">
+   <cells rows="10" cols="14" border="false" image="b5.gif">
+    <style />
+    <shaper class="@Rectangular" cols="14" rows="10" />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell border="false">
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell border="false">
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell border="false" />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell border="false">
+     <style borderStroke="6.9" markerStroke="2.7">
+      <color border="0x990000" />
+     </style>
+    </cell>
+    <cell border="false">
+     <style borderStroke="8.9" markerStroke="2.7">
+      <color border="0x990000" />
+     </style>
+    </cell>
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+   </cells>
+  </activity>
+  <activity class="@panels.InformationScreen" name="siguiente_6" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style />
+     <p>PULSA EL BOTÓN SIGUIENTE</p>
+    </cell>
+   </messages>
+   <settings margin="8" report="false">
+    <container bgColor="0xC0C0C0">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0xC0C0C0" border="true" />
+   </settings>
+   <cells rows="10" cols="14" border="false" image="b6.gif">
+    <style />
+    <shaper class="@Rectangular" cols="14" rows="10" />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell border="false">
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell border="false">
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell border="false" />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell border="false">
+     <style borderStroke="6.9" markerStroke="2.7">
+      <color border="0x990000" />
+     </style>
+    </cell>
+    <cell border="false">
+     <style borderStroke="8.9" markerStroke="2.7">
+      <color border="0x990000" />
+     </style>
+    </cell>
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+   </cells>
+  </activity>
+  <activity class="@panels.InformationScreen" name="siguiente_7" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style />
+     <p>PULSA SIGUIENTE PARA CONTINUAR</p>
+    </cell>
+   </messages>
+   <settings margin="8" report="false">
+    <container bgColor="0xC0C0C0">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0xC0C0C0" border="true" />
+   </settings>
+   <cells rows="10" cols="14" border="false" image="b7.gif">
+    <style />
+    <shaper class="@Rectangular" cols="14" rows="10" />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell border="false">
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell border="false">
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell border="false" />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell border="false">
+     <style borderStroke="6.9" markerStroke="2.7">
+      <color border="0x990000" />
+     </style>
+    </cell>
+    <cell border="false">
+     <style borderStroke="8.9" markerStroke="2.7">
+      <color border="0x990000" />
+     </style>
+    </cell>
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+   </cells>
+  </activity>
+  <activity class="@panels.InformationScreen" name="siguiente_8" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style />
+     <p>PULSA SIGUIENTE PARA CONTINUAR</p>
+    </cell>
+   </messages>
+   <settings margin="8" report="false">
+    <container bgColor="0xC0C0C0">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0xC0C0C0" border="true" />
+   </settings>
+   <cells rows="10" cols="14" border="false" image="b9.gif">
+    <style />
+    <shaper class="@Rectangular" cols="14" rows="10" />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell border="false">
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell border="false">
+     <style borderStroke="0.7" markerStroke="2.7">
+      <font family="Arial" size="36" bold="true" />
+      <color foreground="0xCC0000" />
+     </style>
+    </cell>
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell border="false" />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell border="false">
+     <style borderStroke="6.9" markerStroke="2.7">
+      <color border="0x990000" />
+     </style>
+    </cell>
+    <cell border="false">
+     <style borderStroke="8.9" markerStroke="2.7">
+      <color border="0x990000" />
+     </style>
+    </cell>
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+    <cell />
+   </cells>
+  </activity>
+  <activity class="@panels.InformationScreen" name="siguiente_9" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style />
+     <p>PULSA SIGUIENTE PARA CONTINUAR</p>
+    </cell>
+   </messages>
+   <settings margin="8" report="false">
+    <container bgColor="0xC0C0C0">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0xC0C0C0" border="true" />
+   </settings>
+   <cells rows="10" cols="14" border="false" image="b10.gif">
     <style />
     <shaper class="@Rectangular" cols="14" rows="10" />
     <cell />
@@ -1430,16 +2443,18 @@
   </activity>
  </activities>
  <mediaBag>
-  <media name="Imagen 1.png" file="Imagen 1.png" />
-  <media name="Imagen 3.png" file="Imagen 3.png" />
-  <media name="Imagen 4.png" file="Imagen 4.png" />
+  <media name="b10.gif" file="b10.gif" />
+  <media name="b11.gif" file="b11.gif" />
+  <media name="b12.gif" file="b12.gif" />
+  <media name="b2.gif" file="b2.gif" />
+  <media name="b3.gif" file="b3.gif" />
+  <media name="b5.gif" file="b5.gif" />
+  <media name="b6.gif" file="b6.gif" />
+  <media name="b7.gif" file="b7.gif" />
+  <media name="b9.gif" file="b9.gif" />
   <media name="Imagen 4_1ES.png" file="Imagen 4_1ES.png" />
   <media name="Imagen 4_2ES.png" file="Imagen 4_2ES.png" />
-  <media name="Imagen 4_3ES.png" file="Imagen 4_3ES.png" />
-  <media name="Imagen 4_4ES.png" file="Imagen 4_4ES.png" />
   <media name="Imagen 4_5ES.png" file="Imagen 4_5ES.png" />
-  <media name="Imagen 4_6ES.png" file="Imagen 4_6ES.png" />
-  <media name="imagen_42.png" file="imagen_42.png" />
  </mediaBag>
 </JClicProject>
 
