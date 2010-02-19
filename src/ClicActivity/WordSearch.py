@@ -51,7 +51,6 @@ class WordSearch(Activity):
     xmlText = None
     render = False
     textHasBorder = False
-    hasCells = True
     
     
     def Load(self, display_surf ):
@@ -66,9 +65,10 @@ class WordSearch(Activity):
         try:
             '''xml amb les imatges a mostrar per cada paraula'''
             self.xmlCells = self.xmlActivity.getElementsByTagName('cells')[0]
+            self.hasCells = True
+            print self.hasCells
         except:
-            self.hasCells = False
-        
+            pass
         '''Crea el grid de la sopa'''
         self.textGrid = Grid(self.xmlText)
         if self.hasCells:
@@ -83,11 +83,10 @@ class WordSearch(Activity):
         for i in range(0,len(tmpClues)):
             self.clues.append(tmpClues[i].firstChild.data)
         
-        if self.hasCells:  
+        if self.hasCells:   
             orientation =  self.xmlActivity.getElementsByTagName('layout')[0].getAttribute('position')
         else:
             orientation = 'AB'
-            
         ''' Calculate Real size'''
         heightText = self.textGrid.cellHeight * self.textGrid.numRows
         widthText = self.textGrid.cellWidth * self.textGrid.numCols
@@ -95,7 +94,7 @@ class WordSearch(Activity):
         if self.hasCells:
             heightCells = self.cellsGrid.cellHeight * self.cellsGrid.numRows
             widthCells = self.cellsGrid.cellWidth * self.cellsGrid.numCols
-            
+        
             if heightCells < heightText:
                 relation = heightText/heightCells
                 heightCells = heightText
@@ -104,30 +103,33 @@ class WordSearch(Activity):
             heightCells = 0
             widthCells = 0
             
-        '''Maximize size'''
-        if orientation == 'AB' or 'BA':
-            if heightText < heightCells:
-                coef = self.calculateCoef(widthText+widthCells, heightCells)
+        if self.hasCells:
+            '''Maximize size'''
+            if orientation == 'AB' or 'BA':
+                if heightText < heightCells:
+                    coef = self.calculateCoef(widthText+widthCells, heightCells)
+                else:
+                    coef = self.calculateCoef(widthText+widthCells, heightText)
             else:
-                coef = self.calculateCoef(widthText+widthCells, heightText)
+                if widthText < widthCells:
+                    coef = self.calculateCoef(widthCells, heightText+heightCells)
+                else:
+                    coef = self.calculateCoef(widthText, heightText+heightCells)
         else:
-            if widthText < widthCells:
-                coef = self.calculateCoef(widthCells, heightText+heightCells)
-            else:
-                coef = self.calculateCoef(widthText, heightText+heightCells)
+            coef = self.calculateCoef(widthText, heightText)
         
         heightText = heightText * coef
         widthText = widthText * coef
         
-        if self.hasCells:
-            heightCells = heightCells * coef
-            widthCells = widthCells * coef
+        heightCells = heightCells * coef
+        widthCells = widthCells * coef
         
                
         '''Loading constants for the activity'''
 
         xActual=Constants.MARGIN_TOP
         yActual=Constants.MARGIN_LEFT
+        
         if self.hasCells:
             if self.cellsGrid.imagePath != None:
                 self.cellsGrid.LoadWithImage(self.cellsGrid.numRows,self.cellsGrid.numCols,widthCells,heightCells,1,1, display_surf,self.pathToMedia)

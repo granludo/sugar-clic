@@ -45,6 +45,7 @@ class Installer:
     def __init__(self):
         self.clics_path = ""
         self.data_path = ""
+        self.hasPaths = False
 
             
     def __getText(self, nodelist):
@@ -56,8 +57,22 @@ class Installer:
 
     #Parse information about the clic (sequence, mediaBag, settings)
     def get_clic_info(self, file):
-        self.clics_path = paths.new_clics_path  #folder to install clics
-        self.data_path = paths.application_data_path
+        
+        if (self.hasPaths == False) :
+            #init paths
+            self.clics_path = paths.new_clics_path  #folder to install clics
+            self.data_path = paths.application_data_path
+            self.views_path = paths.views_path
+            self.icons_path = paths.icons_path
+            #init popup window
+            self.xml = gtk.glade.XML(self.views_path + '/DownloadingInfo.glade')
+            self.window = self.xml.get_widget('window')
+            self.label = self.xml.get_widget('label')
+            self.ImageGo = self.xml.get_widget('image') 
+            self.ImageGo.set_from_file(self.icons_path + '/si.png')
+            self.window.resize(1200, 75)
+            self.window.move(0, 825)
+            self.hasPaths = True
         
         from_path = os.path.join(self.data_path, file)
         t = self.__unzip_file(from_path, self.data_path)
@@ -176,21 +191,11 @@ class Installer:
     
     #shows an alert to the user to inform about the status of the download (clic).  
     def __show_warning(self, text, clic):     
-        views_path = paths.views_path
-        icons_path = paths.icons_path
-        
-        self.xml = gtk.glade.XML(views_path + '/DownloadingInfo.glade')
-        self.window = self.xml.get_widget('window')
-        self.label = self.xml.get_widget('label')
         if clic == None :
             self.label.set_text(_(text))
         else :
             text = _(text) + ' "' + clic + '".'
             self.label.set_text(text)
-        self.ImageGo = self.xml.get_widget('image') 
-        self.ImageGo.set_from_file(icons_path + '/si.png')
-        self.window.resize(1200, 75)
-        self.window.move(0, 825)
         self.window.show()
         self.button = self.xml.get_widget('button')
         self.button.connect('clicked', self.__destroy_win)

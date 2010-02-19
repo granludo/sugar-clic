@@ -27,8 +27,8 @@ msgid "IT WAS NOT POSSIBLE TO DOWNLOAD"
 msgstr "NO HA SIDO POSIBLE DESCARGAR"
 
 #manager.py
-msgid "HOME PAGE"
-msgstr "INICIO"
+msgid "CLICS TO DOWNLOAD"
+msgstr "CLICS PARA DESCARGAR"
 
 #manager.py
 msgid "MAIN MENU"

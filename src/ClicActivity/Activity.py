@@ -66,6 +66,7 @@ class Activity(object):
             bgColor = self.xmlActivity.getElementsByTagName('gradient')[0].getAttribute('source')
             intcolor =  int(bgColor, 16)
             self.containerBg.fill(pygame.Color(hex(intcolor)))
+            print 'color de gradient!'
         except:
             try:
                 bgColor = self.xmlActivity.getElementsByTagName('container')[0].getAttribute('bgColor')
@@ -75,6 +76,7 @@ class Activity(object):
                 r = int(r,16)
                 g = int(g,16)
                 b = int(b,16)
+                print r,g,b
                 self.containerBg.fill(pygame.Color(r,g,b))
             except:
                 '''No bgColor'''
@@ -184,7 +186,7 @@ class Activity(object):
             texto = ''
             for element in elementP:
                 texto = texto + element.firstChild.nodeValue + '\n'
-            
+            print texto
             font = pygame.font.Font(None, styleCell.fontSize)
             
             '''Blit text'''
@@ -261,16 +263,7 @@ class Activity(object):
                 final_lines.append(requested_line) 
     
         # Let's try to write the text out on the surface.
-        ok = False
-        while not ok:
-            total_height = len(final_lines) * font.size(final_lines[0])[1]
-            if total_height < rect.height:
-                ok = True
-            else:
-                '''HAURIA DE FER MES PETITA LA FONT'''
-                total_height = rect.height - 1
-                ok = True
-        
+        total_height = len(final_lines) * font.size(final_lines[0])[1]
         accumulated_height = (rect.height - total_height) / 2
         for line in final_lines: 
             if accumulated_height + font.size(line)[1] >= rect.height:
@@ -280,7 +273,7 @@ class Activity(object):
                 surf.blit(tempsurface, ((rect.width - tempsurface.get_width()) / 2, accumulated_height))
                 
             accumulated_height += font.size(line)[1] #font.size returns (width,height)
- 
+        print final_lines[0]
 
     def play_sound(self,filename):
         #pygame.mixer.pre_init(44100,-16,2, 1024)

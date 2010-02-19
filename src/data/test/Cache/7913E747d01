@@ -176,7 +176,7 @@ jQuery.extend(Drupal.settings, { "basePath": "/", "lightbox2": { "rtl": "0", "fi
                   <td class="views-field views-field-field-icono-fid">
             <img  class="imagefield imagefield-field_icono" width="60" height="60" alt="" src="http://www.sbennel.es/sites/default/files/bicicleta.jpg?1265151944" />          </td>
               </tr>
-          <tr class="odd views-row-last">
+          <tr class="odd">
                   <td class="views-field views-field-title">
             <a href="/?q=content/les-plantes">Les plantes</a>          </td>
                   <td class="views-field views-field-field-tematica-value">
@@ -187,6 +187,54 @@ jQuery.extend(Drupal.settings, { "basePath": "/", "lightbox2": { "rtl": "0", "fi
             Catalan          </td>
                   <td class="views-field views-field-field-icono-fid">
             <img  class="imagefield imagefield-field_icono" width="50" height="50" alt="" src="http://www.sbennel.es/sites/default/files/plantes.gif?1265128137" />          </td>
+              </tr>
+          <tr class="even">
+                  <td class="views-field views-field-title">
+            <a href="/?q=content/los-sentidos">Los sentidos</a>          </td>
+                  <td class="views-field views-field-field-tematica-value">
+            <a href="/?q=galeria/Ciencias%20experimentales">Ciencias experimentales</a>          </td>
+                  <td class="views-field views-field-field-autor-value">
+            Amaya Padilla Collado          </td>
+                  <td class="views-field views-field-field-lengua-value">
+            Castellano          </td>
+                  <td class="views-field views-field-field-icono-fid">
+            <img  class="imagefield imagefield-field_icono" width="57" height="60" alt="" src="http://www.sbennel.es/sites/default/files/cincosentidos.jpg?1265905182" />          </td>
+              </tr>
+          <tr class="odd">
+                  <td class="views-field views-field-title">
+            <a href="/?q=content/wild-animals">Wild animals</a>          </td>
+                  <td class="views-field views-field-field-tematica-value">
+            <a href="/?q=galeria/"></a>          </td>
+                  <td class="views-field views-field-field-autor-value">
+            Carlos Medina Viedma          </td>
+                  <td class="views-field views-field-field-lengua-value">
+            Catalan          </td>
+                  <td class="views-field views-field-field-icono-fid">
+            <img  class="imagefield imagefield-field_icono" width="60" height="60" alt="" src="http://www.sbennel.es/sites/default/files/wild.jpg?1266012473" />          </td>
+              </tr>
+          <tr class="even">
+                  <td class="views-field views-field-title">
+            <a href="/?q=content/demo-marc">[DEMO] Marc</a>          </td>
+                  <td class="views-field views-field-field-tematica-value">
+            <a href="/?q=galeria/Lengua%3ACastellano">Lengua:Castellano</a>          </td>
+                  <td class="views-field views-field-field-autor-value">
+            Marc Benito          </td>
+                  <td class="views-field views-field-field-lengua-value">
+            Castellano          </td>
+                  <td class="views-field views-field-field-icono-fid">
+            <img  class="imagefield imagefield-field_icono" width="60" height="60" alt="" src="http://www.sbennel.es/sites/default/files/wild_0.jpg?1266013238" />          </td>
+              </tr>
+          <tr class="odd views-row-last">
+                  <td class="views-field views-field-title">
+            <a href="/?q=content/demo-marc2">[DEMO] Marc2</a>          </td>
+                  <td class="views-field views-field-field-tematica-value">
+            <a href="/?q=galeria/Lengua%3ACastellano">Lengua:Castellano</a>          </td>
+                  <td class="views-field views-field-field-autor-value">
+            Marc Benito          </td>
+                  <td class="views-field views-field-field-lengua-value">
+            Castellano          </td>
+                  <td class="views-field views-field-field-icono-fid">
+            <img  class="imagefield imagefield-field_icono" width="60" height="60" alt="" src="http://www.sbennel.es/sites/default/files/wild_1.jpg?1266013349" />          </td>
               </tr>
       </tbody>
 </table>
@@ -234,7 +282,7 @@ jQuery.extend(Drupal.settings, { "basePath": "/", "lightbox2": { "rtl": "0", "fi
 <input type="submit" name="op" id="edit-submit" value="Log in"  class="form-submit" />
 <div class="item-list"><ul><li class="first"><a href="/?q=user/register" title="Create a new user account.">Create new account</a></li>
 <li class="last"><a href="/?q=user/password" title="Request new password via e-mail.">Request new password</a></li>
-</ul></div><input type="hidden" name="form_build_id" id="form-d31e0ec4d488e3d2d3eb45a62a799ff6" value="form-d31e0ec4d488e3d2d3eb45a62a799ff6"  />
+</ul></div><input type="hidden" name="form_build_id" id="form-d44086918c58fa39d1096db9d5ccb7b6" value="form-d44086918c58fa39d1096db9d5ccb7b6"  />
 <input type="hidden" name="form_id" id="edit-user-login-block" value="user_login_block"  />
 
 </div></form>
