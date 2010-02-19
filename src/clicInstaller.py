@@ -201,6 +201,6 @@ class Installer:
         self.button.connect('clicked', self.__destroy_win)
 
     def __destroy_win(self, *args):
-        self.window.destroy()
+        self.window.hide()
     
 
