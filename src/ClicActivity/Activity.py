@@ -46,7 +46,7 @@ class Activity(object):
     def __init__(self,xmlActivity):
         
         self.xmlActivity = xmlActivity
-        a, b, c, d = pygame.cursors.load_xbm(Constants.Images.CURSOR, Constants.Images.CURSOR_MASK)
+        a, b, c, d = pygame.cursors.load_xbm(Constants.Images.CURSOR, Constants.Images.MASK)
         pygame.mouse.set_cursor(a, b, c, d)
 
         '''pygame.mouse.set_cursor(*pygame.cursors.broken_x)'''
@@ -69,8 +69,13 @@ class Activity(object):
         except:
             try:
                 bgColor = self.xmlActivity.getElementsByTagName('container')[0].getAttribute('bgColor')
-                intcolor =  int(bgColor, 16)
-                self.containerBg.fill(pygame.Color(hex(intcolor)))
+                r = bgColor[2] + bgColor[3]
+                g = bgColor[4] + bgColor[5]
+                b = bgColor[6] + bgColor[7]
+                r = int(r,16)
+                g = int(g,16)
+                b = int(b,16)
+                self.containerBg.fill(pygame.Color(r,g,b))
             except:
                 '''No bgColor'''
         ''' If the activity have image background'''
