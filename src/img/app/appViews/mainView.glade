@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Tue Feb  9 18:22:15 2010 -->
+<!--Generated with glade3 3.4.5 on Tue Feb  9 19:13:56 2010 -->
 <glade-interface>
   <widget class="GtkWindow" id="window">
     <child>
@@ -100,8 +100,10 @@
         <child>
           <widget class="GtkAlignment" id="alignment3">
             <property name="visible">True</property>
-            <property name="top_padding">20</property>
-            <property name="bottom_padding">20</property>
+            <property name="top_padding">30</property>
+            <property name="bottom_padding">30</property>
+            <property name="left_padding">30</property>
+            <property name="right_padding">30</property>
             <child>
               <widget class="GtkLabel" id="labelInitText">
                 <property name="visible">True</property>
