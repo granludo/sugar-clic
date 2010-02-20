@@ -1,0 +1,8 @@
+The main objective of this project is to adapt JClic to the Sugar/OLPC platform, thus mitigating the lack
+of educational content that is currently for OLPC, making this platform available JClic activities that 
+exist on the Internet.
+
+More specifically, this project to JClic focuses on developing a Clic Activity Player, to deliver contents 
+already created by educators worldwide. This project is leaded by Maria Jose Casany and Ludo (Marc Alier) 
+from the GESSI research group of the UPC, and benefits from contributions of several students of the 
+Computer Science School FIB at UPC Barcelona.
