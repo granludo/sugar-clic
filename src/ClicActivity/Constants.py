@@ -55,8 +55,11 @@ colorWhite = (255,255,255)
 colorBlack = (0,0,0)
 colorDefault= (42,42,42)
 colorMessage = (171,171,171)
+colorBlue = (0,0,255)
+colorRed = (255,0,0)
 
 widthCross = 50 #Ample de la cell de la orientacio al crossword
+widthOpt = 150
 minFontSize = 25
 MIN_CELL = 30
 

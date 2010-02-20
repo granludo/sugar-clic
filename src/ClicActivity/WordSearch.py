@@ -66,7 +66,6 @@ class WordSearch(Activity):
             '''xml amb les imatges a mostrar per cada paraula'''
             self.xmlCells = self.xmlActivity.getElementsByTagName('cells')[0]
             self.hasCells = True
-            print self.hasCells
         except:
             pass
         '''Crea el grid de la sopa'''
@@ -219,16 +218,18 @@ class WordSearch(Activity):
             
             '''Agafa la paraula seleccionada'''
             if self.pressedCellFi != None and self.pressedCellIni != None:
-                d = self.pressedCellFi.contentCell.id - self.pressedCellIni.contentCell.id
-                if d > -self.cols and d < self.cols:
+                orientacio = self.orientacioParaula()
+                
+                if orientacio == 'horitzontal':
                     '''Paraula en horitzontal'''
                     if self.pressedCellFi.contentCell.id > self.pressedCellIni.contentCell.id:
                         for i in range(self.pressedCellIni.contentCell.id, self.pressedCellFi.contentCell.id+1):
                             select.append(self.textGrid.Cells[i].contentCell.letter)
                     else:
                         for i in range(self.pressedCellFi.contentCell.id, self.pressedCellIni.contentCell.id+1):
-                                select.append(self.textGrid.Cells[i].contentCell.letter)
-                else:
+                            select.append(self.textGrid.Cells[i].contentCell.letter)
+                
+                elif orientacio == 'vertical':
                     '''Paraula en vertical'''
                     if self.pressedCellFi.contentCell.id > self.pressedCellIni.contentCell.id:
                         for i in range(self.pressedCellIni.contentCell.id, self.pressedCellFi.contentCell.id+1, self.cols):
@@ -236,7 +237,21 @@ class WordSearch(Activity):
                     else:
                         for i in range(self.pressedCellFi.contentCell.id, self.pressedCellIni.contentCell.id+1, self.cols):
                             select.append(self.textGrid.Cells[i].contentCell.letter)
-            
+                
+                #Paraula en diagonal: diferents opcions
+                elif orientacio == 'dretaBaix':
+                    for i in range(self.pressedCellIni.contentCell.id,self.pressedCellFi.contentCell.id+1, self.cols+1):
+                        select.append(self.textGrid.Cells[i].contentCell.letter)
+                elif orientacio == 'dretaDalt':
+                    for i in range(self.pressedCellIni.contentCell.id,self.pressedCellFi.contentCell.id-1, -self.cols+1):
+                        select.append(self.textGrid.Cells[i].contentCell.letter)
+                elif orientacio == 'esqBaix':
+                    for i in range(self.pressedCellIni.contentCell.id,self.pressedCellFi.contentCell.id+1, self.cols-1):
+                        select.append(self.textGrid.Cells[i].contentCell.letter)
+                elif orientacio == 'esqDalt':
+                    for i in range(self.pressedCellIni.contentCell.id,self.pressedCellFi.contentCell.id-1, -self.cols-1):
+                        select.append(self.textGrid.Cells[i].contentCell.letter)
+                        
                 self.pressedCellIni.actualColorCell = Constants.colorCell
                 
                 '''Comproba si es una paraula correcta'''
@@ -259,25 +274,65 @@ class WordSearch(Activity):
                             xmlCell = self.xmlCells.getElementsByTagName('cell')[clueID]
                             self.printxmlCellinCell(self.auxGrid.Cells[clueID],xmlCell)
                     print 'paraula trobada'
-                    if d > -self.cols and d < self.cols:
+                    if orientacio == 'horitzontal':
                         if self.pressedCellFi.contentCell.id > self.pressedCellIni.contentCell.id:
                             for i in range(self.pressedCellIni.contentCell.id, self.pressedCellFi.contentCell.id+1):
                                 self.printLetterinCell(self.textGrid.Cells[i],self.xmlText,Constants.colorWhite,Constants.colorBlack)
                         else:
                             for i in range(self.pressedCellFi.contentCell.id, self.pressedCellIni.contentCell.id+1):
                                 self.printLetterinCell(self.textGrid.Cells[i],self.xmlText,Constants.colorWhite,Constants.colorBlack)
-                    else:
+                    elif orientacio == 'vertical':
                         if self.pressedCellFi.contentCell.id > self.pressedCellIni.contentCell.id:
                             for i in range(self.pressedCellIni.contentCell.id, self.pressedCellFi.contentCell.id+1, self.cols):
                                 self.printLetterinCell(self.textGrid.Cells[i],self.xmlText,Constants.colorWhite,Constants.colorBlack)
                         else:
                             for i in range(self.pressedCellFi.contentCell.id, self.pressedCellIni.contentCell.id+1, self.cols):
                                 self.printLetterinCell(self.textGrid.Cells[i],self.xmlText,Constants.colorWhite,Constants.colorBlack)
-                            
+                    elif orientacio == 'dretaBaix':
+                        for i in range(self.pressedCellIni.contentCell.id,self.pressedCellFi.contentCell.id+1, self.cols+1):
+                            self.printLetterinCell(self.textGrid.Cells[i],self.xmlText,Constants.colorWhite,Constants.colorBlack)
+                    elif orientacio == 'dretaDalt':
+                        for i in range(self.pressedCellIni.contentCell.id,self.pressedCellFi.contentCell.id-1, -self.cols+1):
+                            self.printLetterinCell(self.textGrid.Cells[i],self.xmlText,Constants.colorWhite,Constants.colorBlack)
+                    elif orientacio == 'esqBaix':
+                        for i in range(self.pressedCellIni.contentCell.id,self.pressedCellFi.contentCell.id+1, self.cols-1):
+                            self.printLetterinCell(self.textGrid.Cells[i],self.xmlText,Constants.colorWhite,Constants.colorBlack)
+                    elif orientacio == 'esqDalt':
+                        for i in range(self.pressedCellIni.contentCell.id,self.pressedCellFi.contentCell.id-1, -self.cols-1):
+                            self.printLetterinCell(self.textGrid.Cells[i],self.xmlText,Constants.colorWhite,Constants.colorBlack)
                 '''Reset pressedCells'''
                 self.pressedCellIni.contentCell.border = self.textHasBorder
                 self.pressedCellIni = None
                 self.pressedCellFi = None
+    
+    def orientacioParaula(self):
+        d = self.pressedCellFi.contentCell.id - self.pressedCellIni.contentCell.id
+        
+        if d > -self.cols and d < self.cols:
+            return 'horitzontal'
+        elif (d % self.cols) == 0:
+            return 'vertical'
+        else:
+            '''Mira si es una diagonal correcta'''
+            filaIni = self.pressedCellIni.contentCell.id // self.cols
+            colIni = self.pressedCellIni.contentCell.id % self.cols
+            filaFi = self.pressedCellFi.contentCell.id // self.cols
+            colFi = self.pressedCellFi.contentCell.id % self.cols
+            
+            difFiles = filaIni - filaFi
+            difCols = colIni - colFi
+            if abs(difFiles) == abs(difCols):
+                if filaIni < filaFi and colIni < colFi:
+                    return 'dretaBaix'
+                elif filaIni > filaFi and colIni > colFi:
+                    return 'esqDalt'
+                elif filaIni < filaFi and colIni > colFi:
+                    return 'esqBaix'
+                elif filaIni > filaFi and colIni < colFi:
+                    return 'dretaDalt'
+        
+        return 'incorrecte'
+                
     
     
     def isWordCorrect(self,parfw,parbw):
