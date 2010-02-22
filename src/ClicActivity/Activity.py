@@ -38,18 +38,33 @@ from styleCell import StyleCell
 import os
 class Activity(object):
     xmlActivity = None
+    xmlMediaBag = None
+    xmlSettings = None
+    mediaInformation = dict() #dictionary with the real name of all the media files used in the Activity
+    
     containerBg = None
     pathToMedia = None
     
+    #creates a dictionary <name used in the activity, real name of the file> with all the media used in the Activity 
+    def __create_media_dictionary(self, mediaInfo):
+        media_dictionary = dict()
+        for media in mediaInfo:
+            name =  media.getAttribute('name')
+            file =  media.getAttribute('file')
+            media_dictionary[name] = file
+        return media_dictionary
     
     
-    def __init__(self,xmlActivity):
-        
+    def __init__(self,xmlActivity, xmlMediaBag, xmlSettings):
+        #load xml tags 
         self.xmlActivity = xmlActivity
+        self.xmlMediaBag = xmlMediaBag
+        self.mediaInformation = self.__create_media_dictionary(self.xmlMediaBag.getElementsByTagName('media'))
+        self.xmlSettings = xmlSettings
+
+        #load cursor image of OLPC
         a, b, c, d = pygame.cursors.load_xbm(Constants.Images.CURSOR, Constants.Images.MASK)
         pygame.mouse.set_cursor(a, b, c, d)
-
-        '''pygame.mouse.set_cursor(*pygame.cursors.broken_x)'''
         
     def OnEvent(self,PointOfMouse):
         print 'MOTHER CLASS'

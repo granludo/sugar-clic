@@ -14,6 +14,7 @@ ClicActivity/Activity.pyc
 ClicActivity/HolePuzzle.py
 ClicActivity/IdentifyPanels.py
 ClicActivity/Cell.pyc
+ClicActivity/Complete.py
 ClicActivity/HolePuzzle.pyc
 ClicActivity/4.wav
 ClicActivity/PanelsExplore.py
@@ -24,6 +25,7 @@ ClicActivity/Constants.py
 ClicActivity/styleCell.pyc
 ClicActivity/SimpleAssociation.pyc
 ClicActivity/ComplexAssociation.pyc
+ClicActivity/Complete.pyc
 ClicActivity/IdentifyPanels.pyc
 ClicActivity/WordSearch.py
 ClicActivity/Activity.py
@@ -88,38 +90,32 @@ Manager.py
 paths.py
 data/default.xml
 data/textoInicio.txt
-data/test/places.sqlite-journal
 data/test/places.sqlite
-data/test/permissions.sqlite
 data/test/secmod.db
-data/test/cert8.db
 data/test/xpti.dat
 data/test/cookies.sqlite
 data/test/compreg.dat
-data/test/pluginreg.dat
-data/test/key3.db
-data/test/prefs.js
 data/test/compatibility.ini
 data/test/Cache/_CACHE_003_
 data/test/Cache/_CACHE_001_
-data/test/Cache/AF212412d01
-data/test/Cache/D778DA62d01
-data/test/Cache/_CACHE_MAP_
 data/test/Cache/_CACHE_002_
-data/test/Cache/C50930B0d01
 data/test/Cache/7913E747d01
-data/clics/sugar_clic_help/Imagen 1.png
-data/clics/sugar_clic_help/imagen_42.png
-data/clics/sugar_clic_help/Imagen 4.png
-data/clics/sugar_clic_help/Imagen 4_4ES.png
+data/clics/sugar_clic_help/b8.gif
+data/clics/sugar_clic_help/b2.gif
+data/clics/sugar_clic_help/b11.gif
 data/clics/sugar_clic_help/Imagen 4_5ES.png
-data/clics/sugar_clic_help/Imagen 3.png
-data/clics/sugar_clic_help/Imagen 4_1ES2.png
-data/clics/sugar_clic_help/Imagen 4_3ES.png
+data/clics/sugar_clic_help/b6.gif
+data/clics/sugar_clic_help/b3.gif
+data/clics/sugar_clic_help/b10.gif
+data/clics/sugar_clic_help/b9.gif
 data/clics/sugar_clic_help/Imagen 4_1ES.png
 data/clics/sugar_clic_help/Imagen 4_2ES.png
+data/clics/sugar_clic_help/b4.gif
+data/clics/sugar_clic_help/b5.gif
 data/clics/sugar_clic_help/sugar_clic_help.jclic
-data/clics/sugar_clic_help/Imagen 4_6ES.png
+data/clics/sugar_clic_help/b7.gif
+data/clics/sugar_clic_help/b12.gif
+data/clics/sugar_clic_help/b1.gif
 data/clics/conill/CAU.wav
 data/clics/conill/conejo.peq.JPG
 data/clics/conill/FRASE.wav
@@ -238,7 +234,7 @@ po/es.po
 po/ca.po
 img/siguiente.png
 img/reiniciar.png
-img/standardcursor_mask.xbm
+img/arrow_mask.xbm
 img/prev.png
 img/misclics.png
 img/standardcursor.xbm
