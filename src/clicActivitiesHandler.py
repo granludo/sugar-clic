@@ -54,15 +54,17 @@ from ClicActivity import Constants
 class ClicActivities:
     display = None
     path_to_clic = None
-    mediaBagXML = None
-    settingsXML = None
+    mediaBagTag = None
+    settingsTag = None
     
-    def __init__(self, path, mediaTag, settingsTag,clic_name):
+    def __init__(self, path, mediaTag, settingsTag, clic_name):
         print 'clicname = ',clic_name
         print 'path = ',path
         self.path_to_clic = path
-        self.mediaBagXML = mediaTag
-        self.settingsXML = settingsTag
+        self.mediaBagTag = mediaTag
+        self.settingsTag = settingsTag
+        
+
         
     #starts the activity declared in activityTag
     def start_activity(self, activityTag, pygameScreen, first = False, last = False):
@@ -82,11 +84,8 @@ class ClicActivities:
         
        
        
-        if self.canExecuteActivity(activityTag):
-           
-
-                
-            self.activityInUse = self.executeActivity(activityTag)
+        if self.canExecuteActivity(activityTag):                
+            self.activityInUse = self.executeActivity(activityTag, self.mediaBagTag, self.settingsTag)
             self.activityInUse.pathToMedia = self.path_to_clic
             self.activityInUse.Load(self.activity_surf)
             self.dialog.printMessage(self.screen,self.activityInUse.getInitMessage())
@@ -214,29 +213,29 @@ class ClicActivities:
                         return False
         else:
              return False
-    def executeActivity(self,node):
+    def executeActivity(self, node, media, settings):
         if node.getAttribute('class') =='@puzzles.ExchangePuzzle':
-                        return ExchangePuzzle(node)
+                        return ExchangePuzzle(node, media, settings)
         elif  node.getAttribute('class') =='@memory.MemoryGame':
-                        return MemoryGame(node)
+                        return MemoryGame(node, media, settings)
         elif  node.getAttribute('class') =='@puzzles.DoublePuzzle':
-                        return DoublePuzzle(node)
+                        return DoublePuzzle(node, media, settings)
         elif  node.getAttribute('class') =='@panels.InformationScreen':
-                        return InformationScreen(node)
+                        return InformationScreen(node, media, settings)
         elif  node.getAttribute('class') =='@puzzles.HolePuzzle':
-                        return HolePuzzle(node)
+                        return HolePuzzle(node, media, settings)
         elif  node.getAttribute('class') =='@panels.Identify':
-                        return IdentifyPanels(node)
+                        return IdentifyPanels(node, media, settings)
         elif  node.getAttribute('class') =='@panels.Explore':
-                        return PanelsExplore(node)
+                        return PanelsExplore(node, media, settings)
         elif  node.getAttribute('class') =='@associations.SimpleAssociation':
-                        return SimpleAssociation(node)
+                        return SimpleAssociation(node, media, settings)
         elif  node.getAttribute('class') =='@associations.ComplexAssociation':
-                        return ComplexAssociation(node)
+                        return ComplexAssociation(node, media, settings)
         elif  node.getAttribute('class') =='@textGrid.WordSearch':
-                        return WordSearch(node)
+                        return WordSearch(node, media, settings)
         elif  node.getAttribute('class') =='@textGrid.CrossWord':
-                        return CrossWord(node)
+                        return CrossWord(node, media, settings)
         elif node.getAttribute('class') == '@text.Complete' :
-                        return Complete(node)
+                        return Complete(node, media, settings)
                     
