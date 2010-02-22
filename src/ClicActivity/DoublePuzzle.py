@@ -42,7 +42,6 @@ class DoublePuzzle(Activity):
     activity = None
     PressedCell = None
     FinishGame = False
-    xmlActivity = None
 
 
     def Load(self, display_surf ):
