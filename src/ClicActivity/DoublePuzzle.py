@@ -95,7 +95,7 @@ class DoublePuzzle(Activity):
         yGrid1 = max(yGrid1, yActual)
         
         ''' 1 Imagen de fondo '''
-
+        self.Grid1.imagePath = self.mediaInformation[self.Grid1.imagePath]
         self.Grid1.LoadWithImage(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid1 ,yGrid1, display_surf,self.pathToMedia)
         
         if layout == 'AB':
@@ -108,6 +108,7 @@ class DoublePuzzle(Activity):
         xGrid2 = max(xGrid2,xActual)
         yGrid2 = max(yGrid2, yActual)
         
+        self.Grid2.imagePath = self.mediaInformation[self.Grid2.imagePath]
         self.Grid2.LoadWithImage(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid2 ,yGrid2, display_surf,self.pathToMedia)
         
         for cell in self.Grid1.Cells:
