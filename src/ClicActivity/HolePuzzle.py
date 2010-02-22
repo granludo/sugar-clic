@@ -88,6 +88,7 @@ class HolePuzzle(Activity):
             width= Constants.ACTIVITY_WIDTH 
             height =Constants.ACTIVITY_HEIGHT
             
+            self.Grid1.imagePath = self.mediaInformation[self.Grid1.imagePath]
             self.Grid1.LoadWithImage(self.Grid1.numRows,self.Grid1.numCols,width,height,xActual ,yActual, display_surf,self.pathToMedia)
             
            

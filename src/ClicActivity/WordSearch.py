@@ -131,6 +131,7 @@ class WordSearch(Activity):
         
         if self.hasCells:
             if self.cellsGrid.imagePath != None:
+                self.cellsGrid.imagePath = self.mediaInformation[self.cellsGrid.imagePath]
                 self.cellsGrid.LoadWithImage(self.cellsGrid.numRows,self.cellsGrid.numCols,widthCells,heightCells,1,1, display_surf,self.pathToMedia)
             else:
                 self.cellsGrid.Load(self.cellsGrid.numRows,self.cellsGrid.numCols,widthCells,heightCells,1,1, display_surf)

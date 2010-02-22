@@ -54,10 +54,13 @@ class Activity(object):
             media_dictionary[name] = file
         return media_dictionary
     
-    
     def __init__(self,xmlActivity, xmlMediaBag, xmlSettings):
         #load xml tags 
+
         self.xmlActivity = xmlActivity
+
+        a, b, c, d = pygame.cursors.load_xbm(Constants.Images.CURSOR, Constants.Images.MASK)
+
         self.xmlMediaBag = xmlMediaBag
         self.mediaInformation = self.__create_media_dictionary(self.xmlMediaBag.getElementsByTagName('media'))
         self.xmlSettings = xmlSettings
@@ -65,6 +68,9 @@ class Activity(object):
         #load cursor image of OLPC
         a, b, c, d = pygame.cursors.load_xbm(Constants.Images.CURSOR, Constants.Images.MASK)
         pygame.mouse.set_cursor(a, b, c, d)
+
+        '''pygame.mouse.set_cursor(*pygame.cursors.broken_x)'''
+
         
     def OnEvent(self,PointOfMouse):
         print 'MOTHER CLASS'
@@ -99,6 +105,7 @@ class Activity(object):
         
         try:   
             imagePath = self.xmlActivity.getElementsByTagName('image')[0].getAttribute('name')
+            imagePath = self.mediaInformation[imagePath]
             image = pygame.image.load(self.pathToMedia+'/'+imagePath).convert_alpha()
             img2 = pygame.transform.scale(image, (pygame.Surface.get_width(self.containerBg), pygame.Surface.get_height(self.containerBg)))
             self.containerBg.blit(img2,(0,0))
@@ -185,7 +192,8 @@ class Activity(object):
             #if audio != None and audio.getAttribute('type') == 'PLAY_AUDIO':
             #    audioPath = audio.getAttribute('file')
             #    cell.contentCell.audio = audioPath
-
+            
+            pathImage = self.mediaInformation[pathImage]
             imagePath = self.pathToMedia+'/'+pathImage
     
             newImg = pygame.image.load(imagePath).convert_alpha()

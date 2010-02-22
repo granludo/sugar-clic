@@ -70,6 +70,7 @@ class InformationScreen(Activity):
         if self.Grid1.imagePath != None:
             width= Constants.ACTIVITY_WIDTH 
             height =Constants.ACTIVITY_HEIGHT
+            self.Grid1.imagePath = self.mediaInformation[self.Grid1.imagePath]
             self.Grid1.LoadWithImage(1,1,width,height,xActual ,yActual, display_surf,self.pathToMedia)
         else:
             xGrid = (Constants.ACTIVITY_WIDTH - width) / 2
