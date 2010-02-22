@@ -44,14 +44,7 @@ class DoublePuzzle(Activity):
     FinishGame = False
     xmlActivity = None
 
-    
-    
-    def __init__(self,xmlActivity):
-        
-        self.xmlActivity = xmlActivity
-        
- 
-     
+
     def Load(self, display_surf ):
         self.setBgColor(display_surf)
 
