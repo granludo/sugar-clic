@@ -100,18 +100,16 @@ class Sequencer:
                         if(self.index == self.size-1):
                             last = True
                         clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the next activity(tag) of the sequence
+                        
                         if self.act_handler.canExecuteActivity(clic_activity):
-                            if(self.manual.length==0):
-                                error = self.__start_clic_activity(clic_activity, self.screen, first, last)#initiate activity view
-                                if error == False: #check if there isn't any error starting the activity and pass to the next if there is one
-                                    break
-                            else:
-                                self.__start_clic_activity(clic_activity, self.screen, first, last)
-                                if (self.index == self.size -1):
-                                    return -7
-                                    print "Fora del manual"
+                            
+                            #if we are showing the manual and we are in the last screen we must return to the Main View of the application
+                            if(self.manual.length>0 and (self.index == self.size - 1)):
+                                return -7
+                            
+                            error = self.__start_clic_activity(clic_activity, self.screen, first, last)#initiate activity view
+                            if error == False: #check if there isn't any error starting the activity and pass to the next if there is one
                                 break
-                            #break
         
                 #Previous activity
                 if(resultat == -3 and self.index > 0):
@@ -154,10 +152,7 @@ class Sequencer:
                     self.__start_clic_activity(clic_activity, self.screen,first,last)#initiate activity view
                     break   
                     
-                #Return -7 to go to the main view of the application
-                if (resultat == -7) :           
-                    return -7
-            
+
                 #Return -1 to see available clics
                 if(resultat == -1):
                     return -1            
