@@ -100,9 +100,8 @@ class Sequencer:
                         if(self.index == self.size-1):
                             last = True
                         clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the next activity(tag) of the sequence
-                        
                         if self.act_handler.canExecuteActivity(clic_activity):
-                            
+                         
                             #if we are showing the manual and we are in the last screen we must return to the Main View of the application
                             if(self.manual.length>0 and (self.index == self.size - 1)):
                                 return -7
@@ -137,6 +136,9 @@ class Sequencer:
                 if (resultat == -5) :
                     last = True
                     self.index = self.size - 1
+                    if(self.manual.length>0 and (self.index == self.size - 1)):
+                        self.index = self.size-2
+                        last = False
                     clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the last activity(tag) of the sequence
                     if self.act_handler.canExecuteActivity(clic_activity):
                         self.__start_clic_activity(clic_activity, self.screen, first, last)#initiate activity view
