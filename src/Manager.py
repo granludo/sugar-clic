@@ -254,8 +254,7 @@ class Manager:
                 self.__available_clics_view()
             #stops callings, goes to the Main Menu View
             if (nou == -7):
-                nou = 0
-                self.__main_view()    
+                self.__main_view()  
         return True
     
     #changes the bright of an icon
@@ -279,7 +278,12 @@ class Manager:
         
     #Shows the Main Menu View of the application.
     def __main_view(self,*args):
-        self.__change_current_view(self.Main)   
+        if (self.current_view == self.vboxPlay):
+            self.vboxPlay.hide()
+            self.current_view = self.Main
+            self.w_child.add(self.current_view)  
+        else :
+            self.__change_current_view(self.Main)    
         self.ImageSearch.set_from_file(self.icons_path + '/download.png')
         self.ImageMy.set_from_file(self.icons_path + '/clics.png')  
         self.hboxSure.hide() 
