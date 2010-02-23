@@ -105,7 +105,7 @@ class Manager:
 
         #Manual button
         self.bManual = self.xml.get_widget('buttonManual')
-        self.bManual.connect('clicked', self.__about_view)
+        self.bManual.connect('clicked', self.__manual_view)
         self.bManual.connect('enter', self.__change_icon, '/manual_2.png', 1) 
         self.bManual.connect('leave', self.__change_icon, '/manual.png', 1) 
         self.ImageManual = self.xml.get_widget('imageManual')
@@ -371,7 +371,14 @@ class Manager:
         #check if the user is in the clic view (not in list-clic view)
         self.controller.load_about()
         self.vboxPlay.show()
-        self.__change_current_view(self.vboxPlay)           
+        self.__change_current_view(self.vboxPlay)      
+        
+    #shows the manual view    
+    def __manual_view(self, *args):
+        #check if the user is in the clic view (not in list-clic view)
+        self.controller.load_manual()
+        self.vboxPlay.show()
+        self.__change_current_view(self.vboxPlay)         
     
            
     #Initiates the clic selected by the user to play 
