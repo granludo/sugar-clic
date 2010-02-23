@@ -1,8 +1,8 @@
-The main objective of this project is to adapt JClic to the Sugar/OLPC platform, thus mitigating the lack
-of educational content that is currently for OLPC, making this platform available JClic activities that 
-exist on the Internet.
+SugarClic es un proyecto educativo para el OLPC que consiste en la adaptación de JClic para esta plataforma. 
+Más concretamente, está enfocado a desarrollar un reproductor de Actividades Clic, para distribuir contenidos 
+ya creados por educadores de todo el mundo para el JClic.
 
-More specifically, this project to JClic focuses on developing a Clic Activity Player, to deliver contents 
-already created by educators worldwide. This project is leaded by Maria Jose Casany and Ludo (Marc Alier) 
-from the GESSI research group of the UPC, and benefits from contributions of several students of the 
-Computer Science School FIB at UPC Barcelona.
+El JClic es una aplicación creada por Francesc Busquets, del Departamento de Educación de la Generalitat de 
+Cataluña. Es una aplicación que consta de diversos tipos de actividades educativas y se trata de un proyecto 
+de código abierto que ya se ha desarrollado en la plataforma de Java. Trabaja en distintos entornos 
+(navegador,  escritorio, etc.), así como varios sistemas operativos (Windows, Linux, MacOS)
