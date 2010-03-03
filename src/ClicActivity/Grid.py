@@ -62,7 +62,7 @@ class Grid(object):
     crossClues = False
     across = False
     
-    def __init__(self,xml=None):
+    def __init__(self,xml=None, pathToMedia=None):
 
         '''We can change the try/except by hasAttribute'''
         '''Grid is a vector of cells'''
@@ -103,9 +103,11 @@ class Grid(object):
             except:
                 self.cellHeight =  float(30)
                 self.cellWidth =   float(30)
+
+            self.hasBorder = False
             try:
-                if xml.getAttribute('border') == "false":
-                    self.hasBorder = False
+                if xml.getAttribute('border') == "true":
+                    self.hasBorder = True
             except:
                 pass
             
@@ -118,10 +120,33 @@ class Grid(object):
                 self.numRows = float(xml.getAttribute('columns'))
                 self.numCols = tmp
         
+            self.ids = []
+            ids = None
+            
             if xml.hasAttribute('image'):
-            
                 self.imagePath = xml.getAttribute('image')
-            
+                if (pathToMedia !=None):
+                    #pathToMedia = "/home/roger/NetBeansProjects/sugarhg/src/new/data/clics/plantes2"
+                    img = pygame.image.load(pathToMedia+'/'+self.imagePath)
+                    aux = img.get_size()
+                    self.cellWidth, self.cellHeight = aux
+                    self.cellWidth = self.cellWidth / self.numCols
+                    self.cellHeight = self.cellHeight / self.numRows
+                try:
+                    ids = xml.getElementsByTagName('ids')[0].firstChild.nodeValue
+                except:
+                    ids = None
+
+            if ids != None:
+                idant = ''
+                for id in ids:
+                    if id != ' ' and id != '-' and idant != '-':
+                        self.ids.append(id)
+                        #idant = id
+                    elif idant == "-":
+                        self.ids.append(-1)
+                    idant = id
+
             '''Comprova si el grid es de definicions de crosswords, te tractament diferent en load'''
             try:
                 if xml.getAttribute('id') == 'acrossClues' or xml.getAttribute('id') == 'downClues':
@@ -142,8 +167,8 @@ class Grid(object):
         self.cellHeight = heightPart
         self.cellWidth  = widthPart
 
-        print "PathtoMedia" + pathToMedia
-        print "Image path" + self.imagePath
+        print self.imagePath
+        
         img = pygame.image.load(pathToMedia+'/'+self.imagePath).convert_alpha()
 
         img2 = pygame.transform.scale(img, (int(width), int(height)))
@@ -179,7 +204,10 @@ class Grid(object):
             img3 = img2.subsurface(rect)
             contentCell = ContentCell()
             contentCell.img  = img3
-            contentCell.id = i
+            if (self.ids == []):
+                contentCell.id = i
+            else:
+                contentCell.id = int(self.ids[i])
             cell.contentCell = contentCell
             
             '''adding cell to grid..'''
