@@ -49,6 +49,7 @@ class Cell(object):
     borderSize = Constants.DEFAULT_BORDER_SIZE
     #id =  None
     actualColorCell = Constants.colorCell
+    hasBorder = True
    
     
     def __init__(self,rect,display_surf,id,hasBorder):
@@ -57,6 +58,7 @@ class Cell(object):
         self.Point=[]
         self.idCell = id
         #self.Points = points
+        self.hasBorder = hasBorder
         if hasBorder:
             pygame.draw.rect(display_surf,Constants.colorCell,self.Rect,self.borderSize)
 
@@ -73,9 +75,9 @@ class Cell(object):
         display_surf.blit(self.contentCell.img,self.Rect)
         
         ''' Draw borders'''
-        if self.contentCell.border == True:
+        if self.hasBorder == True or self.actualColorCell != Constants.colorCell:
             pygame.draw.rect(display_surf,self.actualColorCell ,self.Rect,self.borderSize)
         
     def OnRenderPressedCell(self,display_surf):
-        if self.contentCell.border == True:
+        if self.hasBorder == True or self.actualColorCell != Constants.colorCell:
             pygame.draw.rect(display_surf,self.actualColorCell ,self.Rect,self.borderSize)
