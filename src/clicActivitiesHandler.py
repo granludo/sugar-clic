@@ -46,7 +46,8 @@ from ClicActivity.GeneralDialog import GeneralDialog
 from ClicActivity.SimpleAssociation import SimpleAssociation
 from ClicActivity.ComplexAssociation import ComplexAssociation
 from ClicActivity.WordSearch import WordSearch
-#from ClicActivity.CrossWord import CrossWord
+from ClicActivity.CrossWord import CrossWord
+from ClicActivity.FillInBlanks import FillInBlanks
 from ClicActivity.Complete import Complete
 from ClicActivity import Constants
 
@@ -208,9 +209,11 @@ class ClicActivities:
         elif  node.getAttribute('class') =='@textGrid.WordSearch':
                         return True
         elif  node.getAttribute('class') =='@textGrid.CrossWord':
-                        return False
+                        return True
         elif node.getAttribute('class') == '@text.Complete':
                         return False
+        elif  node.getAttribute('class') =='@text.FillInBlanks':
+                        return True
         else:
              return False
     def executeActivity(self, node, media, settings):
@@ -238,4 +241,6 @@ class ClicActivities:
                         return CrossWord(node, media, settings)
         elif node.getAttribute('class') == '@text.Complete' :
                         return Complete(node, media, settings)
+        elif node.getAttribute('class') == '@text.FillInBlanks' :
+                        return FillInBlanks(node, media, settings)
                     

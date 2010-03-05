@@ -57,6 +57,7 @@ colorDefault= (42,42,42)
 colorMessage = (171,171,171)
 colorBlue = (0,0,255)
 colorRed = (255,0,0)
+colorCelestial = (135, 206, 255)
 
 widthCross = 50 #Ample de la cell de la orientacio al crossword
 widthOpt = 150
@@ -64,6 +65,7 @@ minFontSize = 25
 MIN_CELL = 30
 
 DEFAULT_BORDER_SIZE = 3
+
 class Images:
     CURSOR = "img/standardcursor.xbm"
     CURSOR_MASK = "img/standardcursor_mask.xbm"
