@@ -39,9 +39,6 @@ import pygame
 import random
 
 
-
-
-
 class Grid(object):
 
     Cells = None
@@ -70,9 +67,15 @@ class Grid(object):
         '''BackGround Color'''
         if xml != None:
             try:
-                color =xml.getElementsByTagName('color')[0].getAttribute('background')
-                print 'el color k trae de background es:',bgcolor
-                self.backgroundColor = pygame.Color(hex(int(bgcolor, 16)))
+                bgColor =xml.getElementsByTagName('color')[0].getAttribute('background')
+                print 'el color k trae de background es:',bgColor
+                r = bgColor[2] + bgColor[3]
+                g = bgColor[4] + bgColor[5]
+                b = bgColor[6] + bgColor[7]
+                r = int(r,16)
+                g = int(g,16)
+                b = int(b,16)
+                self.backgroundColor = (r,g,b)
                 print 'he informado bgcolor',bgcolor
             except:
                 '''Default color'''
@@ -81,7 +84,13 @@ class Grid(object):
             '''foreground Color'''
             try:
                 color =xml.getElementsByTagName('color')[0].getAttribute('foreground')
-                self.foregroundColor = pygame.Color(hex(int(bgcolor, 16)))
+                r = color[2] + color[3]
+                g = color[4] + color[5]
+                b = color[6] + color[7]
+                r = int(r,16)
+                g = int(g,16)
+                b = int(b,16)
+                self.foregroundColor = (r,g,b)
             except:
                 '''Default color'''
                 pass

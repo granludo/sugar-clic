@@ -74,6 +74,8 @@ class Activity(object):
         
     def OnEvent(self,PointOfMouse):
         print 'MOTHER CLASS'
+    def OnKeyEvent(self,PointOfMouse):
+        print 'MOTHER CLASS'   
     def OnLoop(self):
         print 'MOTHER CLASS'
     def OnRender(self,display_surf):
@@ -81,12 +83,16 @@ class Activity(object):
     def setBgColor(self,display_surf):
         self.containerBg = display_surf.copy()
         '''Background Activity'''
-        ''' this function runs so wrong, the bgcolor is in Container-> bgColor not in  gradient'''
         
         try: 
             bgColor = self.xmlActivity.getElementsByTagName('gradient')[0].getAttribute('source')
-            intcolor =  int(bgColor, 16)
-            self.containerBg.fill(pygame.Color(hex(intcolor)))
+            r = bgColor[2] + bgColor[3]
+            g = bgColor[4] + bgColor[5]
+            b = bgColor[6] + bgColor[7]
+            r = int(r,16)
+            g = int(g,16)
+            b = int(b,16)
+            self.containerBg.fill((r,g,b))
             print 'color de gradient!'
         except:
             try:
@@ -97,10 +103,11 @@ class Activity(object):
                 r = int(r,16)
                 g = int(g,16)
                 b = int(b,16)
-                print r,g,b
-                self.containerBg.fill(pygame.Color(r,g,b))
+                print 'color de container',r,g,b
+                self.containerBg.fill((r,g,b))
             except:
                 '''No bgColor'''
+                self.containerBg.fill(Constants.colorWhite)
         ''' If the activity have image background'''
         
         try:   
