@@ -74,7 +74,7 @@ class Activity(object):
         
     def OnEvent(self,PointOfMouse):
         print 'MOTHER CLASS'
-    def OnKeyEvent(self,PointOfMouse):
+    def OnKeyEvent(self,key):
         print 'MOTHER CLASS'   
     def OnLoop(self):
         print 'MOTHER CLASS'
@@ -254,11 +254,12 @@ class Activity(object):
     def calculateCoef(self,width,height):
         coefWidth =  Constants.ACTIVITY_WIDTH /width
         coefHeight = Constants.ACTIVITY_HEIGHT / height
-            
+
         if coefWidth < coefHeight:
             coef = coefWidth
         else:
             coef = coefHeight
+        
         return coef
     
     
