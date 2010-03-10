@@ -74,7 +74,7 @@ class Activity(object):
         
     def OnEvent(self,PointOfMouse):
         print 'MOTHER CLASS'
-    def OnKeyEvent(self,PointOfMouse):
+    def OnKeyEvent(self,key):
         print 'MOTHER CLASS'   
     def OnLoop(self):
         print 'MOTHER CLASS'
