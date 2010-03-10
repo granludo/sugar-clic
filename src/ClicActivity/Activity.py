@@ -254,11 +254,12 @@ class Activity(object):
     def calculateCoef(self,width,height):
         coefWidth =  Constants.ACTIVITY_WIDTH /width
         coefHeight = Constants.ACTIVITY_HEIGHT / height
-            
+
         if coefWidth < coefHeight:
             coef = coefWidth
         else:
             coef = coefHeight
+        
         return coef
     
     

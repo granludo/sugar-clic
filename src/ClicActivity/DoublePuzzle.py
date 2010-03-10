@@ -52,24 +52,28 @@ class DoublePuzzle(Activity):
 
         self.Grid1 = Grid(xmlGrid1)
         self.Grid2 = Grid(xmlGrid1)
-           
+        
+        
         ''' Calculate Real size'''
         height = self.Grid1.cellHeight * self.Grid1.numRows
-        width = self.Grid1.cellWidth * self.Grid1.numCols
-            
-        '''Maximize size'''
-        coef = self.calculateCoef(width, height)      
-        height = self.Grid1.cellHeight * self.Grid1.numRows * coef
-        width = self.Grid1.cellWidth * self.Grid1.numCols * coef
-        
+        width = self.Grid1.cellWidth * self.Grid1.numCols 
+        print 'widht:', width, 'height:', height
+
         try:
             layout =self.xmlActivity.getElementsByTagName('layout')[0].getAttribute('position')
         except:
             layout = 'AB'
         if layout == 'AB':
-            width = width/2 - 5
+            width = width*2 + 5
         else:
-            height = height/2 -5
+            height = height*2 + 5
+        
+        '''Maximize size'''
+        coef = self.calculateCoef(width, height)      
+        height = int(height * coef)
+        width = int(width * coef)
+        print 'maximized -> widht:', width, 'height:', height
+        
 
         '''Loading constants for the activity'''
         
@@ -77,9 +81,11 @@ class DoublePuzzle(Activity):
         yActual=Constants.MARGIN_LEFT
         
         if layout == 'AB':
+            width = (width - 5) / 2
             xGrid1 = (Constants.ACTIVITY_WIDTH - width*2 - 10) / 2
             yGrid1 = (Constants.ACTIVITY_HEIGHT - height) / 2
         else:
+            height = (height - 5) /2
             xGrid1 = (Constants.ACTIVITY_WIDTH - width) / 2
             yGrid1 = (Constants.ACTIVITY_HEIGHT - height*2 - 10) / 2
         
