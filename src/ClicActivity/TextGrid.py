@@ -135,8 +135,8 @@ class TextGrid(object):
                     self.Add(display_surf,'text',text[itext])
                     itext += 1
                 elif child.nodeName == 'target':
-                    self.Add(display_surf,'target',target[itarget])
                     solTargets[self.idCell] = False
+                    self.Add(display_surf,'target',target[itarget])
                     itarget += 1
                     itext += 1 #incrementem tambe l'index del text per saltar el text intern del target
                 elif child.nodeName == 'cell':
@@ -245,7 +245,7 @@ class TextGrid(object):
                 '''Si el target es de tipus response'''
                 xmlObject.getElementsByTagName('response')
                 print 'es de tipus response'
-                resp = Response(xmlObject,self.font)
+                resp = Response(xmlObject,self.font,self.backgroundColor)
                 resp.Load(self.xActCell,self.yActCell,display_surf)
                 
                 respCell = TextCell(None,self.idCell,'response')
@@ -259,8 +259,7 @@ class TextGrid(object):
                     self.xActCell = self.X_NEW_LINE
                     self.yActCell += self.OFFSET_TOP_NEW_LINE
                 return
-            except Exception, e :
-                print 'error al crear response:',str(e)
+            except:
                 print 'no es de tipus response'
             
     def OnRender(self,display_surf):

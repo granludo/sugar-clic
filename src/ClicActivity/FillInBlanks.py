@@ -45,7 +45,9 @@ class FillInBlanks(Activity):
     
     '''Diccionari amb parells (idCell,encert)'''
     targets = {}
-    options = True
+    options = None
+    pressedCell = None
+    idPressed = -1 #indica el numero de cell seleccionada respecte al response cell
     
     def Load(self, display_surf ):
         self.setBgColor(display_surf)
@@ -56,34 +58,69 @@ class FillInBlanks(Activity):
         self.TextGrid = TextGrid(xmlTextGrid,self.mediaInformation,self.pathToMedia)
         
         self.targets = self.TextGrid.Load(display_surf,xmlTextGrid)
+        
+        opt = xmlTextGrid.getElementsByTagName('optionList')
 
-
+        if len(opt) > 0:
+            self.options = True
+        else:
+            self.options = False
+        
     def OnEvent(self,PointOfMouse):
-        
-        id = 0
-        for cell in self.TextGrid.textCells:
-            encert = cell.isOverCell(PointOfMouse[0],PointOfMouse[1])
-            id += 1
-            if encert:
-                break
-        
-        if id in self.targets:
-            self.targets[id] = encert
+        if self.options:
+            id = 0
+            for cell in self.TextGrid.textCells:
+                encert = cell.isOverCell(PointOfMouse[0],PointOfMouse[1])
+                if encert:
+                    id = cell.idCell
+                    break
+            
+            if id in self.targets:
+                self.targets[id] = encert
+        else:
+            for i in self.targets.keys():
+                print self.TextGrid.textCells[i].type
+                id = self.TextGrid.textCells[i].isOverCell(PointOfMouse[0],PointOfMouse[1])
+                if id != None:
+                    self.pressedCell = self.TextGrid.textCells[i]
+                    self.idPressed = id
+                    print 'he asignado el pressedcell', self.pressedCell.idCell
+                 
+    def OnKeyEvent(self,key):
+        print 'idpressed', self.idPressed
+        if self.pressedCell != None:
+            if key == 'backspace' or key == 'delete':
+                self.pressedCell.contentCell.writed[self.idPressed] = '_'
+                self.pressedCell.contentCell.Cells[self.idPressed].contentCell.letter = '_'
+            else:
+                self.pressedCell.contentCell.writed[self.idPressed] = key
+                self.pressedCell.contentCell.Cells[self.idPressed].contentCell.letter = key
+            
+            self.idPressed = self.pressedCell.contentCell.printLetter()
+                
+            
 
     def OnRender(self,display_surf):
         display_surf.blit(self.containerBg,(0,0))
         
-        '''repintamos el grid...'''
+        '''repintamos el grid'''
         self.TextGrid.OnRender(display_surf)
         
 
     def isGameFinished(self):
-        i = 0
-        status = self.targets.values()
-        '''Mira si els targets estan correctes o no'''
-        for st in status:
-            if not st:
-                return False
-        '''Si no ha retornat abans, tot esta correcte, acaba la activitat'''
-        return True
+        if self.options:
+            i = 0
+            status = self.targets.values()
+            '''Mira si els targets estan correctes o no'''
+            for st in status:
+                if not st:
+                    return False
+            '''Si no ha retornat abans, tot esta correcte, acaba la activitat'''
+            return True
+        else:
+            for i in self.targets.keys():
+                if self.TextGrid.textCells[i].contentCell.answer != self.TextGrid.textCells[i].contentCell.writed:                     
+                    return False
+            '''Si no ha retornat abans, tot esta correcte'''
+            return True
     

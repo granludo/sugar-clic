@@ -57,13 +57,19 @@ class TextCell(object):
         
         if self.type == 'text':
             return self.Rect.collidepoint(x,y)
-
+        
         elif self.type == 'option':
             '''mira si ha clicat a la llista i en quina part'''
             id = self.contentCell.isOverList(x,y)
             encert = self.contentCell.listClicked(id)
             return encert
-            
+        
+        elif self.type == 'response':
+            id = self.contentCell.isOverResponse(x,y)
+            print 'el id de response clicado:', id
+            self.contentCell.clicked = id
+            return id
+        
         '''TO DO if self.type == others'''
 
         return False
