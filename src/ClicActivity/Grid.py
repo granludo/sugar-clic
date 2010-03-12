@@ -109,7 +109,7 @@ class Grid(object):
                 
             except:
                 self.cellHeight =  float(30)
-                self.cellWidth =   float(30)
+                self.cellWidth =   float(40)
 
             self.hasBorder = False
             try:

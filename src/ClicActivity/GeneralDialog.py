@@ -124,7 +124,7 @@ class GeneralDialog(object):
         display_surf.fill(Constants.colorLila,self.rectTextInt)
 
         if message != None:
-            self.renderText(message,self.rectTextInt, font, display_surf,(255,255,255))
+            self.renderText(message,self.rectTextInt, 60, display_surf,(255,255,255))
 
         #display_surf.blit(text,rectText)
 
@@ -170,21 +170,33 @@ class GeneralDialog(object):
     def isOverActivity(self,PointOfMouse):
             return True
 
-    def renderText(self,text,rect,font,surf,colour):
-        lines = []
-        line = ''
-        words = text.split(' ')
-
-        for word in words:
-            test_line = line + word + ' '
-            # Build the line while the words fit.
-            if font.size(test_line)[0] < rect.width:
-                line = test_line
+    def renderText(self,text,rect,fontSize,surf,colour):
+        b = False
+        
+        while not b:
+            print fontSize
+            lines = []
+            line = ''
+            words = text.split(' ')
+            font = pygame.font.Font(None,fontSize)
+            for word in words:
+                test_line = line + word + ' '
+                # Build the line while the words fit.
+                if font.size(test_line)[0] < rect.width:
+                    line = test_line
+                else:
+                    lines.append(line)
+                    line = word + ' '
+            lines.append(line)
+            
+            '''Mira si cap el text, sino fa la font mes petita i intenta de nou'''
+            total_height = font.size(lines[0])[1] * len(lines)
+            print 'messageheight', total_height, 'rectheight', rect.height, 'numlines', len(lines)
+            if total_height > rect.height:
+                fontSize -= 2
             else:
-                lines.append(line)
-                line = word + ' '
-        lines.append(line)
-
+                b = True
+            
         acum_heigth = 0
 	yCord = rect.y + 5
 

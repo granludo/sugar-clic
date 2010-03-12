@@ -264,9 +264,9 @@ class Activity(object):
     
     
     def renderText(self,text,rect,font,surf,colour):
-        print 'entra en rendertext'
+        
         final_lines = []
-    
+        
         requested_lines = text.splitlines()
     
         # Create a series of lines that will fit on the provided
@@ -275,20 +275,38 @@ class Activity(object):
         for requested_line in requested_lines:
             if font.size(requested_line)[0] > rect.width-4:
                 words = requested_line.split(' ')
-                # if any of our words are too long to fit, return.
-                for word in words:
-                    if font.size(word)[0] >= rect.width:
-                        raise TextRectException, "The word " + word + " is too long to fit in the rect passed."
+                #si alguna paraula es massa llarga, es trunca
+                for j in range(len(words)):
+                    word = words[j]
+                    if font.size(word)[0] > rect.width-4:
+                        numLetters = ((rect.width - 4) / font.size(word[0])[0]) - 1
+                        numLines = len(word) // numLetters #calcula quantes linies ocupa
+                        if (len(word) % numLetters) != 0:
+                            numLines += 1
+                        
+                        wordCopy = word
+                        word = ""
+                        for n in range(numLines):
+                            for i in range(n*numLetters,(n+1)*numLetters):
+                                word = word + wordCopy[i]
+                                if i == len(wordCopy)-1: #acaba abans si la paraula no ocupa tota la linea
+                                    break
+                            word = word + ' '
+
+                        words[j] = word
+                
                 # Start a new line
                 accumulated_line = ""
                 for word in words:
-                    test_line = accumulated_line + word + " "
-                    # Build the line while the words fit.    
-                    if font.size(test_line)[0] < rect.width-4:
-                        accumulated_line = test_line 
-                    else: 
-                        final_lines.append(accumulated_line) 
-                        accumulated_line = word + " " 
+                    splitwords = word.split(' ')
+                    for splitword in splitwords:
+                        test_line = accumulated_line + splitword + " "
+                        # Build the line while the words fit.    
+                        if font.size(test_line)[0] < rect.width-4:
+                            accumulated_line = test_line 
+                        else: 
+                            final_lines.append(accumulated_line) 
+                            accumulated_line = splitword + " " 
                 final_lines.append(accumulated_line)
             else: 
                 final_lines.append(requested_line) 
