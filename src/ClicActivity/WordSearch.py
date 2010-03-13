@@ -34,6 +34,7 @@ import Constants
 
 from Activity import  Activity
 from Grid import Grid
+from styleCell import StyleCell
 import random
 
 class WordSearch(Activity):
@@ -60,6 +61,7 @@ class WordSearch(Activity):
         
         '''xml amb la sopa de lletres'''
         self.xmlText = self.xmlActivity.getElementsByTagName('textGrid')[0]
+        self.styleCell = StyleCell(self.xmlText)
         '''xml amb els ids que correspon a cada paraula'''
         xmlClues = self.xmlActivity.getElementsByTagName('clues')[0]
         try:

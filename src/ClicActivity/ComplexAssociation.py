@@ -10,6 +10,7 @@ import pygame
 
 from Activity import  Activity
 from Grid import Grid
+from styleCell import StyleCell
 
 class ComplexAssociation(Activity):
 
@@ -138,6 +139,7 @@ class ComplexAssociation(Activity):
             if self.Grid3.imagePath == None:
                 self.Grid3.Load(self.Grid1.numRows,self.Grid1.numCols,width,height,xActual ,yActual, display_surf)
                 cells = xmlGrid3.getElementsByTagName('cell')
+                self.styleCell = StyleCell(self.xmlGrid3)
                 i = 0
                 for cell in cells:
                     self.printxmlCellinCell(self.Grid3.Cells[i], cell)

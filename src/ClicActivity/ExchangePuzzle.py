@@ -36,6 +36,7 @@ import Constants
 
 from Activity import  Activity
 from Grid import Grid
+from styleCell import StyleCell
 
 class ExchangePuzzle(Activity):
 
@@ -90,7 +91,7 @@ class ExchangePuzzle(Activity):
             ''' 1 Imagen por cada celda ''' 
             self.Grid1.Load(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid ,yGrid, display_surf)
             cells = xmlGrid1.getElementsByTagName('cell')
-            
+            self.styleCell = StyleCell(xmlGrid1)
             i = 0
             for cell in cells: 
                 '''Recuperamos el texto de la celda y lo  bliteamos en imagen actual de celda.. ''' 
