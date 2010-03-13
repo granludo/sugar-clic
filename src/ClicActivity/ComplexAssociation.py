@@ -52,6 +52,8 @@ class ComplexAssociation(Activity):
         xmlGrid2 = self.xmlActivity.getElementsByTagName('cells')[1]
         self.Grid2 = Grid(xmlGrid2, self.pathToMedia)
 
+        self.styleCell = StyleCell(xmlGrid1)
+
         try:
             xmlGrid3 = self.xmlActivity.getElementsByTagName('cells')[2]
             self.Grid3 = Grid(xmlGrid3, self.pathToMedia)
@@ -163,6 +165,7 @@ class ComplexAssociation(Activity):
                     i = i+1
             else:
                 self.Grid3.LoadWithImage(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid1 ,yGrid1, display_surf,self.pathToMedia)
+                self.styleCell = StyleCell(self.xmlGrid3)
         except:
             pass
 
