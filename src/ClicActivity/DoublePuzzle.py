@@ -34,6 +34,7 @@ import Constants
 
 from Activity import  Activity
 from Grid import Grid
+from styleCell import StyleCell
 
 class DoublePuzzle(Activity):
 
@@ -49,7 +50,7 @@ class DoublePuzzle(Activity):
 
         '''Loading xml values'''
         xmlGrid1 = self.xmlActivity.getElementsByTagName('cells')[0]
-
+        self.styleCell = StyleCell(xmlGrid1)
         self.Grid1 = Grid(xmlGrid1)
         self.Grid2 = Grid(xmlGrid1)
         

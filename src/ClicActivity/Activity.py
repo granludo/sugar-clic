@@ -45,6 +45,8 @@ class Activity(object):
     containerBg = None
     pathToMedia = None
     
+    styleCell = None
+    
     #creates a dictionary <name used in the activity, real name of the file> with all the media used in the Activity 
     def __create_media_dictionary(self, mediaInfo):
         media_dictionary = dict()
@@ -183,13 +185,12 @@ class Activity(object):
         
     def printxmlCellinCell(self,cell,xmlcell2):    
        
-        styleCell  = StyleCell(xmlcell2)
+        #styleCell  = StyleCell(xmlcell2)
         
         
-        if styleCell.transparent == False:
-            cell.contentCell.img.set_colorkey(styleCell.backgroundColor)
-            cell.contentCell.img.fill(styleCell.backgroundColor)
-    
+        if self.styleCell.transparent == False:
+            cell.contentCell.img.set_colorkey(self.styleCell.backgroundColor)
+            cell.contentCell.img.fill(self.styleCell.backgroundColor)
     
         ''' Image in cell'''
         try:
@@ -217,7 +218,7 @@ class Activity(object):
             for element in elementP:
                 texto = texto + element.firstChild.nodeValue + '\n'
             print texto
-            font = pygame.font.Font(None, styleCell.fontSize)
+            font = pygame.font.Font(None, self.styleCell.fontSize)
             
             '''Blit text'''
             self.renderText(texto,cell.Rect,font,cell.contentCell.img,cell.actualColorCell)
@@ -230,10 +231,10 @@ class Activity(object):
         
     def printLetterinCell(self,cell,xmlcell,letterColour=Constants.colorBlack,backColour=Constants.colorWhite):    
        
-        styleCell  = StyleCell(xmlcell)
+        #styleCell  = StyleCell(xmlcell)
         
         
-        if styleCell.transparent == False:
+        if self.styleCell.transparent == False:
             print backColour
             #cell.contentCell.img.fill(styleCell.backgroundColor)
             cell.contentCell.img.fill(backColour)
@@ -241,7 +242,7 @@ class Activity(object):
         '''Print letter in cell'''
         try:
             texto = cell.contentCell.letter
-            font = pygame.font.Font(None, styleCell.fontSize)
+            font = pygame.font.Font(None, self.styleCell.fontSize)
             #text = font.render(texto, True, styleCell.foregroundColor)
 
             '''Blit text'''
@@ -249,7 +250,7 @@ class Activity(object):
         except:
             pass
         '''Border in cell'''
-        cell.contentCell.border = styleCell.hasBorder
+        cell.contentCell.border = self.styleCell.hasBorder
         
     def calculateCoef(self,width,height):
         coefWidth =  Constants.ACTIVITY_WIDTH /width
