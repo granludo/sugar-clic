@@ -145,14 +145,9 @@ class Grid(object):
                     ids = None
 
             if ids != None:
-                idant = ''
-                for id in ids:
-                    if id != ' ' and id != '-' and idant != '-':
-                        self.ids.append(id)
-                        #idant = id
-                    elif idant == "-":
-                        self.ids.append(-1)
-                    idant = id
+                idsList = ids.split(' ')
+                for id in idsList:
+                    self.ids.append(id)
 
             '''Comprova si el grid es de definicions de crosswords, te tractament diferent en load'''
             try:
