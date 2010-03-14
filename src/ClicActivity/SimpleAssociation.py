@@ -10,6 +10,7 @@ import pygame
 
 from Activity import  Activity
 from Grid import Grid
+from styleCell import StyleCell
 
 class SimpleAssociation(Activity):
 
@@ -90,7 +91,7 @@ class SimpleAssociation(Activity):
 
         '''Cargamos grupo de celdas comunes...'''
         cellsPrimary = self.xmlActivity.getElementsByTagName('cells')[0]
-
+        self.styleCell = StyleCell(cellsPrimary)
         xGrid1 = (Constants.ACTIVITY_WIDTH - width) / 2
         yGrid1 = (Constants.ACTIVITY_HEIGHT - height) / 2
         xGrid1 = max(xGrid1,xActual)
@@ -118,9 +119,9 @@ class SimpleAssociation(Activity):
                 self.Grid3.Load(self.Grid1.numRows,self.Grid1.numCols,width,height,xActual ,yActual, display_surf)
                 cells = xmlGrid3.getElementsByTagName('cell')
                 i = 0
-                for cell in cells:
-                    self.printxmlCellinCell(self.Grid3.Cells[i], cell)
-                    i = i+1
+                for i in range(len(cells)):
+                    self.printxmlCellinCell(self.Grid3.Cells[i], cells)
+                    #i = i+1
             else:
                 self.Grid3.LoadWithImage(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid1 ,yGrid1, display_surf,self.pathToMedia)
         except:

@@ -38,6 +38,7 @@ from pygame import *
 
 from Activity import  Activity
 from Grid import Grid
+from styleCell import StyleCell
 
 class MemoryGame(Activity):
 
@@ -59,7 +60,7 @@ class MemoryGame(Activity):
   
         xmlGrid1 = self.xmlActivity.getElementsByTagName('cells')[0]
         self.Grid1 = Grid(xmlGrid1)
-        
+        self.styleCell = StyleCell(xmlGrid1)
 
         orientation =self.xmlActivity.getElementsByTagName('layout')[0].getAttribute('position')
 

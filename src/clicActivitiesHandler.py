@@ -175,7 +175,7 @@ class ClicActivities:
     
     def validKey(self,key):
         '''Llista de tecles que ens interessa processar i la traduccio'''
-        validKeyList = {'delete':'delete','backspace':'backspace','a':'A','b':'B','c':'C','d':'D',
+        validKeyList = {'delete':'delete','backspace':'backspace','space':' ','a':'A','b':'B','c':'C','d':'D',
                         'e':'E','f':'F','g':'G','h':'H','i':'I','j':'J','k':'K','l':'L','m':'M',
                         'n':'N','o':'O','p':'P','q':'Q','r':'R','s':'S','t':'T','u':'U','v':'V',
                         'w':'W','x':'X','y':'Y','z':'Z'}

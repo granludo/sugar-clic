@@ -36,6 +36,7 @@ import Constants
 
 from Activity import  Activity
 from Grid import Grid
+from styleCell import StyleCell
 
 class PanelsExplore(Activity):
 
@@ -55,7 +56,8 @@ class PanelsExplore(Activity):
         self.Grid2 = Grid(xmlGrid2)
         self.Grid3 = Grid(xmlGrid2)
 
-         
+        self.styleCell = StyleCell(xmlGrid1)
+        
         orientation =  self.xmlActivity.getElementsByTagName('layout')[0].getAttribute('position')
 
         ''' Calculate Real size'''

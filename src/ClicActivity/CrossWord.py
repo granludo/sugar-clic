@@ -34,6 +34,7 @@ import Constants
 
 from Activity import  Activity
 from Grid import Grid
+from styleCell import StyleCell
 import pygame
 import random
 
@@ -74,6 +75,7 @@ class CrossWord(Activity):
         
         '''Crea el grid del crossword'''
         self.textGrid = Grid(self.xmlText)
+        self.styleCell = StyleCell(self.xmlText)
         '''Crea el grid de les definicions horitzontals'''
         self.cellsAcrossGrid = Grid(self.xmlCellsAcross)
         '''Crea el grid de les definicions verticals'''

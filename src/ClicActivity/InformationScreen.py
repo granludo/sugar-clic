@@ -37,6 +37,7 @@ import Constants
 
 from Activity import  Activity
 from Grid import Grid
+from styleCell import StyleCell
 
 
 class InformationScreen(Activity):
@@ -81,6 +82,7 @@ class InformationScreen(Activity):
             self.Grid1.Load(self.Grid1.numRows, self.Grid1.numCols, width, height, xGrid, yGrid, display_surf)
             i = 0
             cells = xmlGrid1.getElementsByTagName('cell')
+            self.styleCell = StyleCell(xmlGrid1)
             if cells.length !=0:
                 for cell in cells: 
                     self.printxmlCellinCell(self.Grid1.Cells[i], cell)

@@ -52,30 +52,45 @@ class StyleCell(object):
      
     
     def __init__(self,xml):
-
         '''BackGround Color'''
         try:
-            
-            
-            bgcolor =xml.getElementsByTagName('color')[0].getAttribute('background')
-            print 'bgcolor d cell  = ',bgcolor
-            self.backgroundColor = pygame.Color(hex(int(bgcolor, 16)))
+            bgColor =xml.getElementsByTagName('color')[0].getAttribute('background')
+            r = bgColor[2] + bgColor[3]
+            g = bgColor[4] + bgColor[5]
+            b = bgColor[6] + bgColor[7]
+            r = int(r,16)
+            g = int(g,16)
+            b = int(b,16)
+            self.backgroundColor = (r,g,b)
+            print 'bgcolor d cell  = ', self.backgroundColor
         except:
             '''Default color'''
             pass
     
         '''foreground Color'''
         try:
-            bgcolor =xml.getElementsByTagName('color')[0].getAttribute('foreground')
-            self.foregroundColor = pygame.Color(hex(int(bgcolor, 16)))
+            fgColor =xml.getElementsByTagName('color')[0].getAttribute('foreground')
+            r = fgColor[2] + fgColor[3]
+            g = fgColor[4] + fgColor[5]
+            b = fgColor[6] + fgColor[7]
+            r = int(r,16)
+            g = int(g,16)
+            b = int(b,16)
+            self.foregroundColor = (r,g,b)
         except:
             '''Default color'''
             pass
         
         '''borderColor Color'''
         try:
-            bgcolor =xml.getElementsByTagName('color')[0].getAttribute('border')
-            self.borderColor = pygame.Color(hex(int(bgcolor, 16)))
+            bColor =xml.getElementsByTagName('color')[0].getAttribute('border')
+            r = bColor[2] + bColor[3]
+            g = bColor[4] + bColor[5]
+            b = bColor[6] + bColor[7]
+            r = int(r,16)
+            g = int(g,16)
+            b = int(b,16)
+            self.borderColor = (r,g,b)
         except:
             '''Default color'''
             pass
