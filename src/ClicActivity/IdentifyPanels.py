@@ -39,6 +39,7 @@ import os.path
 
 from Activity import  Activity
 from Grid import Grid
+from styleCell import StyleCell
 
 class IdentifyPanels(Activity):
 
@@ -57,7 +58,8 @@ class IdentifyPanels(Activity):
         except:
             self.Grid2 = Grid()
             '''only 1 Grid'''
-
+        
+        self.styleCell = StyleCell(xmlGrid1)
 
 
         ''' Calculate Real size'''

@@ -45,6 +45,8 @@ class Activity(object):
     containerBg = None
     pathToMedia = None
     
+    styleCell = None
+    
     #creates a dictionary <name used in the activity, real name of the file> with all the media used in the Activity 
     def __create_media_dictionary(self, mediaInfo):
         media_dictionary = dict()
@@ -183,13 +185,12 @@ class Activity(object):
         
     def printxmlCellinCell(self,cell,xmlcell2):    
        
-        styleCell  = StyleCell(xmlcell2)
+        #styleCell  = StyleCell(xmlcell2)
         
         
-        if styleCell.transparent == False:
-            cell.contentCell.img.set_colorkey(styleCell.backgroundColor)
-            cell.contentCell.img.fill(styleCell.backgroundColor)
-    
+        if self.styleCell.transparent == False:
+            cell.contentCell.img.set_colorkey(self.styleCell.backgroundColor)
+            cell.contentCell.img.fill(self.styleCell.backgroundColor)
     
         ''' Image in cell'''
         try:
@@ -217,7 +218,7 @@ class Activity(object):
             for element in elementP:
                 texto = texto + element.firstChild.nodeValue + '\n'
             print texto
-            font = pygame.font.Font(None, styleCell.fontSize)
+            font = pygame.font.Font(None, self.styleCell.fontSize)
             
             '''Blit text'''
             self.renderText(texto,cell.Rect,font,cell.contentCell.img,cell.actualColorCell)
@@ -230,10 +231,10 @@ class Activity(object):
         
     def printLetterinCell(self,cell,xmlcell,letterColour=Constants.colorBlack,backColour=Constants.colorWhite):    
        
-        styleCell  = StyleCell(xmlcell)
+        #styleCell  = StyleCell(xmlcell)
         
         
-        if styleCell.transparent == False:
+        if self.styleCell.transparent == False:
             print backColour
             #cell.contentCell.img.fill(styleCell.backgroundColor)
             cell.contentCell.img.fill(backColour)
@@ -241,7 +242,7 @@ class Activity(object):
         '''Print letter in cell'''
         try:
             texto = cell.contentCell.letter
-            font = pygame.font.Font(None, styleCell.fontSize)
+            font = pygame.font.Font(None, self.styleCell.fontSize)
             #text = font.render(texto, True, styleCell.foregroundColor)
 
             '''Blit text'''
@@ -249,7 +250,7 @@ class Activity(object):
         except:
             pass
         '''Border in cell'''
-        cell.contentCell.border = styleCell.hasBorder
+        cell.contentCell.border = self.styleCell.hasBorder
         
     def calculateCoef(self,width,height):
         coefWidth =  Constants.ACTIVITY_WIDTH /width
@@ -264,9 +265,9 @@ class Activity(object):
     
     
     def renderText(self,text,rect,font,surf,colour):
-        print 'entra en rendertext'
+        
         final_lines = []
-    
+        
         requested_lines = text.splitlines()
     
         # Create a series of lines that will fit on the provided
@@ -275,20 +276,38 @@ class Activity(object):
         for requested_line in requested_lines:
             if font.size(requested_line)[0] > rect.width-4:
                 words = requested_line.split(' ')
-                # if any of our words are too long to fit, return.
-                for word in words:
-                    if font.size(word)[0] >= rect.width:
-                        raise TextRectException, "The word " + word + " is too long to fit in the rect passed."
+                #si alguna paraula es massa llarga, es trunca
+                for j in range(len(words)):
+                    word = words[j]
+                    if font.size(word)[0] > rect.width-4:
+                        numLetters = ((rect.width - 4) / font.size(word[0])[0]) - 1
+                        numLines = len(word) // numLetters #calcula quantes linies ocupa
+                        if (len(word) % numLetters) != 0:
+                            numLines += 1
+                        
+                        wordCopy = word
+                        word = ""
+                        for n in range(numLines):
+                            for i in range(n*numLetters,(n+1)*numLetters):
+                                word = word + wordCopy[i]
+                                if i == len(wordCopy)-1: #acaba abans si la paraula no ocupa tota la linea
+                                    break
+                            word = word + ' '
+
+                        words[j] = word
+                
                 # Start a new line
                 accumulated_line = ""
                 for word in words:
-                    test_line = accumulated_line + word + " "
-                    # Build the line while the words fit.    
-                    if font.size(test_line)[0] < rect.width-4:
-                        accumulated_line = test_line 
-                    else: 
-                        final_lines.append(accumulated_line) 
-                        accumulated_line = word + " " 
+                    splitwords = word.split(' ')
+                    for splitword in splitwords:
+                        test_line = accumulated_line + splitword + " "
+                        # Build the line while the words fit.    
+                        if font.size(test_line)[0] < rect.width-4:
+                            accumulated_line = test_line 
+                        else: 
+                            final_lines.append(accumulated_line) 
+                            accumulated_line = splitword + " " 
                 final_lines.append(accumulated_line)
             else: 
                 final_lines.append(requested_line) 

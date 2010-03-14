@@ -67,24 +67,23 @@ class FillInBlanks(Activity):
             self.options = False
         
     def OnEvent(self,PointOfMouse):
-        if self.options:
-            id = 0
-            for cell in self.TextGrid.textCells:
-                encert = cell.isOverCell(PointOfMouse[0],PointOfMouse[1])
+        for i in self.targets.keys():
+            print self.TextGrid.textCells[i].type
+            if self.TextGrid.textCells[i].type == 'option':
+                encert = self.TextGrid.textCells[i].isOverCell(PointOfMouse[0],PointOfMouse[1])
                 if encert:
-                    id = cell.idCell
-                    break
+                    self.targets[i] = encert
+                    print self.targets
             
-            if id in self.targets:
-                self.targets[id] = encert
-        else:
-            for i in self.targets.keys():
-                print self.TextGrid.textCells[i].type
+            else:
                 id = self.TextGrid.textCells[i].isOverCell(PointOfMouse[0],PointOfMouse[1])
                 if id != None:
                     self.pressedCell = self.TextGrid.textCells[i]
                     self.idPressed = id
                     print 'he asignado el pressedcell', self.pressedCell.idCell
+                    return
+                else:
+                    self.pressedCell = None
                  
     def OnKeyEvent(self,key):
         print 'idpressed', self.idPressed
@@ -108,19 +107,19 @@ class FillInBlanks(Activity):
         
 
     def isGameFinished(self):
-        if self.options:
-            i = 0
-            status = self.targets.values()
-            '''Mira si els targets estan correctes o no'''
-            for st in status:
-                if not st:
+        j = 0
+        for i in self.targets.keys():
+            if self.TextGrid.textCells[i].type == 'option':
+                status = self.targets.values()
+                '''Mira si els targets estan correctes o no'''
+                if not status[j]:
                     return False
-            '''Si no ha retornat abans, tot esta correcte, acaba la activitat'''
-            return True
-        else:
-            for i in self.targets.keys():
+                
+            else:   
                 if self.TextGrid.textCells[i].contentCell.answer != self.TextGrid.textCells[i].contentCell.writed:                     
                     return False
-            '''Si no ha retornat abans, tot esta correcte'''
-            return True
+            j += 1
+            
+        '''Si no ha retornat abans, tot esta correcte'''
+        return True
     
