@@ -60,7 +60,7 @@ colorRed = (255,0,0)
 colorCelestial = (135, 206, 255)
 
 widthCross = 50 #Ample de la cell de la orientacio al crossword
-widthOpt = 150
+widthOpt = 160
 minFontSize = 25
 MIN_CELL = 30
 
