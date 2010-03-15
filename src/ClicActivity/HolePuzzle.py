@@ -126,34 +126,37 @@ class HolePuzzle(Activity):
         '''
         for cell in self.Grid1.Cells:
             if cell.isOverCell(PointOfMouse[0],PointOfMouse[1]):
+                print cell.idCell
+                print len(self.Grid1.Cells)
                 '''celda anterior apretada ''' 
                 if cell.contentCell.id != -1:
                     idCelda = cell.idCell
                     try:
                         ''' celda gris esta a al izkierda'''
                         if self.Grid1.Cells[idCelda -1].contentCell.id == -1:
-                            print 'idcelda =',idCelda,'mod=',((idCelda)% self.numCols)
-                            if ((idCelda-1)% self.numCols) !=(self.numCols-1) :
+                            print 'idcelda =',idCelda,'mod=',((idCelda)% self.Grid1.numCols)
+                            if ((idCelda-1)% self.Grid1.numCols) !=(self.Grid1.numCols-1) :
                                 self.Grid1.changeImages(cell.idCell,self.Grid1.Cells[idCelda -1].idCell )
-                        ''' celda gris esta a la derecha'''
-                        if self.Grid1.Cells[idCelda +1].contentCell.id == -1:
-                            '''evitem laterals'''
-                            if ((idCelda+1)% self.numCols) !=0:
-                                self.Grid1.changeImages(cell.idCell,self.Grid1.Cells[idCelda + 1].idCell )
-                        ''' celda gris esta arriba '''
-                        print 'idcelda',idCelda
-                        print 'calculo=',(idCelda - self.numCols)
                         
-                        if self.Grid1.Cells[int(idCelda - self.numCols)].contentCell.id == -1:
-                            self.Grid1.changeImages(cell.idCell,self.Grid1.Cells[int(idCelda - self.numCols)].idCell )
-                        ''' celda gris esta abajo '''
-                        print 'calculo=',(idCelda + self.numCols)
-                        if self.Grid1.Cells[int(idCelda + self.numCols)].contentCell.id == -1:
-                            self.Grid1.changeImages(cell.idCell,self.Grid1.Cells[int(idCelda + self.numCols)].idCell )
+                        elif self.Grid1.Cells[int(idCelda - self.Grid1.numCols)].contentCell.id == -1:
+                            ''' celda gris esta arriba '''
+                            print 'idcelda',idCelda
+                            print 'calculo=',(idCelda - self.Grid1.numCols)
+                            self.Grid1.changeImages(cell.idCell,self.Grid1.Cells[int(idCelda - self.Grid1.numCols)].idCell )
+                        
+                        elif self.Grid1.Cells[idCelda +1].contentCell.id == -1:
+                                ''' celda gris esta a la derecha'''
+                                '''evitem laterals'''
+                                if ((idCelda+1)% self.Grid1.numCols) !=0:
+                                    self.Grid1.changeImages(cell.idCell,self.Grid1.Cells[idCelda + 1].idCell )
+
+                        elif self.Grid1.Cells[int(idCelda + self.Grid1.numCols)].contentCell.id == -1:
+                            ''' celda gris esta abajo '''
+                            print 'calculo=',(idCelda + self.Grid1.numCols)
+                            self.Grid1.changeImages(cell.idCell,self.Grid1.Cells[int(idCelda + self.Grid1.numCols)].idCell )
+                        
                     except:
-                        
-                        '''Estamos fuera de tablero....'''
-                        
+                        pass
                     
 
     def OnRender(self,display_surf):
