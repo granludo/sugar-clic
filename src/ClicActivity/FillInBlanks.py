@@ -34,24 +34,35 @@
 
 import Constants
 
-
 from Activity import  Activity
 from TextGrid import TextGrid
+from Grid import Grid
+from styleCell import StyleCell
 
 
 class FillInBlanks(Activity):
 
     TextGrid = None
-    
-    '''Diccionari amb parells (idCell,encert)'''
-    targets = {}
+    PrevGrid = None
+    targets = {} #Diccionari amb parells (idCell,encert) util quan hi ha optionLists
     options = None
     pressedCell = None
     idPressed = -1 #indica el numero de cell seleccionada respecte al response cell
+    previous = False
     
     def Load(self, display_surf ):
         self.setBgColor(display_surf)
-
+        
+        try:
+            xmlPrevious = self.xmlActivity.getElementsByTagName('prevScreen')[0]
+            self.previous = True
+            self.PrevGrid = Grid()
+            self.PrevGrid.Load(1,1,Constants.ACTIVITY_WIDTH, Constants.ACTIVITY_HEIGHT, Constants.MARGIN_TOP, Constants.MARGIN_LEFT,display_surf)
+            self.styleCell = StyleCell(xmlPrevious)
+            self.printxmlCellinCell(self.PrevGrid.Cells[0],xmlPrevious)
+        except:
+            pass
+        
         '''Loading constants for the activity'''
         xmlTextGrid = self.xmlActivity.getElementsByTagName('document')[0]
         
@@ -67,23 +78,27 @@ class FillInBlanks(Activity):
             self.options = False
         
     def OnEvent(self,PointOfMouse):
-        for i in self.targets.keys():
-            print self.TextGrid.textCells[i].type
-            if self.TextGrid.textCells[i].type == 'option':
-                encert = self.TextGrid.textCells[i].isOverCell(PointOfMouse[0],PointOfMouse[1])
-                if encert:
-                    self.targets[i] = encert
-                    print self.targets
-            
-            else:
-                id = self.TextGrid.textCells[i].isOverCell(PointOfMouse[0],PointOfMouse[1])
-                if id != None:
-                    self.pressedCell = self.TextGrid.textCells[i]
-                    self.idPressed = id
-                    print 'he asignado el pressedcell', self.pressedCell.idCell
-                    return
+        if self.previous:
+            '''Quan es fa el primer clic es passa a resoldre l'activitat'''
+            self.previous = False
+        else:
+            for i in self.targets.keys():
+                print self.TextGrid.textCells[i].type
+                if self.TextGrid.textCells[i].type == 'option':
+                    encert = self.TextGrid.textCells[i].isOverCell(PointOfMouse[0],PointOfMouse[1])
+                    if encert:
+                        self.targets[i] = encert
+                        print self.targets
+                
                 else:
-                    self.pressedCell = None
+                    id = self.TextGrid.textCells[i].isOverCell(PointOfMouse[0],PointOfMouse[1])
+                    if id != None:
+                        self.pressedCell = self.TextGrid.textCells[i]
+                        self.idPressed = id
+                        print 'he asignado el pressedcell', self.pressedCell.idCell
+                        return
+                    else:
+                        self.pressedCell = None
                  
     def OnKeyEvent(self,key):
         print 'idpressed', self.idPressed
@@ -101,9 +116,12 @@ class FillInBlanks(Activity):
 
     def OnRender(self,display_surf):
         display_surf.blit(self.containerBg,(0,0))
-        
-        '''repintamos el grid'''
-        self.TextGrid.OnRender(display_surf)
+
+        if self.previous:
+            self.PrevGrid.OnRender(display_surf)
+        else:
+            '''repintamos el grid'''
+            self.TextGrid.OnRender(display_surf)
         
 
     def isGameFinished(self):
