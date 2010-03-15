@@ -85,7 +85,15 @@ class TextGrid(object):
             if size < Constants.minFontSize:
                 size = Constants.minFontSize
             bold = style.getAttribute('bold')
+            if bold == 'true':
+                bold = True
+            else:
+                bold = False
             italic = style.getAttribute('italic')
+            if italic == 'true':
+                italic = True
+            else:
+                italic = False
             self.font = pygame.font.SysFont(family,size,bold,italic)
         except:
             self.font = pygame.font.SysFont('Arial',Constants.minFontSize)
