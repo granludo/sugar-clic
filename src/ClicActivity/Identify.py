@@ -56,18 +56,20 @@ class Identify(Activity):
         '''Loading constants for the activity'''
         xmlTextGrid = self.xmlActivity.getElementsByTagName('document')[0]
         
-        self.TextGrid = TextGrid(xmlTextGrid)
+        self.TextGrid = TextGrid(xmlTextGrid,self.mediaInformation,self.pathToMedia)
 
         self.targets = self.TextGrid.Load(display_surf,xmlTextGrid,True)
 
         try:
             self.checkText = self.xmlActivity.getElementsByTagName('checkButton')[0].firstChild.data
-            self.checkButton = pygame.surface.Surface((self.TextGrid.Rect.width,40))
-            self.checkButton.fill(Constants.colorCelestial)
-            self.font = pygame.font.Font(None,30)
-            self.checkRect = pygame.Rect((self.TextGrid.Rect.left,self.TextGrid.Rect.bottom - 40),(self.checkButton.get_size()))
         except:
-            pass
+            self.checkText = 'Comprueba'
+        
+        self.checkButton = pygame.surface.Surface((self.TextGrid.Rect.width,40))
+        self.checkButton.fill(Constants.colorCelestial)
+        self.font = pygame.font.Font(None,30)
+        self.checkRect = pygame.Rect((self.TextGrid.Rect.left,self.TextGrid.Rect.bottom - 40),(self.checkButton.get_size()))
+        
         self.pressedCells = []
         
     def OnEvent(self,PointOfMouse):

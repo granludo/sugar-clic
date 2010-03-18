@@ -54,7 +54,7 @@ class TextGrid(object):
     idCell = 0 #index que indica el id del cell que s'afegeix
     xActCell = 0
     yActCell = 0
-    
+    numCells = 0
     mediaBag = None
     pathToMedia = None
     
@@ -132,6 +132,7 @@ class TextGrid(object):
             text = p.getElementsByTagName('text')
             target = p.getElementsByTagName('target')
             cells = p.getElementsByTagName('cell')
+            self.numCells = len(cells)
             
             '''Agafo els fills del node per saber l'ordre en que apareix cada fragment'''
             childs = p.childNodes
@@ -153,7 +154,7 @@ class TextGrid(object):
                 elif child.nodeName == 'cell':
                     self.Add(display_surf,'cell',cells[iCell])
                     iCell += 1
-            if len(cells) > 0:
+            if self.numCells > 0:
                 h = int(cells[0].getAttribute('height')) + 10
                 self.yActCell += h
             else:
@@ -221,7 +222,7 @@ class TextGrid(object):
                 
                 self.textCells.append(cell)
                 self.idCell += 1
-                self.xActCell += width*2
+                self.xActCell += width + int((Constants.ACTIVITY_WIDTH - (self.numCells*width)) / self.numCells)
             except:
                 pass
         
