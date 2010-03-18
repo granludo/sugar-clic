@@ -174,7 +174,6 @@ class GeneralDialog(object):
         b = False
         
         while not b:
-            print fontSize
             lines = []
             line = ''
             words = text.split(' ')

@@ -184,13 +184,8 @@ class Activity(object):
             return ""
         
     def printxmlCellinCell(self,cell,xmlcell2):    
-       
-        #styleCell  = StyleCell(xmlcell2)
-        
-        
-        if self.styleCell.transparent == False:
-            cell.contentCell.img.set_colorkey(self.styleCell.backgroundColor)
-            cell.contentCell.img.fill(self.styleCell.backgroundColor)
+
+        cell.contentCell.img.fill(self.styleCell.backgroundColor)
     
         ''' Image in cell'''
         try:
@@ -235,7 +230,6 @@ class Activity(object):
         
         
         if self.styleCell.transparent == False:
-            print backColour
             #cell.contentCell.img.fill(styleCell.backgroundColor)
             cell.contentCell.img.fill(backColour)
     
@@ -323,7 +317,6 @@ class Activity(object):
                 surf.blit(tempsurface, ((rect.width - tempsurface.get_width()) / 2, accumulated_height))
                 
             accumulated_height += font.size(line)[1] #font.size returns (width,height)
-        print final_lines[0]
 
     def play_sound(self,filename):
         #pygame.mixer.pre_init(44100,-16,2, 1024)

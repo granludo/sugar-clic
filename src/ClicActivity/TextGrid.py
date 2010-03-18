@@ -109,7 +109,7 @@ class TextGrid(object):
         @display_surf es la superficie de l'activitat on es pintara el grid amb el seu contingut
         @xmlDocument es la part del xml corresponent al document de l'activitat
     '''
-    def Load(self,display_surf,xmlDocument):
+    def Load(self,display_surf,xmlDocument,identify = False):
         
         self.xActCell = Constants.MARGIN_LEFT + 10
         self.yActCell = Constants.MARGIN_TOP + 10
@@ -137,16 +137,19 @@ class TextGrid(object):
             childs = p.childNodes
             itext = 0 #index per recorrer els nodes text
             itarget = 0 #index per recorrer els nodes target
-            iCell = 0
+            iCell = 0 #index per recorrer els nodes cell
             for child in childs:
                 if child.nodeName == 'text':
                     self.Add(display_surf,'text',text[itext])
                     itext += 1
                 elif child.nodeName == 'target':
                     solTargets[self.idCell] = False
-                    self.Add(display_surf,'target',target[itarget])
+                    if identify:
+                        self.Add(display_surf,'text',target[itarget])
+                    else:
+                        self.Add(display_surf,'target',target[itarget])
+                        itext += 1 #incrementem tambe l'index del text per saltar el text intern del target
                     itarget += 1
-                    itext += 1 #incrementem tambe l'index del text per saltar el text intern del target
                 elif child.nodeName == 'cell':
                     self.Add(display_surf,'cell',cells[iCell])
                     iCell += 1
@@ -198,7 +201,6 @@ class TextGrid(object):
         
         elif type == 'cell':
             try:
-                print 'entro a pintar cell'
                 width = int(xmlObject.getAttribute('width'))
                 height = int(xmlObject.getAttribute('height'))
                 image = xmlObject.getAttribute('image')
@@ -269,6 +271,8 @@ class TextGrid(object):
                 return
             except:
                 print 'no es de tipus response'
+            
+                
             
     def OnRender(self,display_surf):
         '''Pinta la superficie del text grid'''
