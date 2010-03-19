@@ -46,6 +46,7 @@ class Activity(object):
     pathToMedia = None
     
     styleCell = None
+    styleCell2 = None
     
     #creates a dictionary <name used in the activity, real name of the file> with all the media used in the Activity 
     def __create_media_dictionary(self, mediaInfo):
@@ -182,10 +183,22 @@ class Activity(object):
             return ""
         except:
             return ""
-        
-    def printxmlCellinCell(self,cell,xmlcell2):    
+    
+    def getPreviousMessage(self):
+        '''Recuperamos mensaje de  fin partida'''
+        try:
+            cells = self.xmlActivity.getElementsByTagName('messages')[0]
+            cells = cells.getElementsByTagName('cell')
+            for cell in cells:
+                if cell.getAttribute('type')  == 'previous':
+                    text = cell.getElementsByTagName('p')[0].firstChild.nodeValue
+                    return text
+        except:
+            return None
+    
+    def printxmlCellinCell(self,cell,xmlcell2,style):    
 
-        cell.contentCell.img.fill(self.styleCell.backgroundColor)
+        cell.contentCell.img.fill(style.backgroundColor)
     
         ''' Image in cell'''
         try:
@@ -213,14 +226,14 @@ class Activity(object):
             for element in elementP:
                 texto = texto + element.firstChild.nodeValue + '\n'
             print texto
-            font = pygame.font.Font(None, self.styleCell.fontSize)
+            font = pygame.font.Font(None, style.fontSize)
             
             '''Blit text'''
             self.renderText(texto,cell.Rect,font,cell.contentCell.img,cell.actualColorCell)
     
             
             ''' Border in cell'''
-            cell.contentCell.border = styleCell.hasBorder
+            cell.contentCell.border = style.hasBorder
         except:
             pass
         
@@ -228,10 +241,7 @@ class Activity(object):
        
         #styleCell  = StyleCell(xmlcell)
         
-        
-        if self.styleCell.transparent == False:
-            #cell.contentCell.img.fill(styleCell.backgroundColor)
-            cell.contentCell.img.fill(backColour)
+        cell.contentCell.img.fill(backColour)
     
         '''Print letter in cell'''
         try:

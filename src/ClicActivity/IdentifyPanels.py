@@ -55,6 +55,7 @@ class IdentifyPanels(Activity):
         try:
             xmlGrid2 = self.xmlActivity.getElementsByTagName('cells')[1]
             self.Grid2 = Grid(xmlGrid2)
+            self.styleCell2 = StyleCell(xmlGrid2)
         except:
             self.Grid2 = Grid()
             '''only 1 Grid'''
@@ -96,7 +97,7 @@ class IdentifyPanels(Activity):
 
         i = 0
         for cell in cells:
-            self.printxmlCellinCell(self.Grid1.Cells[i], cell)
+            self.printxmlCellinCell(self.Grid1.Cells[i], cell, self.styleCell)
 
             id  = int(cell.getAttribute('id') )
             self.Grid1.Cells[i].contentCell.id = id
@@ -111,7 +112,7 @@ class IdentifyPanels(Activity):
             cells = xmlGrid2.getElementsByTagName('cell')
             i = 0
             for cell in cells:
-                self.printxmlCellinCell(self.Grid2.Cells[i], cell)
+                self.printxmlCellinCell(self.Grid2.Cells[i], cell, self.styleCell2)
 
                 i = i+1
         except:

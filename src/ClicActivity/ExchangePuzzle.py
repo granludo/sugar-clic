@@ -95,7 +95,7 @@ class ExchangePuzzle(Activity):
             i = 0
             for cell in cells: 
                 '''Recuperamos el texto de la celda y lo  bliteamos en imagen actual de celda.. ''' 
-                self.printxmlCellinCell(self.Grid1.Cells[i], cell )
+                self.printxmlCellinCell(self.Grid1.Cells[i], cell, self.styleCell)
                 i = i+1
         self.Grid1.unsort()
 

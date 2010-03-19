@@ -107,17 +107,18 @@ class MemoryGame(Activity):
             
             '''Cargamos secondaryCells'''
             cellsSecondary = self.xmlActivity.getElementsByTagName('cells')[1]
+            self.styleCell2 = StyleCell(cellsSecondary)
             
             '''Cargamos primer Grid del XML'''
             cells = cellsPrimary.getElementsByTagName('cell')
             '''indexCell  = Numero de Celda que ocupa:'''
             indexCell = 0
-            indexCell = self.doBucle(cells,indexCell)
+            indexCell = self.doBucle(cells,indexCell, self.styleCell2)
             
             '''Cargamos segundo Grid del XML'''
             cells = cellsSecondary.getElementsByTagName('cell')
             
-            self.doBucle(cells,indexCell)
+            self.doBucle(cells,indexCell, self.styleCell2)
 
         else:
             '''indexCell  = Numero de Celda que ocupa:'''
@@ -125,18 +126,18 @@ class MemoryGame(Activity):
             
             '''Cargamos primer Grid del XML'''
             cells = cellsPrimary.getElementsByTagName('cell')
-            indexCell = self.doBucle(cells,indexCell)
+            indexCell = self.doBucle(cells,indexCell,self.styleCell)
             
             '''Recargamos el primer Grid del XML'''
-            indexCell = self.doBucle(cells,indexCell)
+            indexCell = self.doBucle(cells,indexCell,self.styleCell)
             
         self.Grid1.unsort()
 
-    def doBucle(self,cells,i): 
+    def doBucle(self,cells,i, style): 
         id = 0
         for cell in cells:
             copy = self.Grid1.Cells[i].contentCell.img.copy()      
-            self.printxmlCellinCell(self.Grid1.Cells[i], cell)         
+            self.printxmlCellinCell(self.Grid1.Cells[i], cell, style)         
 
             '''Guardamos las imagenes en el Grid'''   
             self.Grid1.Cells[i].contentCell.img2 = self.Grid1.Cells[i].contentCell.img

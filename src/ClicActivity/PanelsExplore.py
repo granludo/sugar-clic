@@ -57,6 +57,7 @@ class PanelsExplore(Activity):
         self.Grid3 = Grid(xmlGrid2)
 
         self.styleCell = StyleCell(xmlGrid1)
+        self.styleCell2 = StyleCell(xmlGrid2)
         
         orientation =  self.xmlActivity.getElementsByTagName('layout')[0].getAttribute('position')
 
@@ -116,7 +117,7 @@ class PanelsExplore(Activity):
         cells = xmlGrid1.getElementsByTagName('cell')
         i = 0
         for cell in cells: 
-            self.printxmlCellinCell(self.Grid1.Cells[i], cell)
+            self.printxmlCellinCell(self.Grid1.Cells[i], cell, self.styleCell)
             idCell = cell.getAttribute('id')
             if len(idCell)>0:
                 self.Grid1.Cells[i].contentCell.id = int(idCell)
@@ -129,7 +130,7 @@ class PanelsExplore(Activity):
         for i in range(len(self.Grid1.Cells)):
             copia = self.Grid2.Cells[0].contentCell.img.copy()
             self.Grid3.Cells[i].contentCell.img = copia
-            self.printxmlCellinCell(self.Grid3.Cells[i], cells[i])
+            self.printxmlCellinCell(self.Grid3.Cells[i], cells[i],self.styleCell2)
         
 
     def OnEvent(self,PointOfMouse):

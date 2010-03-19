@@ -52,7 +52,6 @@ class ComplexAssociation(Activity):
         xmlGrid2 = self.xmlActivity.getElementsByTagName('cells')[1]
         self.Grid2 = Grid(xmlGrid2, self.pathToMedia)
 
-        self.styleCell = StyleCell(xmlGrid1)
 
         try:
             xmlGrid3 = self.xmlActivity.getElementsByTagName('cells')[2]
@@ -158,14 +157,13 @@ class ComplexAssociation(Activity):
                     self.Grid3.Load(self.Grid2.numRows,self.Grid2.numCols,newWidth,newHeight,xActual ,yActual, display_surf)
 
                 cells = xmlGrid3.getElementsByTagName('cell')
-                self.styleCell = StyleCell(self.xmlGrid3)
+                self.styleCell = StyleCell(xmlGrid3)
                 i = 0
                 for cell in cells:
-                    self.printxmlCellinCell(self.Grid3.Cells[i], cell)
+                    self.printxmlCellinCell(self.Grid3.Cells[i], cell,self.styleCell)
                     i = i+1
             else:
                 self.Grid3.LoadWithImage(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid1 ,yGrid1, display_surf,self.pathToMedia)
-                self.styleCell = StyleCell(self.xmlGrid3)
         except:
             pass
 
@@ -173,13 +171,14 @@ class ComplexAssociation(Activity):
 
             '''Cargamos secondaryCells'''
             cellsSecondary = self.xmlActivity.getElementsByTagName('cells')[1]
+            self.styleCell2 = StyleCell(cellsSecondary)
 
             '''Cargamos primer Grid del XML'''
             cells = cellsPrimary.getElementsByTagName('cell')
+            self.styleCell = StyleCell(cellsPrimary)
             '''indexCell  = Numero de Celda que ocupa:'''
             indexCell = 0
             indexCell = self.doBucle(cells,indexCell)
-
             '''Cargamos segundo Grid del XML'''
             cells2 = cellsSecondary.getElementsByTagName('cell')
 
@@ -187,24 +186,25 @@ class ComplexAssociation(Activity):
                 ''' 1 Imagen de fondo '''
                 self.Grid1.LoadWithImage(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid1 ,yGrid1, display_surf,self.pathToMedia)
 
-	    print "whola"
-	    #print cells[0].toxml()
-	    #print cellsSecondary.toxml()
-
-            #self.doBucle(cellsSecondary,0)
-	    #indexCell = self.doBucle(cells,indexCell)
-
-	    i = 0
-	    id = 0
-
-	    for cell in cells2:
-		    self.printxmlCellinCell(self.Grid2.Cells[i], cell)
-		    '''Guardamos las imagenes en el Grid'''
-		    self.Grid2.Cells[i].contentCell.img2 = self.Grid2.Cells[i].contentCell.img
-		    self.Grid2.Cells[i].contentCell.id = id
-		    id = id+1
-		    i = i+1
-	    #indexCell = self.doBucle(cells2,indexCell)
+    	    print "whola"
+    	    #print cells[0].toxml()
+    	    #print cellsSecondary.toxml()
+    
+                #self.doBucle(cellsSecondary,0)
+    	    #indexCell = self.doBucle(cells,indexCell)
+    
+    	    i = 0
+    	    id = 0
+            self.styleCell2 = StyleCell(cellsSecondary)
+    	    
+            for cell in cells2:
+    		    self.printxmlCellinCell(self.Grid2.Cells[i], cell, self.styleCell2)
+    		    '''Guardamos las imagenes en el Grid'''
+    		    self.Grid2.Cells[i].contentCell.img2 = self.Grid2.Cells[i].contentCell.img
+    		    self.Grid2.Cells[i].contentCell.id = id
+    		    id = id+1
+    		    i = i+1
+    	    #indexCell = self.doBucle(cells2,indexCell)
 
         else:
             '''indexCell  = Numero de Celda que ocupa:'''
@@ -212,7 +212,9 @@ class ComplexAssociation(Activity):
 
             '''Cargamos primer Grid del XML'''
             cells = cellsPrimary.getElementsByTagName('cell')
+            self.styleCell = StyleCell(cellsPrimary)
             indexCell = self.doBucle(cells,indexCell)
+
 
             '''Recargamos el primer Grid del XML'''
             indexCell = self.doBucle(cells,indexCell)
@@ -226,7 +228,7 @@ class ComplexAssociation(Activity):
     def doBucle(self,cells,i):
         id = 0
         for cell in cells:
-            self.printxmlCellinCell(self.Grid1.Cells[i], cell)
+            self.printxmlCellinCell(self.Grid1.Cells[i], cell,self.styleCell)
             print "---------------------------------------------------"
             print "ids grid2"
             print self.Grid1.ids
@@ -240,7 +242,7 @@ class ComplexAssociation(Activity):
                 else:
                     self.Grid1.Cells[i].contentCell.id = int(id2)
             else:
-		self.Grid1.Cells[i].contentCell.id = int(self.Grid1.ids[i])
+                self.Grid1.Cells[i].contentCell.id = int(self.Grid1.ids[i])
 
             i = i+1
         return i
