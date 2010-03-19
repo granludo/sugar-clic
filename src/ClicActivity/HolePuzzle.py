@@ -36,6 +36,7 @@ import Constants
 
 from Activity import  Activity
 from Grid import Grid
+from styleCell import StyleCell
 
 class HolePuzzle(Activity):
 
@@ -50,7 +51,7 @@ class HolePuzzle(Activity):
 
         '''Loading xml values'''
         xmlGrid = self.xmlActivity.getElementsByTagName('cells')[0]
-       
+        self.styleCell = StyleCell(xmlGrid)
         
         self.Grid1 = Grid(xmlGrid)
         self.Grid2 = Grid(xmlGrid)
@@ -106,7 +107,7 @@ class HolePuzzle(Activity):
             for cell in cells: 
                 '''Recuperamos el texto de la celda y lo  bliteamos en imagen actual de celda.. ''' 
                 
-                self.printxmlCellinCell(self.Grid1.Cells[i], cell)
+                self.printxmlCellinCell(self.Grid1.Cells[i], cell, self.styleCell)
                 i = i+1
         
         self.Grid1.unsort()

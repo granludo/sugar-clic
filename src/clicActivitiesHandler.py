@@ -90,7 +90,12 @@ class ClicActivities:
             self.activityInUse = self.executeActivity(activityTag, self.mediaBagTag, self.settingsTag)
             self.activityInUse.pathToMedia = self.path_to_clic
             self.activityInUse.Load(self.activity_surf)
-            self.dialog.printMessage(self.screen,self.activityInUse.getInitMessage())
+            '''Cogemos previous message si existe'''
+            self.prevMess = self.activityInUse.getPreviousMessage()
+            if self.prevMess != None:
+                self.dialog.printMessage(self.screen,self.prevMess)
+            else:
+                self.dialog.printMessage(self.screen,self.activityInUse.getInitMessage())
             #audio = self.activityInUse.getInitMessageAudio()
             #if audio!="":
             #    self.activityInUse.play_sound(audio)
@@ -142,6 +147,10 @@ class ClicActivities:
             if self.dialog.isOverChangeClicButton(pointMouse):
                 return -1
             
+            if self.prevMess != None and self.dialog.isOverActivity(pointMouse):
+                self.prevMess = None
+                self.dialog.printMessage(self.screen,self.activityInUse.getInitMessage())
+                
             if self.dialog.isOverActivity(pointMouse):
                 self.activityInUse.OnEvent((pointMouse.getX(),pointMouse.getY()))
         

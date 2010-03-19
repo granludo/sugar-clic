@@ -59,7 +59,7 @@ class FillInBlanks(Activity):
             self.PrevGrid = Grid()
             self.PrevGrid.Load(1,1,Constants.ACTIVITY_WIDTH, Constants.ACTIVITY_HEIGHT, Constants.MARGIN_TOP, Constants.MARGIN_LEFT,display_surf)
             self.styleCell = StyleCell(xmlPrevious)
-            self.printxmlCellinCell(self.PrevGrid.Cells[0],xmlPrevious)
+            self.printxmlCellinCell(self.PrevGrid.Cells[0],xmlPrevious, self.styleCell)
         except:
             pass
         

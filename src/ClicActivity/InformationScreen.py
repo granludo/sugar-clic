@@ -85,7 +85,7 @@ class InformationScreen(Activity):
             self.styleCell = StyleCell(xmlGrid1)
             if cells.length !=0:
                 for cell in cells: 
-                    self.printxmlCellinCell(self.Grid1.Cells[i], cell)
+                    self.printxmlCellinCell(self.Grid1.Cells[i], cell, self.styleCell)
                     
                     i = i+1 
             else:
