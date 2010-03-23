@@ -36,6 +36,7 @@ import Constants
 import pygame
 from Activity import  Activity
 from TextGrid import TextGrid
+from CheckButton import CheckButton
 from Grid import Grid
 from styleCell import StyleCell
 
@@ -46,8 +47,6 @@ class Identify(Activity):
     targets = {} #Diccionari amb parells (idCell,encert) util quan hi ha optionLists
     pressedCells = []
     checkButton = None
-    checkRect = None
-    checkText = None
     finish = False
 
     def Load(self, display_surf ):
@@ -61,21 +60,18 @@ class Identify(Activity):
         self.targets = self.TextGrid.Load(display_surf,xmlTextGrid,True)
 
         try:
-            self.checkText = self.xmlActivity.getElementsByTagName('checkButton')[0].firstChild.data
+            checkText = self.xmlActivity.getElementsByTagName('checkButton')[0].firstChild.data
         except:
-            self.checkText = 'Comprueba'
+            checkText = 'Comprueba'
         
-        self.checkButton = pygame.surface.Surface((self.TextGrid.Rect.width,40))
-        self.checkButton.fill(Constants.colorCelestial)
-        self.font = pygame.font.Font(None,30)
-        self.checkRect = pygame.Rect((self.TextGrid.Rect.left,self.TextGrid.Rect.bottom - 40),(self.checkButton.get_size()))
+        self.checkButton = CheckButton(checkText)
+        
         
         self.pressedCells = []
         
     def OnEvent(self,PointOfMouse):
-        if self.checkRect.collidepoint(PointOfMouse[0],PointOfMouse[1]):
+        if self.checkButton.isOverCheck(PointOfMouse[0],PointOfMouse[1]):
             self.finish = self.isCorrect()
-            print self.finish
         else:
             for cell in self.TextGrid.textCells:
                 if cell.isOverCell(PointOfMouse[0],PointOfMouse[1]):
@@ -94,9 +90,7 @@ class Identify(Activity):
         for i in self.pressedCells:
             pygame.draw.rect(display_surf,Constants.colorPressedCell,self.TextGrid.textCells[i].Rect,2)
         
-        self.renderText(self.checkText,self.checkRect,self.font,self.checkButton,Constants.colorBlack)
-        display_surf.blit(self.checkButton,self.checkRect)
-        pygame.draw.rect(display_surf,Constants.colorBlack,self.checkRect,2)
+        self.checkButton.OnRender(display_surf)
 
     def isGameFinished(self):
         
