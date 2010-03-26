@@ -34,6 +34,7 @@ from TextCell import *
 from Cell import *
 from OptionList import *
 from Response import *
+from TextField import *
 from Constants import *
 import os
 import pygame
@@ -109,7 +110,7 @@ class TextGrid(object):
         @display_surf es la superficie de l'activitat on es pintara el grid amb el seu contingut
         @xmlDocument es la part del xml corresponent al document de l'activitat
     '''
-    def Load(self,display_surf,xmlDocument,identify = False):
+    def Load(self,display_surf,xmlDocument,flag = ''):
         
         self.xActCell = Constants.MARGIN_LEFT + 10
         self.yActCell = Constants.MARGIN_TOP + 10
@@ -128,38 +129,41 @@ class TextGrid(object):
          
         '''Mostra el text, per paragrafs, diferenciant els tipus d'elements'''
         for p in allP:
+            if flag == 'complete':
+                self.Add(display_surf, 'textField', p)
                 
-            text = p.getElementsByTagName('text')
-            target = p.getElementsByTagName('target')
-            cells = p.getElementsByTagName('cell')
-            self.numCells = len(cells)
-            
-            '''Agafo els fills del node per saber l'ordre en que apareix cada fragment'''
-            childs = p.childNodes
-            itext = 0 #index per recorrer els nodes text
-            itarget = 0 #index per recorrer els nodes target
-            iCell = 0 #index per recorrer els nodes cell
-            for child in childs:
-                if child.nodeName == 'text':
-                    self.Add(display_surf,'text',text[itext])
-                    itext += 1
-                elif child.nodeName == 'target':
-                    solTargets[self.idCell] = False
-                    if identify:
-                        self.Add(display_surf,'text',target[itarget])
-                    else:
-                        self.Add(display_surf,'target',target[itarget])
-                        itext += 1 #incrementem tambe l'index del text per saltar el text intern del target
-                    itarget += 1
-                elif child.nodeName == 'cell':
-                    self.Add(display_surf,'cell',cells[iCell])
-                    iCell += 1
-            if self.numCells > 0:
-                h = int(cells[0].getAttribute('height')) + 10
-                self.yActCell += h
             else:
-                self.xActCell = self.X_NEW_LINE
-                self.yActCell += self.OFFSET_TOP_NEW_LINE
+                text = p.getElementsByTagName('text')
+                target = p.getElementsByTagName('target')
+                cells = p.getElementsByTagName('cell')
+                self.numCells = len(cells)
+                
+                '''Agafo els fills del node per saber l'ordre en que apareix cada fragment'''
+                childs = p.childNodes
+                itext = 0 #index per recorrer els nodes text
+                itarget = 0 #index per recorrer els nodes target
+                iCell = 0 #index per recorrer els nodes cell
+                for child in childs:
+                    if child.nodeName == 'text':
+                        self.Add(display_surf,'text',text[itext])
+                        itext += 1
+                    elif child.nodeName == 'target':
+                        solTargets[self.idCell] = False
+                        if flag == 'identify':
+                            self.Add(display_surf,'text',target[itarget])
+                        else:
+                            self.Add(display_surf,'target',target[itarget])
+                            itext += 1 #incrementem tambe l'index del text per saltar el text intern del target
+                        itarget += 1
+                    elif child.nodeName == 'cell':
+                        self.Add(display_surf,'cell',cells[iCell])
+                        iCell += 1
+                if self.numCells > 0:
+                    h = int(cells[0].getAttribute('height')) + 10
+                    self.yActCell += h
+                else:
+                    self.xActCell = self.X_NEW_LINE
+                    self.yActCell += self.OFFSET_TOP_NEW_LINE
                     
         return solTargets
         
@@ -225,6 +229,16 @@ class TextGrid(object):
                 self.xActCell += width + int((Constants.ACTIVITY_WIDTH - (self.numCells*width)) / self.numCells)
             except:
                 pass
+        
+        elif type == 'textField':
+            textField = TextField(xmlObject,self.font,self.backgroundColor)
+            textField.Load(self.xActCell,self.yActCell,display_surf)
+            textCell = TextCell(None,self.idCell,'textField')
+            textCell.contentCell = textField
+            self.textCells.append(textCell)
+            self.idCell += 1
+            self.xActCell = self.X_NEW_LINE
+            self.yActCell += textField.textCell.Rect.height + self.OFFSET_TOP_NEW_LINE
         
         elif type == 'target':
             try:
