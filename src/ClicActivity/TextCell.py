@@ -70,6 +70,9 @@ class TextCell(object):
             self.contentCell.clicked = id
             return id
         
+        elif self.type == 'textField':
+            return self.contentCell.isOverTextField(x,y)
+            
         '''TO DO if self.type == others'''
 
         return False
@@ -80,6 +83,8 @@ class TextCell(object):
         elif self.type == 'option':
             self.contentCell.OnRender(display_surf)
         elif self.type == 'response':
+            self.contentCell.OnRender(display_surf)
+        elif self.type == 'textField':
             self.contentCell.OnRender(display_surf)
         
     def OnRenderPressedCell(self,display_surf):

@@ -50,6 +50,7 @@ from ClicActivity.CrossWord import CrossWord
 from ClicActivity.FillInBlanks import FillInBlanks
 from ClicActivity.Complete import Complete
 from ClicActivity.Identify import Identify
+from ClicActivity.TextComplete import TextComplete
 from ClicActivity import Constants
 
 
@@ -185,10 +186,10 @@ class ClicActivities:
     
     def validKey(self,key):
         '''Llista de tecles que ens interessa processar i la traduccio'''
-        validKeyList = {'delete':'delete','backspace':'backspace','space':' ','a':'A','b':'B','c':'C','d':'D',
-                        'e':'E','f':'F','g':'G','h':'H','i':'I','j':'J','k':'K','l':'L','m':'M',
-                        'n':'N','o':'O','p':'P','q':'Q','r':'R','s':'S','t':'T','u':'U','v':'V',
-                        'w':'W','x':'X','y':'Y','z':'Z'}
+        validKeyList = {'delete':'delete','backspace':'backspace','space':' ','return':'return',
+                        'a':'A','b':'B','c':'C','d':'D','e':'E','f':'F','g':'G','h':'H','i':'I',
+                        'j':'J','k':'K','l':'L','m':'M','n':'N','o':'O','p':'P','q':'Q','r':'R',
+                        's':'S','t':'T','u':'U','v':'V','w':'W','x':'X','y':'Y','z':'Z'}
         
         if key in validKeyList:
             return validKeyList[key]
@@ -220,11 +221,11 @@ class ClicActivities:
                         return True
         elif  node.getAttribute('class') =='@textGrid.CrossWord':
                         return True
-        elif node.getAttribute('class') == '@text.Complete':
-                        return False
         elif  node.getAttribute('class') =='@text.FillInBlanks':
                         return True
         elif  node.getAttribute('class') =='@text.Identify':
+                        return True
+        elif node.getAttribute('class') == '@text.Complete':
                         return True
         else:
              return False
@@ -252,7 +253,7 @@ class ClicActivities:
         elif  node.getAttribute('class') =='@textGrid.CrossWord':
                         return CrossWord(node, media, settings)
         elif node.getAttribute('class') == '@text.Complete' :
-                        return Complete(node, media, settings)
+                        return TextComplete(node, media, settings)
         elif node.getAttribute('class') == '@text.FillInBlanks' :
                         return FillInBlanks(node, media, settings)
         elif node.getAttribute('class') == '@text.Identify' :
