@@ -17,29 +17,18 @@
 
 import os
 
-from gettext import gettext as _
 import time
 import tempfile
 import urlparse
 import urllib
-
-import gtk
-import hulahop
 import xpcom
 from xpcom.nsError import *
 from xpcom import components
 from xpcom.components import interfaces
-from xpcom.server.factory import Factory
 
-from sugar.datastore import datastore
-from sugar import profile
-from sugar import mime
-from sugar.graphics.alert import Alert, TimeoutAlert
-from sugar.graphics.icon import Icon
-from sugar.activity import activity
-from gettext import gettext as _
 import paths
 import controller
+
 
 _MIN_TIME_UPDATE = 5        # In seconds
 _MIN_PERCENT_UPDATE = 10
@@ -47,7 +36,7 @@ _MIN_PERCENT_UPDATE = 10
 _active_downloads = []
 _dest_to_window = {}
 
-#component to make a choice about what to do with a file with MIME type
+#component to decide action to do with file (in our case, download only file with extension .xmlclic)
 class HelperAppLauncherDialog:
     _com_interfaces_ = interfaces.nsIHelperAppLauncherDialog
 
@@ -86,11 +75,10 @@ class HelperAppLauncherDialog:
         launcher.saveToDisk(None, False)
         return NS_OK
 
-#component used to download a file
+#component used to download files
 class Download:
     _com_interfaces_ = interfaces.nsITransfer
     
-    #initialize download process
     def init(self, source, target, display_name, mime_info, start_time,
              temp_file, cancelable):
         
@@ -121,7 +109,7 @@ class Download:
             self.controller = controller.Controller()
             self.controller.install_new_clic(self._get_file_name())            
 
-    #method to follow downloading progress
+#    #method to follow downloading progress (not necessary, but show the progress)
     def onProgressChange64(self, web_progress, request, cur_self_progress,
                            max_self_progress, cur_total_progress,
                            max_total_progress):
