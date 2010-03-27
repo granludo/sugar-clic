@@ -81,17 +81,23 @@ class Installer:
         urlsC = clicInfo.getElementsByTagName('urlClic')   
         urlsI = clicInfo.getElementsByTagName('urlIcon') 
         
-        subjectP = clicInfo.getElementsByTagName('Subject')
-        authorP = clicInfo.getElementsByTagName('Author')
-        licenseP = clicInfo.getElementsByTagName('License')
-        themeP = clicInfo.getElementsByTagName('Theme')
-        languageP = clicInfo.getElementsByTagName('Language')
+        subjectElem = clicInfo.getElementsByTagName('Subject')
+        authorElem = clicInfo.getElementsByTagName('Authora')
+        licenseElem = clicInfo.getElementsByTagName('License')
+        themeElem = clicInfo.getElementsByTagName('Theme')
+        languageElem = clicInfo.getElementsByTagName('Language')
+        
+        self.subject = ''
+        self.author = ''
+        self.license = ''
+        self.theme = ''
+        self.language = ''
        
-        self.subject =  subjectP[0].childNodes[0].data
-        self.author =  authorP[0].childNodes[0].data
-        self.license = licenseP[0].childNodes[0].data
-        self.theme = themeP[0].childNodes[0].data
-        self.language = languageP[0].childNodes[0].data
+        if (subjectElem.length != 0 ) : self.subject =  self.__getText(subjectElem[0].childNodes)
+        if (authorElem.length != 0) : self.author = self.__getText(authorElem[0].childNodes)
+        if (licenseElem.length != 0) : self.license = self.__getText(licenseElem[0].childNodes)
+        if (themeElem.length != 0) : self.theme = self.__getText(themeElem[0].childNodes)
+        if (languageElem.length != 0) : self.language = self.__getText(languageElem[0].childNodes)
                        
         clic = {'Title': self.subject,
                 'Author': self.author,
