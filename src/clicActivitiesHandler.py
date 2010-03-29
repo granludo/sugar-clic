@@ -49,6 +49,7 @@ from ClicActivity.WordSearch import WordSearch
 from ClicActivity.CrossWord import CrossWord
 from ClicActivity.FillInBlanks import FillInBlanks
 from ClicActivity.Complete import Complete
+from ClicActivity.TextComplete import TextComplete
 from ClicActivity.Order import Order
 from ClicActivity import Constants
 
@@ -214,7 +215,7 @@ class ClicActivities:
         elif  node.getAttribute('class') =='@textGrid.CrossWord':
                         return True
         elif node.getAttribute('class') == '@text.Complete':
-                        return False
+                        return True
         elif node.getAttribute('class') == '@text.Order':
                         return True
         elif  node.getAttribute('class') =='@text.FillInBlanks':
@@ -245,7 +246,7 @@ class ClicActivities:
         elif  node.getAttribute('class') =='@textGrid.CrossWord':
                         return CrossWord(node, media, settings)
         elif node.getAttribute('class') == '@text.Complete' :
-                        return Complete(node, media, settings)
+                        return TextComplete(node, media, settings)
         elif node.getAttribute('class') == '@text.FillInBlanks' :
                         return FillInBlanks(node, media, settings)
         elif node.getAttribute('class') == '@text.Order' :
