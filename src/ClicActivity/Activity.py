@@ -46,6 +46,7 @@ class Activity(object):
     pathToMedia = None
     
     styleCell = None
+    styleCell2 = None
     
     #creates a dictionary <name used in the activity, real name of the file> with all the media used in the Activity 
     def __create_media_dictionary(self, mediaInfo):
@@ -182,15 +183,22 @@ class Activity(object):
             return ""
         except:
             return ""
-        
-    def printxmlCellinCell(self,cell,xmlcell2):    
-       
-        #styleCell  = StyleCell(xmlcell2)
-        
-        
-        if self.styleCell.transparent == False:
-            cell.contentCell.img.set_colorkey(self.styleCell.backgroundColor)
-            cell.contentCell.img.fill(self.styleCell.backgroundColor)
+    
+    def getPreviousMessage(self):
+        '''Recuperamos mensaje de  fin partida'''
+        try:
+            cells = self.xmlActivity.getElementsByTagName('messages')[0]
+            cells = cells.getElementsByTagName('cell')
+            for cell in cells:
+                if cell.getAttribute('type')  == 'previous':
+                    text = cell.getElementsByTagName('p')[0].firstChild.nodeValue
+                    return text
+        except:
+            return None
+    
+    def printxmlCellinCell(self,cell,xmlcell2,style):    
+
+        cell.contentCell.img.fill(style.backgroundColor)
     
         ''' Image in cell'''
         try:
@@ -218,26 +226,30 @@ class Activity(object):
             for element in elementP:
                 texto = texto + element.firstChild.nodeValue + '\n'
             print texto
-            font = pygame.font.Font(None, self.styleCell.fontSize)
+            font = pygame.font.Font(None, style.fontSize)
             
             '''Blit text'''
             self.renderText(texto,cell.Rect,font,cell.contentCell.img,cell.actualColorCell)
     
             
             ''' Border in cell'''
-            cell.contentCell.border = styleCell.hasBorder
+            cell.contentCell.border = style.hasBorder
         except:
             pass
         
+
+        try:
+            hola = xmlcell2.getElementsByTagName("media")[0].getAttribute("file")
+            if "RUN_CLIC_PACKAGE" == xmlcell2.getElementsByTagName("media")[0].getAttribute("type"):
+                cell.redirect = hola
+        except:
+            pass
+
     def printLetterinCell(self,cell,xmlcell,letterColour=Constants.colorBlack,backColour=Constants.colorWhite):    
        
         #styleCell  = StyleCell(xmlcell)
         
-        
-        if self.styleCell.transparent == False:
-            print backColour
-            #cell.contentCell.img.fill(styleCell.backgroundColor)
-            cell.contentCell.img.fill(backColour)
+        cell.contentCell.img.fill(backColour)
     
         '''Print letter in cell'''
         try:
@@ -323,7 +335,6 @@ class Activity(object):
                 surf.blit(tempsurface, ((rect.width - tempsurface.get_width()) / 2, accumulated_height))
                 
             accumulated_height += font.size(line)[1] #font.size returns (width,height)
-        print final_lines[0]
 
     def play_sound(self,filename):
         #pygame.mixer.pre_init(44100,-16,2, 1024)

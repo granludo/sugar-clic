@@ -85,7 +85,7 @@ class InformationScreen(Activity):
             self.styleCell = StyleCell(xmlGrid1)
             if cells.length !=0:
                 for cell in cells: 
-                    self.printxmlCellinCell(self.Grid1.Cells[i], cell)
+                    self.printxmlCellinCell(self.Grid1.Cells[i], cell, self.styleCell)
                     
                     i = i+1 
             else:
@@ -96,6 +96,11 @@ class InformationScreen(Activity):
         '''
            Pantalla informativa, no hacemos nada...
         '''
+        for cell in self.Grid1.Cells:
+            if cell.isOverCell(PointOfMouse[0],PointOfMouse[1]):
+                if cell.redirect != None:
+                    print "redirecciona!!!!!!!!!!!!!!!!!!!", cell.redirect
+                    return cell.redirect
 
     def OnRender(self,display_surf):
         display_surf.blit(self.containerBg,(0,0))
