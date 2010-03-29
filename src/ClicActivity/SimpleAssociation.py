@@ -1,7 +1,34 @@
 '''
-Created on 09/05/2009
+    This file is part of Sugar-Clic
 
-@author: mbenito
+    Sugar-Clic is copyrigth 2009 by Maria Jose Casany Guerrero and Marc Alier Forment
+    of the Universitat Politecnica de Catalunya http://www.upc.edu
+    Contact info: Marc Alier Forment granludo @ gmail.com or marc.alier
+    @ upc.edu
+
+    Sugar-Clic is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Sugar-Clic is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Sugar-Clic. If not, see <http://www.gnu.org/licenses/>.
+
+
+
+    @package sugarclic
+    @copyrigth 2009 Marc Alier, Maria Jose Casany marc.alier@upc.edu
+    @copyrigth 2009 Universitat Politecnica de Catalunya http://www.upc.edu
+
+    @autor Marc Alier
+    @autor Jordi Piguillem
+
+    @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 '''
 
 import Constants
@@ -18,20 +45,20 @@ class SimpleAssociation(Activity):
     PressedCell = None
 
     color = None
- 
-     
+
+
     def Load(self, display_surf ):
         self.setBgColor(display_surf)
         self.desactGrid1 = []
         self.desactGrid2 = []
         ''' ----Dos posibilidades en XML----
-            
+
          orientation   -1 Grid: Hay que doblar el tamano del Grid para duplicar las posibilidades
             -2 Grids: Hay que printar todas las posibilidades
         '''
-        
+
         '''Loading xml values'''
-  
+
 
 	orientation =  self.xmlActivity.getElementsByTagName('layout')[0].getAttribute('position')
 
@@ -48,7 +75,7 @@ class SimpleAssociation(Activity):
             self.Grid3 = Grid()
 
         self.Grid3.backgroundColor = self.Grid2.backgroundColor
-     
+
         ''' Calculate Real size'''
         height = self.Grid1.cellHeight * self.Grid1.numRows
         width = self.Grid1.cellWidth * self.Grid1.numCols
@@ -65,7 +92,7 @@ class SimpleAssociation(Activity):
 
         '''Maximize size'''
         coef = self.calculateCoef(width, height)
-        
+
         '''Maximize size'''
         #coef = self.calculateCoef(width, height)
 	#coefx = self.calculateCoefPart(height)
@@ -83,7 +110,7 @@ class SimpleAssociation(Activity):
 	print height
 	print self.Grid1.cellHeight
 	print self.Grid1.numRows
-        
+
         '''Loading constants for the activity'''
 
         xActual=Constants.MARGIN_TOP
@@ -120,13 +147,13 @@ class SimpleAssociation(Activity):
                 cells = xmlGrid3.getElementsByTagName('cell')
                 i = 0
                 for i in range(len(cells)):
-                    self.printxmlCellinCell(self.Grid3.Cells[i], cells)
+                    self.printxmlCellinCell(self.Grid3.Cells[i], cells, self.styleCell)
                     #i = i+1
             else:
                 self.Grid3.LoadWithImage(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid1 ,yGrid1, display_surf,self.pathToMedia)
         except:
             pass
-            
+
         '''Cargamos secondaryCells'''
         cellsSecondary = self.xmlActivity.getElementsByTagName('cells')[1]
 
@@ -147,7 +174,7 @@ class SimpleAssociation(Activity):
         id = 0
 
         for cell in cells2:
-                self.printxmlCellinCell(self.Grid2.Cells[i], cell)
+                self.printxmlCellinCell(self.Grid2.Cells[i], cell,self.styleCell)
                 #Guardamos las imagenes en el Grid
                 self.Grid2.Cells[i].contentCell.img2 = self.Grid2.Cells[i].contentCell.img
                 self.Grid2.Cells[i].contentCell.id = id
@@ -162,17 +189,17 @@ class SimpleAssociation(Activity):
         if self.Grid2.imagePath == None:
             self.Grid2.unsort()
 
-    def doBucle(self,cells,i): 
+    def doBucle(self,cells,i):
         id = 0
         for cell in cells:
-            self.printxmlCellinCell(self.Grid1.Cells[i], cell)         
-            '''Guardamos las imagenes en el Grid'''   
+            self.printxmlCellinCell(self.Grid1.Cells[i], cell,self.styleCell)
+            '''Guardamos las imagenes en el Grid'''
             self.Grid1.Cells[i].contentCell.img2 = self.Grid1.Cells[i].contentCell.img
-            self.Grid1.Cells[i].contentCell.id = id 
+            self.Grid1.Cells[i].contentCell.id = id
             id = id+1
             i = i+1
         return i
-    
+
     def OnEvent(self,PointOfMouse):
         for cell in self.Grid1.Cells:
             if cell.isOverCell(PointOfMouse[0],PointOfMouse[1]):
@@ -199,12 +226,12 @@ class SimpleAssociation(Activity):
 
                             #los dos son diferentes..
                         else:
-                            
+
                             #self.changeSecondImage(self.PressedCell)
                             self.PressedCell.actualColorCell = Constants.colorCell
                             #self.changeSecondImage(cell)
                             self.PressedCell = None
-                       
+
                     #celda anterior no apretada
                     else:
                         self.PressedCell = cell
@@ -214,7 +241,7 @@ class SimpleAssociation(Activity):
 
         for cell in self.Grid2.Cells:
             if cell.isOverCell(PointOfMouse[0],PointOfMouse[1]):
-                #si la celda ya ha sido 
+                #si la celda ya ha sido
                 if self.desactGrid2.count(cell) == 0:
                     # celda anterior apretada...
                     if self.PressedCell != None:
@@ -236,17 +263,17 @@ class SimpleAssociation(Activity):
                                 cell.contentCell.img2 = None
                                 self.PressedCell.contentCell.img2 = None
                                 self.PressedCell = None
-                                
-                            #los dos son diferentes..	
+
+                            #los dos son diferentes..
                         else:
-                            
+
                             #self.changeSecondImage(self.PressedCell)
                             self.PressedCell.actualColorCell = Constants.colorCell
                             #self.changeSecondImage(cell)
                             self.PressedCell = None
 			    #self.PressedGrid = 2
 			    #self.PressedCell.actualColorCell = Constants.colorPressedCell
-                       
+
                     #celda anterior no apretada
                     else:
                         self.PressedCell = cell
@@ -255,12 +282,12 @@ class SimpleAssociation(Activity):
                     	self.PressedCell.actualColorCell = Constants.colorPressedCell
 
 
-    def changeSecondImage(self,cell): 
+    def changeSecondImage(self,cell):
         tmpImg  = cell.contentCell.img
         cell.contentCell.img = cell.contentCell.img2
         cell.contentCell.img2= tmpImg
 
-        
+
     def OnRender(self,display_surf):
         display_surf.blit(self.containerBg,(0,0))
         #repintamos el grid...
@@ -269,19 +296,21 @@ class SimpleAssociation(Activity):
         #si la celda se ha apretado, la pintamos ( por los bordes)
         if self.PressedCell != None :
             self.PressedCell.OnRender(display_surf)
-       
-          
+
+
     def isOverActivity(self,PointOfMouse):
         return True
-        
+
     def isGameFinished(self):
-        finish = True
+        '''finish = True
         for cell in self.Grid1.Cells:
             if cell.contentCell.img2 != None:
-                finish = False
-        return finish
-       
+                finish = False'''
+        if len(self.desactGrid1) == len(self.Grid1.Cells):
+            return True
+        return False
 
-        
 
-        
+
+
+

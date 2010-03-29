@@ -1,7 +1,34 @@
 '''
-Created on 09/05/2009
+    This file is part of Sugar-Clic
 
-@author: mbenito
+    Sugar-Clic is copyrigth 2009 by Maria Jose Casany Guerrero and Marc Alier Forment
+    of the Universitat Politecnica de Catalunya http://www.upc.edu
+    Contact info: Marc Alier Forment granludo @ gmail.com or marc.alier
+    @ upc.edu
+
+    Sugar-Clic is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Sugar-Clic is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Sugar-Clic. If not, see <http://www.gnu.org/licenses/>.
+
+
+
+    @package sugarclic
+    @copyrigth 2009 Marc Alier, Maria Jose Casany marc.alier@upc.edu
+    @copyrigth 2009 Universitat Politecnica de Catalunya http://www.upc.edu
+
+    @autor Marc Alier
+    @autor Jordi Piguillem
+
+    @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 '''
 
 import Constants
@@ -42,8 +69,6 @@ class ComplexAssociation(Activity):
             self.inverse = False
 
 
-        print "inverseeeeeeeeeeeeeeeeeeee", self.inverse
-
 	orientation =  self.xmlActivity.getElementsByTagName('layout')[0].getAttribute('position')
 
         xmlGrid1 = self.xmlActivity.getElementsByTagName('cells')[0]
@@ -52,7 +77,6 @@ class ComplexAssociation(Activity):
         xmlGrid2 = self.xmlActivity.getElementsByTagName('cells')[1]
         self.Grid2 = Grid(xmlGrid2, self.pathToMedia)
 
-        self.styleCell = StyleCell(xmlGrid1)
 
         try:
             xmlGrid3 = self.xmlActivity.getElementsByTagName('cells')[2]
@@ -173,13 +197,14 @@ class ComplexAssociation(Activity):
 
             '''Cargamos secondaryCells'''
             cellsSecondary = self.xmlActivity.getElementsByTagName('cells')[1]
+            self.styleCell2 = StyleCell(cellsSecondary)
 
             '''Cargamos primer Grid del XML'''
             cells = cellsPrimary.getElementsByTagName('cell')
+            self.styleCell = StyleCell(cellsPrimary)
             '''indexCell  = Numero de Celda que ocupa:'''
             indexCell = 0
             indexCell = self.doBucle(cells,indexCell)
-
             '''Cargamos segundo Grid del XML'''
             cells2 = cellsSecondary.getElementsByTagName('cell')
 
@@ -187,24 +212,25 @@ class ComplexAssociation(Activity):
                 ''' 1 Imagen de fondo '''
                 self.Grid1.LoadWithImage(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid1 ,yGrid1, display_surf,self.pathToMedia)
 
-	    print "whola"
-	    #print cells[0].toxml()
-	    #print cellsSecondary.toxml()
-
-            #self.doBucle(cellsSecondary,0)
-	    #indexCell = self.doBucle(cells,indexCell)
-
-	    i = 0
-	    id = 0
-
-	    for cell in cells2:
-		    self.printxmlCellinCell(self.Grid2.Cells[i], cell)
-		    '''Guardamos las imagenes en el Grid'''
-		    self.Grid2.Cells[i].contentCell.img2 = self.Grid2.Cells[i].contentCell.img
-		    self.Grid2.Cells[i].contentCell.id = id
-		    id = id+1
-		    i = i+1
-	    #indexCell = self.doBucle(cells2,indexCell)
+    	    print "whola"
+    	    #print cells[0].toxml()
+    	    #print cellsSecondary.toxml()
+    
+                #self.doBucle(cellsSecondary,0)
+    	    #indexCell = self.doBucle(cells,indexCell)
+    
+    	    i = 0
+    	    id = 0
+            self.styleCell2 = StyleCell(cellsSecondary)
+    	    
+            for cell in cells2:
+    		    self.printxmlCellinCell(self.Grid2.Cells[i], cell, self.styleCell2)
+    		    '''Guardamos las imagenes en el Grid'''
+    		    self.Grid2.Cells[i].contentCell.img2 = self.Grid2.Cells[i].contentCell.img
+    		    self.Grid2.Cells[i].contentCell.id = id
+    		    id = id+1
+    		    i = i+1
+    	    #indexCell = self.doBucle(cells2,indexCell)
 
         else:
             '''indexCell  = Numero de Celda que ocupa:'''
@@ -212,7 +238,9 @@ class ComplexAssociation(Activity):
 
             '''Cargamos primer Grid del XML'''
             cells = cellsPrimary.getElementsByTagName('cell')
+            self.styleCell = StyleCell(cellsPrimary)
             indexCell = self.doBucle(cells,indexCell)
+
 
             '''Recargamos el primer Grid del XML'''
             indexCell = self.doBucle(cells,indexCell)
@@ -226,7 +254,7 @@ class ComplexAssociation(Activity):
     def doBucle(self,cells,i):
         id = 0
         for cell in cells:
-            self.printxmlCellinCell(self.Grid1.Cells[i], cell)
+            self.printxmlCellinCell(self.Grid1.Cells[i], cell,self.styleCell)
             print "---------------------------------------------------"
             print "ids grid2"
             print self.Grid1.ids
@@ -240,7 +268,7 @@ class ComplexAssociation(Activity):
                 else:
                     self.Grid1.Cells[i].contentCell.id = int(id2)
             else:
-		self.Grid1.Cells[i].contentCell.id = int(self.Grid1.ids[i])
+                self.Grid1.Cells[i].contentCell.id = int(self.Grid1.ids[i])
 
             i = i+1
         return i
