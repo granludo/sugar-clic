@@ -50,6 +50,7 @@ class Cell(object):
     #id =  None
     actualColorCell = Constants.colorCell
     hasBorder = True
+    redirect = None
    
     
     def __init__(self,rect,display_surf,id,hasBorder):
