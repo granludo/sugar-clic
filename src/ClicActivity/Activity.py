@@ -36,6 +36,7 @@ import Constants
 import pygame
 from styleCell import StyleCell
 import os
+import sys
 class Activity(object):
     xmlActivity = None
     xmlMediaBag = None
@@ -199,10 +200,28 @@ class Activity(object):
     def printxmlCellinCell(self,cell,xmlcell2,style):    
 
         cell.contentCell.img.fill(style.backgroundColor)
-    
+
+        incremEsq = 0
+        incremDreta = 0
         ''' Image in cell'''
         try:
             pathImage =xmlcell2.getAttribute('image')
+
+            overlapping = False
+            if (xmlcell2.getAttribute('avoidOverlapping')=="true"):
+                overlapping = True
+
+            print overlapping
+            try:
+                align = xmlcell2.getAttribute('imgAlign')
+                alignsplit = align.split(',')
+                alignX = alignsplit[0]
+                alignY = alignsplit[1]
+            except:
+                alignX = 0
+                alignY = 0
+
+            print "petaaakiiii2"
             #audio = xmlcell2.getElementByName('media')
 
             #if audio != None and audio.getAttribute('type') == 'PLAY_AUDIO':
@@ -214,9 +233,69 @@ class Activity(object):
     
             newImg = pygame.image.load(imagePath).convert_alpha()
     
-            newImg = pygame.transform.scale(newImg, (cell.contentCell.img.get_width(),  cell.contentCell.img.get_height()))
-            cell.contentCell.img.blit(newImg,(0,0))
-            tmpSurf = surface.Surface()
+            cellWidth = cell.contentCell.img.get_width()
+            cellHeight = cell.contentCell.img.get_height()
+
+            aux = newImg.get_size()
+            widthImg, heightImg = aux
+
+            newWidth = 0
+            newHeight = 0
+
+
+            print overlapping
+
+            print "petaaakiiii3"
+
+            print cell.contentCell.img.get_width(), ",",cell.contentCell.img.get_height()
+            transX = 1
+            transY = 1
+            if (cell.contentCell.img.get_width()<widthImg):
+                transX = widthImg/cell.contentCell.img.get_width()
+                print "transX"
+            if (cell.contentCell.img.get_height()<heightImg):
+                transY = heightImg/cell.contentCell.img.get_height()
+                print "transY"
+
+
+            if alignX == 0:
+                newImg = pygame.transform.scale(newImg, (cell.contentCell.img.get_width(),  cell.contentCell.img.get_height()))
+
+            if alignX == "middle":
+                newWidth = (cellWidth - widthImg)/2
+            elif alignX == "left":
+                newWidth = 0
+                widthImg = widthImg/transY
+                incremEsq = widthImg
+                if(heightImg<cell.contentCell.img.get_height()):
+                    newImg = pygame.transform.scale(newImg, (widthImg,  heightImg))
+                else:
+                    newImg = pygame.transform.scale(newImg, (widthImg, cell.contentCell.img.get_height()))
+            elif alignX == "right":
+                widthImg = widthImg/transY
+                newWidth = cellWidth - widthImg
+                incremDreta = widthImg
+                if(heightImg<cell.contentCell.img.get_height()):
+                    newImg = pygame.transform.scale(newImg, (widthImg,  heightImg))
+                else:
+                    newImg = pygame.transform.scale(newImg, (widthImg,  cell.contentCell.img.get_height()))
+
+            if alignY == "middle":
+                if(heightImg>cell.contentCell.img.get_height()):
+                    newHeight = 0
+                else:
+                    newHeight = (cellHeight - heightImg)/2
+                print "cellHeight", cellHeight
+                print "heightImg", heightImg
+                #newHeight = 0
+            elif alignY == "top":
+                newHeight = 0
+            elif alignY == "bottom":
+                newHeight == cellHeight - heightImg
+                #newHeight = 0
+
+            cell.contentCell.img.blit(newImg,(newWidth,newHeight))
+            #tmpSurf = surface.Surface()
         except:
             pass
         '''Text in cell'''
@@ -229,9 +308,13 @@ class Activity(object):
             font = pygame.font.Font(None, style.fontSize)
             
             '''Blit text'''
-            self.renderText(texto,cell.Rect,font,cell.contentCell.img,cell.actualColorCell)
+            print "overlapping= ", overlapping
+            if (not overlapping):
+                incremEsq = 0
+                incremDreta = 0
+
+            self.renderText(texto,cell.Rect,font,cell.contentCell.img,cell.actualColorCell, incremEsq, incremDreta)
     
-            
             ''' Border in cell'''
             cell.contentCell.border = style.hasBorder
         except:
@@ -276,7 +359,7 @@ class Activity(object):
         return coef
     
     
-    def renderText(self,text,rect,font,surf,colour):
+    def renderText(self,text,rect,font,surf,colour,incremEsquerra = 0, incremDreta = 0):
         
         final_lines = []
         
@@ -286,12 +369,12 @@ class Activity(object):
         # rectangle.
     
         for requested_line in requested_lines:
-            if font.size(requested_line)[0] > rect.width-4:
+            if font.size(requested_line)[0] > rect.width-4-incremEsquerra - incremDreta:
                 words = requested_line.split(' ')
                 #si alguna paraula es massa llarga, es trunca
                 for j in range(len(words)):
                     word = words[j]
-                    if font.size(word)[0] > rect.width-4:
+                    if font.size(word)[0] > rect.width-4 -incremEsquerra - incremDreta:
                         numLetters = ((rect.width - 4) / font.size(word[0])[0]) - 1
                         numLines = len(word) // numLetters #calcula quantes linies ocupa
                         if (len(word) % numLetters) != 0:
@@ -315,7 +398,7 @@ class Activity(object):
                     for splitword in splitwords:
                         test_line = accumulated_line + splitword + " "
                         # Build the line while the words fit.    
-                        if font.size(test_line)[0] < rect.width-4:
+                        if font.size(test_line)[0] < rect.width-4 -incremEsquerra - incremDreta:
                             accumulated_line = test_line 
                         else: 
                             final_lines.append(accumulated_line) 
@@ -332,7 +415,7 @@ class Activity(object):
                 raise TextRectException, "Once word-wrapped, the text string was too tall to fit in the rect."
             if line != "":
                 tempsurface = font.render(line, 1, colour)
-                surf.blit(tempsurface, ((rect.width - tempsurface.get_width()) / 2, accumulated_height))
+                surf.blit(tempsurface, ((rect.width + incremEsquerra - (tempsurface.get_width())-incremDreta) / 2, accumulated_height))
                 
             accumulated_height += font.size(line)[1] #font.size returns (width,height)
 
