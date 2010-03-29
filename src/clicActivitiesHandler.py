@@ -49,6 +49,7 @@ from ClicActivity.WordSearch import WordSearch
 from ClicActivity.CrossWord import CrossWord
 from ClicActivity.FillInBlanks import FillInBlanks
 from ClicActivity.Complete import Complete
+from ClicActivity.Order import Order
 from ClicActivity import Constants
 
 
@@ -111,7 +112,9 @@ class ClicActivities:
 
     def update_activity(self, evento,isFirstActivity=False,isLastActivity=False):
         event = False
-        
+
+        result = None
+
         if evento.type == pygame.MOUSEBUTTONDOWN:
             event = True
             pointMouse = Point(pygame.mouse.get_pos())
@@ -142,7 +145,7 @@ class ClicActivities:
                 return -1
             
             if self.dialog.isOverActivity(pointMouse):
-                self.activityInUse.OnEvent((pointMouse.getX(),pointMouse.getY()))
+                result = self.activityInUse.OnEvent((pointMouse.getX(),pointMouse.getY()))
         
         elif evento.type == pygame.KEYDOWN:
             event = True
@@ -159,15 +162,15 @@ class ClicActivities:
             
             '''EXTRA:  if activity end, then print the end message '''
             if self.activityInUse.isGameFinished():
-                 self.dialog.printMessage(self.screen,self.activityInUse.getFinishMessage())
-            pygame.display.flip()
+                self.dialog.printMessage(self.screen,self.activityInUse.getFinishMessage())
+                pygame.display.flip()
             #     audio = self.activityInUse.getFinishMessageAudio()
             #     if audio!="":
             #        self.activityInUse.play_sound(audio)
                  #Aqui s'hauria de reproduir l'audio del final
                 
             
-        return 0
+        return result
         #self.activityInUse.onRender(self.screen)
         # TODO
         # activity_class.update()
@@ -212,6 +215,8 @@ class ClicActivities:
                         return True
         elif node.getAttribute('class') == '@text.Complete':
                         return False
+        elif node.getAttribute('class') == '@text.Order':
+                        return True
         elif  node.getAttribute('class') =='@text.FillInBlanks':
                         return True
         else:
@@ -243,4 +248,6 @@ class ClicActivities:
                         return Complete(node, media, settings)
         elif node.getAttribute('class') == '@text.FillInBlanks' :
                         return FillInBlanks(node, media, settings)
+        elif node.getAttribute('class') == '@text.Order' :
+                        return Order(node, media, settings)
                     
