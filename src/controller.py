@@ -34,6 +34,7 @@ from db_clics import DbClics
 from clicParser import Parser 
 from sequencer import Sequencer
 from clicInstaller import Installer
+from clicFinder import Finder
 import paths
 
 
@@ -54,12 +55,14 @@ class Controller:
     __db = DbClics()
     __parser = Parser() 
     __installer = Installer()
+    __finder = Finder()
     
     def __init__(self):
         self.db = self.__db
         self.sequencer = self.__sequencer
         self.parser = self.__parser
         self.installer = self.__installer
+        self.finder = self.__finder
         
     #adds new clic to db list
     def add_new_clic(self, clic):
@@ -81,10 +84,10 @@ class Controller:
         
         
     #initialize all the structure information to play the clic
-    def load_clic_information(self, clic_name, is_default):
-        clic_path = paths.get_clic_path(clic_name, is_default)
-        sequence, media, settings = self.parser.get_clic_info(clic_path, clic_name)
-        self.sequencer.begin_sequence(sequence, media, settings, clic_path,clic_name)
+    def load_clic_information(self, clic_folder, is_default):
+        clic_path = paths.get_clic_path(clic_folder, is_default)
+        sequence, media, settings = self.parser.get_clic_info(clic_path, clic_folder)
+        self.sequencer.begin_sequence(sequence, media, settings, clic_path,clic_folder)
     
     #returns all the xml code related with this clic_activity
     def get_clic_activity(self, activity_name):
@@ -98,12 +101,21 @@ class Controller:
     def play_clic(self):
         self.sequencer.play()
         
+    #find clics from Journal or a device
+    def find_clics(self):
+        return self.finder.find_clics()
+        
     #remove clic
-    def remove_clic(self, clic):
-        self.db.remove_clic_from_db(clic)
-        self.installer.delete_clic_folder(clic)
+    def remove_clic(self, folder):
+        self.db.remove_clic_from_db(folder)
+        self.installer.delete_clic_folder(folder)
     
     #installs a new clic
     def install_new_clic(self, name):
         self.installer.get_clic_info(name) 
+        
+    #installs a new clic from a file of datastore (Journal + devices)
+    def install_new_clic_from_datastore(self, title, path):
+        return self.installer.install_clic_from_datastore(title, path)
+        
 

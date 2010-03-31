@@ -31,6 +31,7 @@
     @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 '''
 from xml.dom import minidom
+import os
 
 class Parser:
     def __init__(self):
@@ -38,7 +39,16 @@ class Parser:
 
     #Parse information about the clic (sequence, mediaBag, settings)
     def get_clic_info(self, clic_path, clic_name):
-        JClicProject = minidom.parse(clic_path + '/' + clic_name + '.jclic')
+        
+        for fl in os.listdir(clic_path):
+            if not os.path.isdir(os.path.join(clic_path, fl)):
+                if fl.find('.jclic') != -1: 
+                    #check if the folder of the clic has a .JClic document and is parseable
+                    print 'document: ' + fl
+                    jclic_doc = fl #JClic document has the same name as the zip
+            
+            
+        JClicProject = minidom.parse(os.path.join(clic_path, jclic_doc))
         set = JClicProject.getElementsByTagName('settings')
         seq = JClicProject.getElementsByTagName('sequence')
         act = JClicProject.getElementsByTagName('activities')

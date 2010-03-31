@@ -176,8 +176,7 @@ class DbClics:
         files = doc.childNodes[0]
         
         for file in files.childNodes: 
-            print file.childNodes[4].childNodes[0].data
-            print folder
+            #remove the file that has the same folder as the param
             if file.childNodes[4].childNodes[0].data == folder:
                 files.removeChild(file)
                 
