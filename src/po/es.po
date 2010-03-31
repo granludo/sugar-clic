@@ -20,7 +20,7 @@ msgstr "SEGURO QUE QUIERES BORRAR"
 
 #clicInstaller.py
 msgid "ONCE DOWNLOADED, YOU WILL HAVE THE CLIC ON YOUR LIST."
-msgstr "UNA VEZ DESCARGADO, TENDRAS EL CLIC EN TU LISTADO."
+msgstr "UNA VEZ DESCARGADO, TENDRÁS EL CLIC EN TU LISTADO."
 
 #clicInstaller.py
 msgid "IT WAS NOT POSSIBLE TO DOWNLOAD"
@@ -53,6 +53,32 @@ msgstr "DESCARGAR CLICS"
 #manager.py
 msgid "MY CLICS"
 msgstr "MIS CLICS"
+
+#manager.py
+msgid "SELECT A CLIC TO ADD"
+msgstr "ELIGE UN CLIC PARA AÑADIR"
+
+#manager.py
+msgid "ADDING CLIC..."
+msgstr "AÑADIENDO CLIC..."
+
+#manager.py
+msgid "ADD CLICS"
+msgstr "AÑADIR CLICS"
+
+#manager.py
+msgid "IT WAS NOT POSSIBLE TO FIND ANY CLIC"
+msgstr "NO FUE POSIBLE ENCONTRAR NINGÚN CLIC"
+
+#manager.py
+msgid "IT WAS NOT POSSIBLE TO ADD THE CLIC"
+msgstr "NO FUE POSIBLE AÑADIR EL CLIC"
+
+#manager.py
+msgid "ADDED. LOOK ON YOUR LIST"
+msgstr "AÑADIDO. MIRA EN TU LISTADO"
+
+
 
 
 

@@ -95,9 +95,9 @@ def set_environment(is_Xo):
         
     __create_clics_path()
         
-
+#creates the folder that will contain the new clics (downloaded or installed from usb)
 def __create_clics_path():        
-    if not os.path.exists(clics_path):
-            t = os.system('mkdir ' + clics_path)
+    if not os.path.exists(new_clics_path):
+            t = os.system('mkdir ' + new_clics_path)
     
     

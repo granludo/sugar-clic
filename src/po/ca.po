@@ -53,3 +53,27 @@ msgstr "DESCARREGAR CLICS"
 #manager.py
 msgid "MY CLICS"
 msgstr "ELS MEUS CLICS"
+
+#manager.py
+msgid "SELECT A CLIC TO ADD"
+msgstr "ELIGE UN CLIC PARA AÑADIR"
+
+#manager.py
+msgid "ADDING CLIC..."
+msgstr "AFEGINT CLIC..."
+
+#manager.py
+msgid "ADD CLICS"
+msgstr "AFEGIR CLICS"
+
+#manager.py
+msgid "IT WAS NOT POSSIBLE TO FIND ANY CLIC"
+msgstr "NO HA SIGUT POSSIBLE TROBAR CAP CLIC"
+
+#manager.py
+msgid "IT WAS NOT POSSIBLE TO ADD THE CLIC"
+msgstr "NO HA SIGUT POSSIBLE AFEGIR EL CLIC"
+
+#manager.py
+msgid "ADDED. LOOK ON YOUR LIST"
+msgstr "AFEGIT. MIRA EL TEU LLISTAT"

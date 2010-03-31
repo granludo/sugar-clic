@@ -39,6 +39,7 @@ import logging
 import gtk
 import gtk.glade
 import gobject
+import threading
 #starting module hulahop
 try:
     hula_path = os.path.join(activity.get_activity_root(), 'data/test')
@@ -54,6 +55,9 @@ import pygame
 from browser import Browser
 from ClicActivity import Constants
 
+from sugar.graphics.objectchooser import ObjectChooser
+from sugar import mime
+
 
 
 class Manager:
@@ -67,6 +71,7 @@ class Manager:
         self.start_clic_view = False #is a clic_activity running?
         self.views_path = paths.views_path #path to the icons folder (appIcons)
         self.icons_path = paths.icons_path #path to the views folder (appViews)
+        self.listClicsInstall = False
       
         #loading application views
         self.xmlMain = gtk.glade.XML(self.views_path + '/windowApp.glade')
@@ -79,11 +84,8 @@ class Manager:
         # Needs to remove the parent (we will use the Sugar's window)
         if runaslib:
             gtk.Container.remove(self.window, self.w_child)
-#        else :
-#            state = gtk.STATE_NORMAL    
-#            color = gtk.gdk.Color("orange")
-#            self.window.modify_bg(state, color)
-        
+
+
         #LOADING MAIN VIEW
         self.xml = gtk.glade.XML(self.views_path + '/mainView.glade') 
         self.win = self.xml.get_widget('window')
@@ -125,8 +127,16 @@ class Manager:
         self.bS.connect('enter', self.__change_icon, '/download_2.png', 3) 
         self.bS.connect('leave', self.__change_icon, '/download.png', 3) 
         self.ImageSearch = self.xml.get_widget('imageSearch')
-        self.ImageSearch.set_from_file(self.icons_path + '/download.png')    
+        self.ImageSearch.set_from_file(self.icons_path + '/download.png')
         
+        #Install button    
+        self.bIns = self.xml.get_widget('buttonInstall')
+        self.bIns.connect('clicked', self.__install_view) 
+        self.bIns.connect('enter', self.__change_icon, '/install_2.png', 4) 
+        self.bIns.connect('leave', self.__change_icon, '/install.png', 4) 
+        self.ImageInstall = self.xml.get_widget('imageInstall')
+        self.ImageInstall.set_from_file(self.icons_path + '/install.png')
+              
         #set the labels to translate
         self.labelMan = self.xml.get_widget('labelManual')
         self.labelMan.set_text(_('MANUAL'))
@@ -136,6 +146,8 @@ class Manager:
         self.labelSearch.set_text(_('DOWNLOAD CLICS'))
         self.labelMYCLICS = self.xml.get_widget('labelMyClics')
         self.labelMYCLICS.set_text(_('MY CLICS'))
+        self.labelIns = self.xml.get_widget('labelInstall')
+        self.labelIns.set_text(_('ADD CLICS'))
         
         #load the test that appears in the centre of the main menu
         path_to_texto = os.path.join(paths.application_bundle_path, 'data/textoInicio.txt')
@@ -183,7 +195,35 @@ class Manager:
         self.labelSure = self.xml.get_widget('labelSure')
                 
         gtk.Container.remove(self.windowAva, self.vboxAvailable)
-
+        
+        #LOADING INSTALL CLICS VIEW
+        self.xml = gtk.glade.XML(self.views_path + '/InstallClicsView.glade') 
+        #loading window
+        self.windowIns = self.xml.get_widget('window')
+        self.vboxInstall = self.xml.get_widget('vboxInstall')
+        
+        self.iconViewIns = self.xml.get_widget('iconviewAvailable')
+        self.iconViewIns.connect('selection-changed', self.__installation_info_view) #item-activated 2 clicks //selection-changed 1 click
+                         
+        self.labelInstallClics = self.xml.get_widget('labelInstall')
+        self.labelInstallClics.set_text(_('SELECT A CLIC TO ADD'))
+        self.labelButInsMain = self.xml.get_widget('labelButInstallMain')
+        self.labelButInsMain.set_text(_('MAIN MENU'))    
+        
+        #informs the installation process
+        self.hboxInfoInstall = self.xml.get_widget('hboxInstallation')
+        self.labelInfoInstall = self.xml.get_widget('labelInstallation')
+        self.imageOK = self.xml.get_widget('imageOK')
+        self.imageOK.set_from_file(self.icons_path + '/si.png')
+        self.buttonOK = self.xml.get_widget('buttonOK')
+        self.buttonOK.connect('clicked', self.__hide_installation_info_view)
+        
+        self.bInsMain = self.xml.get_widget('buttonInstallMain')
+        self.bInsMain.connect('clicked', self.__main_view)
+        self.ImageHomeIns = self.xml.get_widget('imageHome')
+        self.ImageHomeIns.set_from_file(self.icons_path + '/home.png')    
+        
+        gtk.Container.remove(self.windowIns, self.vboxInstall)
    
         #LOADING BROWSER VIEW
         self.xml = gtk.glade.XML(self.views_path + '/BrowserView.glade') 
@@ -240,6 +280,8 @@ class Manager:
         if not runaslib: 
             #called every 250 miliseconds (for communication with pygame module (player))
             gobject.timeout_add(250, self.updating)
+            #called every second to refresh some views of the application
+            gobject.timeout_add(1000, self.updating_views)
             self.window.show() 
             gtk.main()
 
@@ -257,6 +299,19 @@ class Manager:
                 self.__main_view()  
         return True
     
+    #this method refresh the Clics view (My Clics, Add Clics)
+    def updating_views(self):
+        
+        #refresh Add Clics View
+        if self.listClicsInstall == True:
+            self.__refresh_install_view()
+        
+        #refresh My Clics View
+        if self.currentClicsView == 'Clics':
+            self.__refresh_clics_view(True)
+            
+        return True
+    
     #changes the bright of an icon
     def __change_icon(self, *args):
         image = args[2]
@@ -267,7 +322,9 @@ class Manager:
         elif image == 2:
             self.ImageAbout.set_from_file(self.icons_path + args[1])
         elif image == 3 :
-            self.ImageSearch.set_from_file(self.icons_path + args[1]) 
+            self.ImageSearch.set_from_file(self.icons_path + args[1])
+        elif image == 4 :
+            self.ImageInstall.set_from_file(self.icons_path + args[1])
 
 
     #Changes the current view of the application.
@@ -278,6 +335,7 @@ class Manager:
         
     #Shows the Main Menu View of the application.
     def __main_view(self,*args):
+        self.listClicsInstall = False
         if (self.current_view == self.vboxPlay):
             self.vboxPlay.hide()
             self.current_view = self.Main
@@ -323,33 +381,91 @@ class Manager:
         self.__refresh_clics_view(True)
         self.hboxSure.hide()
 
-    #RList of clics to remove (view)
+    #List of clics to remove (view)
     def __remove_clics_view(self, *args):
         self.labelMy.set_text(_('SELECT A CLIC TO DELETE'))
         self.labelButBorrar.set_text(_('MY CLICS'))
         c = self.imageBorrar.set_from_file(self.icons_path + '/clics_mini.png')
         self.__refresh_clics_view(False)
+      
+    
+    #Shows the clics to install from Journal or a usb device (view)
+    def __install_view (self, *args):
+        self.listClicsInstall = True
+        self.hboxInfoInstall.hide()
         
+        #change view to install clics view
+        self.__change_current_view(self.vboxInstall)
+        
+        #get found clics
+        found_clics = self.controller.find_clics()
+        
+        #check if the list is not empty
+        if len(found_clics) == 0 :
+            self.labelInfoInstall.set_text(_('IT WAS NOT POSSIBLE TO FIND ANY CLIC'))
+            self.hboxInfoInstall.show()
+        else:
+            #reloads the view (shows all the clics available to install)
+            self.__refresh_install_view()
+    
+        
+    #try to install the file (clic) selected by the user 
+    def __installation_info_view(self, *args):
+        #get data of selected clic
+        title, path = ManagerData.get_found_clic_data(self.iconViewIns)
+        self.iconViewIns.window.set_cursor(gtk.gdk.Cursor(gtk.gdk.WATCH))
+        #try to install the clic
+        is_installed = self.controller.install_new_clic_from_datastore(title, path)
+
+        #refresh view if something failed (maybe there is no device anymore)
+        if is_installed == False :
+            self.labelInfoInstall.set_text(_('IT WAS NOT POSSIBLE TO ADD THE CLIC'))
+            self.__refresh_install_view()
+        else:
+            #shows a warning that everything was fine
+            self.labelInfoInstall.set_text('CLIC "' + title + '" ' +_('ADDED. LOOK ON YOUR LIST'))
+            self.__refresh_install_view()
+        self.hboxInfoInstall.show() 
+        self.iconViewIns.window.set_cursor(None)
+    
+    #hides the information label in instllation view
+    def __hide_installation_info_view(self, *args):
+        self.hboxInfoInstall.hide()
+        
+    #reloads the view to install clics
+    def __refresh_install_view(self, *args):
+        #get found clics
+        found_clics = self.controller.find_clics()
+        #add clics in the iconview with a default icon
+        lclics = ManagerData.add_found_clics_data(found_clics)
+        self.iconViewIns.set_model(lclics)
+        ManagerData.put_columns(self.iconViewIns)
+    
+    
+    
+
+    # removes a clic from the clics list of the user
     def __remove_clic(self, *args):
-        name, clic, default = ManagerData.get_clic_data(self.iconView)
-        self.controller.remove_clic(clic)
+        title, folder, default = ManagerData.get_clic_data(self.iconView)
+        self.controller.remove_clic(folder)
         self.__refresh_clics_view(False)
         self.hboxSure.hide()
         
+    #the user doesn't want to remove the clic
     def __dont_remove_clic(self, *args):
         self.hboxSure.hide()
 
-        
+
     #View that shows the clics (and its activities)
     #View that delete clics
     def __clics_view(self, *args):
-        name, clic, default = ManagerData.get_clic_data(self.iconView)
+        name, folder, default = ManagerData.get_clic_data(self.iconView)
         if self.currentClicsView == 'Delete':
             text = _('DO YOU REALLY WANT TO DELETE') + ' "' + name +'"?'
             self.labelSure.set_text(text)
             self.hboxSure.show()
         else :
-            self.controller.load_clic_information(clic, default)
+            self.controller.load_clic_information(folder, default)
             self.vboxPlay.show()
             self.__change_current_view(self.vboxPlay)   
             

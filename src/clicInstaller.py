@@ -31,6 +31,7 @@
     
     @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 '''
+from sugar.datastore import datastore
 from xml.dom import minidom
 import os
 import re
@@ -40,6 +41,9 @@ import shutil
 import gtk
 from gettext import gettext as _
 import controller
+
+#look the file activty.info in folder activity
+_ACTIVITY_BUNDLE_ID = 'net.netii.kumuolpc.ClicPlayer'
 
 class Installer:
     def __init__(self):
@@ -137,7 +141,9 @@ class Installer:
         hilo.start()
         self.__delete_file(self.data_path, file)
         
-
+        
+        
+    #downloads the new clic file in background (every download has its own thread)
     def __download_file(self, *urls):
         initial_text = 'ONCE DOWNLOADED, YOU WILL HAVE THE CLIC ON YOUR LIST.'
         self.__show_warning(initial_text, None)
@@ -162,8 +168,13 @@ class Installer:
                 to_path = os.path.join(self.clics_path, folder)
                 t = self.__unzip_file(from_path, to_path)   
                 if t == 0:
-                    self.__delete_file(self.clics_path, file)
                     print 'Installed in folder clics/' + folder
+                    
+                    #add new file to Journal (datastore)
+                    title = clic['Title']
+                    self.__write_file_to_datastore(title, from_path)
+                    self.__delete_file(self.clics_path, file)
+                        
                     self.controller = controller.Controller()
                     done = True
                         
@@ -183,10 +194,62 @@ class Installer:
                            
         if done == False:
             self.__show_warning('IT WAS NOT POSSIBLE TO DOWNLOAD', clic['Title'])
+            
+            
+    #installs a clic from datastore (Journal + devices) to the new clics folder (checking if it's a real clic.)
+    def install_clic_from_datastore(self, title, path):
+        
+        #get path of clic to install
+        from_path = path
+        #get destination folder
+        folder = title
+        to_path = paths.get_clic_path(folder, '0')
+        
+        #unzip file into the new clic folder
+        t = self.__unzip_file(from_path, to_path)
+        
+        #if everything was OK, check if the file has a JClic document
+        #(info about how to show the clic)
+        if t == 0 :
+            try:
+                #find a jclic document in the new clic folder
+                for fl in os.listdir(to_path):
+                    if not fl[0] == '.': 
+                        if not os.path.isdir(os.path.join(to_path, fl)):
+                            if fl.find('.jclic') != -1: 
+                                #check if the folder of the clic has a .JClic document and is parseable
+                                jclic_doc = fl #JClic document has the same name as the zip
+                                minidom.parse(os.path.join(to_path, jclic_doc))
+                
+            except Exception :
+                
+                #if not, delete the folder created in new clics directory
+                self.delete_clic_folder(folder)
+                return False
+        else:
+            return False
+            
+        #everything was correctly done
+        #add clic information to database
+        self.controller = controller.Controller()
+        clic = {'Title': title,
+                'Author': '',
+                'Area': '',
+                'Language': '',
+                'Folder': folder,
+                'Icon': ''
+                }    
+        self.controller.add_new_clic(clic)
+        
+        return True
+         
+        
     
     #removes all the data of a clic's folder.
     def delete_clic_folder(self, clics_folder):
-        shutil.rmtree(paths.new_clics_path + '/' + clics_folder)
+        shutil.rmtree(paths.get_clic_path(clics_folder, '0'))
+        
+
     
     #removes zip file.
     def __delete_file(self, path, file):
@@ -194,7 +257,9 @@ class Installer:
         t = os.remove(file_to_remove)      
             
     #Unzips a file to a new path (it will overwrite content if exists).
-    def __unzip_file(self, from_path, to_path):   
+    def __unzip_file(self, from_path, to_path):  
+        from_path = from_path.replace(' ' , '\ ')
+        to_path = to_path.replace(' ' , '\ ')
         t = os.system('unzip -o '+ from_path + ' -d ' + to_path)                 
         return t  
     
@@ -202,6 +267,30 @@ class Installer:
     def __wget_file(self, url, to_path):
         t = os.system('wget -q ' + url + ' --directory-prefix=' + to_path)  
         return t
+    
+    #creates a datastore file and puts in Journal
+    def __write_file_to_datastore(self, title, path):
+        
+        #creates a datastore file
+        file_dsobject = datastore.create()
+        
+        # Write metadata info (here we specifically set the title of the file and
+        # specify that this is a zip file). 
+        file_dsobject.metadata['title'] = title
+        file_dsobject.metadata['mime_type'] = 'application/zip'
+        file_dsobject.metadata['activity'] = _ACTIVITY_BUNDLE_ID
+
+        
+        #Set the file_path in the datastore.
+        file_dsobject.file_path = path
+
+        try:
+            datastore.write(file_dsobject)
+        except Exception:
+            print 'not stored in datastore'
+        #destroy object
+        file_dsobject.destroy()
+
     
     #shows an alert to the user to inform about the status of the download (clic).  
     def __show_warning(self, text, clic):     
