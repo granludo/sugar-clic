@@ -36,11 +36,12 @@ from xml.dom import minidom
 import os
 import re
 import threading
-import paths
 import shutil
 import gtk
 from gettext import gettext as _
 import controller
+import paths
+
 
 #look the file activty.info in folder activity
 _ACTIVITY_BUNDLE_ID = 'net.netii.kumuolpc.ClicPlayer'
@@ -50,6 +51,7 @@ class Installer:
         self.clics_path = ""
         self.data_path = ""
         self.hasPaths = False
+        
 
             
     def __getText(self, nodelist):
@@ -63,20 +65,7 @@ class Installer:
     def get_clic_info(self, file):
         
         if (self.hasPaths == False) :
-            #init paths
-            self.clics_path = paths.new_clics_path  #folder to install clics
-            self.data_path = paths.application_data_path
-            self.views_path = paths.views_path
-            self.icons_path = paths.icons_path
-            #init popup window
-            self.xml = gtk.glade.XML(self.views_path + '/DownloadingInfo.glade')
-            self.window = self.xml.get_widget('window')
-            self.label = self.xml.get_widget('label')
-            self.ImageGo = self.xml.get_widget('image') 
-            self.ImageGo.set_from_file(self.icons_path + '/si.png')
-            self.window.resize(1200, 75)
-            self.window.move(0, 825)
-            self.hasPaths = True
+            self.__load_info_label_and_paths()
         
         #unzip the file with metadata
         from_path = os.path.join(self.data_path, file)
@@ -198,7 +187,21 @@ class Installer:
             
     #installs a clic from datastore (Journal + devices) to the new clics folder (checking if it's a real clic.)
     def install_clic_from_datastore(self, title, path):
-        self.__show_warning('INSTALANDO...', None)
+        if (self.hasPaths == False) :
+            self.__load_info_label_and_paths()
+
+        l = list()
+        l.append(title)
+        l.append(path)
+        hilo = threading.Thread(target=self.__intalling_clic_thread, args=(l))
+        hilo.start()     
+        
+        
+        
+    def __intalling_clic_thread(self, *params):
+        self.__show_warning('ADDING CLIC...', None)
+        title = params[0]
+        path = params[1]
         #get path of clic to install
         from_path = path
         #get destination folder
@@ -225,9 +228,9 @@ class Installer:
                 
                 #if not, delete the folder created in new clics directory
                 self.delete_clic_folder(folder)
-                return False
+                self.__show_warning('IT WAS NOT POSSIBLE TO ADD THE CLIC', None)
         else:
-            return False
+            self.__show_warning('IT WAS NOT POSSIBLE TO ADD THE CLIC', None)
             
         #everything was correctly done
         #add clic information to database
@@ -241,7 +244,7 @@ class Installer:
                 }    
         self.controller.add_new_clic(clic)
         
-        return True
+        self.__show_warning('ADDED, LOOK ON YOUR LIST', title)
          
         
     
@@ -318,11 +321,27 @@ class Installer:
         if clic == None :
             self.label.set_text(_(text))
         else :
-            text = _(text) + ' "' + clic + '".'
+            text = _(text) + '  (' + clic + ').'
             self.label.set_text(text)
         self.window.show()
         self.button = self.xml.get_widget('button')
         self.button.connect('clicked', self.__destroy_win)
+        
+    def __load_info_label_and_paths(self):
+        #init paths
+        self.clics_path = paths.new_clics_path  #folder to install clics
+        self.data_path = paths.application_data_path
+        self.views_path = paths.views_path
+        self.icons_path = paths.icons_path           
+        #init popup window
+        self.xml = gtk.glade.XML(self.views_path + '/DownloadingInfo.glade')
+        self.window = self.xml.get_widget('window')
+        self.label = self.xml.get_widget('label')
+        self.ImageGo = self.xml.get_widget('image') 
+        self.ImageGo.set_from_file(self.icons_path + '/si.png')
+        self.window.resize(1200, 75)
+        self.window.move(0, 825)
+        self.hasPaths = True
 
     def __destroy_win(self, *args):
         self.window.hide()
