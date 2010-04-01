@@ -286,24 +286,13 @@ class Manager:
     #try to install the file (clic) selected by the user 
     def __installation_info_view(self, *args):
         #get data of selected clic
-        self.addClicsView.labelInfoInstall.set_text(_('INSTALANDO...'))
-        self.addClicsView.hboxInfoInstall.show() 
-        
         title, path = ManagerData.get_found_clic_data(self.addClicsView.iconViewIns)
-        self.addClicsView.iconViewIns.window.set_cursor(gtk.gdk.Cursor(gtk.gdk.WATCH))
+        self.addClicsView.vboxInstall.window.set_cursor(gtk.gdk.Cursor(gtk.gdk.WATCH))
+        
         #try to install the clic
-        is_installed = self.controller.install_new_clic_from_datastore(title, path)
-
-        #refresh view if something failed (maybe there is no device anymore)
-        if is_installed == False :
-            self.addClicsView.labelInfoInstall.set_text(_('IT WAS NOT POSSIBLE TO ADD THE CLIC'))
-            self.__refresh_install_view()
-        else:
-            #shows a warning that everything was fine
-            self.addClicsView.labelInfoInstall.set_text('CLIC "' + title + '" ' +_('ADDED. LOOK ON YOUR LIST'))
-            self.__refresh_install_view()
-        self.addClicsView.hboxInfoInstall.show() 
-        self.addClicsView.iconViewIns.window.set_cursor(None)
+        self.controller.install_new_clic_from_datastore(title, path)
+        self.__refresh_install_view()
+        self.addClicsView.vboxInstall.window.set_cursor(None)
     
     #hides the information label in instllation view
     def __hide_installation_info_view(self, *args):

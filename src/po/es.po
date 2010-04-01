@@ -59,10 +59,6 @@ msgid "SELECT A CLIC TO ADD"
 msgstr "ELIGE UN CLIC PARA AÑADIR"
 
 #manager.py
-msgid "ADDING CLIC..."
-msgstr "AÑADIENDO CLIC..."
-
-#manager.py
 msgid "ADD CLICS"
 msgstr "AÑADIR CLICS"
 
@@ -75,9 +71,12 @@ msgid "IT WAS NOT POSSIBLE TO ADD THE CLIC"
 msgstr "NO FUE POSIBLE AÑADIR EL CLIC"
 
 #manager.py
-msgid "ADDED. LOOK ON YOUR LIST"
-msgstr "AÑADIDO. MIRA EN TU LISTADO"
+msgid "ADDED, LOOK ON YOUR LIST"
+msgstr "AÑADIDO, MIRA EN TU LISTADO"
 
+#clicInstaller.py
+msgid "ADDING CLIC..."
+msgstr "AÑADIENDO CLIC..."
 
 
 

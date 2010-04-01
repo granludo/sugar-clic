@@ -1,6 +1,7 @@
 PlayView.pyc
 BrowserView.py
 PlayView.py
+new/data/clic42.xmlclic
 new/data/downloaded.xml
 clicParser.pyc
 ClicActivity/CrossWord.pyc
@@ -249,6 +250,7 @@ data/clics/conill/macarrones.jpg
 data/clics/conill/pastanaga.1.JPG
 data/clics/conill/P2.wav
 data/clics/conill/SOPA.wav
+InstallerInfoView.pyc
 AddClicsView.py
 downloadmanager.pyc
 browser.pyc
@@ -271,6 +273,7 @@ locale/ca/activity.linfo
 locale/ca/LC_MESSAGES/net.netii.kumuolpc.ClicPlayer.mo
 clicActivitiesHandler.py
 clicInstaller.py
+InstallerInfo.py
 MyClicsView.pyc
 controller.pyc
 po/fr.po
@@ -311,6 +314,7 @@ img/app/appIcons/about.png
 img/app/appViews/PlayView.glade
 img/app/appViews/MyClicsView.glade
 img/app/appViews/mainView.glade
+img/app/appViews/InstallerInfo.glade
 img/app/appViews/AddClicsView.glade
 img/app/appViews/BrowserView.glade
 img/app/appViews/WSview.glade
