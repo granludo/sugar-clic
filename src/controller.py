@@ -106,9 +106,9 @@ class Controller:
         return self.finder.find_clics()
         
     #remove clic
-    def remove_clic(self, folder):
+    def remove_clic(self, title, folder):
         self.db.remove_clic_from_db(folder)
-        self.installer.delete_clic_folder(folder)
+        self.installer.delete_clic_folder(title, folder)
     
     #installs a new clic
     def install_new_clic(self, name):

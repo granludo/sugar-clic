@@ -57,25 +57,25 @@ class Finder:
         #for every mounted device, find all the zips
         for device in devices:
             try:
-                (data, count) = datastore.find({'mime_type':'application/zip', 'mountpoints':[device['id']]})
+                (ds_objects, count) = datastore.find({'mime_type':'application/zip', 'mountpoints':[device['id']]})
                 #usb device
                 if device['title'].find('/media/') != -1 :
-                    for d in data:
+                    for d in ds_objects:
                         if d.get_file_path() != '' :
                             path = os.path.join(device['title'], d.metadata['title'])
                             path = path + '.zip'
                             title = d.metadata['title']
                             self.clics.append({'title':title, 'path':path})
                         d.destroy()
-                #datastore
-                else:
-                    for d in data:
-                        if d.get_file_path() != '' :                 
-                            path = os.path.join(paths.new_clics_path, d.metadata['title'])
-                            path = path + '.zip'
-                            title = d.metadata['title']
-                            self.clics.append({'title':title, 'path':d.get_file_path()})
-                        d.destroy()     
+#                #datastore (this moment is not possible)
+#                else:
+#                    for d in data:
+#                        if d.get_file_path() != '' :                 
+#                            path = os.path.join(paths.new_clics_path, d.metadata['title'])
+#                            path = path + '.zip'
+#                            title = d.metadata['title']
+#                            self.clics.append({'title':title, 'path':d.get_file_path()})
+#                        d.destroy()     
             except Exception:
                 return self.clics      
         return self.clics
