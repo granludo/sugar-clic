@@ -77,5 +77,5 @@ class ClicPlayerActivity(activity.Activity):
         #called every 250 miliseconds (for pygame)
         gobject.timeout_add(250, self.Manager.updating)
         #called every second to refresh some views of the application
-        gobject.timeout_add(1000, self.Manager.updating_views)
+        gobject.timeout_add(2000, self.Manager.updating_views)
 

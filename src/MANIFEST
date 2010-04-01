@@ -130,7 +130,6 @@ data/test/key3.db
 data/test/prefs.js
 data/test/compatibility.ini
 data/test/Cache/_CACHE_003_
-data/test/Cache/69D0DD02d01
 data/test/Cache/AF212411d01
 data/test/Cache/_CACHE_001_
 data/test/Cache/6236A26Dd01
@@ -254,7 +253,6 @@ AddClicsView.py
 downloadmanager.pyc
 browser.pyc
 clicFinder.py
-clicInstaller.py~
 ManagerData.pyc
 MainView.py
 controller.py

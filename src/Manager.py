@@ -154,7 +154,7 @@ class Manager:
             #called every 250 miliseconds (for communication with pygame module (player))
             gobject.timeout_add(250, self.updating)
             #called every second to refresh some views of the application
-            gobject.timeout_add(1000, self.updating_views)
+            gobject.timeout_add(2000, self.updating_views)
             self.window.show() 
             gtk.main()
 
@@ -264,7 +264,7 @@ class Manager:
     
     #Shows the clics to install from Journal or a usb device (view)
     def __install_view (self, *args):
-        self.listClicsInstall = True
+
         self.addClicsView.hboxInfoInstall.hide()
         
         #change view to install clics view
@@ -280,11 +280,15 @@ class Manager:
         else:
             #reloads the view (shows all the clics available to install)
             self.__refresh_install_view()
+        self.listClicsInstall = True
     
         
     #try to install the file (clic) selected by the user 
     def __installation_info_view(self, *args):
         #get data of selected clic
+        self.addClicsView.labelInfoInstall.set_text(_('INSTALANDO...'))
+        self.addClicsView.hboxInfoInstall.show() 
+        
         title, path = ManagerData.get_found_clic_data(self.addClicsView.iconViewIns)
         self.addClicsView.iconViewIns.window.set_cursor(gtk.gdk.Cursor(gtk.gdk.WATCH))
         #try to install the clic
@@ -318,7 +322,7 @@ class Manager:
     # removes a clic from the clics list of the user
     def __remove_clic(self, *args):
         title, folder, default = ManagerData.get_clic_data(self.myClicsView.iconView)
-        self.controller.remove_clic(folder)
+        self.controller.remove_clic(title, folder)
         self.__refresh_clics_view(False)
         self.myClicsView.hboxSure.hide()
         

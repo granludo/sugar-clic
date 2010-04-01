@@ -198,7 +198,7 @@ class Installer:
             
     #installs a clic from datastore (Journal + devices) to the new clics folder (checking if it's a real clic.)
     def install_clic_from_datastore(self, title, path):
-        
+        self.__show_warning('INSTALANDO...', None)
         #get path of clic to install
         from_path = path
         #get destination folder
@@ -245,9 +245,10 @@ class Installer:
          
         
     
-    #removes all the data of a clic's folder.
-    def delete_clic_folder(self, clics_folder):
-        shutil.rmtree(paths.get_clic_path(clics_folder, '0'))
+    #removes all the data of a clic's folder. and the entry in Journal
+    def delete_clic_folder(self, title, folder):
+        shutil.rmtree(paths.get_clic_path(folder, '0'))
+        self.__remove_datastore_file(title)
         
 
     
@@ -290,6 +291,26 @@ class Installer:
             print 'not stored in datastore'
         #destroy object
         file_dsobject.destroy()
+        
+    #deletes the datastore entry related with the clic (only in Journal)
+    def __remove_datastore_file(self, title):
+    
+        devices =  datastore.mounts()
+        #remove only datastore entries related with Journal
+        for device in devices:
+            try:
+                #find datastore object related with the query
+                (ds_objects, count) = datastore.find({'title':title, 
+                                                      'mime_type':'application/zip',
+                                                      'activity' : _ACTIVITY_BUNDLE_ID, 
+                                                      'mountpoints':[device['id']]})
+                #usb device
+                if device['title'].find('/media/') == -1 :
+                    for d in ds_objects:
+                        d.destroy()
+                        datastore.delete(d.object_id)
+            except Exception:
+                print 'not removed in datastore'
 
     
     #shows an alert to the user to inform about the status of the download (clic).  

@@ -36,6 +36,7 @@ import os
 # paths used in the application
 application_data_path = ''      #path where the application can store permanent data
 application_bundle_path = ''    #path where the application is installed (/home/olpc/Activities/ClicPlayer.activity
+
         
 clics_path =  ''                #path to the folder that contains default clics
 new_clics_path = ''             #path to the folder that contains new clics
