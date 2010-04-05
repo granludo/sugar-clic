@@ -118,7 +118,6 @@ class SimpleAssociation(Activity):
 
         '''Cargamos grupo de celdas comunes...'''
         cellsPrimary = self.xmlActivity.getElementsByTagName('cells')[0]
-        self.styleCell = StyleCell(cellsPrimary)
         xGrid1 = (Constants.ACTIVITY_WIDTH - width) / 2
         yGrid1 = (Constants.ACTIVITY_HEIGHT - height) / 2
         xGrid1 = max(xGrid1,xActual)
@@ -145,9 +144,10 @@ class SimpleAssociation(Activity):
             if self.Grid3.imagePath == None:
                 self.Grid3.Load(self.Grid1.numRows,self.Grid1.numCols,width,height,xActual ,yActual, display_surf)
                 cells = xmlGrid3.getElementsByTagName('cell')
+                self.styleCell = StyleCell(xmlGrid3)
                 i = 0
                 for i in range(len(cells)):
-                    self.printxmlCellinCell(self.Grid3.Cells[i], cells, self.styleCell)
+                    self.printxmlCellinCell(self.Grid3.Cells[i], cells,self.styleCell)
                     #i = i+1
             else:
                 self.Grid3.LoadWithImage(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid1 ,yGrid1, display_surf,self.pathToMedia)
@@ -156,9 +156,11 @@ class SimpleAssociation(Activity):
 
         '''Cargamos secondaryCells'''
         cellsSecondary = self.xmlActivity.getElementsByTagName('cells')[1]
+        self.styleCell2 = StyleCell(cellsSecondary)
 
         '''Cargamos primer Grid del XML'''
         cells = cellsPrimary.getElementsByTagName('cell')
+        self.styleCell = StyleCell(cellsPrimary)
         '''indexCell  = Numero de Celda que ocupa:'''
         indexCell = 0
         indexCell = self.doBucle(cells,indexCell)
@@ -174,7 +176,7 @@ class SimpleAssociation(Activity):
         id = 0
 
         for cell in cells2:
-                self.printxmlCellinCell(self.Grid2.Cells[i], cell,self.styleCell)
+                self.printxmlCellinCell(self.Grid2.Cells[i], cell,self.styleCell2)
                 #Guardamos las imagenes en el Grid
                 self.Grid2.Cells[i].contentCell.img2 = self.Grid2.Cells[i].contentCell.img
                 self.Grid2.Cells[i].contentCell.id = id
@@ -192,7 +194,7 @@ class SimpleAssociation(Activity):
     def doBucle(self,cells,i):
         id = 0
         for cell in cells:
-            self.printxmlCellinCell(self.Grid1.Cells[i], cell,self.styleCell)
+            self.printxmlCellinCell(self.Grid1.Cells[i], cell, self.styleCell)
             '''Guardamos las imagenes en el Grid'''
             self.Grid1.Cells[i].contentCell.img2 = self.Grid1.Cells[i].contentCell.img
             self.Grid1.Cells[i].contentCell.id = id

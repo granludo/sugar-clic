@@ -1,945 +1,1196 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<JClicProject name="conill" version="0.1.3">
+<JClicProject name="orientat" version="0.1.3">
  <settings>
-  <title>El conill</title>
-  <revision description="Creació del paquet d'activitats en Clic 3.0" date="6/19/06" />
-  <revision description="Conversió de Clic3 a JClic" date="6/19/06">
+  <title>Orienta't</title>
+  <revision description="Creació del paquet d'activitats en Clic 3.0" date="7/7/09" />
+  <revision description="Conversió de Clic3 a JClic" date="7/6/09">
    <author name="Equip Clic" mail="clic@xtec.net" organization="Àrea TIC - Departament d'Educació" />
   </revision>
-  <author name="Sílvia Puig Pagès" mail="spuig25@xtec.net" />
-  <organization name="CEIP Ramon Berenguer III" mail="a8013305@centres.xtec.es" url="http://www.xtec.es/centres/a8013305" city="Barcelona" state="Catalunya" />
+  <author name="Xavier Rodríguez Quevedo" mail="xavier.rodriguez@iesllavanes.org" />
+  <organization name="IES Sant Andreu de Llavaneres" mail="a8046852@centres.xtec.es" url="http://www.xtec.es/centres/a8046852" city="Sant Andreu de Llavaneres" state="Catalunya" />
   <language>català</language>
   <description>
-   <p>Projecte d'activitats per a educació infantil que tenen com a centre d'interès "el conill": què menja, on viu, com és...</p>
+   <p>Activitats d'orientació acadèmica i professional dividit en tres parts:</p>
+   <p>&lt;ul&gt;</p>
+   <p>&lt;li&gt;Tu</p>
+   <p>&lt;li&gt;Les teves opcions</p>
+   <p>&lt;li&gt;Estratègies per buscar feina</p>
+   <p>&lt;/ul&gt;</p>
   </description>
-  <descriptors area="Ciències experimentals, Llengües" level="Infantil (3-6)">animals</descriptors>
+  <descriptors area="Diversos" level="Secundària (12-16)">ensenyament secundari , nivells educatius</descriptors>
+  <skin file="@orange.xml" />
  </settings>
  <sequence>
-  <item id="start" name="portada">
+  <item id="inici" name="portada" navButtons="back">
    <jump action="RETURN" id="back" />
   </item>
-  <item name="IDENTIFICA CONILL" />
-  <item name="JOC DE MEMÒRIA" />
-  <item name="PUZZLE 1" />
-  <item name="JOC DE MEMÒRIA2" />
-  <item name="PUZZLE2" />
-  <item name="ASSOCIA" />
-  <item name="IDENTIFICA" />
-  <item name="ORDENA" />
-  <item name="IDENTIFICAR ELEMENTS" />
-  <item name="SOPA DE LLETRES" />
-  <item name="EXPLORACIÓ" />
-  <item name="COMPLETA" />
-  <item name="OMPLIR FORATS" />
-  <item name="RELACIONA">
-   <jump action="RETURN" id="forward" />
+  <item id="menú" name="menú" navButtons="fwd">
+   <jump action="STOP" id="forward" />
+  </item>
+  <item id="TU" name="tu">
+   <jump action="STOP" id="back" />
+  </item>
+  <item name="aptituds i habilitats (I)" />
+  <item name="intro/extra/est/inest" />
+  <item name="trets">
+   <jump tag="menú" id="forward" />
+  </item>
+  <item id="OPCIONS" name="opcions">
+   <jump action="STOP" id="back" />
+  </item>
+  <item name="esquema sistema educatiu" />
+  <item name="sense GES" />
+  <item name="famílies professionals" />
+  <item name="titulacions" />
+  <item name="proves d'accés" />
+  <item name="accés">
+   <jump tag="menú" id="forward" />
+  </item>
+  <item id="estratègies per cercar feina" name="cercar feina">
+   <jump action="STOP" id="back" />
+  </item>
+  <item name="treballar i gaudir" />
+  <item name="entorns de treball (I)" />
+  <item name="entrevista (I)" />
+  <item name="entrevista-roba" />
+  <item name="instància">
+   <jump tag="menú" id="forward" />
+  </item>
+  <item id="comiat" name="comiat" navButtons="back">
+   <jump action="EXIT" id="forward" />
+   <jump tag="menú" id="back" />
   </item>
  </sequence>
  <activities>
-  <activity class="@associations.ComplexAssociation" name="ASSOCIA" code="">
+  <activity class="@associations.ComplexAssociation" name="accés" code="">
    <description />
    <messages>
     <cell type="initial">
      <style>
       <font family="Arial" size="18" bold="true" />
-      <color background="0x999900" />
-      <gradient source="0xCCCCFF" dest="0xFFFFFF" angle="0" />
+      <color background="0xFFFFFF" />
      </style>
-     <media type="PLAY_AUDIO" level="1" file="Q.wav" />
-     <p>QUÈ MENJA EL CONILL?</p>
-    </cell>
-    <cell type="final">
-     <style borderStroke="0.7" markerStroke="5.0">
-      <font family="Arial" size="18" bold="true" />
-      <color background="0x999900" />
-      <gradient source="0xCCCCFF" dest="0xFFFFFF" angle="0" />
-     </style>
-     <media type="PLAY_AUDIO" level="1" file="Q1.wav" />
-     <p>MOLT BÉ!!  CORRECTE!!</p>
+     <p>Quins dels estudis o proves de la dreta permeten accedir als estudis o proves de l'esquerra?</p>
     </cell>
    </messages>
-   <settings margin="8" report="true" reportActions="false">
-    <container bgColor="0xC0C0C0">
-     <gradient source="0x6666FF" dest="0xFFFFFF" angle="43" cycles="2" />
+   <settings margin="4" report="true" reportActions="false">
+    <container bgColor="0x9BFF69">
      <counters time="true" actions="true" score="true" />
     </container>
-    <window bgColor="0xCCCCFF" border="true" />
+    <window bgColor="0xFF6600" transparent="true" border="true" />
    </settings>
-   <cells rows="2" cols="3" cellWidth="138.0" cellHeight="137.0" border="true" id="primary">
-    <style borderStroke="0.7" markerStroke="5.0">
-     <color background="0xFFFFFF" />
+   <cells rows="3" cols="3" cellWidth="150.0" cellHeight="100.0" border="true" id="primary">
+    <style>
+     <font family="Arial" size="18" bold="true" />
+     <color foreground="0x2ADB08" background="0xFFFFFF" />
     </style>
-    <shaper class="@Rectangular" cols="3" rows="2" />
-    <cell id="0" image="maiz1.jpg" />
-    <cell id="0" image="hierba.1.JPG" />
-    <cell id="1" image="macarrones.jpg" />
-    <cell id="0" image="pastagana2.JPG" />
-    <cell id="1" image="galletas.jpg" />
-    <cell id="1" image="nuez.jpg" />
-   </cells>
-   <cells rows="1" cols="2" cellWidth="84.0" cellHeight="90.0" border="true" id="secondary">
-    <style />
-    <shaper class="@Rectangular" cols="2" rows="1" />
-    <cell>
-     <style>
-      <font family="Arial" size="28" bold="true" />
-     </style>
-     <p>SI</p>
+    <shaper class="@Rectangular" cols="3" rows="3" />
+    <cell id="0">
+     <p>Cicle formatiu de grau mitjà (CFGM)</p>
+    </cell>
+    <cell id="3">
+     <p>Cicles formatius de grau superior (CFGS)</p>
+    </cell>
+    <cell id="2">
+     <p>Batxillerat</p>
+    </cell>
+    <cell id="0">
+     <p>Graduat en Educació Secundària (GES) [dues opcions]</p>
+    </cell>
+    <cell id="1">
+     <p>Graduat en Educació Secundària (GES) [hi ha dues opcions]</p>
+    </cell>
+    <cell id="2">
+     <p>Prova d'accés a cicles formatius de grau superior</p>
+    </cell>
+    <cell id="4">
+     <p>Programa de qualificació professsional inicial (PQPI)</p>
     </cell>
     <cell>
-     <style>
-      <font family="Arial" size="28" bold="true" />
-     </style>
-     <p>NO</p>
+     <p>Prova d'accés als cicles formatius de grau mitjà</p>
+    </cell>
+    <cell id="3">
+     <p>PAU (Prova d'accés a la universitat)</p>
+    </cell>
+   </cells>
+   <cells rows="3" cols="2" cellWidth="150.0" cellHeight="100.0" border="true" id="secondary">
+    <style>
+     <font family="Arial" size="18" bold="true" />
+     <color foreground="0xE81313" background="0xFFFFFF" />
+    </style>
+    <shaper class="@Rectangular" cols="2" rows="3" />
+    <cell>
+     <p>Batxillerat</p>
+    </cell>
+    <cell>
+     <p>Cicles formatius de grau mitjà (CFGM)</p>
+    </cell>
+    <cell>
+     <p>Cicles formatius de grau superior (CFGS)</p>
+    </cell>
+    <cell>
+     <p>Universitat</p>
+    </cell>
+    <cell>
+     <p>No permet accedir a altres estudis</p>
+    </cell>
+    <cell>
+     <p>PAU (Prova d'accés a la universitat)</p>
     </cell>
    </cells>
    <scramble times="31" primary="true" secondary="true" />
-   <layout position="AB" />
+   <layout position="BA" />
   </activity>
-  <activity class="@text.FillInBlanks" name="COMPLETA" code="">
+  <activity class="@associations.SimpleAssociation" name="aptituds i habilitats (I)" code="">
    <description />
    <messages>
     <cell type="initial">
      <style>
       <font family="Arial" size="18" bold="true" />
-      <color background="0xCCFFCC" />
+      <color background="0xFFFFFF" />
      </style>
-     <media type="PLAY_AUDIO" level="1" file="FRASE.wav" />
-     <p>COMPLETA LES FRASES AMB LA PARAULA CORRECTA.</p>
-    </cell>
-    <cell type="final">
-     <style>
-      <font family="Arial" size="18" bold="true" />
-      <color background="0xCCFFCC" />
-     </style>
-     <media type="PLAY_AUDIO" level="1" file="Q1.wav" />
-     <p>MOLT BÉ!!      CORRECTE!!</p>
+     <p>Relaciona les aptituds i habilitats de la fila de sobre amb les seves definicions a la fila de sota.</p>
     </cell>
    </messages>
-   <settings margin="8" report="true" reportActions="false">
-    <container bgColor="0xC0C0C0">
-     <gradient source="0x009933" dest="0xFFFFFF" angle="43" cycles="3" />
+   <settings margin="4" report="true" reportActions="false">
+    <container bgColor="0x9BFF69">
      <counters time="true" actions="true" score="true" />
     </container>
-    <window bgColor="0xC0C0C0" border="true">
-     <gradient source="0xCCFFCC" dest="0xFFFFFF" angle="101" />
-     <size width="717" height="362" />
-    </window>
+    <window bgColor="0xFF6600" transparent="true" border="true" />
+    <eventSounds>
+     <sound id="actionError" file="moc.mp3" />
+     <sound id="actionOk" file="aplaudiment_5s.mp3" />
+    </eventSounds>
    </settings>
-   <document>
-    <style name="default" family="Arial" size="14" tabWidth="12" bold="false" background="0xCCFFCC" italic="false" />
-    <style name="target" base="default" target="true" foreground="0x0000FF" background="0xFFFFFF" />
-    <style name="targetError" base="target" foreground="0xFF0000" />
-    <section>
-     <p family="Arial" background="0xFFFFFF">
-      <text family="Arial" background="0xFFFFFF">	 </text>
-      <cell width="130" height="100" image="pastanaga.1.JPG" />
-      <text family="Arial" background="0xFFFFFF">					</text>
-      <cell width="130" height="100" image="conills.cau.JPG" />
-     </p>
-     <p family="Arial" background="0xFFFFFF" />
-     <p family="Arial" background="0xFFFFFF" />
-     <p family="Arial" background="0xFFFFFF">
-      <text family="Arial" background="0xFFFFFF">      EL CONILL MENJA </text>
-      <target>
-       <answer>PASTANAGA</answer>
-       <optionList>
-        <option>FIDEUS</option>
-        <option>PASTANAGA</option>
-        <option>SOPA</option>
-       </optionList>
-       <text>PASTANAGA</text>
-      </target>
-      <text family="Arial" background="0xFFFFFF">.		ELS CONILLS NEIXEN AMB ELS </text>
-      <target>
-       <answer>ULLS</answer>
-       <optionList>
-        <option>PEUS</option>
-        <option>ULLS</option>
-        <option>DITS</option>
-       </optionList>
-       <text>ULLS</text>
-      </target>
-      <text family="Arial" background="0xFFFFFF"> TANCATS.</text>
-     </p>
-     <p family="Arial" background="0xFFFFFF" />
-     <p family="Arial" background="0xFFFFFF" />
-     <p family="Arial" background="0xFFFFFF">
-      <text family="Arial" background="0xFFFFFF">	</text>
-      <cell width="130" height="100" image="conejodientes.JPG" />
-      <text family="Arial" background="0xFFFFFF">					</text>
-      <cell width="130" height="100" image="conejo.peq.JPG" />
-     </p>
-     <p family="Arial" background="0xFFFFFF" />
-     <p family="Arial" background="0xFFFFFF">
-      <text family="Arial" background="0xFFFFFF">  EL CONILL TÉ DUES </text>
-      <target>
-       <answer>DENTS</answer>
-       <optionList>
-        <option>POTES</option>
-        <option>DENTS</option>
-        <option>CUES</option>
-       </optionList>
-       <text>DENTS</text>
-      </target>
-      <text family="Arial" background="0xFFFFFF">  MOLT LLARGUES.	     EL CONILL POT VIURE  EN UN </text>
-      <target>
-       <answer>CAU</answer>
-       <optionList>
-        <option>PIS</option>
-        <option>CAU</option>
-        <option>POU</option>
-       </optionList>
-       <text>CAU</text>
-      </target>
-      <text family="Arial" background="0xFFFFFF">.</text>
-     </p>
-     <p family="Arial" background="0xFFFFFF" />
-     <p family="Arial" background="0xFFFFFF" />
-    </section>
-   </document>
-   <evaluator class="@ComplexEvaluator" />
-  </activity>
-  <activity class="@panels.Explore" name="EXPLORACIÓ" code="">
-   <description />
-   <messages>
-    <cell type="initial">
-     <style>
-      <font family="Arial" size="18" bold="true" />
-      <gradient source="0xFF3333" dest="0xFFFFFF" angle="143" cycles="2" />
-     </style>
-     <media type="PLAY_AUDIO" level="1" file="EXPLORA.wav" />
-     <p>ESCOLTA AMB ATENCIÓ EL QUE DIU CADA IMATGE.</p>
-    </cell>
-   </messages>
-   <settings margin="8" report="false">
-    <container bgColor="0xC0C0C0">
-     <gradient source="0x990000" dest="0xFFFFFF" angle="230" cycles="3" />
-     <counters time="false" actions="false" score="false" />
-    </container>
-    <window bgColor="0xC0C0C0" border="true">
-     <gradient source="0xFF9999" dest="0xFFFFFF" angle="101" />
-    </window>
-   </settings>
-   <cells rows="2" cols="3" cellWidth="166.0" cellHeight="141.0" border="true" id="primary">
-    <style />
-    <shaper class="@Rectangular" cols="3" rows="2" />
-    <cell id="0" image="conejitos+mama.jpg" />
-    <cell id="1" image="conejo.peq.JPG" />
-    <cell id="2" image="conill2.gif" />
-    <cell id="3" image="conillsorra.jpg" />
-    <cell id="4" image="rabbit..JPG" />
-    <cell id="5" image="gran.jpg" />
-   </cells>
-   <cells rows="6" cols="1" cellWidth="50.0" cellHeight="30.0" border="true" id="secondary">
-    <style />
-    <shaper class="@Rectangular" cols="1" rows="6" />
-    <cell>
-     <media type="PLAY_AUDIO" level="1" file="E1.wav" />
-    </cell>
-    <cell>
-     <media type="PLAY_AUDIO" level="1" file="E2.wav" />
-    </cell>
-    <cell>
-     <media type="PLAY_AUDIO" level="1" file="E3.wav" />
-    </cell>
-    <cell>
-     <media type="PLAY_AUDIO" level="1" file="E4.wav" />
-    </cell>
-    <cell>
-     <media type="PLAY_AUDIO" level="1" file="E5.wav" />
-    </cell>
-    <cell>
-     <media type="PLAY_AUDIO" level="1" file="E6.wav" />
-    </cell>
-   </cells>
-   <scramble times="31" primary="false" />
-   <layout position="AB" />
-  </activity>
-  <activity class="@panels.Identify" name="IDENTIFICA" code="">
-   <description />
-   <messages>
-    <cell type="initial">
-     <style>
-      <font family="Arial" size="18" bold="true" />
-      <gradient source="0x66FFFF" dest="0xFFFFFF" angle="0" />
-     </style>
-     <media type="PLAY_AUDIO" level="1" file="VIURE1.wav" />
-     <p>CLICA SOBRE ELS LLOCS ON POT VIURE UN CONILL.</p>
-    </cell>
-    <cell type="final">
-     <style>
-      <font family="Arial" size="18" bold="true" />
-      <gradient source="0x66FFFF" dest="0xFFFFFF" angle="0" />
-     </style>
-     <media type="PLAY_AUDIO" level="1" file="VIURE2.wav" />
-     <p>MOLT BÉ!! EN UN ICEBERG FA MOLT DE FRED PER VIURE UN CONILL.</p>
-    </cell>
-   </messages>
-   <settings margin="8" report="true" reportActions="false">
-    <container bgColor="0xC0C0C0">
-     <gradient source="0x993300" dest="0xFFFFFF" angle="132" cycles="2" />
-     <counters time="true" actions="true" score="true" />
-    </container>
-    <window bgColor="0xC0C0C0" border="true">
-     <gradient source="0xFF9999" dest="0xFFCCCC" angle="0" />
-    </window>
-   </settings>
-   <cells rows="2" cols="3" cellWidth="149.0" cellHeight="116.0" border="true" id="primary">
-    <style />
-    <shaper class="@Rectangular" cols="3" rows="2" />
-    <cell id="1" image="conejo21.JPG">
-     <media type="PLAY_AUDIO" level="1" file="CAU.wav" />
-    </cell>
-    <cell id="1" image="gabia.jpg">
-     <media type="PLAY_AUDIO" level="1" file="GABIA.wav" />
-    </cell>
-    <cell id="1" image="granja.jpg">
-     <media type="PLAY_AUDIO" level="1" file="GRANJA.wav" />
-    </cell>
-    <cell id="1" image="granja1.jpg">
-     <media type="PLAY_AUDIO" level="1" file="GRANJA.wav" />
-    </cell>
-    <cell id="0" image="gel.jpg" />
-    <cell id="1" image="bosque.jpg">
-     <media type="PLAY_AUDIO" level="1" file="BOSC.wav" />
-    </cell>
-   </cells>
-   <cells rows="2" cols="3" cellWidth="50.0" cellHeight="30.0" border="true" id="solvedPrimary">
-    <style />
-    <shaper class="@Rectangular" cols="3" rows="2" />
-    <cell>
-     <p>EN UN CAU</p>
-    </cell>
-    <cell>
-     <p>EN UNA GÀBIA</p>
-    </cell>
-    <cell>
-     <p>EN UNA GRANJA</p>
-    </cell>
-    <cell>
-     <p>EN UNA GRANJA</p>
-    </cell>
-    <cell />
-    <cell>
-     <p>EN EL BOSC</p>
-    </cell>
-   </cells>
-   <scramble times="31" primary="true" />
-  </activity>
-  <activity class="@panels.Identify" name="IDENTIFICA CONILL" code="">
-   <description />
-   <messages>
-    <cell type="initial">
-     <style borderStroke="0.7" markerStroke="3.3">
-      <font family="Arial" size="18" bold="true" />
-      <gradient source="0x66FFFF" dest="0xFFFFFF" angle="0" />
-     </style>
-     <media type="PLAY_AUDIO" level="1" file="IDEN2.wav" />
-     <p>QUINS ANIMALS NO SÓN CONILLS?</p>
-    </cell>
-    <cell type="final">
-     <style>
-      <font family="Arial" size="18" bold="true" />
-      <gradient source="0x66FFFF" dest="0xFFFFFF" angle="0" />
-     </style>
-     <media type="PLAY_AUDIO" level="1" file="IDEN1.wav" />
-     <p> MOLT BÉ!!  AQUEST ANIMAL ÉS UN CONILL.</p>
-    </cell>
-   </messages>
-   <settings margin="8" report="true" reportActions="false">
-    <container bgColor="0xC0C0C0">
-     <gradient source="0x993300" dest="0xFFFFFF" angle="132" cycles="2" />
-     <counters time="true" actions="true" score="true" />
-    </container>
-    <window bgColor="0x993300" border="true">
-     <gradient source="0xFF9999" dest="0xFFCCCC" angle="0" />
-    </window>
-   </settings>
-   <cells rows="2" cols="3" cellWidth="177.0" cellHeight="187.0" border="true" id="primary">
-    <style borderStroke="5.5" markerStroke="3.3">
-     <color background="0xFFFFFF" />
+   <cells rows="1" cols="7" cellWidth="150.0" cellHeight="50.0" border="true" id="primary">
+    <style borderStroke="2.6" markerStroke="5.0">
+     <font family="Arial" size="20" bold="true" italic="true" />
+     <color foreground="0x339900" background="0xFFFFFF" border="0xFF6600" />
     </style>
-    <shaper class="@Rectangular" cols="3" rows="2" />
-    <cell id="1" image="cargol.jpg" />
-    <cell id="1" image="elefant.jpg" />
-    <cell id="1" image="gatet.jpg" />
-    <cell id="1" image="marieta.jpg" />
-    <cell id="1" image="ovella.jpg" />
-    <cell id="0" image="REDUIT.jpg" />
+    <shaper class="@Rectangular" cols="7" rows="1" />
+    <cell>
+     <p>Artística</p>
+    </cell>
+    <cell>
+     <p>Numèrica</p>
+    </cell>
+    <cell>
+     <p>De lideratge</p>
+    </cell>
+    <cell>
+     <p>Musical</p>
+    </cell>
+    <cell>
+     <p>Físicoesportiva</p>
+    </cell>
+    <cell>
+     <p>Manual</p>
+    </cell>
+    <cell>
+     <p>Lingüística</p>
+    </cell>
    </cells>
-   <scramble times="31" primary="true" />
-  </activity>
-  <activity class="@text.Identify" name="IDENTIFICAR ELEMENTS" code="" type="identifyWords">
-   <description />
-   <messages>
-    <cell type="initial">
-     <style>
-      <font family="Arial" size="18" bold="true" />
-      <gradient source="0x66FFFF" dest="0xFFFFFF" angle="0" />
-     </style>
-     <media type="PLAY_AUDIO" level="1" file="IELEM.wav" />
-     <p>BUSCA I CLICA SOBRE  LES PARAULES QUE POSIN CONILL.</p>
-    </cell>
-    <cell type="final">
-     <style>
-      <font family="Arial" size="18" bold="true" />
-      <gradient source="0x66FFFF" dest="0xFFFFFF" angle="0" />
-     </style>
-     <media type="PLAY_AUDIO" level="1" file="IELEM1.wav" />
-     <p>MOLT BÉ!!!  EN AQUEST TEXT APAREIX 9 VEGADES LA PARAULA CONILL!!  COMPTA-LES.</p>
-    </cell>
-   </messages>
-   <settings margin="20" report="true" reportActions="false">
-    <container bgColor="0xC0C0C0">
-     <gradient source="0x993300" dest="0xFFFFFF" angle="132" cycles="2" />
-     <counters time="true" actions="true" score="true" />
-    </container>
-    <window bgColor="0xC0C0C0" border="true">
-     <gradient source="0xFF9999" dest="0xFFCCCC" angle="0" />
-     <size width="507" height="365" />
-    </window>
-   </settings>
-   <checkButton>Avalua't</checkButton>
-   <document>
-    <style name="default" family="Arial" bold="false" background="0xCCFFCC" tabWidth="12" size="18" italic="false" />
-    <style name="target" base="default" foreground="0x0000FF" target="true" background="0xFFFFFF" />
-    <style name="targetError" base="target" foreground="0xFF0000" />
-    <section>
-     <p family="Arial" background="0xFFFFFF" />
-     <p family="Arial" Alignment="0" background="0xFFFFFF">
-      <text size="11">		</text>
-      <text bold="true" size="16">	EL </text>
-      <target>CONILL</target>
-     </p>
-     <p family="Arial" Alignment="0" background="0xFFFFFF" />
-     <p family="Arial" background="0xFFFFFF">
-      <text bold="true" size="16">	EL </text>
-      <target>CONILL</target>
-      <text bold="true" size="16"> ÉS UN MAMÍFER.</text>
-     </p>
-     <p family="Arial" background="0xFFFFFF" />
-     <p family="Arial" background="0xFFFFFF">
-      <text bold="true" size="16">	MENJA PASTANAGUES, BLAT DE MORO, HERBA,...</text>
-     </p>
-     <p family="Arial" background="0xFFFFFF" />
-     <p family="Arial" background="0xFFFFFF">
-      <text bold="true" size="16">	EL </text>
-      <target>CONILL</target>
-      <text bold="true" size="16"> TÉ 4 POTES. LES 2 DE DARRERA SÓN 		MÉS LLARGUES I AIXÍ  EL </text>
-      <target>CONILL</target>
-      <text bold="true" size="16"> POT SALTAR MÉS 		LLUNY.</text>
-     </p>
-     <p family="Arial" background="0xFFFFFF" />
-     <p family="Arial" background="0xFFFFFF">
-      <text bold="true" size="16">	EL </text>
-      <target>CONILL</target>
-      <text bold="true" size="16"> POT VIURE A CASA NOSTRA, EN UNA 		GRANJA O AL BOSC DINS D'UN CAU.</text>
-     </p>
-     <p family="Arial" background="0xFFFFFF" />
-     <p family="Arial" background="0xFFFFFF">
-      <text bold="true" size="16">	POT SER DE DIFERENTS COLORS: </text>
-      <target>CONILL</target>
-      <text bold="true" size="16"> BLANC, 		</text>
-      <target>CONILL</target>
-      <text bold="true" size="16"> NEGRE, </text>
-     </p>
-     <p family="Arial" background="0xFFFFFF" />
-     <p family="Arial" background="0xFFFFFF">
-      <text bold="true" size="16">	</text>
-      <target>CONILL</target>
-      <text bold="true" size="16"> GRIS O </text>
-      <target>CONILL</target>
-      <text bold="true" size="16"> MARRÓ. </text>
-     </p>
-    </section>
-   </document>
-  </activity>
-  <activity class="@memory.MemoryGame" name="JOC DE MEMÒRIA" code="">
-   <description />
-   <messages>
-    <cell type="initial">
-     <style>
-      <font family="Arial" size="18" bold="true" />
-      <color background="0xCCFFCC" />
-     </style>
-     <media type="PLAY_AUDIO" level="1" file="PARELLES1.wav" />
-     <p>BUSCA LES PARELLES.</p>
-    </cell>
-    <cell type="final">
-     <style>
-      <font family="Arial" size="18" bold="true" />
-      <color background="0xCCFFCC" />
-     </style>
-     <media type="PLAY_AUDIO" level="1" file="Q1.wav" />
-     <p>MOLT BÉ!!!  CORRECTE!!!</p>
-    </cell>
-   </messages>
-   <settings margin="8" report="true" reportActions="false">
-    <container bgColor="0xC0C0C0">
-     <gradient source="0xFF9900" dest="0xFFFFFF" angle="77" />
-     <counters time="true" actions="true" score="true" />
-    </container>
-    <window bgColor="0x339900" border="true" />
-   </settings>
-   <cells rows="2" cols="3" cellWidth="190.0" cellHeight="139.0" border="true" id="primary">
+   <cells rows="1" cols="7" cellWidth="150.0" cellHeight="300.0" border="true" id="secondary">
     <style>
      <font family="Arial" size="17" bold="true" />
-     <color background="0xFFFFFF" />
+     <color background="0x9BFF69" />
     </style>
-    <shaper class="@Rectangular" cols="3" rows="2" />
-    <cell image="2con.jpg" />
-    <cell image="4conills.jpg" />
-    <cell image="conejo.jpg" />
-    <cell image="conejo2-1.JPG" />
-    <cell image="gran2.jpg" />
-    <cell image="conejoss.JPG" />
+    <shaper class="@Rectangular" cols="7" rows="1" />
+    <cell>
+     <p>Aptitud per al dibuix, la pintura, la decoració, l'escultura, el disseny, etc. Percepció estètica i apreciació de la bellesa. En persones imaginatives i creatives.</p>
+    </cell>
+    <cell>
+     <p>Rapidesa i precisió per treballar amb nombres fent operacions aritmètiques, mesurant, analitzant estadístiques, ...</p>
+    </cell>
+    <cell>
+     <p>Aptitud per dirigir activitats de grup, saber prendre decisions, ser sol·licitat pels altres per dur a terme una acció o tirar endevant una idea o projecte, etc.</p>
+    </cell>
+    <cell>
+     <p>Saber tocar un instrument, cantar en una coral, compondre música, etc.</p>
+    </cell>
+    <cell>
+     <p>Habilitat en la coordinació del cos en moviment, resitència muscular, força, flexibilitat, agilitat, etc.</p>
+    </cell>
+    <cell>
+     <p>Saber treballar amb les mans, tant en treball d'esforç físic com en activitats de precisió.</p>
+    </cell>
+    <cell>
+     <p>Domini de l'expressió verbal, tant oral com escrita. Ús correcte de l'idioma.</p>
+    </cell>
    </cells>
-   <scramble times="31" />
+   <scramble times="31" primary="true" secondary="true" />
    <layout position="AUB" />
   </activity>
-  <activity class="@memory.MemoryGame" name="JOC DE MEMÒRIA2" code="">
+  <activity class="@text.Order" name="cercar feina" code="" type="orderWords" amongParagraphs="true">
    <description />
    <messages>
     <cell type="initial">
      <style>
       <font family="Arial" size="18" bold="true" />
-      <color background="0xCCFFCC" />
+      <color background="0xFFFFFF" />
      </style>
-     <media type="PLAY_AUDIO" level="1" file="PARELLES1.wav" />
-     <p>BUSCA LES PARELLES.</p>
-    </cell>
-    <cell type="final">
-     <style>
-      <font family="Arial" size="18" bold="true" />
-      <color background="0xCCFFCC" />
-     </style>
-     <media type="PLAY_AUDIO" level="1" file="Q1.wav" />
-     <p>MOLT BÉ!!  CORRECTE!!</p>
+     <p>Reordena les paraules que estan fora de lloc</p>
     </cell>
    </messages>
-   <settings margin="8" report="true" reportActions="false">
-    <container bgColor="0xC0C0C0">
-     <gradient source="0xFF9900" dest="0xFFFFFF" angle="77" />
+   <settings margin="4" report="true" reportActions="false">
+    <container bgColor="0x9AFF69">
      <counters time="true" actions="true" score="true" />
     </container>
-    <window bgColor="0x339900" border="true" />
+    <window bgColor="0xFF6600" transparent="true" border="true">
+     <size width="500" height="400" />
+    </window>
    </settings>
-   <cells rows="2" cols="3" cellWidth="187.0" cellHeight="190.0" border="true" id="primary">
+   <checkButton>Avaluació</checkButton>
+   <document>
+    <style name="default" size="24" bold="true" background="0xFFFFFF" tabWidth="12" italic="true" family="Times New Roman" />
+    <style name="target" base="default" foreground="0x0000FF" target="true" />
+    <style name="targetError" base="target" foreground="0xFF0000" />
+    <section>
+     <p Alignment="1" background="0xFFFFFF" family="Arial">
+      <text size="24" background="0xFFFFFF" bold="false" italic="true" family="Times New Roman">Buscar un lloc de </text>
+      <target>treball</target>
+      <text size="24" background="0xFFFFFF" bold="false" italic="true" family="Times New Roman"> i tenir </text>
+      <target>èxit</target>
+      <text size="24" background="0xFFFFFF" bold="false" italic="true" family="Times New Roman"> exigeix ordre i </text>
+      <target>mètode</target>
+      <text size="24" background="0xFFFFFF" bold="false" italic="true" family="Times New Roman"> en el plantejament del teu </text>
+      <target>objectiu.</target>
+      <text size="24" background="0xFFFFFF" bold="false" italic="true" family="Times New Roman"> Per </text>
+      <target>organitzar</target>
+      <text size="24" background="0xFFFFFF" bold="false" italic="true" family="Times New Roman"> aquesta </text>
+      <target>recerca,</target>
+      <text size="24" background="0xFFFFFF" bold="false" italic="true" family="Times New Roman"> has de comptar amb </text>
+      <target>informació</target>
+      <text size="24" background="0xFFFFFF" bold="false" italic="true" family="Times New Roman"> en relació amb els diferents mètodes que pots fer servir. De la mateixa manera, també hauràs de disposar d’informació pel que fa a aspectes que integren el procés de </text>
+      <target>selecció</target>
+      <text size="24" background="0xFFFFFF" bold="false" italic="true" family="Times New Roman"> dels </text>
+      <target>candidats</target>
+      <text size="24" background="0xFFFFFF" bold="false" italic="true" family="Times New Roman"> a un lloc de treball, com poden ser la manera d’elaborar el </text>
+      <target>currículum</target>
+      <text size="24" background="0xFFFFFF" bold="false" italic="true" family="Times New Roman"> i la carta de </text>
+      <target>sol·licitud,</target>
+      <text size="24" background="0xFFFFFF" bold="false" italic="true" family="Times New Roman"> entre d’altres. De tot això, te’n parlarem.</text>
+     </p>
+    </section>
+   </document>
+   <evaluator class="@BasicEvaluator" checkAccents="false" checkPunctuation="false" />
+  </activity>
+  <activity class="@panels.InformationScreen" name="comiat" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style>
+      <font family="Arial" size="18" bold="true" />
+      <color background="0xFFFFFF" />
+     </style>
+     <p>Fins una altra, si vols. Clica per tancar el programa.</p>
+    </cell>
+   </messages>
+   <settings margin="4" report="false">
+    <container bgColor="0x9BFF69">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0xFF6600" transparent="true" border="true" />
+    <eventSounds>
+     <sound id="start" file="sintonia_inicial.mp3" />
+     <sound id="click" enabled="false" />
+     <sound id="actionError" enabled="false" />
+     <sound id="actionOk" enabled="false" />
+     <sound id="finishedError" enabled="false" />
+     <sound id="finishedOk" enabled="false" />
+    </eventSounds>
+   </settings>
+   <cells rows="1" cols="1" border="true" image="portada_orienta't.gif">
     <style>
      <font family="Arial" size="17" bold="true" />
      <color background="0xFFFFFF" />
     </style>
-    <shaper class="@Rectangular" cols="3" rows="2" />
-    <cell image="pastagana2.JPG" />
-    <cell image="maiz1.jpg" />
-    <cell image="hierba.1.JPG" />
-    <cell image="maiz.jpg" />
-    <cell image="hierba.2.JPG" />
-    <cell image="pastanaga.1.JPG" />
+    <shaper class="@Rectangular" cols="1" rows="1" />
+    <cell>
+     <media type="EXIT" level="1" />
+    </cell>
    </cells>
-   <scramble times="31" />
-   <layout position="AB" />
   </activity>
-  <activity class="@text.FillInBlanks" name="OMPLIR FORATS" code="">
+  <activity class="@associations.ComplexAssociation" name="entorns de treball (I)" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style>
+      <font family="Arial" size="17" bold="true" />
+      <color background="0xFFFFFF" />
+     </style>
+     <p>Relaciona els grups de professions de la fila de sobre amb les feines de la fila des sota.</p>
+    </cell>
+   </messages>
+   <settings margin="4" report="true" reportActions="false">
+    <container bgColor="0x9BFF69">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0xFF6600" transparent="true" border="true" />
+   </settings>
+   <cells rows="1" cols="7" cellWidth="150.0" cellHeight="270.0" border="true" id="primary">
+    <style margin="0" borderStroke="0.7" markerStroke="5.0">
+     <font family="Arial" size="18" bold="true" />
+     <color foreground="0x4BE01F" background="0xFFFFFF" />
+    </style>
+    <shaper class="@Rectangular" cols="7" rows="1" />
+    <cell id="0" txtAlign="middle,top">
+     <p>Professions manipulatives: relacionades amb l'obtenció de productes en petites quantitats usant tècniques i màquines senzilles.</p>
+    </cell>
+    <cell id="1" txtAlign="middle,top">
+     <p>Alimentària, agropequari, de pesca i de mineria: feines relacionades amb el camp, la ramaderia, la pesca i la mineria</p>
+    </cell>
+    <cell id="2" txtAlign="middle,top">
+     <p>Transport: professions relacionades amb els transports terrestres, marítims o aeris.</p>
+    </cell>
+    <cell id="3" txtAlign="middle,top">
+     <p>Cossos de seguretat i serveis de protecció: professions que tenen com a funcions primordials la protecció de les persones o els béns, la defensa del territori, el manteniment de l'ordre públic, la prevenció i la investigació de conductes delictives.</p>
+    </cell>
+    <cell id="4" txtAlign="middle,top">
+     <p>Administratiu: professions relacionades amb les tasques administratives en empreses.</p>
+    </cell>
+    <cell id="5" txtAlign="middle,top">
+     <p>Comercial (economia i negocis): Professions relacionades amb el món del comerç, les vendes, els negocis i la vida empresarial.</p>
+    </cell>
+    <cell id="6" txtAlign="middle,top">
+     <p>Serveis socials: Feines relacionades amb l'atenció en els camps de la salut mental, vellesa, infància, atenció primària, disminució, exclusió social, immigració, drogodependències, etc.</p>
+    </cell>
+   </cells>
+   <cells rows="1" cols="7" cellWidth="150.0" cellHeight="338.0" border="true" id="secondary">
+    <style margin="0" borderStroke="0.7" markerStroke="5.0">
+     <font family="Arial" size="18" bold="true" />
+     <color foreground="0x5BD336" background="0xFFFFFF" />
+    </style>
+    <shaper class="@Rectangular" cols="7" rows="1" />
+    <cell txtAlign="middle,top">
+     <p>fuster, vidrier, modista, tapisser, paleta, enguixador, enquadernador, tècnic en tractament d'imatges, escanista, corrector tipogràfic, etc.</p>
+    </cell>
+    <cell txtAlign="middle,top">
+     <p>agricultor, ramader, horticultor, jardiner, miner, pescador, agent forestal, piscicultor, aqüicultor, controlador de qualitat, auxiliar de clínica veterinària, etc.</p>
+    </cell>
+    <cell txtAlign="middle,top">
+     <p>conductor de transport públic (autobús, tren, metro...), capità de vaixell mercant, oficial de vaixell de viatgers, patró de pesca costanera, pilot (civil, comercial...), inspector de transport de viatgers, controlador aeri, etc.</p>
+    </cell>
+    <cell txtAlign="middle,top">
+     <p>mosso d'equadra, bomber, policia, local, criminòleg, guarda jurat, guardaespatlles, vigilant, oficial o suboficial de les forces armades, etc.</p>
+    </cell>
+    <cell txtAlign="middle,top">
+     <p>administratiu (institucions financeres, comercial, d'assegurances...), telefonista, recepcionista, auxiliar de documentació i arxiu, gestor administratiu, secretari, etc.</p>
+    </cell>
+    <cell txtAlign="middle,top">
+     <p>assessor d'inversions, agent d'assegurances, tècnic de màrqueting, relacions públiques, representant comercial, comerciant, assessor d'imatge, agent de canvi i borsa, economista, etc.</p>
+    </cell>
+    <cell txtAlign="middle,top">
+     <p>integrador social, mediador cultural, animador comunitari, educador infantil, treballador familiar, treballador social, educador social, psicòleg, auxiliar en geriatria, etc.</p>
+    </cell>
+   </cells>
+   <scramble times="31" primary="true" secondary="true" />
+   <layout position="AUB" />
+  </activity>
+  <activity class="@associations.ComplexAssociation" name="entrevista (I)" code="">
    <description />
    <messages>
     <cell type="initial">
      <style>
       <font family="Arial" size="18" bold="true" />
-      <color background="0xCCFFCC" />
+      <color background="0xFFFFFF" />
      </style>
-     <media type="PLAY_AUDIO" level="1" file="OMPLIR1.wav" />
-     <p>FIXA'T AMB LA IMATGE I ESCRIU EL QUE ÉS.</p>
-    </cell>
-    <cell type="final">
-     <style>
-      <font family="Arial" size="18" bold="true" />
-      <color background="0xCCFFCC" />
-     </style>
-     <media type="PLAY_AUDIO" level="1" file="OMPLIR2.wav" />
-     <p>MOLT BÉ!!    HO HAS FET MOLT BÉ!!</p>
+     <p>El que cal fer en una entrevista de treball, i el que no.</p>
     </cell>
    </messages>
-   <settings margin="8" report="true" reportActions="false">
-    <container bgColor="0xC0C0C0">
-     <gradient source="0x009933" dest="0xFFFFFF" angle="43" cycles="3" />
+   <settings margin="4" report="true" reportActions="false">
+    <container bgColor="0x9BFF69">
      <counters time="true" actions="true" score="true" />
     </container>
-    <window bgColor="0xCCFFCC" border="true">
-     <size width="780" height="300" />
+    <window bgColor="0xFF9800" transparent="true" border="true" />
+    <eventSounds>
+     <sound id="actionError" file="moc.mp3" />
+     <sound id="actionOk" file="aplaudiment_5s.mp3" />
+    </eventSounds>
+   </settings>
+   <cells rows="1" cols="5" cellWidth="150.0" cellHeight="250.0" border="true" id="primary">
+    <style>
+     <font family="Arial" size="18" />
+     <color background="0x9BFF69" />
+    </style>
+    <shaper class="@Rectangular" cols="5" rows="1" />
+    <cell id="1">
+     <p>Preparar les respostes i la forma d'expressar-les, evitar els monsíl·labs, el vocabulari massa col·loquial o massa rebuscat.</p>
+    </cell>
+    <cell id="0">
+     <p>Utilitzar una llengua diferent de la persona entrevistadora.</p>
+    </cell>
+    <cell id="0">
+     <p>Tutejar l'entrevistador/a</p>
+    </cell>
+    <cell id="0">
+     <p>Menjar xiclet, si ens engrada molt i ens fa passar els nervis.</p>
+    </cell>
+    <cell id="1">
+     <p>Arribar amb antelació suficient per tranquil·litzar-nos abans d'inicar l'entrevista.</p>
+    </cell>
+   </cells>
+   <cells rows="1" cols="2" cellWidth="375.0" cellHeight="100.0" border="true" id="secondary">
+    <style>
+     <font family="Arial" size="18" bold="true" />
+     <color background="0x9BFF69" />
+    </style>
+    <shaper class="@Rectangular" cols="2" rows="1" />
+    <cell imgAlign="left,middle" image="incorrecte.png">
+     <p>És millor no fer-ho</p>
+    </cell>
+    <cell imgAlign="right,middle" image="correcte.png">
+     <p>Convé fer-ho.</p>
+    </cell>
+   </cells>
+   <scramble times="31" primary="false" secondary="true" />
+   <layout position="AUB" />
+  </activity>
+  <activity class="@text.FillInBlanks" name="entrevista-roba" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style borderStroke="0.7" markerStroke="5.0">
+      <font family="Arial" size="18" bold="true" />
+      <color background="0xFFFFFF" />
+     </style>
+     <p>Escriu les paraules adients després d'esborrar les pistes</p>
+    </cell>
+   </messages>
+   <settings margin="4" report="true" reportActions="false">
+    <container bgColor="0x9AFF69">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0xFF6600" transparent="true" border="true">
+     <size width="700" height="575" />
     </window>
    </settings>
    <document>
-    <style name="default" italic="false" bold="false" tabWidth="12" size="16" background="0xFFFFFF" family="Arial" />
+    <style name="default" size="24" bold="true" background="0xFFFFFF" tabWidth="12" italic="false" family="Times New Roman" />
     <style name="target" base="default" foreground="0x0000FF" target="true" />
     <style name="targetError" base="target" foreground="0xFF0000" />
     <section>
      <p background="0xFFFFFF" family="Arial">
-      <text background="0xFFFFFF" family="Arial"> </text>
+      <text size="24" bold="true" background="0xFFFFFF" family="Arial">L'entrevista és un pas més, i sovint l'</text>
+      <target>
+       <answer>últim</answer>
+       <response fill="." length="5" maxLength="5" show="darrer" />
+       <text>últim</text>
+      </target>
+      <text size="24" bold="true" background="0xFFFFFF" family="Arial"> i més important, dins d'un procés de selecció. És un diàleg amb preguntes i </text>
+      <target>
+       <answer>respostes</answer>
+       <response fill="." length="9" maxLength="9" show="tots en cerquem" />
+       <text>respostes</text>
+      </target>
+      <text size="24" bold="true" background="0xFFFFFF" family="Arial"> sobre temes professionals, formatius i personals, en el qual tant la persona </text>
+      <target>
+       <answer>entrevistadora</answer>
+       <response fill="." length="14" maxLength="14" show="dona que entrevista" />
+       <text>entrevistadora</text>
+      </target>
+      <text size="24" bold="true" background="0xFFFFFF" family="Arial"> com l'entrevistada intenten resoldre els seus dubtes.</text>
      </p>
      <p background="0xFFFFFF" family="Arial" />
      <p background="0xFFFFFF" family="Arial">
-      <text background="0xFFFFFF" family="Arial">     </text>
-      <cell width="150" height="150" image="pastanaga.1.JPG" />
-      <text background="0xFFFFFF" family="Arial">      	</text>
-      <cell width="150" height="150" image="conillet.jpg" />
-      <text background="0xFFFFFF" family="Arial">           	</text>
-      <cell width="150" height="150" image="ORELLES.jpg" />
+      <text size="24" bold="true" background="0xFFFFFF" family="Arial">Durant l'</text>
+      <target>
+       <answer>entrevista</answer>
+       <response fill="_" length="10" maxLength="10" show="d'allò que parla aquest text" />
+       <text>entrevista</text>
+      </target>
+      <text size="24" bold="true" background="0xFFFFFF" family="Arial"> heu de tenir en compte les coses que es diuen verbalment sense oblidar els detalls que es transmeten amb l'actitud i la forma de comportar-vos.</text>
      </p>
      <p background="0xFFFFFF" family="Arial" />
-     <p background="0xFFFFFF" family="Arial" />
-     <p background="0xFFFFFF" family="Arial" />
      <p background="0xFFFFFF" family="Arial">
-      <text size="24" background="0xFFFFFF" family="Arial">   </text>
-      <text size="18" background="0xFFFFFF" family="Arial">	</text>
-      <text size="16" background="0xFFFFFF" family="Arial">P</text>
+      <text size="24" bold="true" background="0xFFFFFF" family="Arial">Cal portar la </text>
       <target>
-       <answer>ASTANAGA</answer>
-       <response fill="_" length="8" maxLength="8" />
-       <text>ASTANAGA</text>
+       <answer>roba</answer>
+       <response fill="_" length="4" maxLength="4" show="a l'hivern en portem més" />
+       <text>roba</text>
       </target>
-      <text size="16" background="0xFFFFFF" family="Arial">       		           C</text>
+      <text size="24" bold="true" background="0xFFFFFF" family="Arial"> adequada al lloc de treball al qual s'opta. No és el mateix el </text>
       <target>
-       <answer>ONILL</answer>
-       <response fill="_" length="5" maxLength="5" />
-       <text>ONILL</text>
+       <answer>vestit</answer>
+       <response fill="." length="6" maxLength="6" show="roba que es veu" />
+       <text>vestit</text>
       </target>
-      <text size="18" background="0xFFFFFF" family="Arial">	      	</text>
-      <text background="0xFFFFFF" family="Arial">	         O</text>
+      <text size="24" bold="true" background="0xFFFFFF" family="Arial"> que la persona candidata ha de portar per ocupar un lloc de treball de dependent/a en una botiga d'alta costura, que el que ha de portar de dependent/a en una botiga del mercat. Però no sols cal que la </text>
       <target>
-       <answer>RELLES</answer>
-       <response fill="_" length="6" maxLength="6" />
-       <text>RELLES</text>
+       <answer>roba</answer>
+       <response fill="." length="4" maxLength="4" show="allo amb què ens vestim" />
+       <text>roba</text>
       </target>
+      <text size="24" bold="true" background="0xFFFFFF" family="Arial"> sigui l'adient, cal que estigui </text>
+      <target>
+       <answer>neta</answer>
+       <response fill="." length="8" maxLength="4" show="bruta no" />
+       <text>neta</text>
+      </target>
+      <text size="24" bold="true" background="0xFFFFFF" family="Arial"> i que no hi hagi estrips.</text>
      </p>
     </section>
    </document>
    <evaluator class="@ComplexEvaluator" />
   </activity>
-  <activity class="@puzzles.ExchangePuzzle" name="ORDENA" code="">
+  <activity class="@puzzles.ExchangePuzzle" name="esquema sistema educatiu" code="">
    <description />
    <messages>
     <cell type="initial">
-     <style>
+     <style borderStroke="0.7" markerStroke="5.0">
       <font family="Arial" size="18" bold="true" />
-      <color background="0xFFCCCC" />
+      <color background="0xFFFFFF" />
      </style>
-     <media type="PLAY_AUDIO" level="1" file="ORDENA1.WAV" />
-     <p>ORDENA LA PARAULA CONILL.</p>
+     <p>Reordena l'esquema del sistema educatiu</p>
     </cell>
     <cell type="final">
      <style>
       <font family="Arial" size="18" bold="true" />
-      <color background="0xFFCCCC" />
+      <color foreground="0x241F1A" background="0xFFFFFF" />
      </style>
-     <media type="PLAY_AUDIO" level="1" file="ORDENA2.WAV" />
-     <p>MOLT BÉ!!     C - O - N - I - L - L</p>
+     <p>Ho has aconseguit, felicitats!</p>
+    </cell>
+    <cell type="finalError">
+     <style>
+      <font family="Arial" size="18" bold="true" />
+      <color background="0xFFFFFF" />
+     </style>
+     <p>S'ha acabat el temps</p>
     </cell>
    </messages>
-   <settings margin="8" dragCells="true" report="true" reportActions="false">
-    <container bgColor="0xC0C0C0">
-     <gradient source="0xFF9900" dest="0xFFFFFF" angle="77" />
-     <counters time="true" actions="true" score="true" />
+   <settings margin="4" dragCells="true" maxTime="60" countDownTime="true" report="true" reportActions="false">
+    <helpWindow showSolution="true" />
+    <container bgColor="0x9BFF69">
+     <counters time="true" actions="false" score="true" />
     </container>
-    <window bgColor="0xFFFFCC" border="true" />
+    <window bgColor="0xFF6633" transparent="true" border="true" />
    </settings>
-   <cells rows="1" cols="6" cellWidth="109.0" cellHeight="121.0" border="true">
+   <cells rows="3" cols="4" border="false" image="organigrama_sistema educatiu_600x450.gif">
     <style borderStroke="0.7" markerStroke="5.0">
-     <font family="Arial" size="48" bold="true" />
-     <color background="0xFFCC99" />
+     <color background="0xFFFFFF" />
     </style>
-    <shaper class="@Rectangular" cols="6" rows="1" />
-    <cell>
-     <p>C</p>
-    </cell>
-    <cell>
-     <p>O</p>
-    </cell>
-    <cell>
-     <p>N</p>
-    </cell>
-    <cell>
-     <p>I</p>
-    </cell>
-    <cell>
-     <p>L</p>
-    </cell>
-    <cell>
-     <p>L</p>
-    </cell>
+    <shaper class="@Rectangular" cols="4" rows="3" />
    </cells>
    <scramble times="31" />
   </activity>
-  <activity class="@puzzles.DoublePuzzle" name="PUZZLE 1" code="">
+  <activity class="@panels.Explore" name="famílies professionals" code="">
    <description />
    <messages>
     <cell type="initial">
      <style>
       <font family="Arial" size="18" bold="true" />
-      <color background="0xFFCCCC" />
+      <color background="0xFFFFFF" />
      </style>
-     <media type="PLAY_AUDIO" level="1" file="P2.wav" />
-     <p>QUIN ANIMAL S'AMAGA?</p>
-    </cell>
-    <cell type="final">
-     <style>
-      <font family="Arial" size="18" bold="true" />
-      <color background="0xFFCCCC" />
-     </style>
-     <media type="PLAY_AUDIO" level="1" file="P1.wav" />
-     <p>MOLT BÉ!!   ÉS UN CONILL</p>
+     <p>Clica a cada família professional per veure el cicles de grau mitjà (CFGM) i els cicles de grau superior (CFGS) que inclou.</p>
     </cell>
    </messages>
-   <settings margin="8" dragCells="true" report="true" reportActions="false">
-    <container bgColor="0xC0C0C0">
-     <gradient source="0xFF9900" dest="0xFFFFFF" angle="77" />
-     <counters time="true" actions="true" score="true" />
+   <settings margin="8" report="false">
+    <container bgColor="0x9AFF69">
+     <counters time="false" actions="false" score="false" />
     </container>
-    <window bgColor="0xFFFF99" border="true" />
+    <window bgColor="0xFF6600" transparent="true" border="true" />
    </settings>
-   <cells rows="3" cols="3" border="true" image="gran3.jpg">
-    <style />
-    <shaper class="@Rectangular" cols="3" rows="3" />
-   </cells>
-   <scramble times="31" />
-   <layout position="AB" />
-  </activity>
-  <activity class="@puzzles.DoublePuzzle" name="PUZZLE2" code="">
-   <description />
-   <messages>
-    <cell type="initial">
-     <style borderStroke="0.7" markerStroke="2.7">
-      <font family="Arial" size="18" bold="true" />
-      <color background="0xFFCCCC" />
-     </style>
-     <media type="PLAY_AUDIO" level="1" file="PUZZLE2.wav" />
-     <p>FES EL PUZZLE I SABRÀS EL QUE MENJA UN CONILL.</p>
-    </cell>
-    <cell type="final">
-     <style>
-      <font family="Arial" size="18" bold="true" />
-      <color background="0xFFCCCC" />
-     </style>
-     <media type="PLAY_AUDIO" level="1" file="PUZZLE2'.wav" />
-     <p>MOLT BÉ! EL CONILL MENJA PASTANAGA.</p>
-    </cell>
-   </messages>
-   <settings margin="8" dragCells="true" report="true" reportActions="false">
-    <container bgColor="0xFF9933">
-     <gradient source="0xFF9900" dest="0xFFFFFF" angle="77" />
-     <counters time="true" actions="true" score="true" />
-    </container>
-    <window bgColor="0xFFFFCC" border="true" />
-   </settings>
-   <cells rows="2" cols="3" border="true" image="pastagana2.JPG">
-    <style borderStroke="1.5" markerStroke="2.7" />
-    <shaper class="@ClassicJigSaw" cols="3" rows="2" baseWidthFactor="0.76" toothHeightFactor="0.493" />
-   </cells>
-   <scramble times="31" />
-   <layout position="AB" />
-  </activity>
-  <activity class="@associations.SimpleAssociation" name="RELACIONA" code="">
-   <description />
-   <messages>
-    <cell type="initial">
-     <style>
-      <font family="Arial" size="18" bold="true" />
-      <gradient source="0xCCFFCC" dest="0xFFFFFF" angle="0" />
-     </style>
-     <media type="PLAY_AUDIO" level="1" file="QQ.wav" />
-     <p>QUANTS CONILLS HI HA?    RELACIONA-HO AMB EL SEU NOMBRE.</p>
-    </cell>
-    <cell type="final">
-     <style>
-      <font family="Arial" size="18" bold="true" />
-      <gradient source="0xCCFFCC" dest="0xFFFFFF" angle="0" />
-     </style>
-     <media type="PLAY_AUDIO" level="1" file="Q1.wav" />
-     <p>MOLT BÉ!!  CORRECTE!!</p>
-    </cell>
-   </messages>
-   <settings margin="8" report="true" reportActions="false">
-    <container bgColor="0xC0C0C0">
-     <gradient source="0x999900" dest="0xFFFFFF" angle="91" cycles="2" />
-     <counters time="true" actions="true" score="true" />
-    </container>
-    <window bgColor="0xFFFFCC" border="true" />
-   </settings>
-   <cells rows="1" cols="6" cellWidth="107.0" cellHeight="98.0" border="true" id="primary">
+   <cells rows="4" cols="7" cellWidth="140.0" cellHeight="120.0" border="true" id="primary">
     <style borderStroke="0.7" markerStroke="5.0">
-     <color background="0xFFFFCC" />
+     <font family="Arial" size="20" bold="true" />
+     <color background="0x9AFF69" />
     </style>
-    <shaper class="@Rectangular" cols="6" rows="1" />
-    <cell image="4CONILLS..jpg">
-     <style borderStroke="0.7" markerStroke="5.0">
-      <color background="0xFFFFFF" />
-     </style>
+    <shaper class="@Rectangular" cols="7" rows="4" />
+    <cell id="0">
+     <p>Acitivitats físiques i esportives</p>
     </cell>
-    <cell image="5CONILLS.jpg">
-     <style borderStroke="0.7" markerStroke="5.0">
-      <color background="0xFFFFFF" />
-     </style>
+    <cell id="1">
+     <p>Administració i gestió</p>
     </cell>
-    <cell image="6CONILLS.jpg">
-     <style borderStroke="0.7" markerStroke="5.0">
-      <color background="0xFFFFFF" />
-     </style>
+    <cell id="2">
+     <p>Agrària</p>
     </cell>
-    <cell image="7CONILLS.jpg" />
-    <cell image="8CONILLS.jpg">
-     <style borderStroke="0.7" markerStroke="5.0">
-      <color background="0xFFFFFF" />
-     </style>
+    <cell id="3">
+     <p>Arts i artesanies</p>
     </cell>
-    <cell image="9CONILLS.jpg">
-     <style borderStroke="0.7" markerStroke="5.0">
-      <color background="0xFFFFFF" />
-     </style>
+    <cell id="4">
+     <p>Arts gràfiques</p>
+    </cell>
+    <cell id="5">
+     <p>Comerç i màrqueting</p>
+    </cell>
+    <cell id="6">
+     <p>Edificació i obra civil</p>
+    </cell>
+    <cell id="7">
+     <p>Electricitat i electrònica</p>
+    </cell>
+    <cell id="8">
+     <p>Energia i aigua</p>
+    </cell>
+    <cell id="9">
+     <p>Fabricació mecànica</p>
+    </cell>
+    <cell id="10">
+     <p>Fusta, moble i suro</p>
+    </cell>
+    <cell id="11">
+     <p>Hoteleria i turisme</p>
+    </cell>
+    <cell id="12">
+     <p>Imatge i so</p>
+    </cell>
+    <cell id="13">
+     <p>Imatge personal</p>
+    </cell>
+    <cell id="14">
+     <p>Indústries alimetàries</p>
+    </cell>
+    <cell>
+     <p>Indústries extractives</p>
+    </cell>
+    <cell id="16">
+     <p>Informàtica i comunicacions</p>
+    </cell>
+    <cell id="17">
+     <p>Instal·lació i manteniment</p>
+    </cell>
+    <cell>
+     <p>Marítimo-pesquera</p>
+    </cell>
+    <cell id="19">
+     <p>Química</p>
+    </cell>
+    <cell id="20">
+     <p>Sanitat</p>
+    </cell>
+    <cell id="21">
+     <p>Seguretat i medi ambient</p>
+    </cell>
+    <cell id="22">
+     <p>Serveis socioculturals i a la comuntat</p>
+    </cell>
+    <cell id="23">
+     <p>Tèxtil, confecció i pell</p>
+    </cell>
+    <cell id="24">
+     <p>Transport i manteniment de vehicles</p>
+    </cell>
+    <cell id="25">
+     <p>Vidre i ceràmica</p>
+    </cell>
+    <cell border="false">
+     <style transparent="true" borderStroke="0.7" markerStroke="5.0" />
+    </cell>
+    <cell border="false">
+     <style transparent="true" borderStroke="0.7" markerStroke="5.0" />
     </cell>
    </cells>
-   <cells rows="1" cols="6" cellWidth="62.0" cellHeight="56.0" border="true" id="secondary">
+   <cells rows="4" cols="7" cellWidth="120.0" cellHeight="200.0" border="true" id="secondary">
     <style>
-     <font family="Arial" size="17" bold="true" />
-     <color background="0xCCFFCC" />
+     <font family="Arial" size="24" italic="true" />
+     <color background="0xFFFFFF" />
     </style>
-    <shaper class="@Rectangular" cols="6" rows="1" />
+    <shaper class="@Rectangular" cols="7" rows="4" />
     <cell>
-     <p>4</p>
+     <style>
+      <color foreground="0x999999" background="0xFFFFFF" />
+     </style>
+     <p>[informació no disponible]</p>
     </cell>
     <cell>
-     <p>5</p>
+     <style>
+      <font family="Arial" size="17" bold="true" italic="true" />
+      <color foreground="0x999999" background="0xFFFFFF" />
+     </style>
+     <p>[informació no disponible]</p>
     </cell>
     <cell>
-     <p>6</p>
+     <style>
+      <color foreground="0x999999" background="0xFFFFFF" />
+     </style>
+     <p>[informació no disponible]</p>
     </cell>
     <cell>
-     <p>7</p>
+     <style>
+      <font family="Arial" size="17" bold="true" italic="true" />
+      <color foreground="0x999999" background="0xFFFFFF" />
+     </style>
+     <p>[informació no disponible]</p>
     </cell>
     <cell>
-     <p>8</p>
+     <style>
+      <color foreground="0x999999" background="0xFFFFFF" />
+     </style>
+     <p>[informació no disponible]</p>
     </cell>
     <cell>
-     <p>9</p>
+     <style>
+      <font family="Arial" size="17" bold="true" italic="true" />
+      <color foreground="0x999999" background="0xFFFFFF" />
+     </style>
+     <p>[informació no disponible]</p>
     </cell>
+    <cell>
+     <style>
+      <color foreground="0x999999" background="0xFFFFFF" />
+     </style>
+     <p>[informació no disponible]</p>
+    </cell>
+    <cell>
+     <p>CFGM Instal·lacions elèctriques i automàtiques</p>
+    </cell>
+    <cell>
+     <p>CFGS Eficiència energètica i energia solar</p>
+    </cell>
+    <cell>
+     <p>CFGM Mecanització   |   CFGM Soldadura i caldereria   |   CFGS Construccions metàl·liques   |   CFGS Programació de la producció en fabricació mecànica </p>
+    </cell>
+    <cell>
+     <style>
+      <color foreground="0x999999" background="0xFFFFFF" />
+     </style>
+     <p>[informació no disponible]</p>
+    </cell>
+    <cell>
+     <p>CFGM Cuina i Gastronomia   |   CFGM Serveis de restauració   |   CFGS Gestió d'allotjaments turístics</p>
+    </cell>
+    <cell>
+     <style>
+      <color foreground="0x999999" background="0xFFFFFF" />
+     </style>
+     <p>[informació no disponible]</p>
+    </cell>
+    <cell>
+     <style>
+      <font family="Arial" size="17" bold="true" italic="true" />
+      <color foreground="0x999999" background="0xFFFFFF" />
+     </style>
+     <p>[informació no disponible]</p>
+    </cell>
+    <cell>
+     <p>CFGM Forneria, pastisseria i confiteria   |   CFGM Olis d'oliva  i vins   |   CFGS Vitivinicultura</p>
+    </cell>
+    <cell>
+     <style>
+      <font family="Arial" size="17" bold="true" italic="true" />
+      <color foreground="0x999999" background="0xFFFFFF" />
+     </style>
+     <p>[informació no disponible]</p>
+    </cell>
+    <cell>
+     <p>CFGM Sistemes microinformàtics i xarxes</p>
+    </cell>
+    <cell>
+     <p>CFGS Desenvolupament de projectes d'instal.lacions tèrmiques i de fluids   |   CFGS Manteniment d'instal·lacions tèrmiques i de fluids</p>
+    </cell>
+    <cell>
+     <style>
+      <font family="Arial" size="17" bold="true" italic="true" />
+      <color foreground="0x999999" background="0xFFFFFF" />
+     </style>
+     <p>[informació no disponible]</p>
+    </cell>
+    <cell>
+     <p>CFGM Planta Química   |   CFGS Laboratori d'anàlisi i de control de qualitat   |   CFGS Química industrial</p>
+    </cell>
+    <cell>
+     <p>CFGM Emergències sanitàries   |   CFGM Farmàcia i parafarmàcia   |   CFGS Audiologia protètica</p>
+    </cell>
+    <cell>
+     <style>
+      <color foreground="0x999999" background="0xFFFFFF" />
+     </style>
+     <p>[informació no disponible]</p>
+    </cell>
+    <cell>
+     <style>
+      <font family="Arial" size="17" bold="true" italic="true" />
+      <color foreground="0x999999" background="0xFFFFFF" />
+     </style>
+     <p>[informació no disponible]</p>
+    </cell>
+    <cell>
+     <p>CFGM Confecció i Moda   |   CFGS Patronatge i Moda</p>
+    </cell>
+    <cell>
+     <p>CFGM Carrosseria   |   CFGS Automoció</p>
+    </cell>
+    <cell>
+     <style>
+      <color foreground="0x999999" background="0xFFFFFF" />
+     </style>
+     <p>[informació no disponible]</p>
+    </cell>
+    <cell />
+    <cell />
    </cells>
-   <cells rows="1" cols="6" cellWidth="50.0" cellHeight="30.0" border="true" id="solvedPrimary">
-    <style />
-    <shaper class="@Rectangular" cols="6" rows="1" />
-    <cell>
-     <media type="PLAY_AUDIO" level="1" file="4.wav" />
-     <p>4 CONILLS</p>
-    </cell>
-    <cell>
-     <media type="PLAY_AUDIO" level="1" file="5.wav" />
-     <p>5 CONILLS</p>
-    </cell>
-    <cell>
-     <style borderStroke="0.7" markerStroke="5.0">
-      <color background="0xFFFFCC" />
-     </style>
-     <media type="PLAY_AUDIO" level="1" file="6.wav" />
-     <p>6 CONILLS</p>
-    </cell>
-    <cell>
-     <style borderStroke="0.7" markerStroke="5.0">
-      <color background="0xFFFFCC" />
-     </style>
-     <media type="PLAY_AUDIO" level="1" file="7.wav" />
-     <p>7 CONILLS</p>
-    </cell>
-    <cell>
-     <style borderStroke="0.7" markerStroke="5.0">
-      <color background="0xFFFFCC" />
-     </style>
-     <media type="PLAY_AUDIO" level="1" file="8.wav" />
-     <p>8 CONILLS</p>
-    </cell>
-    <cell>
-     <style borderStroke="0.7" markerStroke="5.0">
-      <color background="0xFFFFCC" />
-     </style>
-     <media type="PLAY_AUDIO" level="1" file="9.wav" />
-     <p>9 CONILLS</p>
-    </cell>
-   </cells>
-   <scramble times="31" primary="true" secondary="true" />
+   <scramble times="31" primary="false" />
    <layout position="AUB" />
   </activity>
-  <activity class="@textGrid.WordSearch" name="SOPA DE LLETRES" code="">
+  <activity class="@text.Order" name="instància" code="" type="orderParagraphs">
    <description />
    <messages>
+    <cell type="previous">
+     <style />
+    </cell>
     <cell type="initial">
      <style>
       <font family="Arial" size="18" bold="true" />
-      <gradient source="0x99FFCC" dest="0xFFFFFF" angle="87" cycles="2" />
+      <color background="0xFFFFFF" />
      </style>
-     <media type="PLAY_AUDIO" level="1" file="SOPA.wav" />
-     <p>BUSCA EN LA SOPA DE LLETRES LES PARTS D'UN CONILL.</p>
+     <p>Reordena aquest text per tal que sigui una instància correctament redactada</p>
     </cell>
-    <cell type="final">
-     <style>
+   </messages>
+   <settings margin="4" report="true" reportActions="false">
+    <container bgColor="0x9AFF69">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0xFF6600" transparent="true" border="true">
+     <size width="600" height="600" />
+    </window>
+   </settings>
+   <checkButton>Avaluació</checkButton>
+   <prevScreen />
+   <document>
+    <style name="default" size="18" bold="true" background="0xFFFFFF" tabWidth="12" italic="false" family="Times New Roman" />
+    <style name="target" base="default" foreground="0x0000FF" target="true" />
+    <style name="targetError" base="target" foreground="0xFF0000" />
+    <section>
+     <p background="0xFFFFFF" family="Arial">
+      <target>Sant Andreu de Llavaneres, 1 de desembre de 2009</target>
+     </p>
+     <p background="0xFFFFFF" family="Arial" />
+     <p background="0xFFFFFF" family="Arial">
+      <target>EXPOSO:</target>
+     </p>
+     <p background="0xFFFFFF" family="Arial" />
+     <p background="0xFFFFFF" family="Arial">
+      <target>Que em sigui expedida aquesta certificació</target>
+     </p>
+     <p background="0xFFFFFF" family="Arial" />
+     <p background="0xFFFFFF" family="Arial">
+      <target>Pere Andreu Llavaneres, natural de Sant Andreu de Llavaneres, nascut el 15 de febrer de - - - - amb DNI núm. 11.111.111, que visc a Sant Andreu de Llavaneres (Maresme), Passeig del Perelló , 2, telèfon 937926994.</target>
+     </p>
+     <p background="0xFFFFFF" family="Arial" />
+     <p background="0xFFFFFF" family="Arial">
+      <target>SR. DIRECTOR DE L’IES “LLAVANERES” DE SANT ANDREU DE LLAVANERES</target>
+     </p>
+     <p background="0xFFFFFF" family="Arial" />
+     <p background="0xFFFFFF" family="Arial">
+      <target>Que he de sol·licitar una beca del Gremi de Flequers per assistir a un curs de formació en noves tècniques de cocció del pa i que, entre la documentació requerida, hi ha la certificació de notes de Batxillerat</target>
+     </p>
+     <p background="0xFFFFFF" family="Arial" />
+     <p background="0xFFFFFF" family="Arial">
+      <target>(Signatura)</target>
+     </p>
+     <p background="0xFFFFFF" family="Arial" />
+     <p background="0xFFFFFF" family="Arial">
+      <target>DEMANO:</target>
+     </p>
+     <p background="0xFFFFFF" family="Arial" />
+     <p background="0xFFFFFF" family="Arial">
+      <target>Senyor, </target>
+     </p>
+     <p background="0xFFFFFF" family="Arial" />
+     <p background="0xFFFFFF" family="Arial" />
+    </section>
+   </document>
+   <evaluator class="@BasicEvaluator" />
+  </activity>
+  <activity class="@text.FillInBlanks" name="intro/extra/est/inest" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style borderStroke="0.7" markerStroke="5.0">
       <font family="Arial" size="18" bold="true" />
-      <gradient source="0x99FFCC" dest="0xFFFFFF" angle="87" cycles="2" />
+      <color background="0xFFFFFF" />
      </style>
-     <media type="PLAY_AUDIO" level="1" file="Q1.wav" />
-     <p>MOLT BÉ!!!  CORRECTE!!!</p>
+     <p>Completa el text amb les opcions del desplegable</p>
     </cell>
    </messages>
    <settings margin="8" report="true" reportActions="false">
-    <container bgColor="0xC0C0C0">
-     <gradient source="0x006633" dest="0xCCFFCC" angle="77" />
+    <container bgColor="0x9AFF69">
      <counters time="true" actions="true" score="true" />
     </container>
-    <window bgColor="0x33CC00" border="true" />
+    <window bgColor="0xFF6600" transparent="true" border="true">
+     <size width="650" height="459" />
+    </window>
    </settings>
-   <textGrid rows="7" columns="7" cellWidth="49.0" cellHeight="44.0" border="true">
-    <style>
-     <color background="0xFFFFFF" />
+   <document>
+    <style name="default" size="20" bold="true" background="0x97FF63" tabWidth="12" italic="false" family="Times New Roman" />
+    <style name="target" base="default" background="0xFFFFFF" foreground="0x0000FF" target="true" />
+    <style name="targetError" base="target" foreground="0xFF0000" />
+    <section>
+     <p background="0xFFFFFF" family="Arial">
+      <text size="20" background="0x97FF63" family="Times New Roman">* Una persona </text>
+      <target>
+       <answer>introvertida</answer>
+       <optionList>
+        <option>inestable</option>
+        <option>introvertida</option>
+        <option>estable</option>
+        <option>extravertida</option>
+       </optionList>
+       <text>introvertida</text>
+      </target>
+      <text size="20" background="0x97FF63" family="Times New Roman"> és tranquil·la i retreta, més amiga de llibres que de persones. Reservada. Previsora. No molt amiga de la diversió. Ordenada. Li costa enfadar-se. Es pot confiar en ella.</text>
+     </p>
+     <p background="0xFFFFFF" family="Arial" />
+     <p background="0xFFFFFF" family="Arial">
+      <text size="20" background="0x97FF63" family="Times New Roman">* Una persona </text>
+      <target>
+       <answer>extravertida</answer>
+       <optionList>
+        <option>inestable</option>
+        <option>extravertida</option>
+        <option>introvertida</option>
+        <option>estable</option>
+       </optionList>
+       <text>extravertida</text>
+      </target>
+      <text size="20" background="0x97FF63" family="Times New Roman"> és sociable, amb molts amics. Necessita algú amb qui parlar fins i tot quan estudia tota sola. Prefereix parlar més que llegir. Li agraden les bromes i la diversió, li encanta canviar. Despreocupada. S’enfada fàcilment.</text>
+     </p>
+     <p background="0xFFFFFF" family="Arial" />
+     <p background="0xFFFFFF" family="Arial">
+      <text size="20" background="0x97FF63" family="Times New Roman">* Una persona </text>
+      <target>
+       <answer>estable</answer>
+       <optionList>
+        <option>inestable</option>
+        <option>extravertida</option>
+        <option>introvertida</option>
+        <option>estable</option>
+       </optionList>
+       <text>estable</text>
+      </target>
+      <text size="20" background="0x97FF63" family="Times New Roman"> té una sensibilitat dèbil. Equilibrada. Calmosa. Sol ser una mica despreocupada. No fa canvis bruscos. És difícil que s’immuti.</text>
+     </p>
+     <p background="0xFFFFFF" family="Arial" />
+     <p Alignment="0" background="0xFFFFFF" family="Arial">
+      <text size="20" background="0x97FF63" family="Times New Roman">* Una persona </text>
+      <target>
+       <answer>inestable</answer>
+       <optionList>
+        <option>extravertida</option>
+        <option>inestable</option>
+        <option>estable</option>
+        <option>introvertida</option>
+       </optionList>
+       <text>inestable</text>
+      </target>
+      <text size="20" background="0x97FF63" family="Times New Roman"> és sensible, amb canvis d’humor, amb reaccions fortes i duradores, li costa adaptar-se, de vegades inquieta. Es preocupa molt de qualsevol cosa.</text>
+     </p>
+    </section>
+   </document>
+   <evaluator class="@ComplexEvaluator" />
+  </activity>
+  <activity class="@panels.InformationScreen" name="menú" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style borderStroke="0.7" markerStroke="5.0">
+      <font family="Arial" size="18" bold="true" />
+      <color background="0xFFFFFF" />
+     </style>
+     <p>Tria un dels blocs d'activitats.</p>
+    </cell>
+   </messages>
+   <settings margin="4" report="false">
+    <container bgColor="0x9BFF69">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0x00C000" transparent="true" border="false" />
+    <eventSounds>
+     <sound id="start" enabled="false" />
+     <sound id="actionError" enabled="false" />
+     <sound id="actionOk" enabled="false" />
+     <sound id="finishedError" enabled="false" />
+     <sound id="finishedOk" enabled="false" />
+    </eventSounds>
+   </settings>
+   <cells rows="9" cols="1" cellWidth="600.0" cellHeight="50.0" border="false">
+    <style borderStroke="1.2" markerStroke="5.0">
+     <font family="Arial" size="18" bold="true" />
+     <color foreground="0x83D078" background="0xFFFFFF" border="0x53C33C" />
     </style>
-    <text>
-     <row>BIGOTIS</row>
-     <row>ORELLES</row>
-     <row>*******</row>
-     <row>**ULL**</row>
-     <row>URPA***</row>
-     <row>**DENTS</row>
-     <row>POTES**</row>
-    </text>
-   </textGrid>
-   <clues>
-    <clue id="0">BIGOTIS</clue>
-    <clue id="1">ORELLES</clue>
-    <clue id="2">URPA</clue>
-    <clue id="3">DENTS</clue>
-    <clue id="4">ULL</clue>
-    <clue id="5">POTES</clue>
-   </clues>
-   <cells rows="3" cols="2" cellWidth="183.0" cellHeight="120.0" border="true" id="secondary">
-    <style>
-     <font family="Arial" size="17" bold="true" />
-     <color background="0xFFFFFF" />
-    </style>
-    <shaper class="@Rectangular" cols="2" rows="3" />
-    <cell image="BIGOTIS.jpg">
-     <media type="PLAY_AUDIO" level="1" file="BIGOTI.wav" />
+    <shaper class="@Rectangular" cols="1" rows="9" />
+    <cell image="orienta't_400x100.gif">
+     <style transparent="true" borderStroke="2.1" markerStroke="5.0">
+      <font family="Arial" size="48" bold="true" italic="true" />
+      <color foreground="0x4BBC26" background="0xFFFFFF" border="0x64DE3D" />
+     </style>
     </cell>
-    <cell image="ORELLES.jpg">
-     <media type="PLAY_AUDIO" level="1" file="ORELLES.wav" />
+    <cell imgAlign="middle,top" border="false">
+     <style transparent="true" borderStroke="2.0" markerStroke="2.7">
+      <font family="Arial" size="48" />
+      <color foreground="0x4BBC26" background="0xFFFFFF" border="0x64DE3D" />
+     </style>
     </cell>
-    <cell image="urpa.JPG">
-     <media type="PLAY_AUDIO" level="1" file="URPA.wav" />
+    <cell border="true">
+     <style borderStroke="2.4" markerStroke="2.7">
+      <font family="Arial" size="48" bold="true" italic="true" />
+      <color foreground="0x4BBC26" background="0xFFFFFF" border="0xFF6600" />
+     </style>
+     <media type="RUN_CLIC_PACKAGE" level="1" file="TU" />
+     <p>Tu</p>
     </cell>
-    <cell image="conejodientes.JPG">
-     <media type="PLAY_AUDIO" level="1" file="DENTS.wav" />
+    <cell>
+     <style transparent="true" borderStroke="0.7" markerStroke="5.0">
+      <font family="Arial" size="48" />
+      <color foreground="0x4BBC26" background="0xFFFFFF" border="0x56A731" />
+     </style>
     </cell>
-    <cell image="cara.jpg">
-     <media type="PLAY_AUDIO" level="1" file="ULL.wav" />
+    <cell border="true">
+     <style borderStroke="2.6" markerStroke="5.0">
+      <font family="Arial" size="48" bold="true" italic="true" />
+      <color foreground="0x4BBC26" background="0xFFFFFF" border="0xFF6600" />
+     </style>
+     <media type="RUN_CLIC_PACKAGE" level="1" file="OPCIONS" />
+     <p>Les teves opcions</p>
     </cell>
-    <cell image="POTES.jpg">
-     <media type="PLAY_AUDIO" level="1" file="POTES.wav" />
+    <cell>
+     <style transparent="true" borderStroke="0.7" markerStroke="5.0">
+      <font family="Arial" size="48" bold="true" italic="true" />
+      <color foreground="0x339900" background="0xFFFFFF" border="0xFF6600" />
+     </style>
+    </cell>
+    <cell border="true">
+     <style borderStroke="2.4" markerStroke="5.0">
+      <font family="Arial" size="48" bold="true" italic="true" />
+      <color foreground="0x4BBC26" background="0xFFFFFF" border="0xFF6600" />
+     </style>
+     <media type="RUN_CLIC_PACKAGE" level="1" file="estratègies per cercar feina" />
+     <p>Estratègies per cercar feina</p>
+    </cell>
+    <cell>
+     <style transparent="true" borderStroke="0.7" markerStroke="5.0">
+      <font family="Arial" size="48" bold="true" italic="true" />
+      <color foreground="0x4BBC26" background="0xFFFFFF" border="0x56A731" />
+     </style>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="5.0">
+      <font family="Arial" size="48" bold="true" italic="true" />
+      <color foreground="0x4BBC26" background="0xFFFFFF" border="0x56A731" />
+     </style>
+     <media type="RUN_CLIC_PACKAGE" level="1" file="comiat" />
+     <p>Sortir &gt; &gt; &gt;</p>
     </cell>
    </cells>
+  </activity>
+  <activity class="@panels.Explore" name="opcions" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style borderStroke="0.7" markerStroke="5.0">
+      <font family="Arial" size="18" bold="true" />
+      <color background="0xFFFFFF" />
+     </style>
+     <p>A la columna de l'esquerra hi ha factors de tu mateix que convé tenir en compte de cara al teu futur. A la columna de la dreta hi ha opcions que t'ofereix el teu entorn.</p>
+    </cell>
+   </messages>
+   <settings margin="8" report="false">
+    <container bgColor="0x9AFF69">
+     <counters time="false" actions="false" score="false" />
+    </container>
+    <window bgColor="0xC0C0C0" transparent="true" border="false" />
+   </settings>
+   <cells rows="7" cols="1" cellWidth="400.0" cellHeight="50.0" border="false" id="primary">
+    <style transparent="true" borderStroke="0.7" markerStroke="5.0">
+     <font family="Arial" size="48" bold="true" italic="true" />
+     <color foreground="0x339900" border="0xFF6600" />
+    </style>
+    <shaper class="@Rectangular" cols="1" rows="7" />
+    <cell txtAlign="middle,bottom">
+     <style transparent="true" borderStroke="0.7" markerStroke="5.0">
+      <font family="Arial" size="48" bold="true" italic="true" />
+     </style>
+     <p>Opcions</p>
+    </cell>
+    <cell txtAlign="left,middle">
+     <style transparent="true" borderStroke="0.7" markerStroke="5.0">
+      <font family="Arial" size="24" bold="true" italic="true" />
+     </style>
+     <p>Aquestes són les teves alternatives</p>
+    </cell>
+    <cell id="0" border="true">
+     <style borderStroke="2.7" markerStroke="5.0">
+      <font family="Arial" size="48" bold="true" italic="true" />
+      <color foreground="0x339900" background="0xFFFFFF" border="0xFF6600" />
+     </style>
+     <p>Batxillerat</p>
+    </cell>
+    <cell id="1" border="true">
+     <style borderStroke="2.7" markerStroke="5.0">
+      <font family="Arial" size="48" bold="true" italic="true" />
+      <color foreground="0x339900" background="0xFFFFFF" border="0xFF6600" />
+     </style>
+     <p>Cicles de grau mitjà</p>
+    </cell>
+    <cell id="2" border="true">
+     <style borderStroke="2.7" markerStroke="5.0">
+      <font family="Arial" size="48" bold="true" italic="true" />
+      <color foreground="0x339900" background="0xFFFFFF" border="0xFF6600" />
+     </style>
+     <p>PQPI</p>
+    </cell>
+    <cell id="3" border="true">
+     <style borderStroke="2.7" markerStroke="5.0">
+      <font family="Arial" size="48" bold="true" italic="true" />
+      <color foreground="0x339900" background="0xFFFFFF" border="0xFF6600" />
+     </style>
+     <p>Formació d'adults</p>
+    </cell>
+    <cell id="4" border="true">
+     <style borderStroke="2.6" markerStroke="5.0">
+      <font family="Arial" size="48" bold="true" italic="true" />
+      <color foreground="0x339900" background="0xFFFFFF" border="0xFF6600" />
+     </style>
+     <p>Món laboral</p>
+    </cell>
+   </cells>
+   <cells rows="5" cols="1" cellWidth="550.0" cellHeight="600.0" border="true" id="secondary">
+    <style transparent="true" borderStroke="0.7" markerStroke="5.0">
+     <font family="Arial" size="48" />
+     <color background="0xFFFFFF" border="0xFF6600" />
+    </style>
+    <shaper class="@Rectangular" cols="1" rows="5" />
+    <cell border="false">
+     <style transparent="true" borderStroke="2.4" markerStroke="5.0">
+      <font family="Arial" size="36" bold="true" italic="true" />
+      <color background="0xFFFFFF" border="0xFF6600" />
+     </style>
+     <p>Per fer Batxillerat cal que hagis obtingut el Graduat en Educació Secundària o bé que hagis cursat un cicle formatiu de grau mitjà.</p>
+     <p>Hauràs de triar una de les tres modalitats.</p>
+    </cell>
+    <cell border="false">
+     <style transparent="true" borderStroke="2.6" markerStroke="5.0">
+      <font family="Arial" size="36" bold="true" italic="true" />
+      <color background="0xFFFFFF" border="0xFF6600" />
+     </style>
+     <p>Per fer cicles formatius de grau mitjà cal que hagis obtingut el Graduat en Educació Secundària o que hagis superat la prova d'accés.</p>
+     <p>Hi ha una gran varietat de cicles formatius de grau mitjà.</p>
+    </cell>
+    <cell border="false">
+     <style transparent="true" borderStroke="2.6" markerStroke="5.0">
+      <font family="Arial" size="36" bold="true" italic="true" />
+      <color background="0xFFFFFF" border="0xFF6600" />
+     </style>
+     <p>Els Programes de Qualificacació Professional Inicial (PQPI) es poden fer sempre que tinguis 16 anys o més i que no tinguis el Graduat en Educació Secundària.</p>
+     <p>El seu objectiu prioritari és facilitar la incorporació al món laboral.</p>
+    </cell>
+    <cell border="false">
+     <style transparent="true" borderStroke="2.6" markerStroke="5.0">
+      <font family="Arial" size="36" bold="true" italic="true" />
+      <color background="0xFFFFFF" border="0xFF6600" />
+     </style>
+     <p>La formació de persones adultes permet a les persones de 18 anys o més incorporar-se al sistema educatiu en els seus diferents nivells.</p>
+    </cell>
+    <cell border="false">
+     <style transparent="true" borderStroke="2.6" markerStroke="5.0">
+      <font family="Arial" size="36" bold="true" italic="true" />
+      <color background="0xFFFFFF" border="0xFF6600" />
+     </style>
+     <p>Per incorporar-te legalment al món laboral és indispensable que tinguis 16 anys o més.</p>
+    </cell>
+   </cells>
+   <scramble times="31" primary="false" />
    <layout position="AB" />
   </activity>
   <activity class="@panels.InformationScreen" name="portada" code="">
@@ -948,116 +1199,483 @@
     <cell type="initial">
      <style borderStroke="0.7" markerStroke="5.0">
       <font family="Arial" size="18" bold="true" />
-      <gradient source="0x009966" dest="0xFFFFFF" angle="0" />
+      <color foreground="0x081106" background="0xFFFFFF" />
      </style>
-     <p>EL CONILL</p>
+     <p>Et donem la benvinguda a aquesta activitat. Clica per començar.</p>
+    </cell>
+   </messages>
+   <settings margin="4" report="false">
+    <container bgColor="0x9BFF69">
+     <counters time="false" actions="false" score="true" />
+    </container>
+    <window bgColor="0xFF6600" transparent="true" border="true" />
+    <eventSounds>
+     <sound id="start" file="sintonia_inicial.mp3" />
+     <sound id="click" enabled="false" />
+     <sound id="actionError" enabled="false" />
+     <sound id="actionOk" enabled="false" />
+     <sound id="finishedError" enabled="false" />
+     <sound id="finishedOk" enabled="false" />
+    </eventSounds>
+   </settings>
+   <cells rows="1" cols="1" border="true" image="portada_orienta't.gif">
+    <style borderStroke="0.7" markerStroke="5.0">
+     <color background="0xFDF8F8" />
+    </style>
+    <shaper class="@Rectangular" cols="1" rows="1" />
+    <cell>
+     <media type="RUN_CLIC_ACTIVITY" level="1" file="menú" />
+    </cell>
+   </cells>
+  </activity>
+  <activity class="@panels.Explore" name="proves d'accés" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style>
+      <font family="Arial" size="18" bold="true" />
+      <color background="0xFFFFFF" />
+     </style>
+     <p>Les proves d'accés permeten cursar diferents tipus d'estudis.</p>
+    </cell>
+   </messages>
+   <settings margin="4" report="false">
+    <container bgColor="0x9BFF69">
+     <counters time="false" actions="false" score="false" />
+    </container>
+    <window bgColor="0xFF6600" transparent="true" border="true" />
+   </settings>
+   <cells rows="3" cols="1" cellWidth="300.0" cellHeight="100.0" border="true" id="primary">
+    <style borderStroke="0.7" markerStroke="5.0">
+     <font family="Arial" size="18" bold="true" />
+     <color foreground="0x5CDD1E" background="0xFFFFFF" />
+    </style>
+    <shaper class="@Rectangular" cols="1" rows="3" />
+    <cell id="0">
+     <p>Prova d'accés als cicles formatius de grau mitjà</p>
+    </cell>
+    <cell id="1">
+     <p>Prova d'accés als cicles formatius de grau superior</p>
+    </cell>
+    <cell id="2">
+     <p>Prova d'accés a la universitat (PAU)</p>
+    </cell>
+   </cells>
+   <cells rows="3" cols="1" cellWidth="300.0" cellHeight="300.0" border="true" id="secondary">
+    <style>
+     <font family="Arial" size="18" bold="true" />
+     <color foreground="0x6AF92E" background="0xFFFFFF" />
+    </style>
+    <shaper class="@Rectangular" cols="1" rows="3" />
+    <cell>
+     <p>Es poden fer l'any que fas 17 anys o més</p>
+    </cell>
+    <cell>
+     <p>Es poden fer a partir de l'any en que es compleixen 19 anys. Si has fet un Cicle formatiu de grau mitjà, pots presentar-te a la prova a partir de l'any que fas 18 anys.</p>
+    </cell>
+    <cell>
+     <p>Cal haver aprovat el Batxillerat</p>
+    </cell>
+   </cells>
+   <scramble times="31" primary="false" />
+   <layout position="AB" />
+  </activity>
+  <activity class="@panels.Identify" name="sense GES" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style borderStroke="0.7" markerStroke="5.0">
+      <font family="Arial" size="18" bold="true" />
+      <color background="0xFFFFFF" />
+     </style>
+     <p>Quines són les DUES opcions per a algú que tingui 16 anys o més i que SENSE el Graduat en Educació Secundària?</p>
+    </cell>
+    <cell type="final">
+     <style>
+      <font family="Arial" size="18" bold="true" />
+      <color background="0xFFFFFF" />
+     </style>
+     <p>Efectivament, només és poden fer PQPI o anar a treballar</p>
+    </cell>
+   </messages>
+   <settings margin="4" report="true" reportActions="false">
+    <container bgColor="0x9BFF69">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0xFF6600" transparent="true" border="true" />
+    <eventSounds>
+     <sound id="actionError" file="moc.mp3" />
+     <sound id="actionOk" file="aplaudiment_5s.mp3" />
+    </eventSounds>
+   </settings>
+   <cells rows="2" cols="3" cellWidth="250.0" cellHeight="250.0" border="true" id="primary">
+    <style borderStroke="0.7" markerStroke="2.7">
+     <font family="Arial" size="24" bold="true" />
+     <color foreground="0x339900" background="0xFFFFFF" inactive="0x97FF63" alternative="0xD53232" border="0x6CDA35" />
+    </style>
+    <shaper class="@Rectangular" cols="3" rows="2" />
+    <cell id="0">
+     <p>Cicles formatius de grau mitjà (CFGM)</p>
+    </cell>
+    <cell id="0" border="true">
+     <p>Estudis universitaris</p>
+    </cell>
+    <cell id="0">
+     <p>Batxillerat</p>
+    </cell>
+    <cell id="1">
+     <p>Món laboral (treballar)</p>
+    </cell>
+    <cell id="1">
+     <p>Programes de qualificació professional inicial (PQPI)</p>
+    </cell>
+    <cell id="0">
+     <p>Cicles formatius de grau superior (CFGS)</p>
+    </cell>
+   </cells>
+   <cells rows="2" cols="3" cellWidth="50.0" cellHeight="30.0" border="true" id="solvedPrimary">
+    <style />
+    <shaper class="@Rectangular" cols="3" rows="2" />
+    <cell>
+     <style borderStroke="0.7" markerStroke="5.0">
+      <font family="Arial" size="18" bold="true" />
+      <color foreground="0xE61714" />
+     </style>
+    </cell>
+    <cell />
+    <cell />
+    <cell>
+     <style borderStroke="0.7" markerStroke="5.0">
+      <font family="Arial" size="18" bold="true" />
+      <color foreground="0xE61714" />
+     </style>
+     <p>Corecte. Amb 16 anys o més pots treballar, encara que no tinguis el Graduat en Educació Secundària.</p>
+    </cell>
+    <cell>
+     <style borderStroke="0.7" markerStroke="5.0">
+      <font family="Arial" size="18" bold="true" />
+      <color foreground="0xE6142A" />
+     </style>
+     <p>Correcte. A partir dels 16 anys pots fer Programes de qualificació professional inicial (PQPI), encara que no tinguis el Graduat en Educació Secundària.</p>
+    </cell>
+    <cell />
+   </cells>
+   <scramble times="31" primary="true" />
+  </activity>
+  <activity class="@memory.MemoryGame" name="titulacions" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style borderStroke="0.7" markerStroke="5.0">
+      <font family="Arial" size="18" bold="true" />
+      <color background="0xFFFFFF" />
+     </style>
+     <p>Emparella les titulacions amb els estudis corresponents.</p>
+    </cell>
+   </messages>
+   <settings margin="8" report="true" reportActions="false">
+    <container bgColor="0x9AFF69">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0xFF6600" transparent="true" border="true" />
+   </settings>
+   <cells rows="3" cols="3" cellWidth="150.0" cellHeight="120.0" border="true" id="primary">
+    <style borderStroke="0.7" markerStroke="5.0">
+     <font family="Arial" size="24" bold="true" italic="true" />
+     <color background="0xFFFFFF" inactive="0x9AFF69" alternative="0x000000" border="0xFF6600" />
+    </style>
+    <shaper class="@Rectangular" cols="3" rows="3" />
+    <cell image="diploma.jpg">
+     <p>Graduat en Educació Secundària</p>
+    </cell>
+    <cell image="diploma.jpg">
+     <p>amor</p>
+    </cell>
+    <cell image="diploma.jpg">
+     <p>ooooo</p>
+    </cell>
+    <cell image="diploma.jpg">
+     <p>Batxiller</p>
+    </cell>
+    <cell image="diploma.jpg">
+     <p>Diplomat</p>
+    </cell>
+    <cell image="diploma.jpg">
+     <p>Llicenciat</p>
+    </cell>
+    <cell image="diploma.jpg">
+     <p>Enginyer</p>
+    </cell>
+    <cell image="diploma.jpg">
+     <p>Arquitecte</p>
+    </cell>
+    <cell image="diploma.jpg">
+     <p>Doctor</p>
+    </cell>
+   </cells>
+   <cells rows="3" cols="3" cellWidth="150.0" cellHeight="155.0" border="true" id="secondary">
+    <style />
+    <shaper class="@Rectangular" cols="3" rows="3" />
+    <cell image="llibres_gris.jpg">
+     <p>Cicle formatiu de grau mitj</p>
+    </cell>
+    <cell image="llibres_gris.jpg">
+     <p>amor amor...</p>
+    </cell>
+    <cell image="llibres_gris.jpg">
+     <p>Cicle formatiu de grau superior</p>
+    </cell>
+    <cell image="llibres_gris.jpg">
+     <p>Batxillerat</p>
+    </cell>
+    <cell image="llibres_gris.jpg">
+     <p>Diplomatura</p>
+    </cell>
+    <cell image="llibres_gris.jpg">
+     <p>Llicenciatura</p>
+    </cell>
+    <cell image="llibres_gris.jpg">
+     <p>Enginyeria</p>
+    </cell>
+    <cell image="llibres_gris.jpg">
+     <p>Arquitectura</p>
+    </cell>
+    <cell image="llibres_gris.jpg">
+     <p>Doctorat</p>
+    </cell>
+   </cells>
+   <scramble times="31" />
+   <layout position="AB" />
+  </activity>
+  <activity class="@text.FillInBlanks" name="treballar i gaudir" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style>
+      <font family="Arial" size="18" bold="true" />
+      <color background="0xFFFFFF" />
+     </style>
+     <p>Escriu les quatre paraules que falten i de les que ja hi ha la primera lletra. </p>
+    </cell>
+   </messages>
+   <settings margin="4" report="true" reportActions="false">
+    <container bgColor="0x9AFF69">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0xFF6600" transparent="true" border="true" />
+   </settings>
+   <document>
+    <style name="default" size="22" bold="false" background="0xFFFFFF" tabWidth="12" italic="true" family="Arial" />
+    <style name="target" base="default" foreground="0x0000FF" target="true" />
+    <style name="targetError" base="target" foreground="0xFF0000" />
+    <section>
+     <p Alignment="1" background="0xFFFFFF" family="Arial">
+      <text size="24" bold="false" background="0xFFFFFF" family="Times New Roman">No hace falta ser </text>
+      <target>
+       <answer>brillante</answer>
+       <response fill="." length="9" maxLength="9" show="b--------" />
+       <text>brillante</text>
+      </target>
+      <text size="24" bold="false" background="0xFFFFFF" family="Times New Roman"> ni excepcional para disfrutar y tener </text>
+      <target>
+       <answer>éxito</answer>
+       <response fill="." length="5" maxLength="5" show="é----" />
+       <text>éxito</text>
+      </target>
+      <text size="24" bold="false" background="0xFFFFFF" family="Times New Roman"> profesional, porque la realidad se ha encargado de demostrar que hasta el más malo llega a ser bueno si se dedica a lo que le </text>
+      <target>
+       <answer>gusta</answer>
+       <response fill="." length="5" maxLength="5" show="g----" />
+       <text>gusta</text>
+      </target>
+      <text size="24" bold="false" background="0xFFFFFF" family="Times New Roman">. Por tanto, el trabajo no está reñido con el </text>
+      <target>
+       <answer>placer</answer>
+       <response fill="." length="6" maxLength="6" show="p-----" />
+       <text>placer</text>
+      </target>
+      <text size="24" bold="false" background="0xFFFFFF" family="Times New Roman">. La clave está en escoger lo que más nos llena sin otros prejuicios.</text>
+     </p>
+    </section>
+   </document>
+   <evaluator class="@ComplexEvaluator" />
+  </activity>
+  <activity class="@textGrid.WordSearch" name="trets" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style borderStroke="0.7" markerStroke="5.0">
+      <font family="Arial" size="18" bold="true" />
+      <color background="0xFFFFFF" />
+     </style>
+     <p>TROBA AQUESTS TRETS DE PERSONALITAT: ESTABLE, INESTABLE, INTROVERTIT, EXTRAVERTIT, FLEMÀTIC, APÀTIC, SANGUINI, COLÈRIC, APASSIONAT, NEVIÓS, AMORF  i MELANCÒLIC </p>
+    </cell>
+   </messages>
+   <settings margin="8" report="true" reportActions="false">
+    <container bgColor="0x9AFF69">
+     <counters time="true" actions="true" score="true" />
+    </container>
+    <window bgColor="0xFF6600" transparent="true" border="true" />
+   </settings>
+   <textGrid rows="25" columns="15" cellWidth="20.0" cellHeight="25.0" border="false">
+    <style borderStroke="0.7" markerStroke="5.0">
+     <font family="Arial" size="20" bold="true" />
+     <color background="0xFFFFFF" />
+    </style>
+    <text>
+     <row>******AMORF**************</row>
+     <row>*************************</row>
+     <row>*******R*******S*********</row>
+     <row>**N***FLEMÀTIC*Ó****I****</row>
+     <row>**E******V*****I***N****C</row>
+     <row>**S**CIRÈLOC***V**I****I*</row>
+     <row>**T********R***R*U****L**</row>
+     <row>**A*********T**EG****Ò***</row>
+     <row>**B*TITREVORTNIN****C**T*</row>
+     <row>A*L***********A****N***I*</row>
+     <row>P*E**********S****A****T*</row>
+     <row>À****************L*****R*</row>
+     <row>T*********ESTABLE******E*</row>
+     <row>I**************M*******V*</row>
+     <row>C*************TANOISSAPA*</row>
+    </text>
+   </textGrid>
+   <clues>
+    <clue id="0">MELANCÒLIC</clue>
+    <clue id="1">SANGUINI</clue>
+    <clue id="2">APASSIONAT</clue>
+    <clue id="3">AMORF</clue>
+    <clue id="4">APÀTIC</clue>
+    <clue id="5">COLÈRIC</clue>
+    <clue id="6">NERVIÓS</clue>
+    <clue id="7">FLEMÀTIC</clue>
+    <clue id="8">INTROVERTIT</clue>
+    <clue id="9">EXTRAVERTIT</clue>
+    <clue id="10">ESTABLE</clue>
+    <clue id="11">INESTABLE</clue>
+   </clues>
+   <cells rows="4" cols="3" border="true" image="EYSENCK.JPG" id="secondary">
+    <style />
+    <shaper class="@Rectangular" cols="3" rows="4" />
+   </cells>
+   <layout position="AB" />
+  </activity>
+  <activity class="@panels.Explore" name="tu" code="">
+   <description />
+   <messages>
+    <cell type="initial">
+     <style borderStroke="0.7" markerStroke="5.0">
+      <font family="Arial" size="18" bold="true" />
+      <color background="0xFFFFFF" />
+     </style>
+     <p>Cal tenir en compte aquests factors de tu mateix de cara planificar teu futur.</p>
     </cell>
    </messages>
    <settings margin="8" report="false">
-    <container bgColor="0x009966">
-     <counters time="true" actions="true" score="true" />
+    <container bgColor="0x9AFF69">
+     <counters time="false" actions="false" score="false" />
     </container>
-    <window bgColor="0xC0C0C0" border="true" />
+    <window bgColor="0xC0C0C0" transparent="true" border="false" />
    </settings>
-   <cells rows="1" cols="1" border="true" image="portada.jpg">
-    <style />
-    <shaper class="@Rectangular" cols="1" rows="1" />
+   <cells rows="6" cols="1" cellWidth="500.0" cellHeight="100.0" border="true" id="primary">
+    <style transparent="true" borderStroke="0.7" markerStroke="5.0">
+     <font family="Arial" size="48" bold="true" italic="true" />
+     <color foreground="0x339900" border="0xFF6600" />
+    </style>
+    <shaper class="@Rectangular" cols="1" rows="6" />
+    <cell border="false">
+     <style transparent="true" borderStroke="0.7" markerStroke="5.0">
+      <font family="Arial" size="48" bold="true" />
+     </style>
+     <p>Tu</p>
+    </cell>
+    <cell border="false">
+     <style transparent="true" borderStroke="0.7" markerStroke="5.0">
+      <font family="Arial" size="18" bold="true" italic="true" />
+      <color background="0xFFFFFF" />
+     </style>
+     <p>Convé que tinguis en compte aquestes característiques teves</p>
+    </cell>
+    <cell id="1" border="true">
+     <style borderStroke="2.6" markerStroke="5.0">
+      <font family="Arial" size="48" bold="true" italic="true" />
+      <color foreground="0x339900" background="0xFFFFFF" border="0xFF6600" />
+     </style>
+     <p>aptituds</p>
+    </cell>
+    <cell id="0" border="true">
+     <style borderStroke="2.6" markerStroke="5.0">
+      <font family="Arial" size="48" bold="true" italic="true" />
+      <color foreground="0x339900" background="0xFFFFFF" border="0xFF6600" />
+     </style>
+     <p>interessos</p>
+    </cell>
+    <cell id="2">
+     <style borderStroke="2.6" markerStroke="5.0">
+      <font family="Arial" size="48" bold="true" italic="true" />
+      <color foreground="0x339900" background="0xFFFFFF" border="0xFF6600" />
+     </style>
+     <p>valors</p>
+    </cell>
+    <cell id="3" border="true">
+     <style borderStroke="2.7" markerStroke="5.0">
+      <font family="Arial" size="48" bold="true" italic="true" />
+      <color foreground="0x339900" background="0xFFFFFF" border="0xFF6600" />
+     </style>
+     <p>personalitat</p>
+    </cell>
    </cells>
+   <cells rows="4" cols="1" cellWidth="500.0" cellHeight="250.0" border="false" id="secondary">
+    <style transparent="true" borderStroke="0.7" markerStroke="5.0">
+     <font family="Arial" size="48" bold="true" italic="true" />
+     <color background="0xFFFFFF" border="0xFF6600" />
+    </style>
+    <shaper class="@Rectangular" cols="1" rows="4" />
+    <cell txtAlign="middle,bottom" border="false">
+     <style transparent="true" borderStroke="2.4" markerStroke="5.0">
+      <font family="Arial" size="36" bold="true" italic="true" />
+      <color background="0xFFFFFF" border="0xFF6600" />
+     </style>
+     <p>No n’hi ha prou de poder fer quelcom per fer-ho bé, també cal voler fer-ho. El que vols és curar? construir? calcular? dirigir? investigar? traduir?...</p>
+    </cell>
+    <cell txtAlign="middle,bottom" border="false">
+     <style transparent="true" borderStroke="2.6" markerStroke="5.0">
+      <font family="Arial" size="36" bold="true" italic="true" />
+      <color background="0xFFFFFF" border="0xFF6600" />
+     </style>
+     <p>Quines coses se't donen bé? imaginar? calcular? parlar? raonar? dibuixar?...</p>
+    </cell>
+    <cell txtAlign="middle,bottom" border="false">
+     <style transparent="true" borderStroke="2.6" markerStroke="5.0">
+      <font family="Arial" size="36" bold="true" italic="true" />
+      <color background="0xFFFFFF" border="0xFF6600" />
+     </style>
+     <p>És molt important que sàpigues que valores més d'una feina? diners? creativitat? indipendència? altruïsme? comoditat? prestigi?...</p>
+    </cell>
+    <cell txtAlign="middle,bottom" border="false">
+     <style transparent="true" borderStroke="2.6" markerStroke="5.0">
+      <font family="Arial" size="36" bold="true" italic="true" />
+      <color background="0xFFFFFF" border="0xFF6600" />
+     </style>
+     <p>Cada persona és única i irrepetible i cada feina encaixa millor amb unes característiques de personalitat que amb unes altres.</p>
+    </cell>
+   </cells>
+   <scramble times="31" primary="false" />
+   <layout position="AB" />
   </activity>
  </activities>
  <mediaBag>
-  <media name="conill2.gif" file="conill2.gif" />
-  <media name="2con.jpg" file="2con.jpg" />
-  <media name="4CONILLS..jpg" file="4CONILLS..jpg" />
-  <media name="4conills.jpg" file="4conills.jpg" />
-  <media name="5CONILLS.jpg" file="5CONILLS.jpg" />
-  <media name="6CONILLS.jpg" file="6CONILLS.jpg" />
-  <media name="7CONILLS.jpg" file="7CONILLS.jpg" />
-  <media name="8CONILLS.jpg" file="8CONILLS.jpg" />
-  <media name="9CONILLS.jpg" file="9CONILLS.jpg" />
-  <media name="BIGOTIS.jpg" file="BIGOTIS.jpg" />
-  <media name="bosque.jpg" file="bosque.jpg" />
-  <media name="cara.jpg" file="cara.jpg" />
-  <media name="cargol.jpg" file="cargol.jpg" />
-  <media name="conejitos+mama.jpg" file="conejitos+mama.jpg" />
-  <media name="conejo.jpg" file="conejo.jpg" />
-  <media name="conejo.peq.JPG" file="conejo.peq.JPG" />
-  <media name="conejo2-1.JPG" file="conejo2-1.JPG" />
-  <media name="conejo21.JPG" file="conejo21.JPG" />
-  <media name="conejodientes.JPG" file="conejodientes.JPG" />
-  <media name="conejoss.JPG" file="conejoss.JPG" />
-  <media name="conillet.jpg" file="conillet.jpg" />
-  <media name="conills.cau.JPG" file="conills.cau.JPG" />
-  <media name="conillsorra.jpg" file="conillsorra.jpg" />
-  <media name="elefant.jpg" file="elefant.jpg" />
-  <media name="gabia.jpg" file="gabia.jpg" />
-  <media name="galletas.jpg" file="galletas.jpg" />
-  <media name="gatet.jpg" file="gatet.jpg" />
-  <media name="gel.jpg" file="gel.jpg" />
-  <media name="gran.jpg" file="gran.jpg" />
-  <media name="gran2.jpg" file="gran2.jpg" />
-  <media name="gran3.jpg" file="gran3.jpg" />
-  <media name="granja.jpg" file="granja.jpg" />
-  <media name="granja1.jpg" file="granja1.jpg" />
-  <media name="hierba.1.JPG" file="hierba.1.JPG" />
-  <media name="hierba.2.JPG" file="hierba.2.JPG" />
-  <media name="macarrones.jpg" file="macarrones.jpg" />
-  <media name="maiz.jpg" file="maiz.jpg" />
-  <media name="maiz1.jpg" file="maiz1.jpg" />
-  <media name="marieta.jpg" file="marieta.jpg" />
-  <media name="nuez.jpg" file="nuez.jpg" />
-  <media name="ORELLES.jpg" file="ORELLES.jpg" />
-  <media name="ovella.jpg" file="ovella.jpg" />
-  <media name="pastagana2.JPG" file="pastagana2.JPG" />
-  <media name="pastanaga.1.JPG" file="pastanaga.1.JPG" />
-  <media name="portada.jpg" file="portada.jpg" />
-  <media name="POTES.jpg" file="POTES.jpg" />
-  <media name="rabbit..JPG" file="rabbit..JPG" />
-  <media name="REDUIT.jpg" file="REDUIT.jpg" />
-  <media name="urpa.JPG" file="urpa.JPG" />
-  <media name="4.wav" file="4.wav" />
-  <media name="5.wav" file="5.wav" />
-  <media name="6.wav" file="6.wav" />
-  <media name="7.wav" file="7.wav" />
-  <media name="8.wav" file="8.wav" />
-  <media name="9.wav" file="9.wav" />
-  <media name="BIGOTI.wav" file="BIGOTI.wav" />
-  <media name="BOSC.wav" file="BOSC.wav" />
-  <media name="CAU.wav" file="CAU.wav" />
-  <media name="DENTS.wav" file="DENTS.wav" />
-  <media name="E1.wav" file="E1.wav" />
-  <media name="E2.wav" file="E2.wav" />
-  <media name="E3.wav" file="E3.wav" />
-  <media name="E4.wav" file="E4.wav" />
-  <media name="E5.wav" file="E5.wav" />
-  <media name="E6.wav" file="E6.wav" />
-  <media name="EXPLORA.wav" file="EXPLORA.wav" />
-  <media name="FRASE.wav" file="FRASE.wav" />
-  <media name="GABIA.wav" file="GABIA.wav" />
-  <media name="GRANJA.wav" file="GRANJA.wav" />
-  <media name="IDEN1.wav" file="IDEN1.wav" />
-  <media name="IDEN2.wav" file="IDEN2.wav" />
-  <media name="IELEM.wav" file="IELEM.wav" />
-  <media name="IELEM1.wav" file="IELEM1.wav" />
-  <media name="OMPLIR1.wav" file="OMPLIR1.wav" />
-  <media name="OMPLIR2.wav" file="OMPLIR2.wav" />
-  <media name="ORDENA1.WAV" file="C1.wav" />
-  <media name="ORDENA2.WAV" file="C2.wav" />
-  <media name="ORELLES.wav" file="ORELLES.wav" />
-  <media name="P1.wav" file="P1.wav" />
-  <media name="P2.wav" file="P2.wav" />
-  <media name="PARELLES1.wav" file="PARELLES1.wav" />
-  <media name="POTES.wav" file="POTES.wav" />
-  <media name="PUZZLE2'.wav" file="PUZZLE2'.wav" />
-  <media name="PUZZLE2.wav" file="PUZZLE2.wav" />
-  <media name="Q.wav" file="Q.wav" />
-  <media name="Q1.wav" file="Q1.wav" />
-  <media name="QQ.wav" file="QQ.wav" />
-  <media name="SOPA.wav" file="SOPA.wav" />
-  <media name="ULL.wav" file="ULL.wav" />
-  <media name="URPA.wav" file="URPA.wav" />
-  <media name="VIURE1.wav" file="VIURE1.wav" />
-  <media name="VIURE2.wav" file="VIURE2.wav" />
+  <media name="organigrama_sistema educatiu_600x450.gif" file="organigrama_sistema educatiu_600x450.gif" />
+  <media name="orienta't_400x100.gif" file="orienta't_400x100.gif" />
+  <media name="portada_orienta't.gif" file="portada_orienta't.gif" />
+  <media name="diploma.jpg" file="diploma.jpg" />
+  <media name="EYSENCK.JPG" file="EYSENCK.JPG" />
+  <media name="llibres_gris.jpg" file="llibres_gris.jpg" />
+  <media name="aplaudiment_5s.mp3" file="aplaudiment_5s.mp3" />
+  <media name="moc.mp3" file="moc.mp3" />
+  <media name="sintonia_inicial.mp3" file="sintonia_inicial.mp3" />
+  <media name="correcte.png" file="correcte.png" />
+  <media name="incorrecte.png" file="incorrecte.png" />
  </mediaBag>
 </JClicProject>
 

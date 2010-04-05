@@ -34,24 +34,35 @@
 
 import Constants
 
-
 from Activity import  Activity
 from TextGrid import TextGrid
+from Grid import Grid
+from styleCell import StyleCell
 
 
 class FillInBlanks(Activity):
 
     TextGrid = None
-    
-    '''Diccionari amb parells (idCell,encert)'''
-    targets = {}
+    PrevGrid = None
+    targets = {} #Diccionari amb parells (idCell,encert) util quan hi ha optionLists
     options = None
     pressedCell = None
     idPressed = -1 #indica el numero de cell seleccionada respecte al response cell
+    previous = False
     
     def Load(self, display_surf ):
         self.setBgColor(display_surf)
-
+        
+        try:
+            xmlPrevious = self.xmlActivity.getElementsByTagName('prevScreen')[0]
+            self.previous = True
+            self.PrevGrid = Grid()
+            self.PrevGrid.Load(1,1,Constants.ACTIVITY_WIDTH, Constants.ACTIVITY_HEIGHT, Constants.MARGIN_TOP, Constants.MARGIN_LEFT,display_surf)
+            self.styleCell = StyleCell(xmlPrevious)
+            self.printxmlCellinCell(self.PrevGrid.Cells[0],xmlPrevious, self.styleCell)
+        except:
+            pass
+        
         '''Loading constants for the activity'''
         xmlTextGrid = self.xmlActivity.getElementsByTagName('document')[0]
         
@@ -67,24 +78,27 @@ class FillInBlanks(Activity):
             self.options = False
         
     def OnEvent(self,PointOfMouse):
-        if self.options:
-            id = 0
-            for cell in self.TextGrid.textCells:
-                encert = cell.isOverCell(PointOfMouse[0],PointOfMouse[1])
-                if encert:
-                    id = cell.idCell
-                    break
-            
-            if id in self.targets:
-                self.targets[id] = encert
+        if self.previous:
+            '''Quan es fa el primer clic es passa a resoldre l'activitat'''
+            self.previous = False
         else:
             for i in self.targets.keys():
                 print self.TextGrid.textCells[i].type
-                id = self.TextGrid.textCells[i].isOverCell(PointOfMouse[0],PointOfMouse[1])
-                if id != None:
-                    self.pressedCell = self.TextGrid.textCells[i]
-                    self.idPressed = id
-                    print 'he asignado el pressedcell', self.pressedCell.idCell
+                if self.TextGrid.textCells[i].type == 'option':
+                    encert = self.TextGrid.textCells[i].isOverCell(PointOfMouse[0],PointOfMouse[1])
+                    if encert:
+                        self.targets[i] = encert
+                        print self.targets
+                
+                else:
+                    id = self.TextGrid.textCells[i].isOverCell(PointOfMouse[0],PointOfMouse[1])
+                    if id != None:
+                        self.pressedCell = self.TextGrid.textCells[i]
+                        self.idPressed = id
+                        print 'he asignado el pressedcell', self.pressedCell.idCell
+                        return
+                    else:
+                        self.pressedCell = None
                  
     def OnKeyEvent(self,key):
         print 'idpressed', self.idPressed
@@ -102,25 +116,28 @@ class FillInBlanks(Activity):
 
     def OnRender(self,display_surf):
         display_surf.blit(self.containerBg,(0,0))
-        
-        '''repintamos el grid'''
-        self.TextGrid.OnRender(display_surf)
+
+        if self.previous:
+            self.PrevGrid.OnRender(display_surf)
+        else:
+            '''repintamos el grid'''
+            self.TextGrid.OnRender(display_surf)
         
 
     def isGameFinished(self):
-        if self.options:
-            i = 0
-            status = self.targets.values()
-            '''Mira si els targets estan correctes o no'''
-            for st in status:
-                if not st:
+        j = 0
+        for i in self.targets.keys():
+            if self.TextGrid.textCells[i].type == 'option':
+                status = self.targets.values()
+                '''Mira si els targets estan correctes o no'''
+                if not status[j]:
                     return False
-            '''Si no ha retornat abans, tot esta correcte, acaba la activitat'''
-            return True
-        else:
-            for i in self.targets.keys():
+                
+            else:   
                 if self.TextGrid.textCells[i].contentCell.answer != self.TextGrid.textCells[i].contentCell.writed:                     
                     return False
-            '''Si no ha retornat abans, tot esta correcte'''
-            return True
+            j += 1
+            
+        '''Si no ha retornat abans, tot esta correcte'''
+        return True
     

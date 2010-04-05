@@ -99,7 +99,9 @@ class Response(object):
     
     def printLetter(self):
         self.Cells[self.clicked].contentCell.img.fill(self.background)
-        if self.writed[self.clicked] == self.answer[self.clicked]:
+        if self.writed[self.clicked] == '_':
+            color = Constants.colorBlack
+        elif self.writed[self.clicked] == self.answer[self.clicked]:
             color = Constants.colorBlue
         else:
             color = Constants.colorRed

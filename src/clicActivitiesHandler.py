@@ -49,8 +49,10 @@ from ClicActivity.WordSearch import WordSearch
 from ClicActivity.CrossWord import CrossWord
 from ClicActivity.FillInBlanks import FillInBlanks
 from ClicActivity.Complete import Complete
-from ClicActivity.TextComplete import TextComplete
 from ClicActivity.Order import Order
+from ClicActivity.WrittenAnswer import WrittenAnswer
+from ClicActivity.Identify import Identify
+from ClicActivity.TextComplete import TextComplete
 from ClicActivity import Constants
 
 
@@ -91,7 +93,12 @@ class ClicActivities:
             self.activityInUse = self.executeActivity(activityTag, self.mediaBagTag, self.settingsTag)
             self.activityInUse.pathToMedia = self.path_to_clic
             self.activityInUse.Load(self.activity_surf)
-            self.dialog.printMessage(self.screen,self.activityInUse.getInitMessage())
+            '''Cogemos previous message si existe'''
+            self.prevMess = self.activityInUse.getPreviousMessage()
+            if self.prevMess != None:
+                self.dialog.printMessage(self.screen,self.prevMess)
+            else:
+                self.dialog.printMessage(self.screen,self.activityInUse.getInitMessage())
             #audio = self.activityInUse.getInitMessageAudio()
             #if audio!="":
             #    self.activityInUse.play_sound(audio)
@@ -145,6 +152,10 @@ class ClicActivities:
             if self.dialog.isOverChangeClicButton(pointMouse):
                 return -1
             
+            if self.prevMess != None and self.dialog.isOverActivity(pointMouse):
+                self.prevMess = None
+                self.dialog.printMessage(self.screen,self.activityInUse.getInitMessage())
+                
             if self.dialog.isOverActivity(pointMouse):
                 result = self.activityInUse.OnEvent((pointMouse.getX(),pointMouse.getY()))
         
@@ -165,6 +176,9 @@ class ClicActivities:
             if self.activityInUse.isGameFinished():
                 self.dialog.printMessage(self.screen,self.activityInUse.getFinishMessage())
                 pygame.display.flip()
+
+                a, b, c, d = pygame.cursors.load_xbm(Constants.Images.CURSOR2, Constants.Images.CURSOR2_MASK)
+                pygame.mouse.set_cursor(a, b, c, d)
             #     audio = self.activityInUse.getFinishMessageAudio()
             #     if audio!="":
             #        self.activityInUse.play_sound(audio)
@@ -179,10 +193,10 @@ class ClicActivities:
     
     def validKey(self,key):
         '''Llista de tecles que ens interessa processar i la traduccio'''
-        validKeyList = {'delete':'delete','backspace':'backspace','a':'A','b':'B','c':'C','d':'D',
-                        'e':'E','f':'F','g':'G','h':'H','i':'I','j':'J','k':'K','l':'L','m':'M',
-                        'n':'N','o':'O','p':'P','q':'Q','r':'R','s':'S','t':'T','u':'U','v':'V',
-                        'w':'W','x':'X','y':'Y','z':'Z'}
+        validKeyList = {'delete':'delete','backspace':'backspace','space':' ','return':'return',
+                        'a':'A','b':'B','c':'C','d':'D','e':'E','f':'F','g':'G','h':'H','i':'I',
+                        'j':'J','k':'K','l':'L','m':'M','n':'N','o':'O','p':'P','q':'Q','r':'R',
+                        's':'S','t':'T','u':'U','v':'V','w':'W','x':'X','y':'Y','z':'Z'}
         
         if key in validKeyList:
             return validKeyList[key]
@@ -214,12 +228,18 @@ class ClicActivities:
                         return True
         elif  node.getAttribute('class') =='@textGrid.CrossWord':
                         return True
+        elif  node.getAttribute('class') =='@text.FillInBlanks':
+                        return True
+        elif  node.getAttribute('class') =='@text.Identify':
+                        return True
         elif node.getAttribute('class') == '@text.Complete':
                         return True
         elif node.getAttribute('class') == '@text.Order':
                         return True
         elif  node.getAttribute('class') =='@text.FillInBlanks':
                         return True
+        elif  node.getAttribute('class') =='@text.WrittenAnswer':
+                return True
         else:
              return False
     def executeActivity(self, node, media, settings):
@@ -251,4 +271,8 @@ class ClicActivities:
                         return FillInBlanks(node, media, settings)
         elif node.getAttribute('class') == '@text.Order' :
                         return Order(node, media, settings)
-                    
+        elif node.getAttribute('class') == '@text.WrittenAnswer' :
+                        return WrittenAnswer(node, media, settings)
+        elif node.getAttribute('class') == '@text.Identify' :
+                        return Identify(node, media, settings)
+

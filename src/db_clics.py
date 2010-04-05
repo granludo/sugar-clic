@@ -67,11 +67,11 @@ class DbClics:
         
         if default == True :            
             for file in files.childNodes: 
-                clic = {'Title': file.childNodes[0].childNodes[0].data,
-                        'Author': file.childNodes[1].childNodes[0].data,
-                        'Area': file.childNodes[2].childNodes[0].data,
-                        'Language': file.childNodes[3].childNodes[0].data,
-                        'Folder': file.childNodes[4].childNodes[0].data,
+                clic = {'Title': self.__getText(file.childNodes[0].childNodes),
+                        'Author': self.__getText(file.childNodes[1].childNodes),
+                        'Area': self.__getText(file.childNodes[2].childNodes),
+                        'Language': self.__getText(file.childNodes[3].childNodes),
+                        'Folder': self.__getText(file.childNodes[4].childNodes),
                         'Icon': self.__getText(file.childNodes[5].childNodes), 
                         'Default' : 1              
                         }
@@ -81,11 +81,11 @@ class DbClics:
         files = doc.childNodes[0]
         
         for file in files.childNodes: 
-            clic = {'Title': file.childNodes[0].childNodes[0].data,
-                    'Author': file.childNodes[1].childNodes[0].data,
-                    'Area': file.childNodes[2].childNodes[0].data,
-                    'Language': file.childNodes[3].childNodes[0].data,
-                    'Folder': file.childNodes[4].childNodes[0].data,
+            clic = {'Title': self.__getText(file.childNodes[0].childNodes),
+                    'Author': self.__getText(file.childNodes[1].childNodes),
+                    'Area': self.__getText(file.childNodes[2].childNodes),
+                    'Language': self.__getText(file.childNodes[3].childNodes),
+                    'Folder': self.__getText(file.childNodes[4].childNodes),
                     'Icon': self.__getText(file.childNodes[5].childNodes),
                     'Default' : 0              
                     }

@@ -66,8 +66,6 @@ class Order(Activity):
             id = -1
             paraula = -1
             for cell in self.TextGrid.textCells2:
-                nou += 1
-                paraula +=1
                 encert = cell.isOverCell(PointOfMouse[0],PointOfMouse[1])
 
                 print cell.contentCell.id, " ",cell.Rect
@@ -76,39 +74,22 @@ class Order(Activity):
 
                 if (id != cell.contentCell.id):
                     nou2 += 1
-                    paraula = 0
 
                 id = cell.contentCell.id
 
-                #random.shuffle(self.TextGrid.textCells2)
-                #print cell.contentCell.id
-
-                #print "id", cell.contentCell.id, cell.Rect
-
 
                 if encert:
-                    print "encerttttttttt"
-                    print PointOfMouse[0],PointOfMouse[1]
-                    print "id=", cell.contentCell.id, cell.Rect
-                    print self.TextGrid.bloc[cell.contentCell.id]
                     cell.contentCell.border = True
-
-
                     self.TextGrid.canvi = True
 
                     if (self.pressedCell != None):
-                        print "hi ha una cela apretada"
-                        print "canvi de ", self.pressedCell ," per ", nou2
                         self.TextGrid.changeImages(self.pressedCell, nou2)
                         self.pressedCell = None
                         self.TextGrid.pressedId = None
 
                     else:
-                        print "no n'hi ha cap d'apretada"
-                        print "pressed id=", cell.contentCell.id
                         self.TextGrid.pressedId = nou2
                         self.pressedCell = nou2
-
  
                     break
 

@@ -31,11 +31,10 @@
     @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 '''
 from Cell import *
-from Constants import *
 from OptionList import *
 from Response import *
-from TextCell import *
 from TextField import *
+from Constants import *
 import os
 import pygame
 from pygame import surface
@@ -109,7 +108,7 @@ class TextGrid(object):
                 italic = True
             else:
                 italic = False
-            self.font = pygame.font.SysFont(family, size, bold, italic)
+            self.font = pygame.font.SysFont(family,size,bold,italic)
         except:
             self.font = pygame.font.SysFont('Arial', Constants.minFontSize)
 
@@ -131,8 +130,8 @@ class TextGrid(object):
         @display_surf es la superficie de l'activitat on es pintara el grid amb el seu contingut
         @xmlDocument es la part del xml corresponent al document de l'activitat
     '''
-    def Load(self, display_surf, xmlDocument, flag=''):
-        
+
+    def Load(self, display_surf, xmlDocument, flag=''):      
         self.xActCell = Constants.MARGIN_LEFT + 10
         self.yActCell = Constants.MARGIN_TOP + 10
         self.idCell = 0
@@ -150,12 +149,21 @@ class TextGrid(object):
          
         '''Mostra el text, per paragrafs, diferenciant els tipus d'elements'''
         for p in allP:
-            print "sirus"
             if flag == 'complete':
                 self.Add(display_surf, 'textField', p)
                 
             else:
-                text = p.getElementsByTagName('text')
+                #nou = p.childNodes
+                #print p.childNodes
+                nou = p.childNodes
+                text = []
+                if(self.isOrder!=None):
+                    for child in nou:
+                        if child.nodeName == 'text':
+                            text.append(child)
+                else:
+                    #Tambe agafar els target.getElementsByName('cell') i restar-li a text
+                    text = p.getElementsByTagName('text')
                 target = p.getElementsByTagName('target')
                 cells = p.getElementsByTagName('cell')
                 self.numCells = len(cells)
@@ -167,15 +175,9 @@ class TextGrid(object):
                 iCell = 0 #index per recorrer els nodes cell
                 for child in childs:
                     if child.nodeName == 'text':
-                        print "petaaki222"
-                        print text
-                        print itext
-                        print text[itext].toxml()
-                        print "petaakiii333"
                         self.Add(display_surf, 'text', text[itext])
                         itext += 1
                     elif child.nodeName == 'target':
-                        print "peta aki"
                         solTargets[self.idCell] = False
                         if(self.isOrder != None):
                             self.Add(display_surf,'text2',target[itarget])
@@ -188,6 +190,8 @@ class TextGrid(object):
                     elif child.nodeName == 'cell':
                         self.Add(display_surf,'cell',cells[iCell])
                         iCell += 1
+                if(self.isOrder!=None):
+                    self.Add(display_surf,'text2','\n')
                 if len(cells) > 0:
                     h = int(cells[0].getAttribute('height')) + 10
                     self.yActCell += h
@@ -206,7 +210,6 @@ class TextGrid(object):
     '''
     def Add(self, display_surf, type, xmlObject):
 
-        print "entra a add"
         if type == 'text':
             line = xmlObject.firstChild.data
 
@@ -246,48 +249,61 @@ class TextGrid(object):
                     self.yActCell += self.OFFSET_TOP_NEW_LINE
         
         elif type == 'text2':
-            line = xmlObject.firstChild.data
 
-            words = line.split(' ')
+            if (xmlObject == '\n'):
+                self.bloc.append('\n')
+                self.tipus.append('return')
 
-            self.bloc.append(words)
-            self.numeracio.append(self.numCells)
-            self.tipus.append('text2')
-            self.lenTipus2 += 1
 
-            for word in words:
-                tmpSurf = self.font.render(word,1,Constants.colorLila)
-                surf = pygame.Surface((self.font.size(word))).convert()
-                surf.fill(Constants.colorBlack)
-                if (self.xActCell + self.font.size(word)[0]) > self.Rect.width - 10:
-                    self.xActCell = self.X_NEW_LINE
-                    self.yActCell += self.OFFSET_TOP_NEW_LINE
+            else:
+                line = xmlObject.firstChild.data
 
-                surf.blit(tmpSurf,(0,0))
+                try:
+                    text = xmlObject.getElementsByTagName("text")[0].firstChild.data
+                    line = text
+                except:
+                    pass
 
-                rect = pygame.Rect((self.xActCell,self.yActCell),(surf.get_size()))
-                textCell = TextCell(rect,self.idCell,'text')
+                words = line.split(' ')
 
-                contentCell = ContentCell()
-                contentCell.img = surf.copy()
-                contentCell.id = self.id
-                textCell.contentCell = contentCell
+                self.bloc.append(words)
+                self.numeracio.append(self.numCells)
+                self.tipus.append('text2')
+                self.lenTipus2 += 1
 
-                textCell.contentCell.id = self.id
+                for word in words:
+                    tmpSurf = self.font.render(word,1,Constants.colorLila)
+                    surf = pygame.Surface((self.font.size(word))).convert()
+                    surf.fill(Constants.colorBlack)
+                    if (self.xActCell + self.font.size(word)[0]) > self.Rect.width - 10:
+                        self.xActCell = self.X_NEW_LINE
+                        self.yActCell += self.OFFSET_TOP_NEW_LINE
 
-                self.textCells2.append(textCell)
+                    surf.blit(tmpSurf,(0,0))
 
-                self.numCells += 1
+                    rect = pygame.Rect((self.xActCell,self.yActCell),(surf.get_size()))
+                    textCell = TextCell(rect,self.idCell,'text')
 
-                #self.idCell = self.idCell + 1
-                self.xActCell += rect.width + 5
-                if self.xActCell >= self.Rect.width - 10:
-                    self.xActCell = self.X_NEW_LINE
-                    self.yActCell += self.OFFSET_TOP_NEW_LINE
+                    contentCell = ContentCell()
+                    contentCell.img = surf.copy()
+                    contentCell.id = self.id
+                    textCell.contentCell = contentCell
 
-            self.ids.append(self.id)
+                    textCell.contentCell.id = self.id
 
-            self.id += 1
+                    self.textCells2.append(textCell)
+
+                    self.numCells += 1
+
+                    #self.idCell = self.idCell + 1
+                    self.xActCell += rect.width + 5
+                    if self.xActCell >= self.Rect.width - 10:
+                        self.xActCell = self.X_NEW_LINE
+                        self.yActCell += self.OFFSET_TOP_NEW_LINE
+
+                self.ids.append(self.id)
+
+                self.id += 1
 
 
         elif type == 'cell':
@@ -312,14 +328,14 @@ class TextGrid(object):
                 
                 self.textCells.append(cell)
                 self.idCell += 1
-                self.xActCell += width + int((Constants.ACTIVITY_WIDTH - (self.numCells * width)) / self.numCells)
+                self.xActCell += width + int((Constants.ACTIVITY_WIDTH - (self.numCells*width)) / self.numCells)
             except:
                 pass
         
         elif type == 'textField':
-            textField = TextField(xmlObject, self.font, self.backgroundColor)
-            textField.Load(self.xActCell, self.yActCell, display_surf)
-            textCell = TextCell(None, self.idCell, 'textField')
+            textField = TextField(xmlObject,self.font,self.backgroundColor)
+            textField.Load(self.xActCell,self.yActCell,display_surf)
+            textCell = TextCell(None,self.idCell,'textField')
             textCell.contentCell = textField
             self.textCells.append(textCell)
             self.idCell += 1
@@ -375,7 +391,7 @@ class TextGrid(object):
             
                 
             
-    def OnRender(self, display_surf):
+    def OnRender(self,display_surf):
         '''Pinta la superficie del text grid'''
         self.gridSurf.fill(self.backgroundColor)
         display_surf.blit(self.gridSurf, (Constants.MARGIN_LEFT, Constants.MARGIN_TOP))
@@ -387,7 +403,6 @@ class TextGrid(object):
 
     def OnRefresh(self,display_surf):
         '''Pinta la superficie del text grid'''
-        print "entra a textorder"
         self.gridSurf.fill(self.backgroundColor)
         display_surf.blit(self.gridSurf,(Constants.MARGIN_LEFT,Constants.MARGIN_TOP))
         pygame.draw.rect(display_surf,Constants.colorBlack,self.Rect,Constants.DEFAULT_BORDER_SIZE)
@@ -401,40 +416,44 @@ class TextGrid(object):
         self.encerts = 0
         for wordGroup in self.bloc:
             conta +=1
-            if (self.tipus[conta]=="text2"):
-                    conta2 += 1
-                    if self.pressedId == conta2:
-                        color = Constants.colorLila
-                    elif conta2 == self.textCells2[numAux].contentCell.id:
-                        color = Constants.colorGreen
-                        self.encerts += 1
-                    else:
-                        color = Constants.colorRed
-                    numAux  += len(wordGroup)
+            if(self.tipus[conta]=="return"):
+                self.xActCell = self.X_NEW_LINE
+                self.yActCell += self.OFFSET_TOP_NEW_LINE/2
             else:
-                    color = Constants.colorBlack
-            for word in wordGroup:
+                if (self.tipus[conta]=="text2"):
+                        conta2 += 1
+                        if self.pressedId == conta2:
+                            color = Constants.colorLila
+                        elif conta2 == self.textCells2[numAux].contentCell.id:
+                            color = Constants.colorGreen
+                            self.encerts += 1
+                        else:
+                            color = Constants.colorRed
+                        numAux  += len(wordGroup)
+                else:
+                        color = Constants.colorBlack
+                for word in wordGroup:
 
-                    tmpSurf = self.font.render(word,1,color)
-                    surf = pygame.Surface((self.font.size(word))).convert()
-                    surf.fill(self.backgroundColor)
-                    if (self.xActCell + self.font.size(word)[0]) > self.Rect.width - 10:
-                        self.xActCell = self.X_NEW_LINE
-                        self.yActCell += self.OFFSET_TOP_NEW_LINE
+                        tmpSurf = self.font.render(word,1,color)
+                        surf = pygame.Surface((self.font.size(word))).convert()
+                        surf.fill(self.backgroundColor)
+                        if (self.xActCell + self.font.size(word)[0]) > self.Rect.width - 10:
+                            self.xActCell = self.X_NEW_LINE
+                            self.yActCell += self.OFFSET_TOP_NEW_LINE
 
-                    display_surf.blit(tmpSurf,(self.xActCell,self.yActCell))
+                        display_surf.blit(tmpSurf,(self.xActCell,self.yActCell))
 
-                    rect = pygame.Rect((self.xActCell,self.yActCell),(surf.get_size()))
-                    textCell = TextCell(rect,self.idCell,'text')
+                        rect = pygame.Rect((self.xActCell,self.yActCell),(surf.get_size()))
+                        textCell = TextCell(rect,self.idCell,'text')
 
-                    if (self.tipus[conta]=="text2"):
-                        self.textCells2[numCells].Rect = rect
-                        numCells += 1
+                        if (self.tipus[conta]=="text2"):
+                            self.textCells2[numCells].Rect = rect
+                            numCells += 1
 
-                    self.xActCell = self.xActCell + rect.width + 5
-                    if self.xActCell >= self.Rect.width:
-                        self.xActCell = self.X_NEW_LINE
-                        self.yActCell += self.OFFSET_TOP_NEW_LINE
+                        self.xActCell = self.xActCell + rect.width + 5
+                        if self.xActCell >= self.Rect.width:
+                            self.xActCell = self.X_NEW_LINE
+                            self.yActCell += self.OFFSET_TOP_NEW_LINE
 
 
 

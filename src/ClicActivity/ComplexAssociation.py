@@ -161,36 +161,49 @@ class ComplexAssociation(Activity):
             newHeight = self.Grid2.cellHeight * coef
             yGrid1 = (Constants.ACTIVITY_HEIGHT - height - newHeight - 10) / 2
             yGrid1 = max(yGrid1,yActual)
-            self.Grid2.Load(self.Grid2.numRows,self.Grid2.numCols,width,newHeight,xGrid1 ,yGrid1 + height +10, display_surf)
+            if(self.Grid2.imagePath == None):
+                self.Grid2.Load(self.Grid2.numRows,self.Grid2.numCols,width,newHeight,xGrid1 ,yGrid1 + height +10, display_surf)
+            else:
+                self.Grid2.LoadWithImage(self.Grid2.numRows,self.Grid2.numCols,width,newHeight,xGrid1 ,yGrid1 + height +10, display_surf, self.pathToMedia)
         else:
             '''Sumamos el width al tamano total'''
             newWidth = self.Grid2.cellWidth * coef
             newHeight = height
             xGrid1 = (Constants.ACTIVITY_WIDTH - width - newWidth - 10) / 2
             xGrid1 = max(xGrid1,xActual)
-            self.Grid2.Load(self.Grid2.numRows,self.Grid2.numCols,newWidth,height,xGrid1 + width +10 ,yGrid1, display_surf)
+            if(self.Grid2.imagePath == None):
+                self.Grid2.Load(self.Grid2.numRows,self.Grid2.numCols,newWidth,height,xGrid1 + width +10 ,yGrid1, display_surf)
+            else:
+                self.Grid2.LoadWithImage(self.Grid2.numRows,self.Grid2.numCols,newWidth,height,xGrid1 + width +10 ,yGrid1, display_surf, self.pathToMedia)
+
 
         if self.Grid1.imagePath == None:
             self.Grid1.Load(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid1 ,yGrid1, display_surf)
 
         try:
+            print "pasa1"
             '''if cells 3 not exists, only create an empty Grid'''
             if self.Grid3.imagePath == None:
                 if self.inverse == False:
                     self.Grid3.Load(self.Grid1.numRows,self.Grid1.numCols,width,height,xActual ,yActual, display_surf)
                 else:
                     self.Grid3.Load(self.Grid2.numRows,self.Grid2.numCols,newWidth,newHeight,xActual ,yActual, display_surf)
+                cellsSolved = self.xmlActivity.getElementsByTagName('cells')[2]
+                self.styleCell3 = StyleCell(cellsSolved)
+                cells = cellsSolved.getElementsByTagName('cell')
+                #self.styleCell3 = StyleCell(self.xmlGrid3)
 
-                cells = xmlGrid3.getElementsByTagName('cell')
-                self.styleCell = StyleCell(self.xmlGrid3)
                 i = 0
                 for cell in cells:
-                    self.printxmlCellinCell(self.Grid3.Cells[i], cell)
+                    print "ho fa??"
+                    self.printxmlCellinCell(self.Grid3.Cells[i], cell, self.styleCell3)
+
                     i = i+1
             else:
+                print "pasa3"
                 self.Grid3.LoadWithImage(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid1 ,yGrid1, display_surf,self.pathToMedia)
-                self.styleCell = StyleCell(self.xmlGrid3)
         except:
+            print "pasa4"
             pass
 
         if self.xmlActivity.getElementsByTagName('cells').length >= 2:
@@ -221,16 +234,20 @@ class ComplexAssociation(Activity):
     
     	    i = 0
     	    id = 0
-            self.styleCell2 = StyleCell(cellsSecondary)
+
+            #print "imagepath=",self.Grid2.imagePath
+            if self.Grid2.imagePath == None:
+                self.styleCell2 = StyleCell(cellsSecondary)
     	    
-            for cell in cells2:
-    		    self.printxmlCellinCell(self.Grid2.Cells[i], cell, self.styleCell2)
-    		    '''Guardamos las imagenes en el Grid'''
-    		    self.Grid2.Cells[i].contentCell.img2 = self.Grid2.Cells[i].contentCell.img
-    		    self.Grid2.Cells[i].contentCell.id = id
-    		    id = id+1
-    		    i = i+1
+                for cell in cells2:
+                        self.printxmlCellinCell(self.Grid2.Cells[i], cell, self.styleCell2)
+                        '''Guardamos las imagenes en el Grid'''
+                        self.Grid2.Cells[i].contentCell.img2 = self.Grid2.Cells[i].contentCell.img
+                        self.Grid2.Cells[i].contentCell.id = id
+                        id = id+1
+                        i = i+1
     	    #indexCell = self.doBucle(cells2,indexCell)
+
 
         else:
             '''indexCell  = Numero de Celda que ocupa:'''
@@ -246,7 +263,10 @@ class ComplexAssociation(Activity):
             indexCell = self.doBucle(cells,indexCell)
 
         if self.Grid1.imagePath == None:
-            self.Grid1.unsort()
+            if(len(self.Grid1.Cells) == len(self.Grid3.Cells)):
+                self.Grid1.unsort(self.Grid3)
+            else:
+                self.Grid1.unsort()
 
         if self.Grid2.imagePath == None:
             self.Grid2.unsort()
@@ -390,10 +410,21 @@ class ComplexAssociation(Activity):
         return True
 
     def isGameFinished(self):
-        finish = True
-        for cell in self.Grid1.Cells:
-            if cell.contentCell.img2 != None:
-                finish = False
+        finish = False
+        desact = len(self.desactGrid1)
+        i = 0
+        for id in self.Grid1.ids:
+            print "id =", id
+            if id != "-1":
+                i += 1
+                
+        if i == 0:
+            i = len(self.Grid1.Cells)
+
+        if desact == i:
+            finish = True
+
+        print desact, " == ", i
         return finish
 
 
