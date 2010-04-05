@@ -239,7 +239,7 @@ class ClicActivities:
         elif  node.getAttribute('class') =='@text.FillInBlanks':
                         return True
         elif  node.getAttribute('class') =='@text.WrittenAnswer':
-                return True
+                        return False
         else:
              return False
     def executeActivity(self, node, media, settings):
