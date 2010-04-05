@@ -69,7 +69,6 @@ DEFAULT_BORDER_SIZE = 3
 
 class Images:
     CURSOR = "img/standardcursor.xbm"
-    CURSOR_MASK = "img/standardcursor_mask.xbm"
     CURSOR2 = "img/correcte.xbm"
     CURSOR2_MASK = "img/correct_mask.xbm"
     MASK = "img/arrow_mask.xbm"
