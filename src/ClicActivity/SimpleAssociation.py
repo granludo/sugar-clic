@@ -194,8 +194,8 @@ class SimpleAssociation(Activity):
     def doBucle(self,cells,i):
         id = 0
         for cell in cells:
-            self.printxmlCellinCell(self.Grid1.Cells[i], cell, self.styleCell)
-            '''Guardamos las imagenes en el Grid'''
+            self.printxmlCellinCell(self.Grid1.Cells[i], cell, self.styleCell)         
+            '''Guardamos las imagenes en el Grid'''   
             self.Grid1.Cells[i].contentCell.img2 = self.Grid1.Cells[i].contentCell.img
             self.Grid1.Cells[i].contentCell.id = id
             id = id+1
