@@ -33,21 +33,22 @@
 
 
 import Constants
-
+import pygame
 from Activity import  Activity
 from TextGrid import TextGrid
+from CheckButton import CheckButton
 from Grid import Grid
 from styleCell import StyleCell
-from CheckButton import CheckButton
 
 
-class TextComplete(Activity):
+class Identify(Activity):
 
     TextGrid = None
-    
-    pressedCell = None
+    targets = {} #Diccionari amb parells (idCell,encert) util quan hi ha optionLists
+    pressedCells = []
     checkButton = None
-    
+    finish = False
+
     def Load(self, display_surf ):
         self.setBgColor(display_surf)
         
@@ -55,29 +56,30 @@ class TextComplete(Activity):
         xmlTextGrid = self.xmlActivity.getElementsByTagName('document')[0]
         
         self.TextGrid = TextGrid(xmlTextGrid,self.mediaInformation,self.pathToMedia)
-        
-        self.TextGrid.Load(display_surf,xmlTextGrid,'complete')
-        
+
+        self.targets = self.TextGrid.Load(display_surf,xmlTextGrid,'identify')
+
         try:
-            checkText = xmlActivity.getElementsByTagName('checkButton')[0].firstChild.data
+            checkText = self.xmlActivity.getElementsByTagName('checkButton')[0].firstChild.data
         except:
             checkText = 'Comprueba'
-            
+        
         self.checkButton = CheckButton(checkText)
         
         
-    def OnEvent(self,PointOfMouse):
-        for cell in self.TextGrid.textCells:
-            if cell.isOverCell(PointOfMouse[0],PointOfMouse[1]):
-                print 'he asignado pressed'
-                self.pressedCell = cell
-                
-    def OnKeyEvent(self,key):
+        self.pressedCells = []
         
-        if self.pressedCell != None:
-            self.pressedCell.contentCell.processKey(key)
-                
-            
+    def OnEvent(self,PointOfMouse):
+        if self.checkButton.isOverCheck(PointOfMouse[0],PointOfMouse[1]):
+            self.finish = self.isCorrect()
+        else:
+            for cell in self.TextGrid.textCells:
+                if cell.isOverCell(PointOfMouse[0],PointOfMouse[1]):
+                    if cell.idCell in self.pressedCells:
+                        self.pressedCells.remove(cell.idCell)
+                    else:
+                        self.pressedCells.append(cell.idCell)
+        
 
     def OnRender(self,display_surf):
         display_surf.blit(self.containerBg,(0,0))
@@ -85,7 +87,24 @@ class TextComplete(Activity):
         '''repintamos el grid'''
         self.TextGrid.OnRender(display_surf)
         
+        for i in self.pressedCells:
+            pygame.draw.rect(display_surf,Constants.colorPressedCell,self.TextGrid.textCells[i].Rect,2)
+        
+        self.checkButton.OnRender(display_surf)
 
     def isGameFinished(self):
-        return False
+        
+        return self.finish
+    
+    def isCorrect(self):
+
+        targetKeys = self.targets.keys()
+        if len(self.pressedCells) == len(self.targets.keys()):
+            for pressed in self.pressedCells:
+                print pressed
+                if pressed not in targetKeys:
+                    return False
+            return True
+        else:
+            return False
     

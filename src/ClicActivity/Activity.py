@@ -196,7 +196,7 @@ class Activity(object):
                     return text
         except:
             return None
-    
+  
     def printxmlCellinCell(self,cell,xmlcell2,style):    
 
         cell.contentCell.img.fill(style.backgroundColor)
@@ -221,7 +221,6 @@ class Activity(object):
                 alignX = 0
                 alignY = 0
 
-            print "petaaakiiii2"
             #audio = xmlcell2.getElementByName('media')
 
             #if audio != None and audio.getAttribute('type') == 'PLAY_AUDIO':
@@ -245,17 +244,14 @@ class Activity(object):
 
             print overlapping
 
-            print "petaaakiiii3"
 
             print cell.contentCell.img.get_width(), ",",cell.contentCell.img.get_height()
             transX = 1
             transY = 1
             if (cell.contentCell.img.get_width()<widthImg):
                 transX = widthImg/cell.contentCell.img.get_width()
-                print "transX"
             if (cell.contentCell.img.get_height()<heightImg):
                 transY = heightImg/cell.contentCell.img.get_height()
-                print "transY"
 
 
             if alignX == 0:
@@ -285,8 +281,6 @@ class Activity(object):
                     newHeight = 0
                 else:
                     newHeight = (cellHeight - heightImg)/2
-                print "cellHeight", cellHeight
-                print "heightImg", heightImg
                 #newHeight = 0
             elif alignY == "top":
                 newHeight = 0

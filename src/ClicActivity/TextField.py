@@ -48,6 +48,7 @@ class TextField(object):
     font = None
     background = None
     textCell = None
+    resposta = ""
 
     
     def __init__(self,xmlTarget, gridFont, backgroundColor):
@@ -58,6 +59,7 @@ class TextField(object):
         target = xmlTarget.getElementsByTagName('target')
         idText = 0
         idTarget = 0
+        self.resposta = ""
         childs = xmlTarget.childNodes
         for child in childs:
             if child.nodeName == 'text':
@@ -133,6 +135,7 @@ class TextField(object):
     def processKey(self,key):
         textPart = self.writed.partition('|')
         tmp = textPart[0]
+        print key
         if key == 'backspace':
             if self.numCharsAdded > 1: #si nomes queda el cursor, no esborro mes
                 self.numCharsAdded -= 1
@@ -141,16 +144,21 @@ class TextField(object):
                     tmp += textPart[0][i]
         elif key == 'return':
             '''comproba si el contingut del TextField es correcte'''
-            self.writed = tmp + textPart[2]
+            '''self.writed = tmp + textPart[2]
             if self.writed.upper() == self.answer:
                 return True
-            return False
+            return False'''
+            self.resposta = tmp
+            print self.resposta
         else:
             tmp += key
             self.numCharsAdded += 1
         
         self.writed = tmp + textPart[1] + textPart[2]
-        return None
+        return self.resposta
+
+    def borraTmp(self):
+        tmp = ''
         
     def OnRender(self,display_surf):
         self.textCell.contentCell.img.fill(self.background)
@@ -182,5 +190,4 @@ class TextField(object):
             tmpSurf = self.font.render(self.writed,1,Constants.colorBlack)
             self.textCell.contentCell.img.blit(tmpSurf,(0,0))
         self.textCell.OnRender(display_surf)
-            
             

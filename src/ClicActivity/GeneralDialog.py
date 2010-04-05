@@ -174,7 +174,6 @@ class GeneralDialog(object):
         b = False
         
         while not b:
-            print fontSize
             lines = []
             line = ''
             words = text.split(' ')
@@ -191,7 +190,7 @@ class GeneralDialog(object):
             
             '''Mira si cap el text, sino fa la font mes petita i intenta de nou'''
             total_height = font.size(lines[0])[1] * len(lines)
-            print 'messageheight', total_height, 'rectheight', rect.height, 'numlines', len(lines)
+            
             if total_height > rect.height:
                 fontSize -= 2
             else:

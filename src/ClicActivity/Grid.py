@@ -76,7 +76,7 @@ class Grid(object):
                 g = int(g,16)
                 b = int(b,16)
                 self.backgroundColor = (r,g,b)
-                print 'he informado bgcolor',bgcolor
+                print 'he informado bgcolor',bgColor
             except:
                 '''Default color'''
                 pass
@@ -117,15 +117,20 @@ class Grid(object):
                     self.hasBorder = True
             except:
                 pass
-            
-            self.numRows = float(xml.getAttribute('rows'))
+            try:
+                self.numRows = float(xml.getAttribute('rows'))
+            except:
+                self.numRows = 1
             try:
                 self.numCols = float(xml.getAttribute('cols'))
             except:
-                '''Si l'atribut es columns es textGrid i rows <--> cols'''
-                tmp = self.numRows
-                self.numRows = float(xml.getAttribute('columns'))
-                self.numCols = tmp
+                try:
+                    '''Si l'atribut es columns es textGrid i rows <--> cols'''
+                    tmp = self.numRows
+                    self.numRows = float(xml.getAttribute('columns'))
+                    self.numCols = tmp
+                except:
+                    self.numCols = 1
         
             self.ids = []
             ids = None
@@ -350,9 +355,13 @@ class Grid(object):
         self.Cells[idCell1].contentCell = contentCell2
         self.Cells[idCell2].contentCell = contentCell1
 
-    def unsort(self):
+    def unsort(self, GridAux= None):
         i = 0
         ''' We do 50 times!!! maby only 10 loops necessary'''
         while (i< 50):
-            self.changeImages(random.randint(0, (self.rows*self.cols)-1),random.randint(0, (self.rows*self.cols)-1))
+            num1 = random.randint(0, (self.rows*self.cols)-1)
+            num2 = random.randint(0, (self.rows*self.cols)-1)
+            self.changeImages(num1,num2)
+            if(GridAux!= None):
+                GridAux.changeImages(num1,num2)
             i = i+1

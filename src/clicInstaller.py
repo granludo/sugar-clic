@@ -74,24 +74,36 @@ class Installer:
             self.window.move(0, 825)
             self.hasPaths = True
         
+        #unzip the file with metadata
         from_path = os.path.join(self.data_path, file)
         t = self.__unzip_file(from_path, self.data_path)
         
+        #parse XML to get all the information about the Clic
         clicInfo = minidom.parse(self.data_path + '/' + file)
+        
+        #information to download the clic and icon
         urlsC = clicInfo.getElementsByTagName('urlClic')   
         urlsI = clicInfo.getElementsByTagName('urlIcon') 
         
-        subjectP = clicInfo.getElementsByTagName('Subject')
-        authorP = clicInfo.getElementsByTagName('Author')
-        licenseP = clicInfo.getElementsByTagName('License')
-        themeP = clicInfo.getElementsByTagName('Theme')
-        languageP = clicInfo.getElementsByTagName('Language')
+        #information about the clic (subject, author, license, ...)
+        subjectElem = clicInfo.getElementsByTagName('Subject')
+        authorElem = clicInfo.getElementsByTagName('Author')
+        licenseElem = clicInfo.getElementsByTagName('License')
+        themeElem = clicInfo.getElementsByTagName('Theme')
+        languageElem = clicInfo.getElementsByTagName('Language')
+        
+        self.subject = ''
+        self.author = ''
+        self.license = ''
+        self.theme = ''
+        self.language = ''
        
-        self.subject =  subjectP[0].childNodes[0].data
-        self.author =  authorP[0].childNodes[0].data
-        self.license = licenseP[0].childNodes[0].data
-        self.theme = themeP[0].childNodes[0].data
-        self.language = languageP[0].childNodes[0].data
+        #check if all the fields are informed
+        if (subjectElem.length != 0 ) : self.subject =  self.__getText(subjectElem[0].childNodes)
+        if (authorElem.length != 0) : self.author = self.__getText(authorElem[0].childNodes)
+        if (licenseElem.length != 0) : self.license = self.__getText(licenseElem[0].childNodes)
+        if (themeElem.length != 0) : self.theme = self.__getText(themeElem[0].childNodes)
+        if (languageElem.length != 0) : self.language = self.__getText(languageElem[0].childNodes)
                        
         clic = {'Title': self.subject,
                 'Author': self.author,
@@ -105,6 +117,7 @@ class Installer:
         fileUrls = list()
         iconUrls = list()
         
+        #get all the urls (to download clic and to download icon
         for url in  urlsC:
             oneUrl = self.__getText(url.childNodes)
             if oneUrl != "" :
@@ -112,13 +125,14 @@ class Installer:
                 
         for url in  urlsI:
             iconUrls.append(url.childNodes[0].data)
-                
+         
+        #put all the information in a list to send it to the thread that downloads the files       
         l = list()
         l.append(clic)
         l.append(fileUrls)
         l.append(iconUrls)
             
-        #downloads the new clic file in background
+        #downloads the new clic file in background (every download has its own thread)
         hilo = threading.Thread(target=self.__download_file, args=(l))
         hilo.start()
         self.__delete_file(self.data_path, file)
