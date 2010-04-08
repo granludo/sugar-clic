@@ -90,5 +90,12 @@ class TextComplete(Activity):
         self.checkButton.OnRender(display_surf)
 
     def isGameFinished(self):
-        return False
+        return self.finish
+    
+    def isCorrect(self):
+        for cell in self.TextGrid.textCells:
+            if cell.contentCell.writed.upper() != cell.contentCell.answer:
+                return False
+        '''Si cap esta malament, tot esta correcre i acaba el joc'''
+        return True
     
