@@ -67,10 +67,12 @@ class TextComplete(Activity):
         
         
     def OnEvent(self,PointOfMouse):
-        for cell in self.TextGrid.textCells:
-            if cell.isOverCell(PointOfMouse[0],PointOfMouse[1]):
-                print 'he asignado pressed'
-                self.pressedCell = cell
+        if self.checkButton.isOverCheck(PointOfMouse[0],PointOfMouse[1]):
+            self.finish = self.isCorrect()
+        else:
+            for cell in self.TextGrid.textCells:
+                if cell.isOverCell(PointOfMouse[0],PointOfMouse[1]):
+                    self.pressedCell = cell
                 
     def OnKeyEvent(self,key):
         
@@ -85,6 +87,7 @@ class TextComplete(Activity):
         '''repintamos el grid'''
         self.TextGrid.OnRender(display_surf)
         
+        self.checkButton.OnRender(display_surf)
 
     def isGameFinished(self):
         return False
