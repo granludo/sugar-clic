@@ -77,7 +77,7 @@ class TextField(object):
 
     def Load(self,posx,posy,display_surf):
 
-        width = self.font.size(self.answer)[0] + 100
+        width = self.font.size(self.answer)[0] + 300
         height = self.font.size(self.answer)[1]
         
         rect = pygame.Rect(posx, posy, width, height)
