@@ -50,6 +50,7 @@ from ClicActivity.CrossWord import CrossWord
 from ClicActivity.FillInBlanks import FillInBlanks
 from ClicActivity.Complete import Complete
 from ClicActivity.Order import Order
+from ClicActivity.WrittenAnswer import WrittenAnswer
 from ClicActivity.Identify import Identify
 from ClicActivity.TextComplete import TextComplete
 from ClicActivity import Constants
@@ -238,6 +239,8 @@ class ClicActivities:
                         return True
         elif  node.getAttribute('class') =='@text.FillInBlanks':
                         return True
+        elif  node.getAttribute('class') =='@text.WrittenAnswer':
+                return True
         else:
              return False
     def executeActivity(self, node, media, settings):
@@ -269,6 +272,8 @@ class ClicActivities:
                         return FillInBlanks(node, media, settings)
         elif node.getAttribute('class') == '@text.Order' :
                         return Order(node, media, settings)
+        elif node.getAttribute('class') == '@text.WrittenAnswer' :
+                        return WrittenAnswer(node, media, settings)
         elif node.getAttribute('class') == '@text.Identify' :
                         return Identify(node, media, settings)
 
