@@ -173,6 +173,9 @@ class WrittenAnswer(Activity):
         cells = cellsPrimary.getElementsByTagName('cell')
         '''indexCell  = Numero de Celda que ocupa:'''
         indexCell = 0
+        cells = cellsPrimary.getElementsByTagName('cell')
+        self.styleCell = StyleCell(cellsPrimary)
+        indexCell = self.doBucle2(cells,indexCell)
         #indexCell = self.doBucle(cells, cellsSecondary, indexCell) # a CADA volta del bucle posar fer un ids[]
 
         '''Cargamos segundo Grid del XML'''
@@ -189,13 +192,14 @@ class WrittenAnswer(Activity):
             self.Grid2.Load(xGrid1+width + 5,(yGrid1+height)/2, display_surf)
 
         i = 0
-        id = 0
-
 
         #self.Grid3.LoadWithImage(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid1 ,yGrid1, display_surf,self.pathToMedia)
 
         if self.Grid1.imagePath == None:
             self.Grid1.unsort()
+
+        for cell in self.Grid1.Cells:
+            self.Grid1.ids.append(cell.contentCell.id)
 
         self.PressedCell = self.Grid1.Cells[0]
         self.PressedCell.actualColorCell = Constants.colorCell
@@ -206,7 +210,7 @@ class WrittenAnswer(Activity):
         print "entraaki???"
         print cells
         for cell in cells:
-            #self.printxmlCellinCell(self.Grid2.Cells[i], cell,self.styleCell)
+            #self.printxmlCellinCell(self.Grid1.Cells[i], cell,self.styleCell)
             print cell.toxml()
             resposta = cell.getElementsByTagName('p')[0].firstChild.data
             print resposta
@@ -215,6 +219,29 @@ class WrittenAnswer(Activity):
             #self.Grid2.Cells[i].contentCell.img2 = self.Grid1.Cells[i].contentCell.img
             #self.Grid2.Cells[i].contentCell.id = id
             id = id+1
+            i = i+1
+        return i
+
+    def doBucle2(self,cells,i):
+        id = 0
+        idsAux = []
+        for cell in cells:
+            self.printxmlCellinCell(self.Grid1.Cells[i], cell,self.styleCell)
+            '''Guardamos las imagenes en el Grid'''
+            self.Grid1.Cells[i].contentCell.img2 = self.Grid1.Cells[i].contentCell.img
+
+            if (self.Grid1.ids == []):
+                id = cell.getAttribute('id')
+                #Si los ids ya vienen por defecto los cojemos y sino los generamos incrementado en 1 cada vuelta
+                if cell.hasAttribute('id'):
+                    self.Grid1.Cells[i].contentCell.id = int(cell.getAttribute('id'))
+                    id2 = id
+                else:
+                    self.Grid1.Cells[i].contentCell.id = int(id2)
+            #Cargamos los ids directamente de la matriz en caso que sea una imagen i tenga un vector de ids
+            else:
+                self.Grid1.Cells[i].contentCell.id = int(self.Grid1.ids[i])
+
             i = i+1
         return i
 
