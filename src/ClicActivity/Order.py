@@ -38,6 +38,8 @@ import random
 
 from Activity import  Activity
 from TextGrid import TextGrid
+from Grid import Grid
+from styleCell import StyleCell
 
 
 class Order(Activity):
@@ -53,6 +55,18 @@ class Order(Activity):
     def Load(self, display_surf ):
         self.setBgColor(display_surf)
 
+        self.previous = False
+        
+        try:
+            xmlPrevious = self.xmlActivity.getElementsByTagName('prevScreen')[0]
+            self.previous = True
+            self.PrevGrid = Grid()
+            self.PrevGrid.Load(1,1,Constants.ACTIVITY_WIDTH, Constants.ACTIVITY_HEIGHT, Constants.MARGIN_TOP, Constants.MARGIN_LEFT,display_surf)
+            self.styleCell = StyleCell(xmlPrevious)
+            self.printxmlCellinCell(self.PrevGrid.Cells[0],xmlPrevious, self.styleCell)
+        except:
+            pass
+
         '''Loading constants for the activity'''
         xmlTextGrid = self.xmlActivity.getElementsByTagName('document')[0]
 
@@ -61,6 +75,10 @@ class Order(Activity):
         self.targets = self.TextGrid.Load(display_surf,xmlTextGrid)
 
     def OnEvent(self,PointOfMouse):
+        if self.previous:
+            '''Quan es fa el primer clic es passa a resoldre l'activitat'''
+            self.previous = False
+        else:
             nou = -1
             nou2 =-1
             id = -1
@@ -101,8 +119,11 @@ class Order(Activity):
     def OnRender(self,display_surf):
         display_surf.blit(self.containerBg,(0,0))
 
-        '''repintamos el grid'''
-        self.TextGrid.OnRefresh(display_surf)
+        if self.previous:
+            self.PrevGrid.OnRender(display_surf)
+        else:
+            '''repintamos el grid'''
+            self.TextGrid.OnRefresh(display_surf)
 
 
     def isGameFinished(self):
