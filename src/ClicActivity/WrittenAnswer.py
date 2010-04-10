@@ -254,6 +254,7 @@ class WrittenAnswer(Activity):
                 self.PressedCell = cell
                 self.Grid2.writed = ''
                 self.Grid2.numCharsAdded = 0
+                self.result = ""
             cont+= 1
 
 
@@ -262,6 +263,7 @@ class WrittenAnswer(Activity):
 
         print self.Grid1.ids
         self.result = self.Grid2.processKey(key)
+        self.Grid2.printCursor(0, 0)
         print "result= ", self.result
         cont = 0
         contCeles = 0
@@ -286,16 +288,20 @@ class WrittenAnswer(Activity):
                                 if(len(self.resolts) < len(self.Grid1.Cells) - idsNegatius):
                                     cont = self.NextPiece(cont) -1
                                     self.PressedCell = self.Grid1.Cells[cont+1]
-                                    self.Grid2.writed = ''
-                                    self.Grid2.numCharsAdded = 0
-                                    self.result = ""
                                 else:
                                     self.PressedCell = None
+                                    
+                                self.Grid2.writed = ''
+                                self.Grid2.numCharsAdded = 0
+                                self.result = ""
                         break
 
                                 #self.PressedCell.OnRender(display_surf)
                     contCeles += 1
                 cont += 1
+        #self.Grid2.writed = ''
+        #self.Grid2.numCharsAdded = 0
+        #self.result = ""
 
       
 

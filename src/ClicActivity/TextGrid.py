@@ -414,11 +414,12 @@ class TextGrid(object):
         conta2 = -1
         numAux = 0
         self.encerts = 0
+        
         for wordGroup in self.bloc:
             conta +=1
             if(self.tipus[conta]=="return"):
                 self.xActCell = self.X_NEW_LINE
-                self.yActCell += self.OFFSET_TOP_NEW_LINE/2
+                self.yActCell += self.OFFSET_TOP_NEW_LINE - 10
             else:
                 if (self.tipus[conta]=="text2"):
                         conta2 += 1
@@ -439,7 +440,7 @@ class TextGrid(object):
                         surf.fill(self.backgroundColor)
                         if (self.xActCell + self.font.size(word)[0]) > self.Rect.width - 10:
                             self.xActCell = self.X_NEW_LINE
-                            self.yActCell += self.OFFSET_TOP_NEW_LINE
+                            self.yActCell += self.OFFSET_TOP_NEW_LINE - 10
 
                         display_surf.blit(tmpSurf,(self.xActCell,self.yActCell))
 
@@ -453,7 +454,7 @@ class TextGrid(object):
                         self.xActCell = self.xActCell + rect.width + 5
                         if self.xActCell >= self.Rect.width:
                             self.xActCell = self.X_NEW_LINE
-                            self.yActCell += self.OFFSET_TOP_NEW_LINE
+                            #self.yActCell += self.OFFSET_TOP_NEW_LINE
 
 
 
