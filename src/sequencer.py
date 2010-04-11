@@ -176,6 +176,7 @@ class Sequencer:
                 elif(resultat == -1):
                     return -1
 
+                #Return another result if the result is the id of the next activity to execute
                 elif(resultat !=0 and resultat != None):
                     self.index = -1
                     trobat = False
@@ -183,6 +184,7 @@ class Sequencer:
                         self.index = self.index + 1
                         if(self.index == self.size-1):
                             last = True
+                        #if the id of the next activity is founded, execute the next avaliable activity
                         if(self.activities2[self.index].id == resultat) or trobat:
                             trobat = True
                             clic_activity = self.controller.get_clic_activity(self.activities[self.index]) #gets the next activity(tag) of the sequence

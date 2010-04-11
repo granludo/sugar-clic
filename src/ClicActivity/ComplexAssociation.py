@@ -52,15 +52,9 @@ class ComplexAssociation(Activity):
 
         self.desactGrid1 = []
         self.desactGrid2 = []
-        ''' ----Dos posibilidades en XML----
 
-         orientation   -1 Grid: Hay que doblar el tamano del Grid para duplicar las posibilidades
-            -2 Grids: Hay que printar todas las posibilidades
-        '''
-
-        '''Loading xml values'''
-
-        print "xmlActiviti!!!!!!!!!!!!!!!!!!"
+        #Loading xml attributes
+        #The attribute inverse is how are oriented the grids in the activity (which is the left or top grid)
         self.inverse = False
         try:
             if (self.xmlActivity.getAttribute('inverse') == 'true'):
@@ -69,15 +63,17 @@ class ComplexAssociation(Activity):
             self.inverse = False
 
 
+        #The attribute orientation is how are oriented the grids in the activity (vertical or horitzontal)
 	orientation =  self.xmlActivity.getElementsByTagName('layout')[0].getAttribute('position')
 
+        #Load 2 Grids
         xmlGrid1 = self.xmlActivity.getElementsByTagName('cells')[0]
         self.Grid1 = Grid(xmlGrid1, self.pathToMedia)
-        print xmlGrid1.toxml()
+
         xmlGrid2 = self.xmlActivity.getElementsByTagName('cells')[1]
         self.Grid2 = Grid(xmlGrid2, self.pathToMedia)
 
-
+        #Loading a third possible grid
         try:
             xmlGrid3 = self.xmlActivity.getElementsByTagName('cells')[2]
             self.Grid3 = Grid(xmlGrid3, self.pathToMedia)
@@ -85,11 +81,7 @@ class ComplexAssociation(Activity):
             self.Grid3 = Grid()
 
 
-        print "proporcionsss!!!!!!!!!!!!!!!!!"
-
-        print self.Grid1.cellWidth
-        print self.Grid2.cellWidth
-
+        #Calculate the size of grids
         width = self.Grid1.cellWidth * self.Grid1.numCols
         height = self.Grid1.cellHeight * self.Grid1.numRows
 
@@ -103,8 +95,6 @@ class ComplexAssociation(Activity):
             '''Sumamos el width al tamano total'''
             width = width + self.Grid2.cellWidth
 
-	print self.Grid2.cellHeight
-	print self.Grid1.cellHeight
 
         '''Maximize size'''
         coef = self.calculateCoef(width, height)
@@ -117,10 +107,6 @@ class ComplexAssociation(Activity):
         height2 = self.Grid2.cellHeight * self.Grid2.numRows * coef
         width2 = self.Grid2.cellWidth * self.Grid2.numCols * coef
 
-	print "paramentres"
-	print height
-	print self.Grid1.cellHeight
-	print self.Grid1.numRows
 
         '''Loading constants for the activity'''
 
@@ -130,25 +116,6 @@ class ComplexAssociation(Activity):
         '''Cargamos grupo de celdas comunes...'''
         cellsPrimary = self.xmlActivity.getElementsByTagName('cells')[0]
 
-        '''Load grid...
-            Notar que el NumCols se ha multiplicado x 2 para Duplicar el tamano del Grid...
-        '''
-
-        ''' print "1"
-	print self.Grid1.numRows
-	print self.Grid1.numCols
-	print width
-	print height
-	print xActual
-	print yActual
-
-        print "2"
-	print self.Grid2.numRows
-	print self.Grid2.numCols
-	print width2
-	print height2
-	print xActual
-	print yActual'''
 
         xGrid1 = (Constants.ACTIVITY_WIDTH - width) / 2
         yGrid1 = (Constants.ACTIVITY_HEIGHT - height) / 2
@@ -159,8 +126,10 @@ class ComplexAssociation(Activity):
             '''Sumamos el height al tamano'''
             newWidth = width
             newHeight = self.Grid2.cellHeight * coef
+            #Para centrarlo verticalmente calculamos el heighttotal menos los height de los dos grids unidos
             yGrid1 = (Constants.ACTIVITY_HEIGHT - height - newHeight - 10) / 2
             yGrid1 = max(yGrid1,yActual)
+            #Cargamos el Grid2 si tiene imagen o no (nos lo indica imagePath)
             if(self.Grid2.imagePath == None):
                 self.Grid2.Load(self.Grid2.numRows,self.Grid2.numCols,width,newHeight,xGrid1 ,yGrid1 + height +10, display_surf)
             else:
@@ -169,8 +138,10 @@ class ComplexAssociation(Activity):
             '''Sumamos el width al tamano total'''
             newWidth = self.Grid2.cellWidth * coef
             newHeight = height
+            #Para centrarlo horizontalmente calculamos el widthtotal menos los width de los dos grids unidos
             xGrid1 = (Constants.ACTIVITY_WIDTH - width - newWidth - 10) / 2
             xGrid1 = max(xGrid1,xActual)
+            #Cargamos el Grid2 si tiene imagen o no
             if(self.Grid2.imagePath == None):
                 self.Grid2.Load(self.Grid2.numRows,self.Grid2.numCols,newWidth,height,xGrid1 + width +10 ,yGrid1, display_surf)
             else:
@@ -181,8 +152,7 @@ class ComplexAssociation(Activity):
             self.Grid1.Load(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid1 ,yGrid1, display_surf)
 
         try:
-            print "pasa1"
-            '''if cells 3 not exists, only create an empty Grid'''
+            '''if cells 3 not exists, only create an empty Grid, '''
             if self.Grid3.imagePath == None:
                 if self.inverse == False:
                     self.Grid3.Load(self.Grid1.numRows,self.Grid1.numCols,width,height,xActual ,yActual, display_surf)
@@ -195,15 +165,11 @@ class ComplexAssociation(Activity):
 
                 i = 0
                 for cell in cells:
-                    print "ho fa??"
                     self.printxmlCellinCell(self.Grid3.Cells[i], cell, self.styleCell3)
-
                     i = i+1
             else:
-                print "pasa3"
                 self.Grid3.LoadWithImage(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid1 ,yGrid1, display_surf,self.pathToMedia)
         except:
-            print "pasa4"
             pass
 
         if self.xmlActivity.getElementsByTagName('cells').length >= 2:
@@ -225,17 +191,10 @@ class ComplexAssociation(Activity):
                 ''' 1 Imagen de fondo '''
                 self.Grid1.LoadWithImage(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid1 ,yGrid1, display_surf,self.pathToMedia)
 
-    	    print "whola"
-    	    #print cells[0].toxml()
-    	    #print cellsSecondary.toxml()
-    
-                #self.doBucle(cellsSecondary,0)
-    	    #indexCell = self.doBucle(cells,indexCell)
     
     	    i = 0
     	    id = 0
 
-            #print "imagepath=",self.Grid2.imagePath
             if self.Grid2.imagePath == None:
                 self.styleCell2 = StyleCell(cellsSecondary)
     	    
@@ -246,7 +205,6 @@ class ComplexAssociation(Activity):
                         self.Grid2.Cells[i].contentCell.id = id
                         id = id+1
                         i = i+1
-    	    #indexCell = self.doBucle(cells2,indexCell)
 
 
         else:
@@ -262,7 +220,9 @@ class ComplexAssociation(Activity):
             '''Recargamos el primer Grid del XML'''
             indexCell = self.doBucle(cells,indexCell)
 
+        #Unsort the Grids
         if self.Grid1.imagePath == None:
+            #If Grid3 is not an empty grid, we have to unsort like the grid1
             if(len(self.Grid1.Cells) == len(self.Grid3.Cells)):
                 self.Grid1.unsort(self.Grid3)
             else:
@@ -271,22 +231,23 @@ class ComplexAssociation(Activity):
         if self.Grid2.imagePath == None:
             self.Grid2.unsort()
 
+    #Cargamos el primer Grid
     def doBucle(self,cells,i):
         id = 0
         for cell in cells:
             self.printxmlCellinCell(self.Grid1.Cells[i], cell,self.styleCell)
-            print "---------------------------------------------------"
-            print "ids grid2"
-            print self.Grid1.ids
             '''Guardamos las imagenes en el Grid'''
             self.Grid1.Cells[i].contentCell.img2 = self.Grid1.Cells[i].contentCell.img
+           
             if (self.Grid1.ids == []):
                 id = cell.getAttribute('id')
+                #Si los ids ya vienen por defecto los cojemos y sino los generamos incrementado en 1 cada vuelta
                 if cell.hasAttribute('id'):
                     self.Grid1.Cells[i].contentCell.id = int(cell.getAttribute('id'))
                     id2 = id
                 else:
                     self.Grid1.Cells[i].contentCell.id = int(id2)
+            #Cargamos los ids directamente de la matriz en caso que sea una imagen i tenga un vector de ids
             else:
                 self.Grid1.Cells[i].contentCell.id = int(self.Grid1.ids[i])
 
@@ -296,25 +257,20 @@ class ComplexAssociation(Activity):
     def OnEvent(self,PointOfMouse):
         for cell in self.Grid1.Cells:
             if cell.isOverCell(PointOfMouse[0],PointOfMouse[1]):
-                #si la celda ya ha sido
+                #si la celda no ha sido solucionada o su id es diferente de -1 (valor predeterminado)
                 if self.desactGrid1.count(cell)==0 and cell.contentCell.id != -1:
                     # celda anterior apretada...
                     if self.PressedCell != None:
                         #los dos son iguales
-                        print 'id PressedCell = ',self.PressedCell.contentCell.id
-                        print 'id cell = ',cell.contentCell.id
                         if self.PressedCell.contentCell.id == cell.contentCell.id:
-                            #if self.PressedCell.idCell != cell.idCell:
+                            #si el Grid2 es el que esta apretado
 			    if self.PressedGrid ==2:
+                                #Depende de la orientacion cargamos en un grid u otro
                                 if self.inverse == False:
-                                    print 'COINCIDEN LAS CELDAS!!'
-                                    #self.desactGrid1.append(cell)
-                                    #cell.contentCell.img = cell.contentCell.img2
+                                    #COINCIDEN LAS CELDAS!!
                                     self.PressedCell.actualColorCell = Constants.colorCell
                                     cell.contentCell.img.fill(Constants.colorBackground)
                                     cell.contentCell.img = self.Grid3.Cells[cell.idCell].contentCell.img
-                                    #anulamos valor de img2 para indicar k ta ok
-                                    #cell.contentCell.img = Constants.colorCell
                                     cell.contentCell.img2 = None
                                     self.PressedCell = None
                                     self.desactGrid1.append(cell)
@@ -328,9 +284,7 @@ class ComplexAssociation(Activity):
                         #los dos son diferentes..
                         else:
 
-                            #self.changeSecondImage(self.PressedCell)
                             self.PressedCell.actualColorCell = Constants.colorCell
-                            #self.changeSecondImage(cell)
                             self.PressedCell = None
 			    self.PressedGrid = 1
 
@@ -338,32 +292,25 @@ class ComplexAssociation(Activity):
                     else:
                         self.PressedCell = cell
 			self.PressedGrid = 1
-                        #self.changeSecondImage(cell)
                     	self.PressedCell.actualColorCell = Constants.colorPressedCell
 
         for cell in self.Grid2.Cells:
             if cell.isOverCell(PointOfMouse[0],PointOfMouse[1]):
                 #si la celda ya ha sido
-                print self.desactGrid2.count(cell)
                 if self.desactGrid2.count(cell) == 0:
                     # celda anterior apretada...
                     if self.PressedCell != None:
                         #los dos son iguales
-                        print 'id PressedCell = ',self.PressedCell.contentCell.id
-                        print 'id cell = ',cell.contentCell.id
                         if self.PressedCell.contentCell.id == cell.contentCell.id:
-                            #if self.PressedCell.idCell != cell.idCell:
 			    if self.PressedGrid == 1:
                                 if self.inverse == False:
-                                    print 'COINCIDEN LAS CELDAS!!'
+                                    #'COINCIDEN LAS CELDAS!!'
                                     self.desactGrid1.append(self.PressedCell)
-                                    #cell.contentCell.img = cell.contentCell.img2
                                     self.PressedCell.actualColorCell = Constants.colorCell
                                     self.PressedCell.contentCell.img.fill(Constants.colorBackground)
                                     self.PressedCell.contentCell.img = self.Grid3.Cells[self.PressedCell.idCell].contentCell.img
                                     self.PressedCell.contentCell.borders=False
                                     #anulamos valor de img2 para indicar k ta ok
-                                    #cell.contentCell.img = Constants.colorCell
                                     self.PressedCell.contentCell.img2 = None
                                     self.PressedCell = None
                                 else:
@@ -376,9 +323,7 @@ class ComplexAssociation(Activity):
                             #los dos son diferentes..
                         else:
 
-                            #self.changeSecondImage(self.PressedCell)
                             self.PressedCell.actualColorCell = Constants.colorCell
-                            #self.changeSecondImage(cell)
                             self.PressedCell = None
 			    self.PressedGrid = 2
 
@@ -386,7 +331,6 @@ class ComplexAssociation(Activity):
                     else:
                         self.PressedCell = cell
 			self.PressedGrid = 2
-                        #self.changeSecondImage(cell)
                     	self.PressedCell.actualColorCell = Constants.colorPressedCell
 
 
@@ -414,7 +358,6 @@ class ComplexAssociation(Activity):
         desact = len(self.desactGrid1)
         i = 0
         for id in self.Grid1.ids:
-            print "id =", id
             if id != "-1":
                 i += 1
                 
@@ -424,7 +367,6 @@ class ComplexAssociation(Activity):
         if desact == i:
             finish = True
 
-        print desact, " == ", i
         return finish
 
 
