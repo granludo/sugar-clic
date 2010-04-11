@@ -273,7 +273,6 @@ locale/ca/activity.linfo
 locale/ca/LC_MESSAGES/net.netii.kumuolpc.ClicPlayer.mo
 clicActivitiesHandler.py
 clicInstaller.py
-InstallerInfo.py
 MyClicsView.pyc
 controller.pyc
 po/fr.po
@@ -314,7 +313,6 @@ img/app/appIcons/about.png
 img/app/appViews/PlayView.glade
 img/app/appViews/MyClicsView.glade
 img/app/appViews/mainView.glade
-img/app/appViews/InstallerInfo.glade
 img/app/appViews/AddClicsView.glade
 img/app/appViews/BrowserView.glade
 img/app/appViews/WSview.glade
