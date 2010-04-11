@@ -94,10 +94,33 @@ class IdentifyPanels(Activity):
         self.Grid1.Load(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid ,yGrid, display_surf)
 
         cells = xmlGrid1.getElementsByTagName('cell')
-
+        
+        '''Obtenim la imatge mes gran per redimensionar respecte el que augmenta aquest, 
+            per mantenir la relacio de tamany entre les diferents imatges'''
+        (maxWidth,maxHeight) = (0,0)
+        for cell in cells:
+            try:
+                pathImage = cell.getAttribute('image')
+                pathImage = self.mediaInformation[pathImage]
+                imagePath = self.pathToMedia+'/'+pathImage
+                img = pygame.image.load(imagePath).convert_alpha()
+                (imgWidth,imgHeight) = img.get_size()
+                if maxWidth < imgWidth:
+                    maxWidth = imgWidth
+                if maxHeight < imgHeight:
+                    maxHeigth = imgHeight
+            except:
+                pass
+        
+            inc = min((self.Grid1.cellWidth - maxWidth),(self.Grid1.cellHeight - maxHeight))
+            if inc < 0:
+                inc = 0
+        
+        print 'maxw,maxh,inc',maxWidth,maxHeight,inc
+        
         i = 0
         for cell in cells:
-            self.printxmlCellinCell(self.Grid1.Cells[i], cell, self.styleCell)
+            self.printxmlCellinCell(self.Grid1.Cells[i], cell, self.styleCell,inc)
 
             id  = int(cell.getAttribute('id') )
             self.Grid1.Cells[i].contentCell.id = id

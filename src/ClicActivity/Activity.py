@@ -197,7 +197,7 @@ class Activity(object):
         except:
             return None
   
-    def printxmlCellinCell(self,cell,xmlcell2,style):    
+    def printxmlCellinCell(self,cell,xmlcell2,style,increase = None):    
 
         cell.contentCell.img.fill(style.backgroundColor)
 
@@ -244,6 +244,16 @@ class Activity(object):
 
             print overlapping
 
+            if increase != None:
+                if increase > 0:
+                    widthImg += increase
+                    heightImg += increase
+                    newImg = pygame.transform.scale(newImg, (widthImg, heightImg))
+                    alignX = "middle"
+                    alignY = "middle"
+                else:
+                    alignX = 0
+                    alignY = 0   
 
             print cell.contentCell.img.get_width(), ",",cell.contentCell.img.get_height()
             transX = 1
