@@ -199,7 +199,7 @@ class Installer:
         
         
     def __intalling_clic_thread(self, *params):
-        self.__show_warning('ADDING CLIC...', None)
+        self.__show_warning('ONCE ADDED, YOU WILL HAVE THE CLIC ON YOUR LIST.', None)
         title = params[0]
         path = params[1]
         #get path of clic to install
@@ -228,9 +228,9 @@ class Installer:
                 
                 #if not, delete the folder created in new clics directory
                 self.delete_clic_folder(folder)
-                self.__show_warning('IT WAS NOT POSSIBLE TO ADD THE CLIC', None)
+                self.__show_warning('IT WAS NOT POSSIBLE TO ADD THE CLIC', title)
         else:
-            self.__show_warning('IT WAS NOT POSSIBLE TO ADD THE CLIC', None)
+            self.__show_warning('IT WAS NOT POSSIBLE TO ADD THE CLIC', title)
             
         #everything was correctly done
         #add clic information to database
@@ -244,7 +244,6 @@ class Installer:
                 }    
         self.controller.add_new_clic(clic)
         
-        self.__show_warning('ADDED, LOOK ON YOUR LIST', title)
          
         
     
