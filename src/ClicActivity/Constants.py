@@ -88,4 +88,6 @@ class Sounds:
     OK = "sounds/action_ok.mp3"
     ERROR = "sounds/action_error.mp3"
     CLICK = "sounds/click.mp3"
+    START = "sounds/start.mp3"
+
     

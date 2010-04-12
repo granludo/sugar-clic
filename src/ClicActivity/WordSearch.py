@@ -201,6 +201,9 @@ class WordSearch(Activity):
             self.textGrid.Cells[i].contentCell.letter = text[i]
             self.printLetterinCell(self.textGrid.Cells[i],self.xmlText)
 
+        '''Play start sound'''
+        self.start.play()
+        
     def OnEvent(self,PointOfMouse):
         '''
             -----------LOGICS OF THE GAME-----------

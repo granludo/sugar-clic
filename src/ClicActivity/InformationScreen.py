@@ -34,7 +34,7 @@
 
 import Constants
 
-
+import pygame
 from Activity import  Activity
 from Grid import Grid
 from styleCell import StyleCell
@@ -90,7 +90,9 @@ class InformationScreen(Activity):
                     i = i+1 
             else:
                 self.Grid1 = None
-      
+        
+        '''Play start sound'''
+        self.start.play()
 
     def OnEvent(self,PointOfMouse):
         '''
@@ -101,6 +103,8 @@ class InformationScreen(Activity):
                 if cell.redirect != None:
                     print "redirecciona!!!!!!!!!!!!!!!!!!!", cell.redirect
                     return cell.redirect
+        
+        self.click.play()
 
     def OnRender(self,display_surf):
         display_surf.blit(self.containerBg,(0,0))

@@ -204,7 +204,9 @@ class WrittenAnswer(Activity):
         self.PressedCell = self.Grid1.Cells[0]
         self.PressedCell.actualColorCell = Constants.colorCell
 
-
+        '''Play start sound'''
+        self.start.play()
+        
     def doBucle(self,cells,i):
         id = 0
         print "entraaki???"

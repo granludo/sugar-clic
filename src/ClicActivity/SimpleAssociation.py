@@ -191,6 +191,9 @@ class SimpleAssociation(Activity):
         if self.Grid2.imagePath == None:
             self.Grid2.unsort()
 
+        '''Play start sound'''
+        self.start.play()
+        
     def doBucle(self,cells,i):
         id = 0
         for cell in cells:

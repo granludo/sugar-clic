@@ -117,7 +117,9 @@ class DoublePuzzle(Activity):
     
         ''' A image 1 le quitamos la imagen'''
     
-
+        '''Play start sound'''
+        self.start.play()
+        
     def OnEvent(self,PointOfMouse):
         '''
             -----------LOGICS OF THE GAME-----------

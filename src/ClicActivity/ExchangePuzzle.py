@@ -99,6 +99,9 @@ class ExchangePuzzle(Activity):
                 i = i+1
         self.Grid1.unsort()
 
+        '''Play start sound'''
+        self.start.play()
+        
     def OnEvent(self,PointOfMouse):
         '''
             -----------LOGICS OF THE GAME-----------

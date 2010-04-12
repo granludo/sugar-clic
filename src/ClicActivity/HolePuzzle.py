@@ -119,6 +119,9 @@ class HolePuzzle(Activity):
         self.Grid1.Cells[0].contentCell.img.fill(Constants.colorBackground)
         self.Grid1.Cells[0].contentCell.id = -1
 
+        '''Play start sound'''
+        self.start.play()
+        
     def OnEvent(self,PointOfMouse):
         '''
             -----------LOGICS OF THE GAME-----------
