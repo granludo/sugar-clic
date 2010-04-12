@@ -49,6 +49,11 @@ class Activity(object):
     styleCell = None
     styleCell2 = None
     
+    click = None
+    ok = None
+    error = None
+    start = None
+    
     #creates a dictionary <name used in the activity, real name of the file> with all the media used in the Activity 
     def __create_media_dictionary(self, mediaInfo):
         media_dictionary = dict()
@@ -75,6 +80,12 @@ class Activity(object):
 
         '''pygame.mouse.set_cursor(*pygame.cursors.broken_x)'''
 
+        '''Loading sounds'''
+        pygame.mixer.init()
+        self.start = pygame.mixer.Sound(Constants.Sounds.START)
+        self.click = pygame.mixer.Sound(Constants.Sounds.CLICK)
+        self.ok = pygame.mixer.Sound(Constants.Sounds.OK)
+        self.error = pygame.mixer.Sound(Constants.Sounds.ERROR)
         
     def OnEvent(self,PointOfMouse):
         print 'MOTHER CLASS'

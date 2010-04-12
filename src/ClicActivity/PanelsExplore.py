@@ -132,7 +132,9 @@ class PanelsExplore(Activity):
             self.Grid3.Cells[i].contentCell.img = copia
             self.printxmlCellinCell(self.Grid3.Cells[i], cells[i],self.styleCell2)
         
-
+        '''Play start sound'''
+        self.start.play()
+        
     def OnEvent(self,PointOfMouse):
         '''
             -----------LOGICS OF THE GAME-----------

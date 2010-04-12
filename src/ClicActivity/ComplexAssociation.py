@@ -231,6 +231,9 @@ class ComplexAssociation(Activity):
         if self.Grid2.imagePath == None:
             self.Grid2.unsort()
 
+        '''Play start sound'''
+        self.start.play()
+        
     #Cargamos el primer Grid
     def doBucle(self,cells,i):
         id = 0

@@ -186,6 +186,9 @@ class CrossWord(Activity):
         self.selectNextCell()
         self.showClues()
         
+        '''Play start sound'''
+        self.start.play()
+        
     def OnEvent(self,PointOfMouse):
         
         '''Si click al textGrid'''

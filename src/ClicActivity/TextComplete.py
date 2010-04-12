@@ -65,6 +65,9 @@ class TextComplete(Activity):
             
         self.checkButton = CheckButton(checkText)
         
+        '''Play start sound'''
+        self.start.play()
+        
         
     def OnEvent(self,PointOfMouse):
         if self.checkButton.isOverCheck(PointOfMouse[0],PointOfMouse[1]):

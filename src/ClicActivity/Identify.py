@@ -69,6 +69,9 @@ class Identify(Activity):
         
         self.pressedCells = []
         
+        '''Play start sound'''
+        self.start.play()
+        
     def OnEvent(self,PointOfMouse):
         if self.checkButton.isOverCheck(PointOfMouse[0],PointOfMouse[1]):
             self.finish = self.isCorrect()
