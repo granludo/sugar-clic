@@ -52,9 +52,9 @@ class PanelsExplore(Activity):
         '''Loading xml values'''
         xmlGrid1 = self.xmlActivity.getElementsByTagName('cells')[0]
         xmlGrid2 = self.xmlActivity.getElementsByTagName('cells')[1]
-        self.Grid1 = Grid(xmlGrid1)
-        self.Grid2 = Grid(xmlGrid2)
-        self.Grid3 = Grid(xmlGrid2)
+        self.Grid1 = Grid(xmlGrid1, self.pathToMedia)
+        self.Grid2 = Grid(xmlGrid2, self.pathToMedia)
+        self.Grid3 = Grid(xmlGrid2, self.pathToMedia)
 
         self.styleCell = StyleCell(xmlGrid1)
         self.styleCell2 = StyleCell(xmlGrid2)
@@ -108,9 +108,12 @@ class PanelsExplore(Activity):
             xGrid1 = max(xGrid1,xActual)
             self.Grid2.Load(1,1,newWidth,height,xGrid1 + width ,yGrid1, display_surf)
             '''Grid auxiliar...'''
-            self.Grid3.Load(self.Grid1.numRows,self.Grid1.numCols,newWidth,height*self.Grid1.numRows,0,0, display_surf)
+            self.Grid3.Load(self.Grid1.numRows,self.Grid1.numCols,newWidth*self.Grid1.numCols,height*self.Grid1.numRows,0,0, display_surf)
         
         self.Grid1.Load(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid1 ,yGrid1, display_surf)
+
+        if(self.Grid1.imagePath!=None):
+            self.Grid1.LoadWithImage(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid1 ,yGrid1, display_surf,self.pathToMedia)
         
         self.Grid2.Cells[0].contentCell.img2 = self.Grid2.Cells[0].contentCell.img.copy()
 
@@ -127,11 +130,16 @@ class PanelsExplore(Activity):
         cells = xmlGrid2.getElementsByTagName('cell')
         i = 0 
         copia = self.Grid2.Cells[0].contentCell.img.copy()
-        for i in range(len(self.Grid1.Cells)):
-            copia = self.Grid2.Cells[0].contentCell.img.copy()
-            self.Grid3.Cells[i].contentCell.img = copia
-            self.printxmlCellinCell(self.Grid3.Cells[i], cells[i],self.styleCell2)
-        
+
+        if(self.Grid1.imagePath==None):
+            for i in range(len(cells)):
+                copia = self.Grid2.Cells[0].contentCell.img.copy()
+                self.Grid3.Cells[i].contentCell.img = copia
+                self.printxmlCellinCell(self.Grid3.Cells[i], cells[i],self.styleCell2)
+        else:
+            for i in range(len(cells)):
+                self.printxmlCellinCell(self.Grid3.Cells[i], cells[i],self.styleCell2)
+
         '''Play start sound'''
         self.start.play()
         
