@@ -31,6 +31,8 @@
     
     @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 '''
+from sugar.graphics.alert import NotifyAlert
+from sugar.graphics.alert import ConfirmationAlert
 from sugar.activity import activity
 import os
 import hulahop
@@ -118,13 +120,10 @@ class Manager:
         self.myClicsView.iconView.connect('selection-changed', self.__clics_view)
         self.myClicsView.bClics.connect('clicked', self.__generate_list)
         self.myClicsView.bPM.connect('clicked', self.__main_view)
-        self.myClicsView.buttonSI.connect('clicked', self.__remove_clic)
-        self.myClicsView.buttonNO.connect('clicked', self.__dont_remove_clic)
         
         #LOADING INSTALL CLICS VIEW and connect events
         self.addClicsView = AddClicsView()
         self.addClicsView.iconViewIns.connect('selection-changed', self.__installation_info_view) #item-activated 2 clicks //selection-changed 1 click
-        self.addClicsView.buttonOK.connect('clicked', self.__hide_installation_info_view)
         self.addClicsView.bInsMain.connect('clicked', self.__main_view)
    
         #LOADING BROWSER VIEW and connect events
@@ -158,7 +157,10 @@ class Manager:
             self.window.show() 
             gtk.main()
 
-            
+    def c(self, act):
+        self._activity = act
+        self.controller.c(act)
+        print 'act'
     #this method calls the clic player (pygame) until the user stops playing a clic 
     def updating(self):        
         if self.start_clic_view:
@@ -217,7 +219,6 @@ class Manager:
             self.__change_current_view(self.mainView.Main)    
         self.mainView.ImageSearch.set_from_file(self.icons_path + '/download.png')
         self.mainView.ImageMy.set_from_file(self.icons_path + '/clics.png')  
-        self.myClicsView.hboxSure.hide() 
         
     #Shows all the clics of the user (default clics, downloaded clics).
     def __available_clics_view(self, *args):
@@ -252,7 +253,6 @@ class Manager:
         self.myClicsView.labelButBorrar.set_text(_('DELETE CLICS'))
         self.myClicsView.imageBorrar.set_from_file(self.icons_path + '/borrar.png')
         self.__refresh_clics_view(True)
-        self.myClicsView.hboxSure.hide()
 
     #List of clics to remove (view)
     def __remove_clics_view(self, *args):
@@ -264,9 +264,6 @@ class Manager:
     
     #Shows the clics to install from Journal or a usb device (view)
     def __install_view (self, *args):
-
-        self.addClicsView.hboxInfoInstall.hide()
-        
         #change view to install clics view
         self.__change_current_view(self.addClicsView.vboxInstall)
         
@@ -275,8 +272,9 @@ class Manager:
         
         #check if the list is not empty
         if len(found_clics) == 0 :
-            self.addClicsView.labelInfoInstall.set_text(_('IT WAS NOT POSSIBLE TO FIND ANY CLIC'))
-            self.addClicsView.hboxInfoInstall.show()
+            title = _('Finding Clics')
+            msg = _('It was not possible to find any Clic')
+            self._alert_notify(title, msg)
         else:
             #reloads the view (shows all the clics available to install)
             self.__refresh_install_view()
@@ -294,9 +292,6 @@ class Manager:
         self.__refresh_install_view()
         self.addClicsView.vboxInstall.window.set_cursor(None)
     
-    #hides the information label in instllation view
-    def __hide_installation_info_view(self, *args):
-        self.addClicsView.hboxInfoInstall.hide()
         
     #reloads the view to install clics
     def __refresh_install_view(self, *args):
@@ -313,21 +308,21 @@ class Manager:
         title, folder, default = ManagerData.get_clic_data(self.myClicsView.iconView)
         self.controller.remove_clic(title, folder)
         self.__refresh_clics_view(False)
-        self.myClicsView.hboxSure.hide()
         
-    #the user doesn't want to remove the clic
-    def __dont_remove_clic(self, *args):
-        self.myClicsView.hboxSure.hide()
-
 
     #View that shows the clics (and its activities)
     #View that delete clics
     def __clics_view(self, *args):
         name, folder, default = ManagerData.get_clic_data(self.myClicsView.iconView)
         if self.currentClicsView == 'Delete':
-            text = _('DO YOU REALLY WANT TO DELETE') + ' "' + name +'"?'
-            self.myClicsView.labelSure.set_text(text)
-            self.myClicsView.hboxSure.show()
+            try:
+                self._activity
+            except AttributeError:
+                self.__remove_clic()
+            else:
+                title = _('Delete Clic') + ' (' + name + ')'
+                msg = _('Do you really want to delete that Clic?')
+                self._alert_confirmation_delete(title, msg)
         else :
             self.controller.load_clic_information(folder, default)
             self.playView.vboxPlay.show()
@@ -343,6 +338,7 @@ class Manager:
         self.browserView.browser = Browser()
         self.browserView.browser.show()
         self.browserView.vboxBrowser.add(self.browserView.browser)
+        self.browserView.vboxBrowser.reorder_child(self.browserView.browser, 0) 
         self.__change_current_view(self.browserView.vboxBrowser)
         self.browserView.browser.load_uri('http://www.sbennel.es')
             
@@ -381,6 +377,46 @@ class Manager:
             pygame.display.init()
             pygame.display.set_mode(self.playView.area.size_request())
             self.__play_clic()
+            
+    
+    #### Method: _alert_confirmation, create a Confirmation alert (with ok and cancel buttons standard)
+    # and add it to the UI. 
+    def _alert_confirmation_delete(self, title, msg):
+        alert = ConfirmationAlert()
+        alert.props.title= title
+        alert.props.msg = msg
+        alert.connect('response', self._alert_confirmation_delete_response_cb)
+        self._activity.add_alert(alert)
+
+
+    #### Method: _alert_response_cb, called when an alert object throws a response event. 
+    def _alert_confirmation_delete_response_cb(self, alert, response_id):
+        #remove the alert from the screen, since either a response button was clicked or
+        #there was a timeout
+        self._activity.remove_alert(alert)
+
+        #Do any work that is specific to the type of button clicked. 
+        if response_id is gtk.RESPONSE_OK:
+            self.__remove_clic()
+        elif response_id is gtk.RESPONSE_CANCEL:
+            print 'Cancel Button was clicked.'
+
+
+    #### Method: _alert_notify, create a Notify alert (with only an 'OK' button)
+    # and add it to the UI. 
+    def _alert_notify(self,title, msg):
+        #Notice that for a NotifyAlert, you pass the number of seconds in which to notify. By
+        #default, this is 5. 
+        alert = NotifyAlert(5)
+        alert.props.title= title
+        alert.props.msg = msg
+        alert.connect('response', self._alert_response_cb)
+        self._activity.add_alert(alert)
+        
+    def _alert_response_cb(self, alert, response_id):
+        if response_id is gtk.RESPONSE_OK:
+            self._activity.remove_alert(alert)
+
 
 #To execute outside the Xo laptop
 if __name__=="__main__":
