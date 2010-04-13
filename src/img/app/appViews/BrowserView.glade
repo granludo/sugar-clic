@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Sun Feb  7 23:29:10 2010 -->
+<!--Generated with glade3 3.4.5 on Tue Apr 13 18:47:51 2010 -->
 <glade-interface>
   <widget class="GtkWindow" id="window">
     <child>
       <widget class="GtkVBox" id="vboxBrowser">
         <property name="visible">True</property>
+        <child>
+          <placeholder/>
+        </child>
         <child>
           <widget class="GtkHButtonBox" id="hbuttonbox1">
             <property name="visible">True</property>
@@ -80,6 +83,7 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">False</property>
+            <property name="position">1</property>
           </packing>
         </child>
       </widget>

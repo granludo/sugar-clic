@@ -64,5 +64,6 @@ class BrowserView:
         
         self.vboxBrowser = self.xml.get_widget('vboxBrowser')
         self.browser = Browser()
-        self.vboxBrowser.add(self.browser)       
+        self.vboxBrowser.add(self.browser)  
+        self.vboxBrowser.reorder_child(self.browser, 0)     
         gtk.Container.remove(self.windowBrowser, self.vboxBrowser)

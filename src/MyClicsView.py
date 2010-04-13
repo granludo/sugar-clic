@@ -62,19 +62,9 @@ class MyClicsView:
         self.labelButAvaMain.set_text(_('MAIN MENU'))
         
         self.imageBorrar = self.xml.get_widget('imageClics')
-        self.imageSI = self.xml.get_widget('imageSI')
-        self.imageSI.set_from_file(self.icons_path + '/si.png')
-        self.imageNO = self.xml.get_widget('imageNO')
-        self.imageNO.set_from_file(self.icons_path + '/no.png')
+
         
         self.ImageHome = self.xml.get_widget('imageHome')
         self.ImageHome.set_from_file(self.icons_path + '/home.png')
-        
-        self.hboxSure = self.xml.get_widget('hboxSure')
-        self.buttonSI = self.xml.get_widget('buttonSI')
-
-        self.buttonNO = self.xml.get_widget('buttonNO')
-
-        self.labelSure = self.xml.get_widget('labelSure')
                 
         gtk.Container.remove(self.windowAva, self.vboxAvailable)
