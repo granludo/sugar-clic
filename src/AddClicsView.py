@@ -56,13 +56,6 @@ class AddClicsView:
         self.labelButInsMain = self.xml.get_widget('labelButInstallMain')
         self.labelButInsMain.set_text(_('MAIN MENU'))    
         
-        #informs the installation process
-        self.hboxInfoInstall = self.xml.get_widget('hboxInstallation')
-        self.labelInfoInstall = self.xml.get_widget('labelInstallation')
-        self.imageOK = self.xml.get_widget('imageOK')
-        self.imageOK.set_from_file(self.icons_path + '/si.png')
-        self.buttonOK = self.xml.get_widget('buttonOK')
-        
         self.bInsMain = self.xml.get_widget('buttonInstallMain')
         self.ImageHomeIns = self.xml.get_widget('imageHome')
         self.ImageHomeIns.set_from_file(self.icons_path + '/home.png')    

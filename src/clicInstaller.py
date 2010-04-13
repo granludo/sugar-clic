@@ -31,6 +31,7 @@
     
     @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 '''
+from sugar.graphics.alert import NotifyAlert
 from sugar.datastore import datastore
 from xml.dom import minidom
 import os
@@ -52,6 +53,9 @@ class Installer:
         self.data_path = ""
         self.hasPaths = False
         
+    def c(self, act):
+        self._activity = act
+        
 
             
     def __getText(self, nodelist):
@@ -65,7 +69,7 @@ class Installer:
     def get_clic_info(self, file):
         
         if (self.hasPaths == False) :
-            self.__load_info_label_and_paths()
+            self.__load_paths()
         
         #unzip the file with metadata
         from_path = os.path.join(self.data_path, file)
@@ -134,12 +138,16 @@ class Installer:
         
     #downloads the new clic file in background (every download has its own thread)
     def __download_file(self, *urls):
-        initial_text = 'ONCE DOWNLOADED, YOU WILL HAVE THE CLIC ON YOUR LIST.'
-        self.__show_warning(initial_text, None)
+
         
         clic = urls[0]
         file_urls_to_download = urls[1]
         icons_url_to_download = urls[2]
+        
+        #notify that it is starting to download the clic
+        title = _('Downloading Clic') + ' (' + clic['Title'] + ')'
+        msg = _('Once downloaded, you will have the Clic on your list')
+        self._alert_notify(title, msg)
 
         done = False                
         i = 0
@@ -182,13 +190,15 @@ class Installer:
             self.controller.add_new_clic(clic)
                            
         if done == False:
-            self.__show_warning('IT WAS NOT POSSIBLE TO DOWNLOAD', clic['Title'])
+            title = _('Download failed') + ' (' + clic['Title'] + ')'
+            msg = _('It was not possible to download the Clic')
+            self._alert_notify(title, msg)
             
             
     #installs a clic from datastore (Journal + devices) to the new clics folder (checking if it's a real clic.)
     def install_clic_from_datastore(self, title, path):
         if (self.hasPaths == False) :
-            self.__load_info_label_and_paths()
+            self.__load_paths()
 
         l = list()
         l.append(title)
@@ -199,9 +209,18 @@ class Installer:
         
         
     def __intalling_clic_thread(self, *params):
-        self.__show_warning('ONCE ADDED, YOU WILL HAVE THE CLIC ON YOUR LIST.', None)
+        
+        #get params of the thread
         title = params[0]
         path = params[1]
+        
+        
+        #notify that it is starting to add the Clic
+        title_alert = _('Adding Clic') + ' (' + title + ')'
+        msg_alert = _('Once added, you will have the Clic on your list')
+        self._alert_notify(title_alert, msg_alert)
+        
+
         #get path of clic to install
         from_path = path
         #get destination folder
@@ -228,9 +247,13 @@ class Installer:
                 
                 #if not, delete the folder created in new clics directory
                 self.delete_clic_folder(folder)
-                self.__show_warning('IT WAS NOT POSSIBLE TO ADD THE CLIC', title)
+                title_alert = _('Clic not added') + '(' + title + ')'
+                msg_alert = _('It was not possible to add the Clic')
+                self._alert_notify(title_alert, msg_alert)
         else:
-            self.__show_warning('IT WAS NOT POSSIBLE TO ADD THE CLIC', title)
+                title_alert = _('Clic not added') + '(' + title + ')'
+                msg_alert = _('It was not possible to add the Clic')
+                self._alert_notify(title_alert, msg_alert)
             
         #everything was correctly done
         #add clic information to database
@@ -313,36 +336,24 @@ class Installer:
                         datastore.delete(d.object_id)
             except Exception:
                 print 'not removed in datastore'
-
-    
-    #shows an alert to the user to inform about the status of the download (clic).  
-    def __show_warning(self, text, clic):     
-        if clic == None :
-            self.label.set_text(_(text))
-        else :
-            text = _(text) + '  (' + clic + ').'
-            self.label.set_text(text)
-        self.window.show()
-        self.button = self.xml.get_widget('button')
-        self.button.connect('clicked', self.__destroy_win)
         
-    def __load_info_label_and_paths(self):
-        #init paths
-        self.clics_path = paths.new_clics_path  #folder to install clics
+        #### Method: _alert_notify, create a Notify alert (with only an 'OK' button)
+    # and add it to the UI. 
+    def _alert_notify(self, title, msg):
+        #Notice that for a NotifyAlert, you pass the number of seconds in which to notify. By
+        #default, this is 5. 
+        alert = NotifyAlert(5)
+        alert.props.title = title
+        alert.props.msg = msg
+        alert.connect('response', self._alert_response_cb)
+        self._activity.add_alert(alert)
+        
+    def _alert_response_cb(self, alert, response_id):
+        if response_id is gtk.RESPONSE_OK:
+            self._activity.remove_alert(alert)
+            
+    def __load_paths(self):
+        self.clics_path = paths.new_clics_path
         self.data_path = paths.application_data_path
-        self.views_path = paths.views_path
-        self.icons_path = paths.icons_path           
-        #init popup window
-        self.xml = gtk.glade.XML(self.views_path + '/DownloadingInfo.glade')
-        self.window = self.xml.get_widget('window')
-        self.label = self.xml.get_widget('label')
-        self.ImageGo = self.xml.get_widget('image') 
-        self.ImageGo.set_from_file(self.icons_path + '/si.png')
-        self.window.resize(1200, 75)
-        self.window.move(0, 825)
-        self.hasPaths = True
-
-    def __destroy_win(self, *args):
-        self.window.hide()
     
 
