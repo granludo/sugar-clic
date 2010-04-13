@@ -117,5 +117,8 @@ class Controller:
     #installs a new clic from a file of datastore (Journal + devices)
     def install_new_clic_from_datastore(self, title, path):
         return self.installer.install_clic_from_datastore(title, path)
+    
+    def c(self, act):
+        self.__installer.c(act)
         
 
