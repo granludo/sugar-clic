@@ -182,16 +182,16 @@ class ComplexAssociation(Activity):
             cells = cellsPrimary.getElementsByTagName('cell')
             self.styleCell = StyleCell(cellsPrimary)
             '''indexCell  = Numero de Celda que ocupa:'''
+
+            if self.Grid1.imagePath != None:
+                # 1 Imagen de fondo
+                self.Grid1.LoadWithImage(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid1 ,yGrid1, display_surf,self.pathToMedia)
+
             indexCell = 0
             indexCell = self.doBucle(cells,indexCell)
             '''Cargamos segundo Grid del XML'''
             cells2 = cellsSecondary.getElementsByTagName('cell')
 
-            if self.Grid1.imagePath != None:
-                ''' 1 Imagen de fondo '''
-                self.Grid1.LoadWithImage(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid1 ,yGrid1, display_surf,self.pathToMedia)
-
-    
     	    i = 0
     	    id = 0
 
@@ -238,12 +238,15 @@ class ComplexAssociation(Activity):
     def doBucle(self,cells,i):
         id = 0
         for cell in cells:
-            self.printxmlCellinCell(self.Grid1.Cells[i], cell,self.styleCell)
+            print "i", i
+            #self.printxmlCellinCell(self.Grid1.Cells[i], cell,self.styleCell)
             '''Guardamos las imagenes en el Grid'''
-            self.Grid1.Cells[i].contentCell.img2 = self.Grid1.Cells[i].contentCell.img
+            #self.Grid1.Cells[i].contentCell.img2 = self.Grid1.Cells[i].contentCell.img
            
-            if (self.Grid1.ids == []):
+            if (self.Grid1.imagePath == None):
+                self.printxmlCellinCell(self.Grid1.Cells[i], cell,self.styleCell)
                 id = cell.getAttribute('id')
+                id2 = i
                 #Si los ids ya vienen por defecto los cojemos y sino los generamos incrementado en 1 cada vuelta
                 if cell.hasAttribute('id'):
                     self.Grid1.Cells[i].contentCell.id = int(cell.getAttribute('id'))
@@ -252,9 +255,27 @@ class ComplexAssociation(Activity):
                     self.Grid1.Cells[i].contentCell.id = int(id2)
             #Cargamos los ids directamente de la matriz en caso que sea una imagen i tenga un vector de ids
             else:
-                self.Grid1.Cells[i].contentCell.id = int(self.Grid1.ids[i])
+                if (self.Grid1.ids != []):
+                    self.Grid1.Cells[i].contentCell.id = int(self.Grid1.ids[i])
+                else:
+                    print "ideeeeeeeeee", cell.getAttribute('id')
+                    if (cell.hasAttribute('id')):
+                        print "acceptat"
+                        self.Grid1.Cells[i].contentCell.id = int(cell.getAttribute('id'))
+                    else:
+                         self.Grid1.Cells[i].contentCell.id = -1
 
             i = i+1
+
+        j = 0
+        if(self.Grid1.ids == []):
+            while j< len(self.Grid1.Cells):
+                print "j::",j
+                print "lenGrid1", len(self.Grid1.Cells)
+                print "lenIds", len(self.Grid1.ids)
+                self.Grid1.ids.append(self.Grid1.Cells[j].contentCell.id)
+                j += 1
+
         return i
 
     def OnEvent(self,PointOfMouse):
