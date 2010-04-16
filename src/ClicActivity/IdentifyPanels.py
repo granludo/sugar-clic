@@ -97,25 +97,28 @@ class IdentifyPanels(Activity):
         
         '''Obtenim la imatge mes gran per redimensionar respecte el que augmenta aquest, 
             per mantenir la relacio de tamany entre les diferents imatges'''
-        (maxWidth,maxHeight) = (0,0)
+        maxWidth = 0
+        maxHeight = 0
         for cell in cells:
             try:
                 pathImage = cell.getAttribute('image')
                 pathImage = self.mediaInformation[pathImage]
                 imagePath = self.pathToMedia+'/'+pathImage
                 img = pygame.image.load(imagePath).convert_alpha()
-                (imgWidth,imgHeight) = img.get_size()
+                imgWidth = img.get_width()
+                imgHeight = img.get_height()
+                print imgHeight, maxHeight
                 if maxWidth < imgWidth:
                     maxWidth = imgWidth
                 if maxHeight < imgHeight:
-                    maxHeigth = imgHeight
+                    maxHeight = imgHeight
             except:
                 pass
         
-            inc = min((self.Grid1.cellWidth - maxWidth),(self.Grid1.cellHeight - maxHeight))
-            if inc < 0:
-                inc = 0
-        
+        inc = min((self.Grid1.cellWidth - maxWidth),(self.Grid1.cellHeight - maxHeight))
+        if inc < 0:
+            inc = 0
+        print 'cellw, cellh' , self.Grid1.cellWidth, self.Grid1.cellHeight
         print 'maxw,maxh,inc',maxWidth,maxHeight,inc
         
         i = 0

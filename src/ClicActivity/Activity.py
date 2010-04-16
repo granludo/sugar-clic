@@ -216,21 +216,46 @@ class Activity(object):
         incremDreta = 0
         ''' Image in cell'''
         try:
-            pathImage =xmlcell2.getAttribute('image')
-
+            alignX = 0
+            alignY = 0
+                
             overlapping = False
+
+            pathImage =xmlcell2.getAttribute('image')
+            
+            pathImage = self.mediaInformation[pathImage]
+            imagePath = self.pathToMedia+'/'+pathImage
+    
+            newImg = pygame.image.load(imagePath).convert_alpha()
+            
+            aux = newImg.get_size()
+            widthImg, heightImg = aux
+            
+            '''si s'ha de mantenir relacio, la calculem aqui'''
+            if increase != None:
+                increase = int(increase)
+                widthImg += increase
+                heightImg += increase
+                if widthImg <= cell.contentCell.img.get_width() and heightImg <= cell.contentCell.img.get_height():
+                    newImg = pygame.transform.scale(newImg, (widthImg, heightImg))
+                    alignX = "middle"
+                    alignY = "middle"
+
+            
             if (xmlcell2.getAttribute('avoidOverlapping')=="true"):
                 overlapping = True
 
             print overlapping
             try:
                 align = xmlcell2.getAttribute('imgAlign')
-                alignsplit = align.split(',')
-                alignX = alignsplit[0]
-                alignY = alignsplit[1]
+                if align != '':
+                    alignsplit = align.split(',')
+                    alignX = alignsplit[0]
+                    alignY = alignsplit[1]
             except:
-                alignX = 0
-                alignY = 0
+                pass
+                #alignX = 0
+                #alignY = 0
 
             #audio = xmlcell2.getElementByName('media')
 
@@ -238,16 +263,9 @@ class Activity(object):
             #    audioPath = audio.getAttribute('file')
             #    cell.contentCell.audio = audioPath
             
-            pathImage = self.mediaInformation[pathImage]
-            imagePath = self.pathToMedia+'/'+pathImage
-    
-            newImg = pygame.image.load(imagePath).convert_alpha()
-    
             cellWidth = cell.contentCell.img.get_width()
             cellHeight = cell.contentCell.img.get_height()
 
-            aux = newImg.get_size()
-            widthImg, heightImg = aux
 
             newWidth = 0
             newHeight = 0
@@ -255,25 +273,15 @@ class Activity(object):
 
             print overlapping
 
-            if increase != None:
-                if increase > 0:
-                    widthImg += increase
-                    heightImg += increase
-                    newImg = pygame.transform.scale(newImg, (widthImg, heightImg))
-                    alignX = "middle"
-                    alignY = "middle"
-                else:
-                    alignX = 0
-                    alignY = 0   
-
-            print cell.contentCell.img.get_width(), ",",cell.contentCell.img.get_height()
             transX = 1
             transY = 1
+            
+            print cell.contentCell.img.get_width(), ",",cell.contentCell.img.get_height()
             if (cell.contentCell.img.get_width()<widthImg):
                 transX = widthImg/cell.contentCell.img.get_width()
             if (cell.contentCell.img.get_height()<heightImg):
                 transY = heightImg/cell.contentCell.img.get_height()
-
+        
 
             if alignX == 0:
                 newImg = pygame.transform.scale(newImg, (cell.contentCell.img.get_width(),  cell.contentCell.img.get_height()))
