@@ -57,7 +57,7 @@ class Finder:
         #for every mounted device, find all the zips
         for device in devices:
             try:
-                (ds_objects, count) = datastore.find({'mime_type':'application/zip', 'mountpoints':[device['id']]})
+                (ds_objects, count) = datastore.find({'mime_type':'application/zip', 'mountpoints':[device['id']], 'activity':_ACTIVITY_BUNDLE_ID})
                 #usb device
                 if device['title'].find('/media/') != -1 :
                     for d in ds_objects:
