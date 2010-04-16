@@ -3,22 +3,6 @@ msgid "Clics Player"
 msgstr "Clics Joueur"
 
 
-#manager.py
-msgid "SELECT A CLIC TO PLAY"
-msgstr "SÉLECTIONNE UN CLIC POUR JOUER"
-
-
-#manager.py
-msgid "SELECT A CLIC TO DELETE"
-msgstr "SÉLECTIONNE UN CLIC POUR SUPPRIMER"
-
-#manager.py
-msgid "DO YOU REALLY WANT TO DELETE"
-msgstr "ETES-VOUS SÛR DE VOULOIR SUPPRIMER"
-
-#manager.py
-msgid "CLICS TO DOWNLOAD"
-msgstr "CLICS POUR TÉLÉCHARGER"
 
 #manager.py
 msgid "MAIN MENU"
@@ -45,12 +29,93 @@ msgid "MY CLICS"
 msgstr "MES CLICS"
 
 #manager.py
+msgid "ADD CLICS"
+msgstr "AJOUTER CLICS"
+
+
+
+#manager.py
+msgid "SELECT A CLIC TO PLAY"
+msgstr "SÉLECTIONNE UN CLIC POUR JOUER"
+
+
+#manager.py
+msgid "SELECT A CLIC TO DELETE"
+msgstr "SÉLECTIONNE UN CLIC POUR SUPPRIMER"
+
+#manager.py
+msgid "CLICS TO DOWNLOAD"
+msgstr "CLICS POUR TÉLÉCHARGER"
+
+#manager.py
 msgid "SELECT A CLIC TO ADD"
 msgstr "SÉLECTIONNE UN CLIC POUR AJOUTER"
 
+
 #manager.py
-msgid "ADD CLICS"
-msgstr "AJOUTER CLICS"
+msgid "Delete Clic"
+msgstr "Supprimer Clic"
+
+#manager.py
+msgid "Do you really want to delete that Clic?"
+msgstr "Etes-vous sûr de vouloir supprimer ce Clic?"
+
+#clicInstaller.py
+msgid "Adding Clic"
+msgstr "Ajouter Clic"
+
+#clicInstaller.py
+msgid "Once added, you will have the Clic on your list"
+msgstr "Une fois ajout, vous aurez le Clic dans votre liste"
+
+#clicInstaller.py
+msgid "Clic not added"
+msgstr "Clic non ajouté"
+
+#manager.py
+msgid "It was not possible to add the Clic"
+msgstr "Il n'était pas possible de ajouter le Clic"
+
+#manager.py
+msgid "Finding Clics"
+msgstr "En cherchant Clics"
+
+#manager.py
+msgid "It was not possible to find any Clic"
+msgstr "Il n'était pas possible de trouver aucun Clic"
+
+
+
+#clicInstaller.py
+msgid "Downloading Clic"
+msgstr "Téléchargement Clic"
+
+#clicInstaller.py
+msgid "Once downloaded, you will have the Clic on your list"
+msgstr "Une fois téléchargé, vous aurez le Clic dans votre liste"
+
+#clicInstaller.py
+msgid "Download failed"
+msgstr "Télécharge échoué"
+
+#clicInstaller.py
+msgid "It was not possible to download the Clic"
+msgstr "Il n'était pas possible de télécharger le Clic"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #manager.py
 msgid "IT WAS NOT POSSIBLE TO FIND ANY CLIC"
@@ -72,6 +137,3 @@ msgstr "UNE FOIS TÉLÉCHARGÉ, VOUS AUREZ LE CLIC DANS VOTRE LISTE."
 msgid "IT WAS NOT POSSIBLE TO DOWNLOAD"
 msgstr "IL N'ÉTAIT PAS POSSIBLE DE TÉLÉCHARGER"
 
-#clicInstaller.py
-msgid "ONCE ADDED, YOU WILL HAVE THE CLIC ON YOUR LIST."
-msgstr "UNE FOIS AJOUT, VOUS AUREZ LE CLIC DANS VOTRE LISTE."
