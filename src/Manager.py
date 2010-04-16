@@ -157,10 +157,11 @@ class Manager:
             self.window.show() 
             gtk.main()
 
-    def c(self, act):
-        self._activity = act
-        self.controller.c(act)
-        print 'act'
+    def get_activity(self, activity):
+        self._activity = activity
+        self.controller.get_activity(activity)
+
+
     #this method calls the clic player (pygame) until the user stops playing a clic 
     def updating(self):        
         if self.start_clic_view:
