@@ -60,7 +60,7 @@ class ClicPlayerActivity(activity.Activity):
 
         # Step 1: Load class, which creates Manager.widget
         self.Manager = Manager()
-        self.Manager.c(self)
+        self.Manager.get_activity(self)
 
         # Step 2: Remove the widget's parent
         if self.Manager.widget.parent:

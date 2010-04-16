@@ -118,7 +118,8 @@ class Controller:
     def install_new_clic_from_datastore(self, title, path):
         return self.installer.install_clic_from_datastore(title, path)
     
-    def c(self, act):
-        self.__installer.c(act)
+    #gets XO-activity, necessary to show alerts
+    def get_activity(self, activity):
+        self.__installer.get_activity(activity)
         
 

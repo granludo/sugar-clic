@@ -53,8 +53,8 @@ class Installer:
         self.data_path = ""
         self.hasPaths = False
         
-    def c(self, act):
-        self._activity = act
+    def get_activity(self, activity):
+        self._activity = activity
         
 
             
@@ -203,12 +203,12 @@ class Installer:
         l = list()
         l.append(title)
         l.append(path)
-        hilo = threading.Thread(target=self.__intalling_clic_thread, args=(l))
+        hilo = threading.Thread(target=self.__installing_clic_thread, args=(l))
         hilo.start()     
         
         
         
-    def __intalling_clic_thread(self, *params):
+    def __installing_clic_thread(self, *params):
         
         #get params of the thread
         title = params[0]
@@ -337,7 +337,7 @@ class Installer:
             except Exception:
                 print 'not removed in datastore'
         
-        #### Method: _alert_notify, create a Notify alert (with only an 'OK' button)
+    #### Method: _alert_notify, create a Notify alert (with only an 'OK' button)
     # and add it to the UI. 
     def _alert_notify(self, title, msg):
         #Notice that for a NotifyAlert, you pass the number of seconds in which to notify. By
