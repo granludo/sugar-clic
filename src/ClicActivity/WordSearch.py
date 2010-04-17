@@ -202,7 +202,7 @@ class WordSearch(Activity):
             self.printLetterinCell(self.textGrid.Cells[i],self.xmlText)
 
         '''Play start sound'''
-        self.start.play()
+        self.play_sound(Constants.Sounds.START)
         
     def OnEvent(self,PointOfMouse):
         '''
@@ -216,6 +216,8 @@ class WordSearch(Activity):
                     print cell.contentCell.id
                     self.pressedCellIni = cell
                     self.pressedCellIni.actualColorCell = Constants.colorPressedCell
+                    
+                    self.play_sound(Constants.Sounds.CLICK)
         else:
             select = []
             for cell in self.textGrid.Cells:
@@ -272,6 +274,9 @@ class WordSearch(Activity):
                 if clueID >= 0 and self.clues[clueID] != None:
                     self.encerts += 1
                     self.clues[clueID] = None
+                    
+                    self.play_sound(Constants.Sounds.OK)
+                    
                     if self.hasCells:
                         if self.cellsGrid.imagePath != None:
                             '''Una sola imatge dividida a les cells'''
@@ -307,6 +312,10 @@ class WordSearch(Activity):
                     elif orientacio == 'esqDalt':
                         for i in range(self.pressedCellIni.contentCell.id,self.pressedCellFi.contentCell.id-1, -self.cols-1):
                             self.printLetterinCell(self.textGrid.Cells[i],self.xmlText,Constants.colorWhite,Constants.colorBlack)
+                else:
+                    '''No se acierta palabra -> reproducimos sonido de error'''
+                    self.play_sound(Constants.Sounds.ERROR)
+                    
                 '''Reset pressedCells'''
                 self.pressedCellIni.contentCell.border = self.textHasBorder
                 self.pressedCellIni = None

@@ -120,7 +120,7 @@ class HolePuzzle(Activity):
         self.Grid1.Cells[0].contentCell.id = -1
 
         '''Play start sound'''
-        self.start.play()
+        self.play_sound(Constants.Sounds.START)
         
     def OnEvent(self,PointOfMouse):
         '''
@@ -158,7 +158,7 @@ class HolePuzzle(Activity):
                             ''' celda gris esta abajo '''
                             print 'calculo=',(idCelda + self.Grid1.numCols)
                             self.Grid1.changeImages(cell.idCell,self.Grid1.Cells[int(idCelda + self.Grid1.numCols)].idCell )
-                        
+                        self.play_sound(Constants.Sounds.CLICK)
                     except:
                         pass
                     

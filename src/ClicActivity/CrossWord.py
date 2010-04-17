@@ -187,7 +187,7 @@ class CrossWord(Activity):
         self.showClues()
         
         '''Play start sound'''
-        self.start.play()
+        self.play_sound(Constants.Sounds.START)
         
     def OnEvent(self,PointOfMouse):
         
@@ -234,6 +234,9 @@ class CrossWord(Activity):
             
             self.pressedTextCell.contentCell.letter = keyPressed
             print 'letra grabada: ',self.pressedTextCell.contentCell.letter
+        
+        '''Reprodueix so de click'''
+        self.play_sound(Constants.Sounds.CLICK)
         
         '''Imprimeix el canvi i selecciona la seguent'''
         self.printLetterinCell(self.pressedTextCell,self.xmlText)

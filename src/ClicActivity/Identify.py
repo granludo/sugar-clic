@@ -70,7 +70,7 @@ class Identify(Activity):
         self.pressedCells = []
         
         '''Play start sound'''
-        self.start.play()
+        self.play_sound(Constants.Sounds.START)
         
     def OnEvent(self,PointOfMouse):
         if self.checkButton.isOverCheck(PointOfMouse[0],PointOfMouse[1]):
@@ -82,6 +82,7 @@ class Identify(Activity):
                         self.pressedCells.remove(cell.idCell)
                     else:
                         self.pressedCells.append(cell.idCell)
+            self.play_sound(Constants.Sounds.CLICK)
         
 
     def OnRender(self,display_surf):

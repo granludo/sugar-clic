@@ -78,7 +78,7 @@ class FillInBlanks(Activity):
             self.options = False
             
         '''Play start sound'''
-        self.start.play()
+        self.play_sound(Constants.Sounds.START)
         
     def OnEvent(self,PointOfMouse):
         if self.previous:
@@ -103,8 +103,6 @@ class FillInBlanks(Activity):
                     else:
                         self.pressedCell = None
                         
-        '''Play start sound'''
-        self.start.play()
                  
     def OnKeyEvent(self,key):
         print 'idpressed', self.idPressed

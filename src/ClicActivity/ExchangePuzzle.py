@@ -100,7 +100,7 @@ class ExchangePuzzle(Activity):
         self.Grid1.unsort()
 
         '''Play start sound'''
-        self.start.play()
+        self.play_sound(Constants.Sounds.START)
         
     def OnEvent(self,PointOfMouse):
         '''
@@ -117,9 +117,11 @@ class ExchangePuzzle(Activity):
                         idCell1 = self.PressedCell.idCell
                         idCell2 = cell.idCell
                         self.Grid1.changeImages(idCell1,idCell2 )
-                    
-                    ''' else: no cambiamos -> no hacemos nada... '''
-
+                        self.play_sound(Constants.Sounds.OK)
+                    else: 
+                        '''no cambiamos -> no hacemos nada...pero reproducimos sonido de error'''
+                        self.play_sound(Constants.Sounds.ERROR)
+                        
                     ''' borramos margenes.. '''
                     self.PressedCell.actualColorCell = Constants.colorCell
                     self.PressedCell = None
@@ -128,6 +130,7 @@ class ExchangePuzzle(Activity):
                     '''no hay ninguna anterior apretada'''
                     self.PressedCell = cell
                     self.PressedCell.actualColorCell = Constants.colorPressedCell
+                    self.play_sound(Constants.Sounds.CLICK)
            
 
     def OnRender(self,display_surf):

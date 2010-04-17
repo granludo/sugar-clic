@@ -49,10 +49,6 @@ class Activity(object):
     styleCell = None
     styleCell2 = None
     
-    click = None
-    ok = None
-    error = None
-    start = None
     
     #creates a dictionary <name used in the activity, real name of the file> with all the media used in the Activity 
     def __create_media_dictionary(self, mediaInfo):
@@ -80,12 +76,9 @@ class Activity(object):
 
         '''pygame.mouse.set_cursor(*pygame.cursors.broken_x)'''
 
-        '''Loading sounds'''
+        '''Initiate mixer to play sounds'''
         pygame.mixer.init()
-        self.start = pygame.mixer.Sound(Constants.Sounds.START)
-        self.click = pygame.mixer.Sound(Constants.Sounds.CLICK)
-        self.ok = pygame.mixer.Sound(Constants.Sounds.OK)
-        self.error = pygame.mixer.Sound(Constants.Sounds.ERROR)
+        
         
     def OnEvent(self,PointOfMouse):
         print 'MOTHER CLASS'
@@ -456,6 +449,6 @@ class Activity(object):
                 #sound = pygame.mixer.Sound("/home/roger/Escriptori/monkeystomp/data/jump.wav")
                 pygame.mixer.music.play()
             except:
-                print "No se pudo cargar el sonido:", fullname
+                print "No se pudo cargar el sonido:", filename
                 raise SystemExit, message
             

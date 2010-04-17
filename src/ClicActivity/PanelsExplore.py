@@ -141,7 +141,7 @@ class PanelsExplore(Activity):
                 self.printxmlCellinCell(self.Grid3.Cells[i], cells[i],self.styleCell2)
 
         '''Play start sound'''
-        self.start.play()
+        self.play_sound(Constants.Sounds.START)
         
     def OnEvent(self,PointOfMouse):
         '''
@@ -157,6 +157,8 @@ class PanelsExplore(Activity):
                     self.Grid2.Cells[0].contentCell.img  = self.Grid3.Cells[cell.contentCell.id].contentCell.img
                 else:
                     self.Grid2.Cells[0].contentCell.img = self.Grid2.Cells[0].contentCell.img2
+        
+        self.play_sound(Constants.Sounds.CLICK)
 
     def OnRender(self,display_surf):
         display_surf.blit(self.containerBg,(0,0))
