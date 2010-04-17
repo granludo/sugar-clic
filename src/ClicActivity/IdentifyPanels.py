@@ -145,7 +145,7 @@ class IdentifyPanels(Activity):
             pass
 
         '''Play start sound'''
-        self.start.play()
+        self.play_sound(Constants.Sounds.START)
         
 
     def OnEvent(self,PointOfMouse):
@@ -163,7 +163,7 @@ class IdentifyPanels(Activity):
                 else:
                         self.play_sound(Constants.Sounds.ERROR)
 
-                        '''pygame.mixer.music.play()'''
+
 
 
 

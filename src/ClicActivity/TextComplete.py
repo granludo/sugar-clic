@@ -66,7 +66,7 @@ class TextComplete(Activity):
         self.checkButton = CheckButton(checkText)
         
         '''Play start sound'''
-        self.start.play()
+        self.play_sound(Constants.Sounds.START)
         
         
     def OnEvent(self,PointOfMouse):

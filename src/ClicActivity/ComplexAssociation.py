@@ -232,7 +232,7 @@ class ComplexAssociation(Activity):
             self.Grid2.unsort()
 
         '''Play start sound'''
-        self.start.play()
+        self.play_sound(Constants.Sounds.START)
         
     #Cargamos el primer Grid
     def doBucle(self,cells,i):
@@ -305,11 +305,13 @@ class ComplexAssociation(Activity):
                                     self.PressedCell.contentCell.img = self.Grid3.Cells[0].contentCell.img
                                     self.PressedCell.contentCell.img2 = None
                                     self.PressedCell = None
+                                self.play_sound(Constants.Sounds.OK)
                         #los dos son diferentes..
                         else:
 
                             self.PressedCell.actualColorCell = Constants.colorCell
                             self.PressedCell = None
+                            self.play_sound(Constants.Sounds.ERROR)
 			    self.PressedGrid = 1
 
                     #celda anterior no apretada
@@ -317,6 +319,7 @@ class ComplexAssociation(Activity):
                         self.PressedCell = cell
 			self.PressedGrid = 1
                     	self.PressedCell.actualColorCell = Constants.colorPressedCell
+                        self.play_sound(Constants.Sounds.CLICK)
 
         for cell in self.Grid2.Cells:
             if cell.isOverCell(PointOfMouse[0],PointOfMouse[1]):
@@ -344,11 +347,13 @@ class ComplexAssociation(Activity):
                                     cell.contentCell.img = self.Grid3.Cells[0].contentCell.img
                                     cell.contentCell.img2 = None
                                     self.PressedCell = None
+                                self.play_sound(Constants.Sounds.OK)
                             #los dos son diferentes..
                         else:
 
                             self.PressedCell.actualColorCell = Constants.colorCell
                             self.PressedCell = None
+                            self.play_sound(Constants.Sounds.ERROR)
 			    self.PressedGrid = 2
 
                     #celda anterior no apretada
@@ -356,6 +361,7 @@ class ComplexAssociation(Activity):
                         self.PressedCell = cell
 			self.PressedGrid = 2
                     	self.PressedCell.actualColorCell = Constants.colorPressedCell
+                        self.play_sound(Constants.Sounds.CLICK)
 
 
     def changeSecondImage(self,cell):

@@ -118,7 +118,7 @@ class DoublePuzzle(Activity):
         ''' A image 1 le quitamos la imagen'''
     
         '''Play start sound'''
-        self.start.play()
+        self.play_sound(Constants.Sounds.START)
         
     def OnEvent(self,PointOfMouse):
         '''

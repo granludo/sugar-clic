@@ -205,7 +205,7 @@ class WrittenAnswer(Activity):
         self.PressedCell.actualColorCell = Constants.colorCell
 
         '''Play start sound'''
-        self.start.play()
+        self.play_sound(Constants.Sounds.START)
         
     def doBucle(self,cells,i):
         id = 0
@@ -257,6 +257,9 @@ class WrittenAnswer(Activity):
                 self.Grid2.writed = ''
                 self.Grid2.numCharsAdded = 0
                 self.result = ""
+                
+                self.play_sound(Constants.Sounds.CLICK)
+                
             cont+= 1
 
 
@@ -296,6 +299,8 @@ class WrittenAnswer(Activity):
                                 self.Grid2.writed = ''
                                 self.Grid2.numCharsAdded = 0
                                 self.result = ""
+                                self.play_sound(Constants.Sounds.OK)
+                            
                         break
 
                                 #self.PressedCell.OnRender(display_surf)

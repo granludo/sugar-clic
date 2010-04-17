@@ -192,7 +192,7 @@ class SimpleAssociation(Activity):
             self.Grid2.unsort()
 
         '''Play start sound'''
-        self.start.play()
+        self.play_sound(Constants.Sounds.START)
         
     def doBucle(self,cells,i):
         id = 0
@@ -228,14 +228,16 @@ class SimpleAssociation(Activity):
                                 cell.contentCell.img2 = None
                                 self.PressedCell.contentCell.img2 = None
                                 self.PressedCell = None
-
+                                
+                                self.play_sound(Constants.Sounds.OK)
                             #los dos son diferentes..
                         else:
-
                             #self.changeSecondImage(self.PressedCell)
                             self.PressedCell.actualColorCell = Constants.colorCell
                             #self.changeSecondImage(cell)
                             self.PressedCell = None
+                            
+                            self.play_sound(Constants.Sounds.ERROR)
 
                     #celda anterior no apretada
                     else:
@@ -243,6 +245,8 @@ class SimpleAssociation(Activity):
 			self.PressedGrid = 1
                         #self.changeSecondImage(cell)
                     	self.PressedCell.actualColorCell = Constants.colorPressedCell
+                        
+                        self.play_sound(Constants.Sounds.CLICK)
 
         for cell in self.Grid2.Cells:
             if cell.isOverCell(PointOfMouse[0],PointOfMouse[1]):
@@ -268,7 +272,8 @@ class SimpleAssociation(Activity):
                                 cell.contentCell.img2 = None
                                 self.PressedCell.contentCell.img2 = None
                                 self.PressedCell = None
-
+                                
+                                self.play_sound(Constants.Sounds.OK)
                             #los dos son diferentes..
                         else:
 
@@ -276,6 +281,8 @@ class SimpleAssociation(Activity):
                             self.PressedCell.actualColorCell = Constants.colorCell
                             #self.changeSecondImage(cell)
                             self.PressedCell = None
+                            self.play_sound(Constants.Sounds.ERROR)
+
 			    #self.PressedGrid = 2
 			    #self.PressedCell.actualColorCell = Constants.colorPressedCell
 
@@ -285,6 +292,7 @@ class SimpleAssociation(Activity):
 			self.PressedGrid = 2
                         #self.changeSecondImage(cell)
                     	self.PressedCell.actualColorCell = Constants.colorPressedCell
+                        self.play_sound(Constants.Sounds.CLICK)
 
 
     def changeSecondImage(self,cell):

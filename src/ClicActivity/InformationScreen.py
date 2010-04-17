@@ -92,7 +92,7 @@ class InformationScreen(Activity):
                 self.Grid1 = None
         
         '''Play start sound'''
-        self.start.play()
+        self.play_sound(Constants.Sounds.START)
 
     def OnEvent(self,PointOfMouse):
         '''
@@ -104,7 +104,7 @@ class InformationScreen(Activity):
                     print "redirecciona!!!!!!!!!!!!!!!!!!!", cell.redirect
                     return cell.redirect
         
-        self.click.play()
+        self.play_sound(Constants.Sounds.CLICK)
 
     def OnRender(self,display_surf):
         display_surf.blit(self.containerBg,(0,0))

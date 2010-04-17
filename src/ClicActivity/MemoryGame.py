@@ -134,7 +134,7 @@ class MemoryGame(Activity):
         self.Grid1.unsort()
 
         '''Play start sound'''
-        self.start.play()
+        self.play_sound(Constants.Sounds.START)
         
     def doBucle(self,cells,i, style): 
         id = 0
@@ -187,9 +187,10 @@ class MemoryGame(Activity):
                        
                     #celda anterior no apretada
                     else:
-    
                         self.PressedCell = cell
                         self.changeSecondImage(cell)
+                        
+                        self.play_sound(Constants.Sounds.CLICK)
 
 
     def changeSecondImage(self,cell): 
