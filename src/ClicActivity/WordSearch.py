@@ -283,6 +283,8 @@ class WordSearch(Activity):
                             '''Una imatge per cada cell'''
                             xmlCell = self.xmlCells.getElementsByTagName('cell')[clueID]
                             self.printxmlCellinCell(self.auxGrid.Cells[clueID],xmlCell, self.styleCell)
+                            if self.auxGrid.Cells[clueID].contentCell.audio != None:
+                                self.play_sound(self.auxGrid.Cells[clueID].contentCell.audio)
                     print 'paraula trobada'
                     if orientacio == 'horitzontal':
                         if self.pressedCellFi.contentCell.id > self.pressedCellIni.contentCell.id:

@@ -148,16 +148,18 @@ class PanelsExplore(Activity):
             self.PressedCell = celda anterior
             cell = celda actual
         '''
+        self.play_sound(Constants.Sounds.CLICK)
         
         for cell in self.Grid1.Cells:
             if cell.isOverCell(PointOfMouse[0],PointOfMouse[1]):
                 print cell.contentCell.id
                 if cell.contentCell.id != -1:
                     self.Grid2.Cells[0].contentCell.img  = self.Grid3.Cells[cell.contentCell.id].contentCell.img
+                    if cell.contentCell.audio != None:
+                        self.play_sound(self.pathToMedia+'/'+cell.contentCell.audio)
                 else:
                     self.Grid2.Cells[0].contentCell.img = self.Grid2.Cells[0].contentCell.img2
         
-        self.play_sound(Constants.Sounds.CLICK)
 
     def OnRender(self,display_surf):
         display_surf.blit(self.containerBg,(0,0))
