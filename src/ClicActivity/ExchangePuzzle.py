@@ -99,8 +99,6 @@ class ExchangePuzzle(Activity):
                 i = i+1
         self.Grid1.unsort()
 
-        '''Play start sound'''
-        self.play_sound(Constants.Sounds.START)
         
     def OnEvent(self,PointOfMouse):
         '''

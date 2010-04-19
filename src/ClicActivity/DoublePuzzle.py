@@ -116,9 +116,7 @@ class DoublePuzzle(Activity):
         self.Grid2.unsort()
     
         ''' A image 1 le quitamos la imagen'''
-    
-        '''Play start sound'''
-        self.play_sound(Constants.Sounds.START)
+        
         
     def OnEvent(self,PointOfMouse):
         '''

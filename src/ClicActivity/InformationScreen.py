@@ -91,9 +91,7 @@ class InformationScreen(Activity):
             else:
                 self.Grid1 = None
         
-        '''Play start sound'''
-        self.play_sound(Constants.Sounds.START)
-
+        
     def OnEvent(self,PointOfMouse):
         '''
            Pantalla informativa, no hacemos nada...

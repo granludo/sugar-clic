@@ -159,7 +159,8 @@ class Activity(object):
                         audio = cell.getElementsByTagName('media')
                         if audio.getAttribute('type')=='PLAY_AUDIO':
                             return audio.getAttribute('file')
-                return ""
+                '''Si no hi ha missatge d'inici, reproduim el de per defecte'''
+                return Constants.Sounds.FINISH_OK
             except:
                 return ""
 
@@ -185,12 +186,13 @@ class Activity(object):
                     audio = cell.getElementsByTagName('media')
                     if audio.getAttribute('type')=='PLAY_AUDIO':
                         return audio.getAttribute('file')
-            return ""
+            '''Si no hi ha missatge d'inici, reproduim el de per defecte'''
+            return Constants.Sounds.START
         except:
             return ""
     
     def getPreviousMessage(self):
-        '''Recuperamos mensaje de  fin partida'''
+        '''Recuperamos mensaje previo'''
         try:
             cells = self.xmlActivity.getElementsByTagName('messages')[0]
             cells = cells.getElementsByTagName('cell')

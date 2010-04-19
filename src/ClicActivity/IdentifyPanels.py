@@ -144,8 +144,6 @@ class IdentifyPanels(Activity):
         except:
             pass
 
-        '''Play start sound'''
-        self.play_sound(Constants.Sounds.START)
         
 
     def OnEvent(self,PointOfMouse):
