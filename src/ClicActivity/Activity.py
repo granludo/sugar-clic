@@ -252,11 +252,6 @@ class Activity(object):
                 #alignX = 0
                 #alignY = 0
 
-            #audio = xmlcell2.getElementByName('media')
-
-            #if audio != None and audio.getAttribute('type') == 'PLAY_AUDIO':
-            #    audioPath = audio.getAttribute('file')
-            #    cell.contentCell.audio = audioPath
             
             cellWidth = cell.contentCell.img.get_width()
             cellHeight = cell.contentCell.img.get_height()
@@ -316,6 +311,7 @@ class Activity(object):
             #tmpSurf = surface.Surface()
         except:
             pass
+        
         '''Text in cell'''
         try:
             elementP = xmlcell2.getElementsByTagName('p')
@@ -345,7 +341,18 @@ class Activity(object):
                 cell.redirect = hola
         except:
             pass
+        
+        '''Audio in cell'''
+        try:
+            audio = xmlcell2.getElementByName('media')
 
+            if audio != None and audio.getAttribute('type') == 'PLAY_AUDIO':
+                audioPath = audio.getAttribute('file')
+                audioPath = self.mediaInformation[audioPath]
+                cell.contentCell.audio = audioPath 
+        except:
+            pass
+        
     def printLetterinCell(self,cell,xmlcell,letterColour=Constants.colorBlack,backColour=Constants.colorWhite):    
        
         #styleCell  = StyleCell(xmlcell)
