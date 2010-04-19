@@ -99,10 +99,10 @@ class ClicActivities:
                 self.dialog.printMessage(self.screen,self.prevMess)
             else:
                 self.dialog.printMessage(self.screen,self.activityInUse.getInitMessage())
-            #audio = self.activityInUse.getInitMessageAudio()
-            #if audio!="":
-            #    self.activityInUse.play_sound(audio)
-            #aqui s'hauria de reproduir l'audio del principi
+                '''aqui s'hauria de reproduir l'audio del principi'''
+                audio = self.activityInUse.getInitMessageAudio()
+                if audio!="":
+                    self.activityInUse.play_sound(audio)
         
         else: 
             ''' this case never ocurss.. teorically... heheheh'''
@@ -155,6 +155,10 @@ class ClicActivities:
             if self.prevMess != None and self.dialog.isOverActivity(pointMouse):
                 self.prevMess = None
                 self.dialog.printMessage(self.screen,self.activityInUse.getInitMessage())
+                '''aqui s'hauria de reproduir l'audio del principi'''
+                audio = self.activityInUse.getInitMessageAudio()
+                if audio!="":
+                    self.activityInUse.play_sound(audio)
                 
             if self.dialog.isOverActivity(pointMouse):
                 result = self.activityInUse.OnEvent((pointMouse.getX(),pointMouse.getY()))
@@ -179,10 +183,10 @@ class ClicActivities:
 
                 a, b, c, d = pygame.cursors.load_xbm(Constants.Images.CURSOR2, Constants.Images.CURSOR2_MASK)
                 pygame.mouse.set_cursor(a, b, c, d)
-            #     audio = self.activityInUse.getFinishMessageAudio()
-            #     if audio!="":
-            #        self.activityInUse.play_sound(audio)
-                 #Aqui s'hauria de reproduir l'audio del final
+                '''Aqui s'hauria de reproduir l'audio del final'''
+                audio = self.activityInUse.getFinishMessageAudio()
+                if audio!="":
+                    self.activityInUse.play_sound(audio)
                 
             
         return result

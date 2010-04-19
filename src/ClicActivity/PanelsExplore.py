@@ -140,8 +140,7 @@ class PanelsExplore(Activity):
             for i in range(len(cells)):
                 self.printxmlCellinCell(self.Grid3.Cells[i], cells[i],self.styleCell2)
 
-        '''Play start sound'''
-        self.play_sound(Constants.Sounds.START)
+        
         
     def OnEvent(self,PointOfMouse):
         '''

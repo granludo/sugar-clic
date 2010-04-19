@@ -52,7 +52,7 @@ class WordSearch(Activity):
     xmlText = None
     render = False
     textHasBorder = False
-    
+    hasCells = False
     
     def Load(self, display_surf ):
         self.setBgColor(display_surf)
@@ -201,8 +201,6 @@ class WordSearch(Activity):
             self.textGrid.Cells[i].contentCell.letter = text[i]
             self.printLetterinCell(self.textGrid.Cells[i],self.xmlText)
 
-        '''Play start sound'''
-        self.play_sound(Constants.Sounds.START)
         
     def OnEvent(self,PointOfMouse):
         '''

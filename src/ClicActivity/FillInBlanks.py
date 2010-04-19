@@ -77,8 +77,6 @@ class FillInBlanks(Activity):
         else:
             self.options = False
             
-        '''Play start sound'''
-        self.play_sound(Constants.Sounds.START)
         
     def OnEvent(self,PointOfMouse):
         if self.previous:

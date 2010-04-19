@@ -74,8 +74,6 @@ class Order(Activity):
 
         self.targets = self.TextGrid.Load(display_surf,xmlTextGrid)
 
-        '''Play start sound'''
-        self.start.play()
         
     def OnEvent(self,PointOfMouse):
         if self.previous:

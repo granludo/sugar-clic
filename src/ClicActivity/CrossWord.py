@@ -186,8 +186,6 @@ class CrossWord(Activity):
         self.selectNextCell()
         self.showClues()
         
-        '''Play start sound'''
-        self.play_sound(Constants.Sounds.START)
         
     def OnEvent(self,PointOfMouse):
         

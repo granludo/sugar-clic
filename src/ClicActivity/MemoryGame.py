@@ -133,8 +133,7 @@ class MemoryGame(Activity):
             
         self.Grid1.unsort()
 
-        '''Play start sound'''
-        self.play_sound(Constants.Sounds.START)
+        
         
     def doBucle(self,cells,i, style): 
         id = 0
