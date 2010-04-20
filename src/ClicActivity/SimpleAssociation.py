@@ -80,7 +80,7 @@ class SimpleAssociation(Activity):
         height = self.Grid1.cellHeight * self.Grid1.numRows
         width = self.Grid1.cellWidth * self.Grid1.numCols
 
-
+        #The attribute orientation is how are oriented the grids in the activity (vertical or horitzontal)
         if orientation == 'AUB' or orientation == 'BUA':
             '''Sumamos el height al tamano'''
             height = height + self.Grid2.cellHeight
@@ -144,6 +144,7 @@ class SimpleAssociation(Activity):
             if self.Grid3.imagePath == None:
                 self.Grid3.Load(self.Grid1.numRows,self.Grid1.numCols,width,height,xActual ,yActual, display_surf)
                 cells = xmlGrid3.getElementsByTagName('cell')
+                #Provar xmlGrid en compte de xmlGrid3
                 self.styleCell = StyleCell(xmlGrid3)
                 i = 0
                 for i in range(len(cells)):
@@ -220,7 +221,7 @@ class SimpleAssociation(Activity):
                                 self.desactGrid2.append(self.PressedCell)
                                 self.desactGrid1.append(cell)
                             	self.PressedCell.actualColorCell = Constants.colorCell
-				self.PressedCell.contentCell.img.fill(Constants.colorBackground)
+				self.PressedCell.contentCell.img.fill(self.styleCell2.backgroundColor)
 				self.PressedCell.contentCell.borders=False
 				cell.contentCell.img.fill(Constants.colorBackground)
                                 cell.contentCell.img = self.Grid3.Cells[cell.idCell].contentCell.img
@@ -259,17 +260,16 @@ class SimpleAssociation(Activity):
                         if self.PressedCell.contentCell.id == cell.contentCell.id:
                             #if self.PressedCell.idCell != cell.idCell:
 			    if self.PressedGrid == 1:
-                                self.desactGrid1.append(cell)
-                                self.desactGrid2.append(self.PressedCell)
-                                #cell.contentCell.img = cell.contentCell.img2
                             	self.PressedCell.actualColorCell = Constants.colorCell
 				self.PressedCell.contentCell.img.fill(Constants.colorBackground)
 				self.PressedCell.contentCell.borders=False
-				cell.contentCell.img.fill(Constants.colorBackground)
+				cell.contentCell.img.fill(self.styleCell2.backgroundColor)
                                 self.PressedCell.contentCell.img = self.Grid3.Cells[self.PressedCell.contentCell.id].contentCell.img
 				#anulamos valor de img2 para indicar k ta ok
                                 cell.contentCell.img2 = None
                                 self.PressedCell.contentCell.img2 = None
+                                self.desactGrid2.append(cell)
+                                self.desactGrid1.append(self.PressedCell)
                                 self.PressedCell = None
                                 
                                 self.play_sound(Constants.Sounds.OK)
