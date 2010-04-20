@@ -115,10 +115,6 @@ class WrittenAnswer(Activity):
         height2 = self.Grid2.cellHeight * self.Grid2.numRows * coef
         width2 = self.Grid2.cellWidth * self.Grid2.numCols * coef'''
 
-	print "paramentres"
-	print height
-	print self.Grid1.cellHeight
-	print self.Grid1.numRows
 
         '''Loading constants for the activity'''
 
@@ -158,7 +154,8 @@ class WrittenAnswer(Activity):
                 cells = xmlGrid3.getElementsByTagName('cell')
                 i = 0
                 for i in range(len(cells)):
-                    self.printxmlCellinCell(self.Grid3.Cells[i], cells, self.styleCell)
+                    self.printxmlCellinCell(self.Grid3.Cells[i], cells[i], self.styleCell)
+                    cells[i].toxml()
                     #i = i+1
             else:
                 self.Grid3.LoadWithImage(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid1 ,yGrid1, display_surf,self.pathToMedia)
@@ -170,7 +167,7 @@ class WrittenAnswer(Activity):
         cellsSecondary = self.xmlActivity.getElementsByTagName('cells')[1]
 
         '''Cargamos primer Grid del XML'''
-        cells = cellsPrimary.getElementsByTagName('cell')
+        #cells = cellsPrimary.getElementsByTagName('cell')
         '''indexCell  = Numero de Celda que ocupa:'''
         indexCell = 0
         cells = cellsPrimary.getElementsByTagName('cell')
@@ -196,7 +193,10 @@ class WrittenAnswer(Activity):
         #self.Grid3.LoadWithImage(self.Grid1.numRows,self.Grid1.numCols,width,height,xGrid1 ,yGrid1, display_surf,self.pathToMedia)
 
         if self.Grid1.imagePath == None:
-            self.Grid1.unsort()
+            if(len(self.Grid1.Cells) == len(self.Grid3.Cells)):
+                self.Grid1.unsort(self.Grid3)
+            else:
+                self.Grid1.unsort()
 
         for cell in self.Grid1.Cells:
             self.Grid1.ids.append(cell.contentCell.id)
@@ -207,13 +207,9 @@ class WrittenAnswer(Activity):
         
     def doBucle(self,cells,i):
         id = 0
-        print "entraaki???"
-        print cells
         for cell in cells:
             #self.printxmlCellinCell(self.Grid1.Cells[i], cell,self.styleCell)
-            print cell.toxml()
             resposta = cell.getElementsByTagName('p')[0].firstChild.data
-            print resposta
             self.respostes.append(resposta)
             '''Guardamos las imagenes en el Grid'''
             #self.Grid2.Cells[i].contentCell.img2 = self.Grid1.Cells[i].contentCell.img
@@ -232,12 +228,13 @@ class WrittenAnswer(Activity):
 
             if (self.Grid1.ids == []):
                 id = cell.getAttribute('id')
+                id2 = i
                 #Si los ids ya vienen por defecto los cojemos y sino los generamos incrementado en 1 cada vuelta
                 if cell.hasAttribute('id'):
                     self.Grid1.Cells[i].contentCell.id = int(cell.getAttribute('id'))
                     id2 = id
                 else:
-                    self.Grid1.Cells[i].contentCell.id = int(id2)
+                    self.Grid1.Cells[i].contentCell.id = i
             #Cargamos los ids directamente de la matriz en caso que sea una imagen i tenga un vector de ids
             else:
                 self.Grid1.Cells[i].contentCell.id = int(self.Grid1.ids[i])
@@ -264,23 +261,17 @@ class WrittenAnswer(Activity):
 
     def OnKeyEvent(self,key):
 
-        print self.Grid1.ids
         self.result = self.Grid2.processKey(key)
         self.Grid2.printCursor(0, 0)
-        print "result= ", self.result
         cont = 0
         contCeles = 0
         if (self.result!="" and len(self.resolts)<len(self.Grid1.Cells) ):
             for cell in self.Grid1.Cells:
                 if(self.Grid1.ids[cont]!="-1"):
                     if (self.PressedCell == cell):
-                        print "aki peta, cont = ", cont
                         idResposta = self.respostes[int(self.Grid1.ids[cont])].split('|')
                         for resposta in idResposta:
-                            print "cont es ", cont
-                            print "resposta correcta pot ser: ", resposta
                             if (self.result==resposta.upper()): # comparar_resultat(cell.idCell):
-                                print "entra"
                                 cell.contentCell.img = self.Grid3.Cells[cell.idCell].contentCell.img
                                 self.PressedCell.actualColorCell = Constants.colorCell
 				self.PressedCell.contentCell.borders=False
