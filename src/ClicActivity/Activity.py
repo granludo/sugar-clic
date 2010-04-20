@@ -446,7 +446,8 @@ class Activity(object):
 
     def play_sound(self,filename):
         #pygame.mixer.pre_init(44100,-16,2, 1024)
-
+        if not pygame.mixer.get_init():
+            pygame.mixer.init()
         #Al OLPC no funciona 
         if 0==1:#pygame.mixer.get_init():
             try:
