@@ -75,7 +75,7 @@ class Identify(Activity):
             self.finish = self.isCorrect()
             '''Si no es correcte, reproduim so d'error'''
             if not self.finish:
-                self.play_audio(Constants.Sounds.FINISH_ERROR)
+                self.play_sound(Constants.Sounds.FINISH_ERROR)
         else:
             for cell in self.TextGrid.textCells:
                 if cell.isOverCell(PointOfMouse[0],PointOfMouse[1]):
