@@ -77,6 +77,7 @@ class Activity(object):
         '''pygame.mouse.set_cursor(*pygame.cursors.broken_x)'''
 
         '''Initiate mixer to play sounds'''
+        print 'inicia mixer'
         pygame.mixer.init()
         
         
@@ -150,19 +151,19 @@ class Activity(object):
         except:
             return ""
 
-        def getFinishMessageAudio(self):
-            try:
-                cells = self.xmlActivity.getElementsByTagName('messages')[0]
-                cells = cells.getElementsByTagName('cell')
-                for cell in cells:
-                    if cell.getAttribute('type')  == 'final':
-                        audio = cell.getElementsByTagName('media')
-                        if audio.getAttribute('type')=='PLAY_AUDIO':
-                            return audio.getAttribute('file')
-                '''Si no hi ha missatge d'inici, reproduim el de per defecte'''
-                return Constants.Sounds.FINISH_OK
-            except:
-                return ""
+    def getFinishMessageAudio(self):
+        try:
+            cells = self.xmlActivity.getElementsByTagName('messages')[0]
+            cells = cells.getElementsByTagName('cell')
+            for cell in cells:
+                if cell.getAttribute('type')  == 'final':
+                    audio = cell.getElementsByTagName('media')[0]
+                    if audio.getAttribute('type')=='PLAY_AUDIO':
+                        return audio.getAttribute('file')
+            '''Si no hi ha missatge d'inici, reproduim el de per defecte'''
+            return Constants.Sounds.FINISH_OK
+        except:
+            return ""
 
 
     def getInitMessage(self):
@@ -183,7 +184,7 @@ class Activity(object):
             cells = cells.getElementsByTagName('cell')
             for cell in cells:
                 if cell.getAttribute('type')  == 'initial':
-                    audio = cell.getElementsByTagName('media')
+                    audio = cell.getElementsByTagName('media')[0]
                     if audio.getAttribute('type')=='PLAY_AUDIO':
                         return audio.getAttribute('file')
             '''Si no hi ha missatge d'inici, reproduim el de per defecte'''
@@ -344,8 +345,8 @@ class Activity(object):
         
         '''Audio in cell'''
         try:
-            audio = xmlcell2.getElementByName('media')
-
+            audio = xmlcell2.getElementsByTagName('media')[0]
+            
             if audio != None and audio.getAttribute('type') == 'PLAY_AUDIO':
                 audioPath = audio.getAttribute('file')
                 audioPath = self.mediaInformation[audioPath]

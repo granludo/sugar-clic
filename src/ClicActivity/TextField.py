@@ -69,7 +69,7 @@ class TextField(object):
                 idText += 1
             elif child.nodeName == 'target':
                 '''Els targets no es mostren: es el que ha d'introduir l'usuari'''
-                self.answer = text[idTarget].firstChild.data + ' '
+                self.answer += text[idTarget].firstChild.data + ' '
                 idTarget += 1
         self.answer = self.answer.upper()
         self.writed.strip()

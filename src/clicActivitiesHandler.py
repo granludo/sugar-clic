@@ -100,9 +100,9 @@ class ClicActivities:
             else:
                 self.dialog.printMessage(self.screen,self.activityInUse.getInitMessage())
                 '''aqui s'hauria de reproduir l'audio del principi'''
-                #audio = self.activityInUse.getInitMessageAudio()
-                #if audio!="":
-                    #self.activityInUse.play_sound(audio)
+                audio = self.activityInUse.getInitMessageAudio()
+                if audio!="":
+                    self.activityInUse.play_sound(audio)
         
         else: 
             ''' this case never ocurss.. teorically... heheheh'''
@@ -156,9 +156,9 @@ class ClicActivities:
                 self.prevMess = None
                 self.dialog.printMessage(self.screen,self.activityInUse.getInitMessage())
                 '''aqui s'hauria de reproduir l'audio del principi'''
-                #audio = self.activityInUse.getInitMessageAudio()
-                #if audio!="":
-                    #self.activityInUse.play_sound(audio)
+                audio = self.activityInUse.getInitMessageAudio()
+                if audio!="":
+                    self.activityInUse.play_sound(audio)
                 
             if self.dialog.isOverActivity(pointMouse):
                 result = self.activityInUse.OnEvent((pointMouse.getX(),pointMouse.getY()))
@@ -184,9 +184,9 @@ class ClicActivities:
                 a, b, c, d = pygame.cursors.load_xbm(Constants.Images.CURSOR2, Constants.Images.CURSOR2_MASK)
                 pygame.mouse.set_cursor(a, b, c, d)
                 '''Aqui s'hauria de reproduir l'audio del final'''
-                #audio = self.activityInUse.getFinishMessageAudio()
-                #if audio!="":
-                    #self.activityInUse.play_sound(audio)
+                audio = self.activityInUse.getFinishMessageAudio()
+                if audio!="":
+                    self.activityInUse.play_sound(audio)
                 
             
         return result
@@ -198,7 +198,7 @@ class ClicActivities:
     def validKey(self,key):
         '''Llista de tecles que ens interessa processar i la traduccio'''
         validKeyList = {'delete':'delete','backspace':'backspace','space':' ','return':'return',
-                        'minus sign':'-','comma':',','period':'.','colon':':','semicolon':';',
+                        '-':'-',',':',','.':'.',':':':',';':';',
                         'a':'A','b':'B','c':'C','d':'D','e':'E','f':'F','g':'G','h':'H','i':'I',
                         'j':'J','k':'K','l':'L','m':'M','n':'N','o':'O','p':'P','q':'Q','r':'R',
                         's':'S','t':'T','u':'U','v':'V','w':'W','x':'X','y':'Y','z':'Z',
