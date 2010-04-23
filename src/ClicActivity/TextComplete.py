@@ -47,6 +47,7 @@ class TextComplete(Activity):
     
     pressedCell = None
     checkButton = None
+    finish = False
     
     def Load(self, display_surf ):
         self.setBgColor(display_surf)
@@ -65,19 +66,21 @@ class TextComplete(Activity):
             
         self.checkButton = CheckButton(checkText)
         
+        self.finish = False
         
         
     def OnEvent(self,PointOfMouse):
+        
         if self.checkButton.isOverCheck(PointOfMouse[0],PointOfMouse[1]):
             self.finish = self.isCorrect()
             '''Si no es correcte, reproduim so d'error'''
             if not self.finish:
-                self.play_audio(Constants.Sounds.FINISH_ERROR)
+                self.play_sound(Constants.Sounds.FINISH_ERROR)
         else:
             for cell in self.TextGrid.textCells:
                 if cell.isOverCell(PointOfMouse[0],PointOfMouse[1]):
                     self.pressedCell = cell
-                
+            
     def OnKeyEvent(self,key):
         
         if self.pressedCell != None:
